@@ -119,14 +119,16 @@ local RECIPE_DESC = STRINGS.RECIPE_DESC
 --	Skins
 	
 	--	Names
+	STRINGS.SKIN_NAMES.ms_dragonflychest_polarice = "Dry \"Ice Box\""
 	STRINGS.SKIN_NAMES.ms_polarmoosehat_white = "Hornamented Ushanka"
 	STRINGS.SKIN_NAMES.ms_treasurechest_polarice = "\"Ice Box\""
 	
 	STRINGS.SKIN_NAMES.ms_loading_polarfox = "Slick in the Snow"
 	
 	--	Desc
+	STRINGS.SKIN_DESCRIPTIONS.ms_dragonflychest_polarice = "It's almost like if you had a large Ice Box. Well, The impression strikes out more in the dead of winter."
 	STRINGS.SKIN_DESCRIPTIONS.ms_polarmoosehat_white = "Twigs, bones... anything 'fur holding this loose hat together!"
-	STRINGS.SKIN_DESCRIPTIONS.ms_treasurechest_polarice = "Who needs to cool their food when its cool outside anyway?"
+	STRINGS.SKIN_DESCRIPTIONS.ms_treasurechest_polarice = "Got no gears for the real thing? Afraid you'll have to make do with this."
 	
 	STRINGS.SKIN_DESCRIPTIONS.ms_loading_polarfox = "Bearfolklore says: do a high snow angel just right, and you'll only find its pawprints the next day."
 	

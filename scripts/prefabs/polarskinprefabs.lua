@@ -39,4 +39,30 @@ table.insert(prefs, CreatePrefabSkin("ms_treasurechest_upgraded_polarice", {
 	skin_tags = {},
 }))
 
+table.insert(prefs, CreatePrefabSkin("ms_dragonflychest_polarice", {
+	assets = {
+		Asset("DYNAMIC_ANIM", "anim/dynamic/dragonflychest_polarice.zip"),
+		Asset("PKGREF", "anim/dynamic/dragonflychest_polarice.dyn"),
+	},
+	base_prefab = "dragonflychest",
+	type = "item",
+	build_name_override = "dragonflychest_polarice",
+	rarity = "ModMade",
+	skin_tags = {"POLAR", "DRAGONFLYCHEST", "CRAFTABLE"},
+	granted_items = {"ms_dragonflychest_upgraded_polarice"},
+}))
+
+table.insert(prefs, CreatePrefabSkin("ms_dragonflychest_upgraded_polarice", {
+	assets = {
+		Asset("DYNAMIC_ANIM", "anim/dynamic/dragonflychest_upgraded_polarice.zip"),
+		Asset("PKGREF", "anim/dynamic/dragonfly_chestupgraded_polarice.dyn"),
+	},
+	base_prefab = "dragonflychest",
+	type = "item",
+	build_name_override = "dragonflychest_upgraded_polarice",
+	rarity = "ModLocked",
+	condition = {no_gift = true},
+	skin_tags = {},
+}))
+
 return unpack(prefs)

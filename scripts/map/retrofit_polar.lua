@@ -52,7 +52,7 @@ end
 local RETROFITTING_AVOID_ENTS = { -- Island is pretty big, only add in here things that are SUPER DUPER important so worlds have higher success rate
 	--dst
 	"boat", "boat_ancient", "crabking", "crabking_spawner", "chester_eyebone", "glommerflower",
-	"oceantree_pillar", "watertree_pillar",
+	"oceantree_pillar", "watertree_pillar", "underwater_salvageable", "oceanwhirlbigportal", "oceanwhirlportal",
 	
 	--sw
 	"bermudatriangle", "octopusking", "volcano", "packim_fishbone",

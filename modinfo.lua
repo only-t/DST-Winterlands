@@ -1,10 +1,9 @@
 name = "The Winterlands"
 author = "ADM, Feything, Gearless, LukaS, Notka 󰀃"
 
-version = "1.2.15"
+version = "1.2.16"
 local info_version = "󰀔 [ Version "..version.." ]"
 
---description = info_version..[[ The Imperial Waddle
 description = info_version..[[ 
 
 󰀛 Set sails to a perilous frozen island -
