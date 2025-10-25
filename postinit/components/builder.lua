@@ -20,7 +20,7 @@ local Builder = require("components/builder")
 			SpawnPolarSnowBlocker(pt, block_range, TUNING.POLARPLOW_BLOCKER_DURATION, self.inst)
 		end
 		
-		return OldDoBuild(self, recname, pt)
+		return OldDoBuild(self, recname, pt, ...)
 	end
 	
 	local OldHasTechIngredient = Builder.HasTechIngredient
