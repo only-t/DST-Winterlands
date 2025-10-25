@@ -31,7 +31,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WALTER.DESCRIBE
 		CHOPPED = "The axe won the clash.",
 		GENERIC = "The specter m- ah, it's a tree. Still cool though.",
 	}
-	DESCRIBE.ICELETTUCE_SEEDS = "Where should we plant it, Woby?"
+	DESCRIBE.ICELETTUCE_SEEDS = "Where should we plant them, Woby?"
 	
 	--	Rocks and stones
 	DESCRIBE.POLAR_ICICLE = "I wonder when it will fall."

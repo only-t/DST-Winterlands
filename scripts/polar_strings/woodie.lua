@@ -31,7 +31,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WOODIE.DESCRIBE
 		CHOPPED = "That will show 'em.",
 		GENERIC = "Not now Luce, I'll butt with this one personally!",
 	}
-	DESCRIBE.ICELETTUCE_SEEDS = "Maybe I could plant it?"
+	DESCRIBE.ICELETTUCE_SEEDS = "Maybe I could plant them?"
 	
 	--	Rocks and stones
 	DESCRIBE.POLAR_ICICLE = "They get bigger here than over the ol' cabin."

@@ -29,7 +29,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WURT.DESCRIBE
 		CHOPPED = "Il coule dans la mer de neige.",
 		GENERIC = "Hé, t'es pas un cousin de l'arbre du marais ?",
 	}
-	DESCRIBE.ICELETTUCE_SEEDS = "Faut la mettre dans l'sol !"
+	DESCRIBE.ICELETTUCE_SEEDS = "Faut les mettre dans l'sol !"
 	
 	--	Rocks and stones
 	DESCRIBE.POLAR_ICICLE = "Glurp... ? C'était juste du vent."

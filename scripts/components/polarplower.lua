@@ -4,9 +4,6 @@ local PolarPlower = Class(function(self, inst)
 	self.plow_range = 4
 end)
 
-local SNOWBLOCKER_TAGS = {"snowblocker"}
-local MIN_SNOWBLOCKER_DIST = 2
-
 function PolarPlower:CanPlow(doer, pos)
 	if self.canplowfn then
 		return self.canplowfn(self.inst, doer, pos)
@@ -22,36 +19,10 @@ function PolarPlower:GetPlowDuration(doer)
 end
 
 function PolarPlower:DoPlow(doer, pos)
-	local blockers = TheSim:FindEntities(pos.x, pos.y, pos.z, self.plow_range, SNOWBLOCKER_TAGS)
-	local dist = self.plow_range
 	local duration = self:GetPlowDuration(doer)
+	local dist = self.plow_range
 	
-	for i, v in ipairs(blockers) do
-		if v.ExtendSnowBlocker then
-			v:ExtendSnowBlocker(doer, nil, duration)
-		end
-		
-		local blocker_dist = v:GetDistanceSqToPoint(pos.x, pos.y, pos.z)
-		if blocker_dist <= MIN_SNOWBLOCKER_DIST and v.SetSnowBlockRange and v._snowblockrange and v._snowblockrange:value() < self.plow_range then
-			v:SetSnowBlockRange(self.plow_range)
-		end
-		
-		if v.prefab == "snowwave_blocker" then
-			dist = blocker_dist < dist and blocker_dist or dist
-		end
-	end
-	
-	local blocker
-	if dist >= MIN_SNOWBLOCKER_DIST then
-		blocker = SpawnPrefab("snowwave_blocker")
-		blocker.Transform:SetPosition(pos.x, pos.y, pos.z)
-		
-		blocker:ExtendSnowBlocker(doer, true, duration)
-		if blocker.SetSnowBlockRange then
-			blocker:SetSnowBlockRange(self.plow_range)
-		end
-	end
-	
+	local blocker, blockers = SpawnPolarSnowBlocker(pos, self.plow_range, duration, doer)
 	local fx = SpawnPrefab("polar_splash_large")
 	fx.Transform:SetPosition(pos.x, pos.y, pos.z)
 	

@@ -30,6 +30,34 @@ TECH.POLARAMULET_STATION = {POLARAMULET_STATION = 1}
 
 TECH_INGREDIENT.POLARSNOW = "polarsnow_material"
 
+POLARAMULET_STATION_MOONPHASE_TRADEDATA = {
+	new = {
+		{product = "charcoal", 			ingredients = {Ingredient("houndstooth", 1)}, 	limits = {min = 6, max = 12}},
+		{product = "nitre", 			ingredients = {Ingredient("houndstooth", 1)}, 	limits = {min = 4, max = 8}},
+		{product = "bird_egg", 			ingredients = {Ingredient("boneshard", 1)}, 	limits = {min = 3, max = 6}},
+	},
+	quarter = {
+		{product = "twigs", 			ingredients = {Ingredient("houndstooth", 1)}, 	limits = {min = 6, max = 12}},
+		{product = "rocks", 			ingredients = {Ingredient("houndstooth", 1)}, 	limits = {min = 4, max = 8}},
+		{product = "berries", 			ingredients = {Ingredient("boneshard", 1)}, 	limits = {min = 2, max = 4}},
+	},
+	half = {
+		{product = "cutreeds", 			ingredients = {Ingredient("houndstooth", 1)}, 	limits = {min = 6, max = 12}},
+		{product = "flint", 			ingredients = {Ingredient("houndstooth", 1)}, 	limits = {min = 2, max = 4}},
+		{product = "monstermeat", 		ingredients = {Ingredient("boneshard", 1)}, 	limits = {min = 1, max = 2}},
+	},
+	threequarter = {
+		{product = "log", 				ingredients = {Ingredient("houndstooth", 1)}, 	limits = {min = 6, max = 12}},
+		{product = "goldnugget", 		ingredients = {Ingredient("houndstooth", 1)}, 	limits = {min = 1, max = 2}},
+		{product = "red_cap", 			ingredients = {Ingredient("boneshard", 1)}, 	limits = {min = 2, max = 4}}, -- TODO: Change to white shrooms later ?
+	},
+	full = {
+		{product = "cutgrass", 			ingredients = {Ingredient("houndstooth", 1)}, 	limits = {min = 9, max = 18}},
+		{product = "bluegem_shards", 	ingredients = {Ingredient("houndstooth", 1)}, 	limits = {min = 3, max = 6}},
+		{product = "glommerfuel", 		ingredients = {Ingredient("spoiled_food", 1), Ingredient("spoiled_fish", 1), Ingredient("rottenegg", 1)}, limits = {min = 1, max = 1}, description = "polar_trade_glommerfuel"},
+	},
+}
+
 --	Events
 
 ARCTIC_FOOLS_MOBS = {

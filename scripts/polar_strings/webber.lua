@@ -31,7 +31,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WEBBER.DESCRIBE
 		CHOPPED = "Uh oh, it lost a fight.",
 		GENERIC = "Mooses don't like them. But we think they're nice.",
 	}
-	DESCRIBE.ICELETTUCE_SEEDS = "We could grow something with it."
+	DESCRIBE.ICELETTUCE_SEEDS = "We could grow something with these."
 	
 	--	Rocks and stones
 	DESCRIBE.POLAR_ICICLE = "We better watch out."

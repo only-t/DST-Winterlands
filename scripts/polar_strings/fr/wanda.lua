@@ -29,7 +29,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WANDA.DESCRIBE
 		CHOPPED = "Il fallait que ça arrive, tôt ou tard.",
 		GENERIC = "On dirait qu'il est figé dans le temps.",
 	}
-	DESCRIBE.ICELETTUCE_SEEDS = "Pourquoi gâcher du temps à la faire pousser quand on peut juste la manger immédiatement ?"
+	DESCRIBE.ICELETTUCE_SEEDS = "Pourquoi gâcher du temps à les faire pousser quand on peut juste les manger immédiatement ?"
 	
 	--	Rocks and stones
 	DESCRIBE.POLAR_ICICLE = "Repousse l'inévitable autant que tu peux."

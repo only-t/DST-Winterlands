@@ -31,7 +31,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WORTOX.DESCRIBE
 		CHOPPED = "Down it goes, to rest in snow.",
 		GENERIC = "You may have longer horns, but I have an axe.",
 	}
-	DESCRIBE.ICELETTUCE_SEEDS = "Let's give it some soil, before it spoils."
+	DESCRIBE.ICELETTUCE_SEEDS = "Let's give them some soil, before they spoil."
 	
 	--	Rocks and stones
 	DESCRIBE.POLAR_ICICLE = "I swear it flinched! Or have I been deceived?"

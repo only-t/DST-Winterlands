@@ -68,6 +68,7 @@ local prefabs = {
 	"shadowworker",
 	"shovels",
 	"snowball_item",
+	"tree_rock_data",
 	"walrus",
 	"wilson",
 	"winona_spotlight",
@@ -89,6 +90,8 @@ local components = {
 	"brushable",
 	"combat",
 	"container",
+	"deerclopsspawner",
+	"deployable",
 	"dynamicmusic", -- : (
 	"expertsailor",
 	"explosive",

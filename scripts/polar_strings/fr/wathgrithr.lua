@@ -29,7 +29,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE
 		CHOPPED = "Il est tombé au combat, honorablement.",
 		GENERIC = "Icelle branches feraient une belle arme.",
 	}
-	DESCRIBE.ICELETTUCE_SEEDS = "Une graine, non carnée."
+	DESCRIBE.ICELETTUCE_SEEDS = "Une poignée de graines, non carnées."
 	
 	--	Rocks and stones
 	DESCRIBE.POLAR_ICICLE = "La mort par les cieux !"

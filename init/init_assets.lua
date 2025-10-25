@@ -47,6 +47,8 @@ Assets = {
 	Asset("ANIM", "anim/polar_snow.zip"),
 	Asset("ANIM", "anim/polar_snowman_decor.zip"),
 	
+	Asset("ANIM", "anim/tree_rock_polar.zip"),
+	
 	-- Sounds
 	Asset("SOUNDPACKAGE", "sound/polarsounds.fev"),
 	Asset("SOUND", "sound/polarsounds.fsb"),

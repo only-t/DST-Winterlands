@@ -271,11 +271,13 @@ end
 
 local function OnSave(inst, data)
 	data.amulet_building = inst.amulet_building
+	data.last_trade_phase = inst.last_trade_phase
 end
 
 local function OnLoad(inst, data)
-	if data and data.amulet_building then
-		inst.amulet_building = true
+	if data then
+		inst.amulet_building = data.amulet_building
+		inst.last_trade_phase = data.last_trade_phase
 	end
 end
 
@@ -288,6 +290,36 @@ end
 local function OnTimerDone(inst, data)
 	if data.name == "speak_time" then
 		DoTalkQueue(inst)
+	end
+end
+
+local MOON_STATES = {"new", "quarter", "half", "threequarter", "full"}
+local trades_data = POLARAMULET_STATION_MOONPHASE_TRADEDATA -- See polar_constants for trades...
+
+local function OnMoonPhaseChanged(inst, phase)
+	if inst.components.craftingstation and phase ~= inst.last_trade_phase then
+		for i, v in ipairs(MOON_STATES) do
+			local num_trades = (trades_data[phase] and #trades_data[phase]) or 0
+			
+			if num_trades > 0 then
+				for i = 1, num_trades do
+					local recipe_data = trades_data[phase][i]
+					local recipe_name = recipe_data.name or "polar_trade_"..v.."_"..i
+					
+					if phase == v then
+						inst.components.craftingstation:LearnItem(recipe_name, recipe_name)
+						
+						if recipe_data.limits then
+							inst.components.craftingstation:SetRecipeCraftingLimit(recipe_name, math.random(recipe_data.limits.min, recipe_data.limits.max))
+						end
+					else
+						inst.components.craftingstation:ForgetRecipe(recipe_name)
+					end
+				end
+			end
+		end
+		
+		inst.last_trade_phase = phase
 	end
 end
 
@@ -376,6 +408,9 @@ local function fn()
 	inst:ListenForEvent("animover", OnAnimOver)
 	inst:ListenForEvent("timerdone", OnTimerDone)
 	
+	inst:WatchWorldState("moonphase", OnMoonPhaseChanged)
+	inst:DoTaskInTime(0, function() OnMoonPhaseChanged(inst, TheWorld.state.moonphase) end)
+	
 	return inst
 end
 
@@ -416,7 +451,6 @@ local function UpdateSpeech(inst)
 		inst:Remove()
 	end
 end
-
 
 local function speech()
 	local inst = CreateEntity()

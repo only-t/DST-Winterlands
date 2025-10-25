@@ -29,7 +29,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WORMWOOD.DESCRIBE
 		CHOPPED = "*Soupire* Pourquoi se battre ?",
 		GENERIC = "Pourquoi avoir des cornes ?",
 	}
-	DESCRIBE.ICELETTUCE_SEEDS = "Graine de bébé glacé."
+	DESCRIBE.ICELETTUCE_SEEDS = "Graines de bébé glacés."
 	
 	--	Rocks and stones
 	DESCRIBE.POLAR_ICICLE = "Ça pousse ?"

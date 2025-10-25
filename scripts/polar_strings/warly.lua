@@ -31,7 +31,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WARLY.DESCRIBE
 		CHOPPED = "Clashed!",
 		GENERIC = "Oh! I almost ran into it.",
 	}
-	DESCRIBE.ICELETTUCE_SEEDS = "It will grow some nice fresh vegetable."
+	DESCRIBE.ICELETTUCE_SEEDS = "These will grow some nice fresh vegetables."
 	
 	--	Rocks and stones
 	DESCRIBE.POLAR_ICICLE = "My thanks for the fresh reminder."

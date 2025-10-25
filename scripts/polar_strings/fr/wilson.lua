@@ -32,7 +32,7 @@ local DESCRIBE = STRINGS.CHARACTERS.GENERIC.DESCRIBE
 		CHOPPED = "Vaudrait mieux que je m'élan-- euh, m'éloigne avant que les autres arbres ne remarquent.",
 		GENERIC = "Cet arbre a l'air hache-arné.",
 	}
-	DESCRIBE.ICELETTUCE_SEEDS = "C'est une graine."
+	DESCRIBE.ICELETTUCE_SEEDS = "C'est des graines."
 	
 	--	Rocks and stones
 	DESCRIBE.POLAR_ICICLE = "Ça vient de bouger, non ?"

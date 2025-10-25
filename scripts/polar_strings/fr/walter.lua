@@ -29,7 +29,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WALTER.DESCRIBE
 		CHOPPED = "La hache a gagné le clash.",
 		GENERIC = "L'élan spectral... Ah, c'est juste un arbre. Ça reste quand même cool.",
 	}
-	DESCRIBE.ICELETTUCE_SEEDS = "Où on devrait la planter, Woby ?"
+	DESCRIBE.ICELETTUCE_SEEDS = "Où on devrait les planter, Woby ?"
 	
 	--	Rocks and stones
 	DESCRIBE.POLAR_ICICLE = "Je me demande quand elle va tomber."

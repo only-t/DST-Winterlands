@@ -31,14 +31,17 @@ end
 local function PolarInit(inst)
 	if IsInPolar(inst) then
 		SetOccupied(inst, true)
+	end
+	
+	if TheWorld.event_listeners.megaflare_detonated and TheWorld.event_listeners.megaflare_detonated[inst] then
+		local OnMegaFlare = TheWorld.event_listeners.megaflare_detonated[inst][1]
+		--	TP only the MacTusk & Friends from the current region !!
 		
-		if TheWorld.event_listeners.megaflare_detonated and TheWorld.event_listeners.megaflare_detonated[inst] then
-			local OnMegaFlare = TheWorld.event_listeners.megaflare_detonated[inst][1]
-			--	Don't TP MacTusk & Friends if it's a camp on the island !!
-			TheWorld.event_listeners.megaflare_detonated[inst][1] = function(src, data, ...)
-				if not IsInPolar(inst) and OnMegaFlare then
-					OnMegaFlare(src, data, ...)
-				end
+		TheWorld.event_listeners.megaflare_detonated[inst][1] = function(src, data, ...)
+			local flare_inpolar = (data and data.sourcept) and IsInPolarAtPoint(data.sourcept.x, data.sourcept.y, data.sourcept.z)
+			
+			if ((not IsInPolar(inst) and not flare_inpolar) or IsInPolar(inst) and flare_inpolar) and OnMegaFlare then
+				OnMegaFlare(src, data, ...)
 			end
 		end
 	end

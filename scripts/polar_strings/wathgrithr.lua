@@ -31,7 +31,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE
 		CHOPPED = "It hath fallen in an honorable battle.",
 		GENERIC = "Thy branches would make a fine weapon.",
 	}
-	DESCRIBE.ICELETTUCE_SEEDS = "'Tis a seed, for not-meat."
+	DESCRIBE.ICELETTUCE_SEEDS = "'Tis a handful of seeds, for not-meat."
 	
 	--	Rocks and stones
 	DESCRIBE.POLAR_ICICLE = "Death from above!"

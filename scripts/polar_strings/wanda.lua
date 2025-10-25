@@ -31,7 +31,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WANDA.DESCRIBE
 		CHOPPED = "It had to happen, sooner or later.",
 		GENERIC = "Looks like it's frozen in time.",
 	}
-	DESCRIBE.ICELETTUCE_SEEDS = "Why waste time growing it when I can just eat it now?"
+	DESCRIBE.ICELETTUCE_SEEDS = "Why waste time growing them when I can just eat them now?"
 	
 	--	Rocks and stones
 	DESCRIBE.POLAR_ICICLE = "Delay the inevitable as much as you can."

@@ -256,8 +256,8 @@ local states = {
 	},
 	
 	State {
-		name = "take_host",
-		tags = {"busy"},
+		name = "take_host", -- TODO: It seems snowfleas can sometime enter the inventory despite being killed late into the _pre state
+		tags = {"busy"},	-- (it doesn't do much, won't damage and will despawn as soon as interacted with, but ykow, this could be looked into. It's just rare to trigger...)
 		
 		onenter = function(inst, target)
 			inst.AnimState:PlayAnimation("idle")

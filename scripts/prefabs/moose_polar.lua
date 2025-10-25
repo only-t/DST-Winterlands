@@ -24,8 +24,8 @@ local brain = require("brains/moose_polarbrain")
 SetSharedLootTable("moose_polar", {
 	{"meat", 	1},
 	{"meat", 	1},
-	{"meat", 	0.5},
-	{"meat", 	0.5},
+	{"meat", 	1},
+	{"meat", 	1},
 })
 
 local function RetargetFn(inst)

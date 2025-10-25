@@ -31,7 +31,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WILLOW.DESCRIBE
 		CHOPPED = "We'll meet again, tree.",
 		GENERIC = "You better burn well.",
 	}
-	DESCRIBE.ICELETTUCE_SEEDS = "Some seed."
+	DESCRIBE.ICELETTUCE_SEEDS = "Some seeds."
 	
 	--	Rocks and stones
 	DESCRIBE.POLAR_ICICLE = "Huh?"

@@ -81,6 +81,7 @@ local wilson_attack = TUNING.BASE_SURVIVOR_ATTACK
 	TUNING.TUMBLEWIND_NUMLOOT = 3
 	TUNING.WINTER_FOOD_TUMBLEWIND_CHANCE = 0.2
 	TUNING.WINTER_ORNAMENT_TUMBLEWIND_CHANCE = 0.1
+	TUNING.FISHING_LURE_TUMBLEWIND_CHANCE = 0.05
 	
 --	Events
 	
@@ -170,12 +171,13 @@ local wilson_attack = TUNING.BASE_SURVIVOR_ATTACK
 	
 	TUNING.POLARBEAR_TREASURES = {
 		houndstooth = {
-			spoiled_fish_small = 4,
-			fishmeat_small = 1,
+			spoiled_fish_small = 3,
+			fishmeat_small = 2,
 		},
 		walrus_tusk = {
-			spoiled_fish = 2,
-			fishmeat_small = 1,
+			fishmeat = 2,
+			fishmeat_small = 2,
+			spoiled_fish = 1,
 			oceanfish_medium_polar1_inv = 1,
 			polarmoosehat = 0.5,
 		},
@@ -450,7 +452,7 @@ local wilson_attack = TUNING.BASE_SURVIVOR_ATTACK
 	TUNING.POLARBEARHOUSE_SPAWN_TIME = total_day_time * 4
 	
 	TUNING.POLAR_BRAZIER_FUEL_MAX = TUNING.CAMPFIRE_FUEL_MAX
-	TUNING.POLAR_BRAZIER_BLUEPRINT_CHANCE = 0.25
+	TUNING.POLAR_BRAZIER_BLUEPRINT_CHANCE = 0.1
 	TUNING.POLAR_BRAZIER_HOUSE_SPAWN_CHANCE = 0.5
 	
 	TUNING.POLARICE_PLOW_USES = 8
@@ -485,7 +487,8 @@ local wilson_attack = TUNING.BASE_SURVIVOR_ATTACK
 	TUNING.HUNT_ALTERNATE_POLAR_CHANCE_MAX = 1 -- Always Varg in winter
 	
 	TUNING.SNOW_PLOW_RANGES = {
-		USED = 4,
+		REPLACED = 3, -- Deployed / Built something in snow
+		USED = 4, -- Crafting Dry Ice
 		SHOVEL = 5,
 		GOLDENSHOVEL = 6,
 		SHOVEL_LUNARPLANT = 7,

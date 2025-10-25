@@ -29,7 +29,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WORTOX.DESCRIBE
 		CHOPPED = "Il tombe à terre, recouvert de neige.",
 		GENERIC = "Tes bois sont grands, mais j'ai une hache, c'est embêtant !",
 	}
-	DESCRIBE.ICELETTUCE_SEEDS = "Mettons-là en terre avant qu'elle pourrisse."
+	DESCRIBE.ICELETTUCE_SEEDS = "Mettons-les en terre avant qu'elles pourrissent."
 	
 	--	Rocks and stones
 	DESCRIBE.POLAR_ICICLE = "Je jure qu'il a tressailli ! Ou alors ai-je menti ?"

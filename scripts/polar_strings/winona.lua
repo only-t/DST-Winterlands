@@ -31,7 +31,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WINONA.DESCRIBE
 		CHOPPED = "It was more bark than... y'know.",
 		GENERIC = "Looks sharp, but I've got sharper.",
 	}
-	DESCRIBE.ICELETTUCE_SEEDS = "I got no idea what it'd grow into."
+	DESCRIBE.ICELETTUCE_SEEDS = "I got no idea what they'd grow into."
 	
 	--	Rocks and stones
 	DESCRIBE.POLAR_ICICLE = "Right. My hardhat!"

@@ -8,6 +8,15 @@ local prefabs = {
 	"tumbleweed_polarbreakfx",
 }
 
+local lures_loot = {
+	oceanfishinglure_spoon_red = 1,
+	oceanfishinglure_spoon_green = 1,
+	oceanfishinglure_spoon_blue = 1,
+	oceanfishinglure_spinner_red = 1,
+	oceanfishinglure_spinner_green = 1,
+	oceanfishinglure_spinner_blue = 1,
+}
+
 local ANGLE_VARIANCE = 10
 
 local function OnPicked(inst, picker)
@@ -38,6 +47,13 @@ local function OnPicked(inst, picker)
 			table.insert(inst.loot, ornament)
 			table.insert(inst.lootaggro, false)
 		end
+	end
+	
+	if math.random() < TUNING.FISHING_LURE_TUMBLEWIND_CHANCE then
+		local lure = weighted_random_choice(lures_loot)
+		
+		table.insert(inst.loot, lure)
+		table.insert(inst.lootaggro, false)
 	end
 	
 	local item = nil

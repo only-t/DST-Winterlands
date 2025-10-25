@@ -8,16 +8,20 @@ local prefabs = {
 }
 
 local snowhuntPrefabs = {
-	perd = 2,
 	rabbit = 8,
-	rabbitking_lucky = 2,
-	robin_winter = 8,
+	rabbitking_lucky = 1,
+	
+	robin_winter = 6,
+	perd = 2,
+	
+	mole = 3,
 }
 
 local dirthuntPrefabs = {
-	rabbit = 9,
+	rabbit = 10,
 	rabbitking_lucky = 2,
-	mole = 9,
+	
+	mole = 8,
 }
 
 local polarfox_brain = require("brains/polarfoxbrain")

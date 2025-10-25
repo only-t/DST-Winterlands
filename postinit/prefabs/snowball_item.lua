@@ -9,13 +9,7 @@ local function OnPreBuilt(inst, builder, materials, recipe, ...)
 				local block_range = TUNING.SNOW_PLOW_RANGES.USED or 0
 				
 				if block_range > 0 then
-					local x, y, z = builder.Transform:GetWorldPosition()
-					local blocker = SpawnPrefab("snowwave_blocker")
-					blocker.Transform:SetPosition(x, y, z)
-					
-					if blocker.SetSnowBlockRange then
-						blocker:SetSnowBlockRange(block_range)
-					end
+					SpawnPolarSnowBlocker(builder:GetPosition(), block_range, TUNING.POLARPLOW_BLOCKER_DURATION, builder)
 				end
 				
 				break

@@ -24,6 +24,7 @@ local LOOT = {
 	},
 	FLOATSAM_STARFISH = {
 		dug_trap_starfish = 1,
+		tree_rock_seed = 1,
 	},
 	KELP = {
 		bullkelp_beachedroot = 1,

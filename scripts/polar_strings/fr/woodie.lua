@@ -29,7 +29,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WOODIE.DESCRIBE
 		CHOPPED = "Ça lui montrera.",
 		GENERIC = "Pas maintenant Lucy, j'ai un tête à tête à faire avec lui !",
 	}
-	DESCRIBE.ICELETTUCE_SEEDS = "Je pourrais peut-être la planter ?"
+	DESCRIBE.ICELETTUCE_SEEDS = "Je pourrais peut-être les planter ?"
 	
 	--	Rocks and stones
 	DESCRIBE.POLAR_ICICLE = "Elles grandissent plus ici que sur ma vieille cabane."

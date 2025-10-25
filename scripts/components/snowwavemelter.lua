@@ -21,7 +21,7 @@ function SnowwaveMelter:Melt()
 		return
 	end
 	
-	local x, y, z = self.inst.Transform:GetWorldPosition()
+	--[[local x, y, z = self.inst.Transform:GetWorldPosition()
 	local blockers = TheSim:FindEntities(x, y, z, MIN_SNOWBLOCKER_DIST, SNOWBLOCKER_TAGS)
 	
 	local should_melt = true
@@ -48,7 +48,9 @@ function SnowwaveMelter:Melt()
 		end
 		
 		return blocker
-	end
+	end]]
+	
+	return SpawnPolarSnowBlocker(self.inst:GetPosition(), self.melt_range, self.melt_time, self.inst) -- Generalised method, should do the same
 end
 
 function SnowwaveMelter:StartMelting()

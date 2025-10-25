@@ -11,6 +11,18 @@ end
 
 local Builder = require("components/builder")
 	
+	local OldDoBuild = Builder.DoBuild
+	function Builder:DoBuild(recname, pt, ...)
+		local recipe = recname and GetValidRecipe(recname)
+		local block_range = TUNING.SNOW_PLOW_RANGES.REPLACED or 0
+		
+		if recipe and recipe.placer and block_range > 0 then
+			SpawnPolarSnowBlocker(pt, block_range, TUNING.POLARPLOW_BLOCKER_DURATION, self.inst)
+		end
+		
+		return OldDoBuild(self, recname, pt)
+	end
+	
 	local OldHasTechIngredient = Builder.HasTechIngredient
 	function Builder:HasTechIngredient(ingredient, ...)
 		

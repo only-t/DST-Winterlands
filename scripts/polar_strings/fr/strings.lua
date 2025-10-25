@@ -7,7 +7,7 @@ local RECIPE_DESC = STRINGS.RECIPE_DESC
 	NAMES.ANTLER_TREE = "Bramechêne"
 	NAMES.FARM_PLANT_ICELETTUCE = "Laitue iceberg"
 	NAMES.GRASS_POLAR = "Herbe arctique"
-	NAMES.ICELETTUCE_SEEDS = "Graine froide"
+	NAMES.ICELETTUCE_SEEDS = "Graines froides"
 	NAMES.KNOWN_ICELETTUCE_SEEDS = "Graines de laitue iceberg"
 	
 	--	Rocks and stones

@@ -54,6 +54,43 @@ function GetClosestPolarTileToPoint(x, y, z, maxdist) -- LukaS: Kinda hacky, don
 	end
 end
 
+local SNOWBLOCKER_TAGS = {"snowblocker"}
+
+function SpawnPolarSnowBlocker(pos, radius, duration, doer)
+	local blockers = TheSim:FindEntities(pos.x, pos.y, pos.z, radius or 0, SNOWBLOCKER_TAGS)
+	local dist = radius
+	
+	duration = duration or TUNING.POLARPLOW_BLOCKER_DURATION
+	
+	for i, v in ipairs(blockers) do
+		if v.ExtendSnowBlocker then
+			v:ExtendSnowBlocker(doer, nil, duration)
+		end
+		
+		local blocker_dist = v:GetDistanceSqToPoint(pos.x, pos.y, pos.z)
+		if blocker_dist <= radius and v.SetSnowBlockRange and v._snowblockrange and v._snowblockrange:value() < radius then
+			v:SetSnowBlockRange(radius)
+		end
+		
+		if v.prefab == "snowwave_blocker" then
+			dist = blocker_dist < dist and blocker_dist or dist
+		end
+	end
+	
+	local blocker
+	if dist >= radius then
+		blocker = SpawnPrefab("snowwave_blocker")
+		blocker.Transform:SetPosition(pos.x, pos.y, pos.z)
+		
+		blocker:ExtendSnowBlocker(doer, true, duration)
+		if blocker.SetSnowBlockRange then
+			blocker:SetSnowBlockRange(radius)
+		end
+	end
+	
+	return blocker, blockers
+end
+
 function MakePolarCovered(inst, polar)
 	if polar then
 		inst.AnimState:OverrideSymbol("snow", "polar_snow", "snow") -- The snow is snowier than before...

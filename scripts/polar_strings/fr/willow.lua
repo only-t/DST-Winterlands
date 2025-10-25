@@ -29,7 +29,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WILLOW.DESCRIBE
 		CHOPPED = "On se reverra, arbre.",
 		GENERIC = "Tu ferais mieux de bien brûler.",
 	}
-	DESCRIBE.ICELETTUCE_SEEDS = "Une graine."
+	DESCRIBE.ICELETTUCE_SEEDS = "Des graines."
 	
 	--	Rocks and stones
 	DESCRIBE.POLAR_ICICLE = "Hein ?"
