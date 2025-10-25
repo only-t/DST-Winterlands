@@ -7,8 +7,8 @@ local RECIPE_DESC = STRINGS.RECIPE_DESC
 	NAMES.ANTLER_TREE = "Bullbark"
 	NAMES.FARM_PLANT_ICELETTUCE = "Iceberg Lettuce"
 	NAMES.GRASS_POLAR = "Tundra Grass"
-	NAMES.ICELETTUCE_SEEDS = "Frigid Seed"
-	NAMES.KNOWN_ICELETTUCE_SEEDS = "Iceberg Lettuce Seed"
+	NAMES.ICELETTUCE_SEEDS = "Frigid Seeds"
+	NAMES.KNOWN_ICELETTUCE_SEEDS = "Iceberg Lettuce Seeds"
 	
 	--	Rocks and stones
 	NAMES.POLAR_ICICLE = "Icicle"
