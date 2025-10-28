@@ -150,6 +150,10 @@ local function TryGetFlea(inst, force)
 	end
 end
 
+local function OnIgnite(inst)
+	inst:ReleaseFlea()
+end
+
 local function OnGetPolarFlea(inst, data)
 	local flea = data and data.flea
 	
@@ -262,6 +266,7 @@ local function fn()
 	
 	inst:ListenForEvent("gotpolarflea", OnGetPolarFlea)
 	inst:ListenForEvent("ms_stormchanged", inst.onpolarstormchanged, TheWorld)
+	inst:ListenForEvent("onignite", OnIgnite)
 	
 	return inst
 end

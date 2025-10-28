@@ -31,6 +31,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WINONA.DESCRIBE
 		CHOPPED = "It was more bark than... y'know.",
 		GENERIC = "Looks sharp, but I've got sharper.",
 	}
+	DESCRIBE.ANTLER_TREE_SAPLING = "Would it grow faster under the sun?"
 	DESCRIBE.ICELETTUCE_SEEDS = "I got no idea what they'd grow into."
 	
 	--	Rocks and stones

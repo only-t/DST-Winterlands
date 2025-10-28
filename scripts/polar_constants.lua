@@ -160,6 +160,8 @@ POLAR_SNOWMAN_HATS = {
 	footballhat = 0.5,
 	icehat = 0.5,
 	spiderhat = 0.5,
+	
+	--pumpkinhat = Added from unique setpiece when Halloween event is active, do not mix with random hats
 }
 
 POLARRIFY_MOD_SEASONS = {

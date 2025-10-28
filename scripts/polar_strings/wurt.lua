@@ -31,6 +31,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WURT.DESCRIBE
 		CHOPPED = "It sinking in big sea of snow.",
 		GENERIC = "Hm, you far friend of swamp tree?",
 	}
+	DESCRIBE.ANTLER_TREE_SAPLING = "Glurph! Almost tripped on tree."
 	DESCRIBE.ICELETTUCE_SEEDS = "Put in ground!"
 	
 	--	Rocks and stones

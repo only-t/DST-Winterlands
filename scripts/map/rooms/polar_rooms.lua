@@ -250,7 +250,8 @@ AddRoom("PolarIsland_BG", {
 	tags = {"PolarFleas"},
 	contents = {
 		countstaticlayouts = {
-			["PolarSnowman"] = function() return math.random() < (IsSpecialEventActive(SPECIAL_EVENTS.WINTERS_FEAST) and 0.5 or 0.15) and math.random(2) or 0 end,
+			["PolarSnowman"] = function() return math.random() < (IsSpecialEventActive(SPECIAL_EVENTS.WINTERS_FEAST) and 0.5 or 0) and math.random(2, 3) or 0 end,
+			["PolarSpookman"] = function() return math.random() < (IsSpecialEventActive(SPECIAL_EVENTS.HALLOWED_NIGHTS) and 0.33 or 0) and math.random(3, 5) or 0 end,
 		},
 		countprefabs = {
 			icelettuce_spawner = function(area) return math.max(1, math.floor(area / 42)) end,

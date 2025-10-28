@@ -31,6 +31,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WENDY.DESCRIBE
 		CHOPPED = "It met its end at our hands.",
 		GENERIC = "I think it's... pretty.",
 	}
+	DESCRIBE.ANTLER_TREE_SAPLING = "I might be fully frozen before it's fully grown."
 	DESCRIBE.ICELETTUCE_SEEDS = "It's a plant that's waiting to be."
 	
 	--	Rocks and stones

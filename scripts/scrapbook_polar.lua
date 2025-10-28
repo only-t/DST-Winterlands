@@ -61,6 +61,7 @@ local scrapbookdata = {
 	
 	--	Things / POI
 	antler_tree = {type = "thing", subcat = "tree", workable = "CHOP", burnable = true, build = "antler_tree", bank = "antler_tree", anim = "idle", deps = {"antler_tree_stick", "charcoal", "log", "twigs"}},
+	antler_tree_sapling = {type = "thing", workable = "DIG", burnable = true, build = "baby_antler_tree", bank = "baby_antler_tree", anim = "idle_planted", deps = {"antler_tree", "twigs"}},
 	farm_plant_icelettuce = {type = "thing", subcat = "farmplant", workable = "DIG", burnable = true, speechname = "FARM_PLANT", build = "farm_plant_icelettuce", bank = "farm_plant_icelettuce", anim = "crop_full", animoffsety = -10, scale = 1.3, overridesymbol = {"soil01", "farm_soil", "soil01"}, deps = {"spoiled_food", "icelettuce", "icelettuce_seeds"}},
 	grass_polar = {type = "thing", workable = "DIG", pickable = true, burnable = true, build = "grass_polar", bank = "grass_tall", anim = "idle", deps = {"cutgrass", "cutreeds", "dug_grass"}, specialinfo = "NEEDFERTILIZER"},
 	polar_brazier = {type = "thing", workable = "HAMMER", fueledmax = 270, fueledrate = 1, fueledtype1 = "BURNABLE", burnable = true, build = "polar_brazier", bank = "polar_brazier", anim = "idle", overridesymbol = {"swap_fire", "campfire_fire", "flames_wide"}},

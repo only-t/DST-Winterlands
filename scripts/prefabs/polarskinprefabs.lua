@@ -1,7 +1,6 @@
 local prefs = {}
 
-table.insert(prefs, CreatePrefabSkin("ms_polarmoosehat_white",
-{
+table.insert(prefs, CreatePrefabSkin("ms_polarmoosehat_white", {
 	assets = {
 		Asset("DYNAMIC_ANIM", "anim/dynamic/polarmoosehat_white.zip"),
 		Asset("PKGREF", "anim/dynamic/polarmoosehat_white.dyn"),

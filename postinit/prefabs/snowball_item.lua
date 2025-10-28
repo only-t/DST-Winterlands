@@ -89,7 +89,7 @@ end
 local SNOWMAN_SIZES = {"small", "med", "large"}
 local SNOWMAN_TUNING = TUNING.POLAR_SNOWMAN_DECOR
 
-local function OnPolarDecorate(inst)
+local function OnPolarDecorate(inst, hat_prefab)
 	local snowmandecoratable = inst.components.snowmandecoratable
 	
 	if snowmandecoratable then
@@ -107,10 +107,32 @@ local function OnPolarDecorate(inst)
 		end
 		
 		if math.random() < SNOWMAN_TUNING.HAT_CHANCE then
-			local hat = SpawnPrefab(weighted_random_choice(POLAR_SNOWMAN_HATS))
+			local hat = SpawnPrefab(hat_prefab or weighted_random_choice(POLAR_SNOWMAN_HATS))
 			
 			if hat then
-				snowmandecoratable:EquipHat(hat)
+				if hat.components.pumpkinhatcarvable and hat.SetFaceSymbols then
+					local parts = {}
+					
+					local PumpkinHatCarvable = require("components/pumpkinhatcarvable")
+					local num_vars = PumpkinHatCarvable.VARS_PER_TOOL
+					local num_parts = #PumpkinHatCarvable.PARTS
+					local num_tools = 3
+					
+					for i = 1, num_parts do
+						table.insert(parts, math.random(num_vars * num_tools))
+					end
+					hat:SetFaceSymbols(unpack(parts))
+				end
+				if hat.components.waxable then
+					local beeswax = SpawnPrefab("beeswax")
+					hat.components.waxable:Wax(snowmandecoratable, beeswax)
+				end
+				
+				if hat.components.equippable then
+					snowmandecoratable:EquipHat(hat)
+				else
+					hat:Remove()
+				end
 			end
 		end
 	end
@@ -122,7 +144,7 @@ local function OnLoad(inst, data, ...)
 		OldOnLoad(inst, data, ...)
 	end
 	if data and data.polar_decorate then
-		inst:OnPolarDecorate()
+		inst:OnPolarDecorate(data.polar_decorate_hat_prefab)
 	end
 end
 

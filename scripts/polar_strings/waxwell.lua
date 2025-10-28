@@ -31,6 +31,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WAXWELL.DESCRIBE
 		CHOPPED = "You'll have to do better than that, tree.",
 		GENERIC = "Hmph. Shabby thing... it barely holds together.",
 	}
+	DESCRIBE.ANTLER_TREE_SAPLING = "It insist upon growing despite the cold."
 	DESCRIBE.ICELETTUCE_SEEDS = "Am I supposed to plant these?"
 	
 	--	Rocks and stones

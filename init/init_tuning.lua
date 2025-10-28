@@ -33,6 +33,9 @@ local wilson_attack = TUNING.BASE_SURVIVOR_ATTACK
 	
 	TUNING.ANTLER_TREE_CHOPS = 10
 	TUNING.ANTLER_TREE_CHOPS_REGEN_TIME = total_day_time
+	TUNING.ANTLER_TREE_REGROWTH_TIME = total_day_time * 5
+	TUNING.ANTLER_TREE_REGROWTH_TIME_MULT = 1
+	TUNING.ANTLER_TREE_SAPLING_GROW_TIME = {base = 5 * day_time, random = 1 * day_time}
 	
 	TUNING.ICELETTUCE_REGROWTH_CHANCE = 0.25
 	TUNING.ICELETTUCE_REGROWTH_MAX_QUANTITY = 10
@@ -532,8 +535,16 @@ local wilson_attack = TUNING.BASE_SURVIVOR_ATTACK
 		FIRE = 8,
 		FIRE_SMALL = 5,
 		STAR = 10,
-		TORCH = 4,
+		CREATURE = 8,
+		TORCH = 4, -- Thrown torch
 		TORCH_BRIGHTNESS_SKILL = 0.67,
+		
+		FIREFX_LEVEL_MULTS = { -- Unique modifier for burnables based on fuel / flame size
+			LVL1 = 0.5,
+			LVL2 = 0.75,
+			LVL3 = 1,
+			LVL4 = 1.25,
+		}
 	}
 	
 	TUNING.POLAR_STORM_LIGHTER_LEVEL = 0.5

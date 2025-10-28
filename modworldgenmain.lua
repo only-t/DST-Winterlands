@@ -67,6 +67,7 @@ local polar_layouts = {
 	},
 	
 	["PolarSnowman"] = 			{},
+	["PolarSpookman"] = 		{},
 	["skeleton_icicle"] = 		{},
 	["skeleton_polar"] = 		{},
 	

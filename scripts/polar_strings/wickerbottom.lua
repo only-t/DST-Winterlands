@@ -31,6 +31,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE
 		CHOPPED = "It had adapted to intimidate animals, not to endure them.",
 		GENERIC = "This tree appears to mimic Cervidae defenses with its branches.", -- THE MIMIC!!!
 	}
+	DESCRIBE.ANTLER_TREE_SAPLING = "How long has this sapling been dormant under the snow?"
 	DESCRIBE.ICELETTUCE_SEEDS = "It can't begin growing until it's been planted, dear."
 	
 	--	Rocks and stones

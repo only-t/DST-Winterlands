@@ -2,6 +2,10 @@ local assets = {
 	Asset("ANIM", "anim/antler_tree.zip"),
 }
 
+local sapling_assets = {
+	Asset("ANIM", "anim/baby_antler_tree.zip"),
+}
+
 local prefabs = {
 	"log",
 	"twigs",
@@ -11,7 +15,7 @@ local prefabs = {
 SetSharedLootTable("antler_tree", {
 	{"log", 	1},
 	{"log", 	0.5},
-	{"twigs", 	0.5},
+	{"twigs", 	1},
 })
 
 SetSharedLootTable("antler_tree_burnt", {
@@ -24,7 +28,7 @@ local function ChopTree(inst, chopper, chops)
 	inst.AnimState:PlayAnimation("chop")
 	inst.AnimState:PushAnimation("idle", false)
 	if not (chopper and chopper:HasTag("playerghost")) then
-		inst.SoundEmitter:PlaySound("dontstarve/wilson/use_axe_tree")
+		inst.SoundEmitter:PlaySound("polarsounds/antler_tree/use_axe_tree")
 	end
 	
 	if inst.components.timer then
@@ -87,9 +91,9 @@ local function ChopDownTree(inst, chopper)
 	local he_right = (chopper:GetPosition() - inst:GetPosition()):Dot(TheCamera:GetRightVec()) > 0
 	inst.AnimState:PlayAnimation("fall"..(he_right and (inst.face_left and "left" or "right") or (inst.face_left and "right" or "left")))
 	inst.AnimState:PushAnimation("stump", false)
-	inst.SoundEmitter:PlaySound("dontstarve/forest/treeCrumble")
+	inst.SoundEmitter:PlaySound("polarsounds/antler_tree/treeCrumble")
 	if not (chopper and chopper:HasTag("playerghost")) then
-		inst.SoundEmitter:PlaySound("dontstarve/wilson/use_axe_tree")
+		inst.SoundEmitter:PlaySound("polarsounds/antler_tree/use_axe_tree")
 	end
 	
 	for i, v in ipairs(tree_sticcs) do
@@ -109,9 +113,9 @@ end
 
 local function ChopDownBurntTree(inst, chopper)
 	inst.AnimState:PlayAnimation("chop_burnt")
-	inst.SoundEmitter:PlaySound("dontstarve/forest/treeCrumble")
+	inst.SoundEmitter:PlaySound("polarsounds/antler_tree/treeCrumble")
 	if not (chopper and chopper:HasTag("playerghost")) then
-		inst.SoundEmitter:PlaySound("dontstarve/wilson/use_axe_tree")
+		inst.SoundEmitter:PlaySound("polarsounds/antler_tree/use_axe_tree")
 	end
 	
 	inst.components.lootdropper:DropLoot()
@@ -128,7 +132,7 @@ local function OnBurnt(inst)
 	inst:RemoveComponent("hauntable")
 	MakeHauntableWork(inst)
 	
-	inst.components.lootdropper:SetChanceLootTable("moontree_burnt")
+	inst.components.lootdropper:SetChanceLootTable("antler_tree_burnt")
 	
 	inst.components.workable:SetWorkLeft(1)
 	inst.components.workable:SetOnWorkCallback(nil)
@@ -144,6 +148,15 @@ local function GetStatus(inst)
 		or (inst:HasTag("stump") and "CHOPPED")
 		or (inst.components.burnable and inst.components.burnable:IsBurning() and "BURNING")
 		or nil
+end
+
+local function GrowFromSeed(inst)
+	if inst.components.growable then
+		inst.components.growable:SetStage(1)
+	end
+	
+	inst.AnimState:PlayAnimation("grow_seed_to_short")
+	inst.SoundEmitter:PlaySound("polarsounds/antler_tree/treeGrow")
 end
 
 local function OnSave(inst, data)
@@ -236,9 +249,9 @@ local function MakeHornyTree(data)
 		inst.MiniMapEntity:SetIcon("antler_tree.png")
 		inst.MiniMapEntity:SetPriority(-1)
 		
+		inst:AddTag("antlertree")
 		inst:AddTag("plant")
 		inst:AddTag("tree")
-		inst:AddTag("antlertree")
 		
 		inst.AnimState:SetBuild("antler_tree")
 		inst.AnimState:SetBank("antler_tree")
@@ -298,12 +311,14 @@ local function MakeHornyTree(data)
 			OnBurnt(inst)
 		end
 		
-		MakeHauntableWorkAndIgnite(inst)
-		MakeSnowCovered(inst)
-		
 		inst.OnSave = OnSave
 		inst.OnLoad = OnLoad
 		inst.SetSticcs = SetSticcs
+		inst.growfromseed = GrowFromSeed
+		
+		MakeHauntableWorkAndIgnite(inst)
+		MakeSnowCovered(inst)
+		AddToRegrowthManager(inst)
 		
 		inst:ListenForEvent("timerdone", OnTimerDone)
 		
@@ -316,6 +331,97 @@ local function MakeHornyTree(data)
 	return Prefab("antler_tree"..(data ~= nil and "_"..data or ""), fn, assets, prefabs)
 end
 
+--
+
+local function GrowTree(inst)
+	local grow_prefab = type(inst.growprefab) == "table" and GetRandomItem(inst.growprefab) or inst.growprefab
+	local tree = SpawnPrefab(grow_prefab)
+	if tree then
+		tree.Transform:SetPosition(inst.Transform:GetWorldPosition())
+		tree:growfromseed()
+		inst:Remove()
+	end
+end
+
+local function StopGrowing(inst)
+	inst.components.timer:StopTimer("grow")
+end
+
+local function StartGrowing(inst)
+	if not inst.components.timer:TimerExists("grow") then
+		local basetime = inst.growtimes and inst.growtimes.base or TUNING.PINECONE_GROWTIME.base
+		local randomtime = inst.growtimes and inst.growtimes.random or TUNING.PINECONE_GROWTIME.random
+		local growtime = GetRandomWithVariance(basetime, randomtime)
+		inst.components.timer:StartTimer("grow", growtime)
+	end
+end
+
+local function OnSaplingTimerDone(inst, data)
+	if data.name == "grow" then
+		GrowTree(inst)
+	end
+end
+
+local function DigUp(inst, digger)
+	inst.components.lootdropper:DropLoot()
+	inst:Remove()
+end
+
+local function sapling_fn()
+	local inst = CreateEntity()
+	
+	inst.entity:AddTransform()
+	inst.entity:AddAnimState()
+	inst.entity:AddSoundEmitter()
+	inst.entity:AddNetwork()
+	
+	inst:SetDeploySmartRadius(DEPLOYSPACING_RADIUS[DEPLOYSPACING.DEFAULT] / 2)
+	
+	inst.AnimState:SetBank("baby_antler_tree")
+	inst.AnimState:SetBuild("baby_antler_tree")
+	inst.AnimState:PlayAnimation("idle_planted")
+	
+	inst:AddTag("antlertree")
+	inst:AddTag("plant")
+	inst:AddTag("snowhidden")
+	
+	inst.entity:SetPristine()
+	
+	if not TheWorld.ismastersim then
+		return inst
+	end
+	
+	inst.growprefab = "antler_tree"
+	inst.growtimes = TUNING.ANTLER_TREE_SAPLING_GROW_TIME
+	inst.StartGrowing = StartGrowing
+	
+	inst:AddComponent("timer")
+	
+	inst:AddComponent("inspectable")
+	
+	inst:AddComponent("lootdropper")
+	inst.components.lootdropper:SetLoot({"twigs"})
+	
+	inst:AddComponent("workable")
+	inst.components.workable:SetWorkAction(ACTIONS.DIG)
+	inst.components.workable:SetOnFinishCallback(DigUp)
+	inst.components.workable:SetWorkLeft(1)
+	
+	MakeHauntableIgnite(inst)
+	MakeSmallBurnable(inst, TUNING.SMALL_BURNTIME)
+	MakeSmallPropagator(inst)
+	MakeWaxablePlant(inst)
+	
+	inst:ListenForEvent("onextinguish", StartGrowing)
+	inst:ListenForEvent("onignite", StopGrowing)
+	inst:ListenForEvent("timerdone", OnSaplingTimerDone)
+	
+	StartGrowing(inst)
+	
+	return inst
+end
+
 return MakeHornyTree(),
 	MakeHornyTree("stump"),
-	MakeHornyTree("burnt")
+	MakeHornyTree("burnt"),
+	Prefab("antler_tree_sapling", sapling_fn, sapling_assets)

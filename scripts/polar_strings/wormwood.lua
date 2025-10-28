@@ -31,6 +31,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WORMWOOD.DESCRIBE
 		CHOPPED = "(sigh) Why fight?",
 		GENERIC = "Why grow horns for?",
 	}
+	DESCRIBE.ANTLER_TREE_SAPLING = "Too cold?"
 	DESCRIBE.ICELETTUCE_SEEDS = "Chilly babies"
 	
 	--	Rocks and stones

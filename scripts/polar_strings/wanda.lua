@@ -31,6 +31,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WANDA.DESCRIBE
 		CHOPPED = "It had to happen, sooner or later.",
 		GENERIC = "Looks like it's frozen in time.",
 	}
+	DESCRIBE.ANTLER_TREE_SAPLING = "Why must it take so long for plants to grow?"
 	DESCRIBE.ICELETTUCE_SEEDS = "Why waste time growing them when I can just eat them now?"
 	
 	--	Rocks and stones

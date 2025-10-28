@@ -31,6 +31,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE
 		CHOPPED = "It hath fallen in an honorable battle.",
 		GENERIC = "Thy branches would make a fine weapon.",
 	}
+	DESCRIBE.ANTLER_TREE_SAPLING = "'Twill grow resilient and tall, then 'twill be cut down."
 	DESCRIBE.ICELETTUCE_SEEDS = "'Tis a handful of seeds, for not-meat."
 	
 	--	Rocks and stones

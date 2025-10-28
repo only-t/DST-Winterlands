@@ -113,6 +113,7 @@ local components = {
 	"playerspawner",
 	"playervision",
 	"preserver",
+	"regrowthmanager",
 	"repairable",
 	"sandstorms",
 	"sentientaxe",

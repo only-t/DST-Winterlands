@@ -37,7 +37,7 @@ local FIRES = {
 	
 	--	Actual flames
 	campfirefire = 				{prot_range = PROTECTION.CAMPFIRE, 										snow_melt = true},
-	character_fire = 			{prot_range = PROTECTION.FIRE, 											snow_melt = true},
+	character_fire = 			{prot_range = PROTECTION.CREATURE, 										snow_melt = true},
 	fire = 						{prot_range = PROTECTION.FIRE, 											snow_melt = true},
 	portable_campfirefire = 	{prot_range = PROTECTION.CAMPFIRE, 	snow_block = SNOWBLOCK.FIRE_SMALL, 	snow_melt = true},
 }

@@ -5,6 +5,7 @@ local RECIPE_DESC = STRINGS.RECIPE_DESC
 	
 	--	Plants
 	NAMES.ANTLER_TREE = "Bullbark"
+	NAMES.ANTLER_TREE_SAPLING = "Bullbark Calf"
 	NAMES.FARM_PLANT_ICELETTUCE = "Iceberg Lettuce"
 	NAMES.GRASS_POLAR = "Tundra Grass"
 	NAMES.ICELETTUCE_SEEDS = "Frigid Seeds"

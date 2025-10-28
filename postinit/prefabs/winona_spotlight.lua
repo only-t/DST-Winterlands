@@ -14,7 +14,7 @@ local function OnIsDarkOrCold(inst, ...)
 	local heated = inst._heated and inst._heated:value()
 	local light = inst._lightinst
 	
-	if heated and GetClosestPolarTileToPoint(x, 0, z, 32) ~= nil and inst._turnofftask then
+	if heated and GetClosestPolarTileToPoint(x, 0, z, 32) ~= nil then
 		if light and light:IsValid() then
 			if light.components.snowwavemelter == nil then
 				light:AddComponent("snowwavemelter")

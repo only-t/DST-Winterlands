@@ -1,3 +1,9 @@
+-- 	TODO: There is a bug on our basic penguins that tends to make them still visible (but not interactible) on the client despite they've been removed.
+--	I have no idea why this happens... D:
+
+--	Also, if penguin changes whatsoever remember to update this file, unlike the varg this one isn't self maintained
+--	it might also be possible to copy the penguin Prefab at first look but we'll have to clear entitysleep/wave when event is push, and who knows what else...
+
 local assets = {
 	Asset("ANIM", "anim/penguin_guard.zip"),
 	Asset("ANIM", "anim/penguin_build.zip"),
@@ -157,6 +163,8 @@ local function common(bank, build, soundpath)
 	inst.eggsLayed = 0
 	inst.eggprefab = "bird_egg"
 	inst.OnPolarFreeze = OnPolarFreeze
+	
+	inst.spawn_lunar_mutated_tuning = "SPAWN_MOON_PENGULLS" -- This might require testing, I don't know what the halloween update really did here
 	
 	inst:SetStateGraph("SGpenguin")
 	

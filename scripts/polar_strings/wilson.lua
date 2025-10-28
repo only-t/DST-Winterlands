@@ -34,6 +34,7 @@ local DESCRIBE = STRINGS.CHARACTERS.GENERIC.DESCRIBE
 		CHOPPED = "Better vamoose before the other trees notice.",
 		GENERIC = "This tree is axing for a fight.",
 	}
+	DESCRIBE.ANTLER_TREE_SAPLING = "A frozen baby tree."
 	DESCRIBE.ICELETTUCE_SEEDS = "It's some seeds."
 	
 	--	Rocks and stones

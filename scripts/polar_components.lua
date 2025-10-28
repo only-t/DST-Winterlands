@@ -55,6 +55,7 @@ function GetClosestPolarTileToPoint(x, y, z, maxdist) -- LukaS: Kinda hacky, don
 end
 
 local SNOWBLOCKER_TAGS = {"snowblocker"}
+local MIN_SNOWBLOCKER_DIST = 2
 
 function SpawnPolarSnowBlocker(pos, radius, duration, doer)
 	local blockers = TheSim:FindEntities(pos.x, pos.y, pos.z, radius or 0, SNOWBLOCKER_TAGS)
@@ -78,7 +79,7 @@ function SpawnPolarSnowBlocker(pos, radius, duration, doer)
 	end
 	
 	local blocker
-	if dist >= radius then
+	if dist >= MIN_SNOWBLOCKER_DIST then
 		blocker = SpawnPrefab("snowwave_blocker")
 		blocker.Transform:SetPosition(pos.x, pos.y, pos.z)
 		

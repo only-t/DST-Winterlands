@@ -31,6 +31,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WARLY.DESCRIBE
 		CHOPPED = "Clashed!",
 		GENERIC = "Oh! I almost ran into it.",
 	}
+	DESCRIBE.ANTLER_TREE_SAPLING = "Just a petite bébé."
 	DESCRIBE.ICELETTUCE_SEEDS = "These will grow some nice fresh vegetables."
 	
 	--	Rocks and stones

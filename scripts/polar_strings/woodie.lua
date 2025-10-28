@@ -31,6 +31,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WOODIE.DESCRIBE
 		CHOPPED = "That will show 'em.",
 		GENERIC = "Not now Luce, I'll butt with this one personally!",
 	}
+	DESCRIBE.ANTLER_TREE_SAPLING = "Looks like we'll have firewood soon!"
 	DESCRIBE.ICELETTUCE_SEEDS = "Maybe I could plant them?"
 	
 	--	Rocks and stones

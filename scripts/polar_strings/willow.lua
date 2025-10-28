@@ -31,6 +31,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WILLOW.DESCRIBE
 		CHOPPED = "We'll meet again, tree.",
 		GENERIC = "You better burn well.",
 	}
+	DESCRIBE.ANTLER_TREE_SAPLING = "Brrr... c'mon, grow so I can burn you!"
 	DESCRIBE.ICELETTUCE_SEEDS = "Some seeds."
 	
 	--	Rocks and stones
