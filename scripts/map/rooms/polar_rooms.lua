@@ -191,7 +191,7 @@ AddRoom("PolarIsland_BurntForest", {
 		},
 		
 		prefabdata = {
-			evergreen = function() return {burnt = math.random() < 0.8} end,
+			evergreen = function() return {burnt = math.random() < 0.8} end, -- Aw that sucks :( even naturally spawned burnt trees decay automatically after 20~ days...
 			evergreen_sparse = function() return {burnt = math.random() < 0.8} end,
 			leif_sparse = function() return {hibernate = true, sleeping = true, leifscale = leif_scales[math.random(#leif_scales)]} end,
 			polarbearhouse = {burnt = true},

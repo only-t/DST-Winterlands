@@ -162,7 +162,7 @@ end
 
 local function OnSackRemoved(inst, sack, despawned)
 	if sack then
-		if not despawned or (despawned and not inst.waiting_for_next_sack) then
+		if not despawned or (despawned and (not inst.waiting_for_next_sack or TUNING.POLAR_THRONE_EZ_REFRESH)) then
 			inst:SpawnGifts(sack)
 		end
 		inst:RemoveEventCallback("onremove", inst._onsackremoved, sack)

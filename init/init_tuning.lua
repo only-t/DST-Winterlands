@@ -468,6 +468,7 @@ local wilson_attack = TUNING.BASE_SURVIVOR_ATTACK
 	
 	TUNING.POLAR_THRONE_GIFTRING_DIST = 7.8
 	TUNING.POLAR_THRONE_GIFTRING_MAX_OFFSET = 6
+	TUNING.POLAR_THRONE_EZ_REFRESH = false -- In throne worldsetting (enabled in custom start), if enabled gifts refresh all years without opening stash manually
 	
 	TUNING.RAINOMETER_BLIZZARD_WARNTIME = total_day_time * 2
 	TUNING.WINTEROMETER_BLIZZARD_WARNTIME =  total_day_time * 3

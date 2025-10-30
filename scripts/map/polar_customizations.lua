@@ -1,15 +1,23 @@
+local descriptions = {
+	polarthrone_descriptions = {
+		{text = STRINGS.UI.SANDBOXMENU.DISABLED, 		data = "none"},
+		{text = STRINGS.UI.SANDBOXMENU.ENABLED, 		data = "default"},
+		{text = STRINGS.UI.SANDBOXMENU.THRONE_REFRESH, 	data = "yearly"},
+	},
+}
+
 local customizations = {
 --	WORLDSETTINGS
 	arctic_fools = 			{category = LEVELCATEGORY.SETTINGS, desc = "extraevent_descriptions", group = "events", masteroption = true, master_controlled = true, order = 0.14},
 	--emperor_penguin = 	{category = LEVELCATEGORY.SETTINGS, group = "giants", world = {"forest"}},
 	icelettuce_regrowth = 	{category = LEVELCATEGORY.SETTINGS, desc = "speed_descriptions", group = "resources", world = {"forest", "shipwrecked", "porkland"}},
 	polar_icicles = 		{category = LEVELCATEGORY.SETTINGS, group = "misc", world = {"forest", "shipwrecked", "porkland"}},
-	polar_throne = 			{category = LEVELCATEGORY.SETTINGS, group = "global", desc = "yesno_descriptions", world = {"forest", "shipwrecked", "porkland"}, order = 13.1},
+	polar_throne = 			{category = LEVELCATEGORY.SETTINGS, group = "global", desc = descriptions.polarthrone_descriptions, world = {"forest", "shipwrecked", "porkland"}, order = 13.1},
 	polarbears = 			{category = LEVELCATEGORY.SETTINGS, group = "animals"},
 	polarfleas = 			{category = LEVELCATEGORY.SETTINGS, group = "monsters"},
 	polarfoxes = 			{category = LEVELCATEGORY.SETTINGS, group = "animals", world = {"forest", "shipwrecked", "porkland"}},
 	tumbleweed_polar = 		{category = LEVELCATEGORY.SETTINGS, group = "misc", world = {"forest", "shipwrecked", "porkland"}},
-	
+			
 --	WORLDGEN
 	antler_trees = 			{category = LEVELCATEGORY.WORLDGEN, desc = "worldgen_frequency_descriptions", group = "resources", world = {"forest", "shipwrecked", "porkland"}},
 	grass_polar = 			{category = LEVELCATEGORY.WORLDGEN, desc = "worldgen_frequency_descriptions", group = "resources", world = {"forest", "shipwrecked", "porkland"}},
@@ -70,6 +78,7 @@ WSO.Pre.polar_throne = function(difficulty)
 	local tuning_vars = {
 		never = {SPAWN_POLAR_THRONE = false},
 		--default = {SPAWN_POLAR_THRONE = true},
+		yearly = {POLAR_THRONE_EZ_REFRESH = true},
 	}
 	OverrideTuningVariables(tuning_vars[difficulty])
 end

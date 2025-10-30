@@ -71,7 +71,7 @@ for k, v in pairs(require("map/polar_customizations")) do
 	
 	AddCustomizeItem(v.category, v.group, v.name, {
 		value = v.value,
-		desc = GetCustomizeDescription(v.desc),
+		desc = type(v.desc) == "string" and GetCustomizeDescription(v.desc) or v.desc,
 		world = v.world or {"forest", "cave", "shipwrecked", "volcanoworld", "porkland"},
 		image = v.image..".tex",
 		atlas = "images/worldgen_polar.xml",
@@ -99,7 +99,7 @@ if polar_level.overrides == nil then
 	polar_level.overrides = {}
 end
 
---polar_level.overrides.prefabswaps_start = "classic"
+polar_level.overrides.polar_throne = "yearly"
 polar_level.overrides.season_start = "winter"
 polar_level.overrides.start_location = "polar"
 polar_level.overrides.task_set = "polar"

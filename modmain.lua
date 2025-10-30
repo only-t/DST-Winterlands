@@ -52,6 +52,7 @@ local prefabs = {
 	"frogs",
 	"grass",
 	--"heatrock",
+	"klaus_sack",
 	"krampus",
 	"lavae",
 	"mole",

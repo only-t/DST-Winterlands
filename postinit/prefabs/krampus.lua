@@ -176,34 +176,3 @@ ENV.AddPrefabPostInit("krampus", function(inst)
 	
 	inst:DoTaskInTime(0, OnPolarInit)
 end)
-
---
-
-local OldOnUseKlausKey
-local function OnUseKlausKey(inst, key, doer, ...)
-	local success, fail_msg, consumed
-	if OldOnUseKlausKey then
-		success, fail_msg, consumed = OldOnUseKlausKey(inst, key, doer, ...)
-	end
-	
-	if success then
-		TheWorld:PushEvent("ms_respawnthronegifts", inst)
-	end
-	
-	return success, fail_msg, consumed
-end
-
-ENV.AddPrefabPostInit("klaus_sack", function(inst)
-	inst:AddTag("polarthrone_emptier")
-	
-	if not TheWorld.ismastersim then
-		return
-	end
-	
-	if inst.components.klaussacklock then
-		if OldOnUseKlausKey == nil then
-			OldOnUseKlausKey = inst.components.klaussacklock.onusekeyfn
-		end
-		inst.components.klaussacklock:SetOnUseKey(OnUseKlausKey)
-	end
-end)
