@@ -119,6 +119,7 @@ local components = {
 	"sandstorms",
 	"sentientaxe",
 	"shadowcreaturespawner",
+	"shaveable",
 	"sheltered",
 	"slipperyfeet",
 	"snowballmelting",

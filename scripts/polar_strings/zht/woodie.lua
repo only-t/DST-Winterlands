@@ -56,7 +56,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WOODIE.DESCRIBE
 	}
 	DESCRIBE.POLARFLEA = {
 		GENERIC = "呸！",
-		HELD = "別靠近我的頭髮和羽毛！",
+		HELD_INV = "別靠近我的頭髮和羽毛！",
 		HELD_BACKPACK = "當你了解他們後，其實他們也沒那麼糟。",
 	}
 	DESCRIBE.POLARFOX = {

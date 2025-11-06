@@ -56,7 +56,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE
 	}
 	DESCRIBE.POLARFLEA = {
 		GENERIC = "哦，天哪！",
-		HELD = "可以移除，但要付出我的皮肤作为代价。",
+		HELD_INV = "可以移除，但要付出我的皮肤作为代价。",
 		HELD_BACKPACK = "这些小虫子渴望与我一同作战。",
 	}
 	DESCRIBE.POLARFOX = {

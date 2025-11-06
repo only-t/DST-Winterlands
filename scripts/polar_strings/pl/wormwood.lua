@@ -68,7 +68,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WORMWOOD.DESCRIBE
     }
     DESCRIBE.POLARFLEA = {
         GENERIC = "Tylko nie bzytki znowu!",
-        HELD = "Mocno zaboli",
+        HELD_INV = "Mocno zaboli",
         HELD_BACKPACK = "Poznać nowego przyjaciela",
     }
     DESCRIBE.POLARFOX = {

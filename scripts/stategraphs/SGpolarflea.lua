@@ -21,9 +21,7 @@ local events= {
 		end
 	end),
 	EventHandler("fleahostkick", function(inst, host)
-		if not inst._ignore_kick then
-			inst.sg:GoToState("fall", host)
-		end
+		inst.sg:GoToState("fall", host)
 	end),
 	EventHandler("trapped", function(inst)
 		if not inst.sg:HasStateTag("busy") then
@@ -195,6 +193,7 @@ local states = {
 			pt.y = pt.y + 1.5
 			
 			inst.Transform:SetPosition(pt:Get())
+			inst.Transform:SetRotation(math.random(360))
 		end,
 		
 		onupdate = function(inst)
@@ -241,6 +240,18 @@ local states = {
 			if target and target:IsValid() then
 				inst:ForceFacePoint(target:GetPosition())
 				inst.sg.statemem.target = target
+				
+				if target.components.container and target.components.container.canbeopened then
+					BufferedAction(inst, target, ACTIONS.RUMMAGE):Do()
+				end
+			end
+		end,
+		
+		onexit = function(inst)
+			local target = inst.sg.statemem.target
+			
+			if target and target.components.container and target.components.container.canbeopened and target.components.container:IsOpen() then
+				target.components.container:Close(inst)
 			end
 		end,
 		

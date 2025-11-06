@@ -242,6 +242,10 @@ local function MakeMoose(name, assets)
 		
 		inst:AddComponent("lootdropper")
 		inst.components.lootdropper:SetChanceLootTable("moose_polar")
+		if name == "specter" then
+			inst.components.lootdropper:AddChanceLoot("polarbearfur", 0.5)
+			inst.components.lootdropper:AddChanceLoot("polarbearfur", 0.5)
+		end
 		
 		inst:AddComponent("timer")
 		

@@ -56,7 +56,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE
 	}
 	DESCRIBE.POLARFLEA = {
 		GENERIC = "Oh, mon Dieu...",
-		HELD = "Quelle vermine, répugnante et sans manières !",
+		HELD_INV = "Quelle vermine, répugnante et sans manières !",
 		HELD_BACKPACK = "Je ne vous tolérerai près de mes livres.",
 	}
 	DESCRIBE.POLARFOX = {

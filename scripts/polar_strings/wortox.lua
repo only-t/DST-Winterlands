@@ -69,7 +69,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WORTOX.DESCRIBE
 	}
 	DESCRIBE.POLARFLEA = {
 		GENERIC = "Oh no! No no no!",
-		HELD = "It's okay. I will consume you in return soon.",
+		HELD_INV = "It's okay. I will consume you in return soon.",
 		HELD_BACKPACK = "That's one way to hoard souls.",
 	}
 	DESCRIBE.POLARFOX = {

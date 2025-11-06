@@ -32,10 +32,9 @@ AddTaskSetPreInitAny(function(self)
 		end
 		
 		self.set_pieces["PolarAmulet_Shack"] = {count = 1, tasks = {"Polar Lands", "Polar Village", "Polar Quarry"}}
-		self.set_pieces["PolarThrone"] = {count = 1, tasks = {"Polar Lands", "Polar Floe"}}
 		self.set_pieces["skeleton_icicle"] = {count = 1, tasks = {"Polar Caves"}}
-		self.set_pieces["PolarFox_Duo"] = {count = 1, tasks = {"Polar Lands", "Polar Village", "Polar Floe", "Polar Quarry"}}
-		self.set_pieces["PolarFox_Solo"] = {count = 4, tasks = {"Polar Lands", "Polar Village", "Polar Floe", "Polar Quarry"}}
+		self.set_pieces["PolarFox_Duo"] = {count = 1, tasks = {"Polar Lands", "Polar Village", "Polar Quarry"}}
+		self.set_pieces["PolarFox_Solo"] = {count = 3, tasks = {"Polar Lands", "Polar Village", "Polar Quarry"}}
 		
 		if self.required_prefabs == nil then
 			self.required_prefabs = {}
@@ -63,20 +62,23 @@ end)
 --AddCustomizeGroup(LEVELCATEGORY.WORLDGEN, "polar", STRINGS.UI.SANDBOXMENU.WORLDGENERATION_POLAR, nil, nil, 3.1)
 
 for k, v in pairs(require("map/polar_customizations")) do
-	if v.category == LEVELCATEGORY.SETTINGS then
-		v.image = "worldsettings_"..v.name
-	else
-		v.image = "worldgen_"..v.name
-	end
-	
 	AddCustomizeItem(v.category, v.group, v.name, {
 		value = v.value,
 		desc = type(v.desc) == "string" and GetCustomizeDescription(v.desc) or v.desc,
 		world = v.world or {"forest", "cave", "shipwrecked", "volcanoworld", "porkland"},
-		image = v.image..".tex",
+		image = v.image,
 		atlas = "images/worldgen_polar.xml",
 		masteroption = v.masteroption, master_controlled = v.master_controlled, order = v.order
 	})
+end
+
+--	Bunches
+
+local Bunches = require("map/bunches").Bunches
+local Polar_Bunches = require("map/polar_bunches").Bunches
+
+for k, bunch in pairs(Polar_Bunches) do
+	Bunches[k] = bunch
 end
 
 --	Winterlands Start

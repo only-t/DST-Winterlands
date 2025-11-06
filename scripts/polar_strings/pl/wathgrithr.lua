@@ -68,7 +68,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE
 	}
 	DESCRIBE.POLARFLEA = {
 		GENERIC = "O nie ma mowy!",
-		HELD = "Można je usunąć, kosztem mojej własnej skóry.",
+		HELD_INV = "Można je usunąć, kosztem mojej własnej skóry.",
 		HELD_BACKPACK = "Pragną dołączyć do mnie w walce.",
 	}
 	DESCRIBE.POLARFOX = {

@@ -13,11 +13,14 @@ SetSharedLootTable("polarwarg", {
 	{"monstermeat", 		0.5},
 
 	{"houndstooth", 		1},
+	{"houndstooth", 		1},
 	{"houndstooth", 		0.66},
-	{"houndstooth", 		0.33},
+	{"polarwargstooth", 	1},
 	{"polarwargstooth", 	1},
 	{"polarwargstooth", 	0.66},
-	{"polarwargstooth", 	0.33},
+	
+	{"polarbearfur", 	1},
+	{"polarbearfur", 	0.33},
 })
 
 local OldSimulateKoalefantDrops = SimulateKoalefantDrops

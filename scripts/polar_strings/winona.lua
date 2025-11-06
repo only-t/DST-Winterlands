@@ -69,7 +69,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WINONA.DESCRIBE
 	}
 	DESCRIBE.POLARFLEA = {
 		GENERIC = "I know better than getting closer from those things.",
-		HELD = "Yeesh! Go away!",
+		HELD_INV = "Yeesh! Go away!",
 		HELD_BACKPACK = "I'm the boss here. You bite when I say so.",
 	}
 	DESCRIBE.POLARFOX = {

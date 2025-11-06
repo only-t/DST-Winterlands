@@ -75,7 +75,7 @@ local function MakeEmptyFn(inst)
 		inst.AnimState:PlayAnimation("picked")
 	end
 	
-	inst:ReleaseFlea()
+	--inst:ReleaseFlea()
 end
 
 local function MakeBarrenFn(inst, wasempty)
@@ -105,7 +105,7 @@ local function OnPickedFn(inst, picker)
 		inst.AnimState:PushAnimation("picked", false)
 	end
 	
-	inst:ReleaseFlea()
+	--inst:ReleaseFlea()
 end
 
 local function DigUp(inst, worker)
@@ -150,9 +150,9 @@ local function TryGetFlea(inst, force)
 	end
 end
 
-local function OnIgnite(inst)
+--[[local function OnIgnite(inst)
 	inst:ReleaseFlea()
-end
+end]]
 
 local function OnGetPolarFlea(inst, data)
 	local flea = data and data.flea
@@ -251,7 +251,7 @@ local function fn()
 	inst.OnLoad = OnLoad
 	inst.OnPreLoad = OnPreLoad
 	inst.TryGetFlea = TryGetFlea
-	inst.ReleaseFlea = ReleaseFlea
+	--inst.ReleaseFlea = ReleaseFlea	No longer used, fleas now respond on their own
 	
 	local color = 0.75 + math.random() * 0.25
 	inst.AnimState:SetMultColour(color, color, color, 1)
@@ -266,7 +266,7 @@ local function fn()
 	
 	inst:ListenForEvent("gotpolarflea", OnGetPolarFlea)
 	inst:ListenForEvent("ms_stormchanged", inst.onpolarstormchanged, TheWorld)
-	inst:ListenForEvent("onignite", OnIgnite)
+	--inst:ListenForEvent("onignite", OnIgnite)
 	
 	return inst
 end

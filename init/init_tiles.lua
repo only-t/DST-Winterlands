@@ -160,7 +160,7 @@ local function GetTileForPolarTundra(noise)
 end
 
 local function GetTileForPolarFloe(noise)
-	return noise < 0.7 and WORLD_TILES.OCEAN_POLAR or WORLD_TILES.POLAR_SNOW
+	return noise < 0.7 and WORLD_TILES.POLAR_ICE or WORLD_TILES.POLAR_SNOW -- POLAR_ICE is replaced by OCEAN_POLAR postgen
 end
 
 local function GetTileForPolarQuarry(noise)

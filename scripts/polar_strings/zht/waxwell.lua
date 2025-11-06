@@ -56,7 +56,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WAXWELL.DESCRIBE
 	}
 	DESCRIBE.POLARFLEA = {
 		GENERIC = "不！不！",
-		HELD = "這會痛，但我不會把它當寵物養。",
+		HELD_INV = "這會痛，但我不會把它當寵物養。",
 		HELD_BACKPACK = "你不能逼我留著那東西。",
 	}
 	DESCRIBE.POLARFOX = {

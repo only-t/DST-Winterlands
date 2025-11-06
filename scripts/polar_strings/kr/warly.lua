@@ -56,7 +56,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WARLY.DESCRIBE
 	}
 	DESCRIBE.POLARFLEA = {
 		GENERIC = "오, 논!",
-		HELD = "본 아페티~ 그리고 잘 가라!",
+		HELD_INV = "본 아페티~ 그리고 잘 가라!",
 		HELD_BACKPACK = "겨울잠 자는 중인 것 같아.",
 	}
 	DESCRIBE.POLARFOX = {

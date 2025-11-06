@@ -57,7 +57,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WALTER.DESCRIBE
 	}
 	DESCRIBE.POLARFLEA = {
 		GENERIC = "看看這個——呃，這些酷蟲蟲！",
-		HELD = "我的手冊說……現在想把它移除已經太晚了。",
+		HELD_INV = "我的手冊說……現在想把它移除已經太晚了。",
 		HELD_BACKPACK = "沒有什麼能阻止我和我的蟲子們！",
 	}
 	DESCRIBE.POLARFOX = {

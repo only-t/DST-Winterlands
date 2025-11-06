@@ -59,7 +59,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WX78.DESCRIBE
 	}
 	DESCRIBE.POLARFLEA = {
 		GENERIC = "我沒有皮膚給你們吸",
-		HELD = "我為什麼要撿起它？",
+		HELD_INV = "我為什麼要撿起它？",
 		HELD_BACKPACK = "恭喜。你現在成為了消耗型盟友。",
 	}
 	DESCRIBE.POLARFOX = {

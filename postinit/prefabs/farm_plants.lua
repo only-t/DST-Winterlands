@@ -297,6 +297,13 @@ end
 
 --
 
+local function PolarInit(inst)
+	local x, y, z = inst.Transform:GetWorldPosition()
+	if GetClosestPolarTileToPoint(x, 0, z, 32) then
+		inst.AnimState:OverrideSymbol("soil01", "dirt_to_polar_builds", "soil01")
+	end
+end
+
 for k, data in pairs(PLANT_DEFS) do
 	local is_lettuce = k == "icelettuce"
 	
@@ -340,5 +347,28 @@ for k, data in pairs(PLANT_DEFS) do
 			OldSeasonStressTest = PolarUpvalue(Prefabs[data.prefab].fn, "SeasonStressTest")
 			PolarUpvalue(Prefabs[data.prefab].fn, "SeasonStressTest", SeasonStressTest)
 		end
+		
+		inst:DoTaskInTime(0, PolarInit)
+	end)
+end
+
+--
+
+local soil = {"farm_plow", "farm_soil", "farm_soil_debris"}
+
+for i, v in ipairs(soil) do
+	ENV.AddPrefabPostInit(v, function(inst)
+		if v == "farm_plow" then
+			inst:AddTag("snowblocker")
+			
+			inst._snowblockrange = net_smallbyte(inst.GUID, "animal_track._snowblockrange")
+			inst._snowblockrange:set(3)
+		end
+		
+		if not TheWorld.ismastersim then
+			return
+		end
+		
+		inst:DoTaskInTime(0, PolarInit)
 	end)
 end

@@ -56,7 +56,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WORTOX.DESCRIBE
 	}
 	DESCRIBE.POLARFLEA = {
 		GENERIC = "Oh non ! Non non non !",
-		HELD = "C'est pas grave, je prendrais bientôt ton âme.",
+		HELD_INV = "C'est pas grave, je prendrais bientôt ton âme.",
 		HELD_BACKPACK = "Une façon comme une autre d'amasser des âmes.",
 	}
 	DESCRIBE.POLARFOX = {

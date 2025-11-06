@@ -68,7 +68,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WALTER.DESCRIBE
 	}
 	DESCRIBE.POLARFLEA = {
 		GENERIC = "Patrz na tego-- uh, na TE fajne robaki!",
-		HELD = "W moim podręczniku pisze... że jest za późno żeby sie ich pozbyć.",
+		HELD_INV = "W moim podręczniku pisze... że jest za późno żeby sie ich pozbyć.",
 		HELD_BACKPACK = "Nic nie zatrzyma mnie i moję pełzaki!",
 	}
 	DESCRIBE.POLARFOX = {

@@ -56,7 +56,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WOLFGANG.DESCRIBE
 	}
 	DESCRIBE.POLARFLEA = {
 		GENERIC = "Hiii!",
-		HELD = "Elle voudra pas lâcher sans se battre.",
+		HELD_INV = "Elle voudra pas lâcher sans se battre.",
 		HELD_BACKPACK = "Wolfgang n'écrasera pas insecte... si insecte se tient bien.",
 	}
 	DESCRIBE.POLARFOX = {

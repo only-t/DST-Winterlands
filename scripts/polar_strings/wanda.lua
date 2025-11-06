@@ -69,7 +69,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WANDA.DESCRIBE
 	}
 	DESCRIBE.POLARFLEA = {
 		GENERIC = "Ack! Begone!",
-		HELD = "It hurts, but removing it would hurt more.",
+		HELD_INV = "It hurts, but removing it would hurt more.",
 		HELD_BACKPACK = "They're wound up like a spring and ready to burst out!",
 	}
 	DESCRIBE.POLARFOX = {

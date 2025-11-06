@@ -59,7 +59,20 @@ local POLAR_FX = {
 		anim = "anim",
 		sound = "dontstarve/creatures/together/antlion/sfx/sand_to_glass",
 		sounddelay = FRAMES * 2
-	}
+	},
+	{
+		name = "mole_move_polar_fx",
+		bank = "mole_fx",
+		build = "mole_move_fx",
+		anim = "move",
+		nameoverride = STRINGS.NAMES.MOLE_UNDERGROUND,
+		description = function(inst, viewer)
+			return GetString(viewer, "DESCRIBE", {"MOLE", "UNDERGROUND"})
+		end,
+		fn = function(inst)
+			inst.AnimState:OverrideSymbol("molemovefx", "dirt_to_polar_builds", "molemovefx")
+		end,
+	},
 }
 
 require("fx")

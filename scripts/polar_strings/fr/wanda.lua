@@ -56,7 +56,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WANDA.DESCRIBE
 	}
 	DESCRIBE.POLARFLEA = {
 		GENERIC = "Ack ! Dégage de là !",
-		HELD = "Ça fait mal, mais la retirer le sera plus.",
+		HELD_INV = "Ça fait mal, mais la retirer le sera plus.",
 		HELD_BACKPACK = "Elles sont tendu comme des ressorts et prêt à bondir !",
 	}
 	DESCRIBE.POLARFOX = {

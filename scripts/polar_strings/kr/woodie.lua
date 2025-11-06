@@ -56,7 +56,7 @@ DESCRIBE.POLARBEAR = {
 }
 DESCRIBE.POLARFLEA = {
 	GENERIC = "으엑!",
-	HELD = "내 머리털이랑 깃털에서 나가!",
+	HELD_INV = "내 머리털이랑 깃털에서 나가!",
 	HELD_BACKPACK = "알고 보면 나쁘진 않더라고.",
 }
 DESCRIBE.POLARFOX = {

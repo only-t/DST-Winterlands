@@ -56,7 +56,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WARLY.DESCRIBE
 	}
 	DESCRIBE.POLARFLEA = {
 		GENERIC = "哦不！",
-		HELD = "祝你好胃口，然后再见！",
+		HELD_INV = "祝你好胃口，然后再见！",
 		HELD_BACKPACK = "我相信它们正在冬眠。",
 	}
 	DESCRIBE.POLARFOX = {

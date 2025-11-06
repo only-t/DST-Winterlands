@@ -68,7 +68,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WENDY.DESCRIBE
 	}
 	DESCRIBE.POLARFLEA = {
 		GENERIC = "Nie powinnismy uciekać?",
-		HELD = "Um, przepraszam?",
+		HELD_INV = "Um, przepraszam?",
 		HELD_BACKPACK = "Może w końcu, zwierzak, którego sobie zatrzymam.",
 	}
 	DESCRIBE.POLARFOX = {

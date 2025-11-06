@@ -68,7 +68,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WOODIE.DESCRIBE
     }
     DESCRIBE.POLARFLEA = {
         GENERIC = "Fuj!",
-        HELD = "Wynoś się z moich włosów i piór!",
+        HELD_INV = "Wynoś się z moich włosów i piór!",
         HELD_BACKPACK = "Nie są takie złe jak je poznasz.",
     }
     DESCRIBE.POLARFOX = {

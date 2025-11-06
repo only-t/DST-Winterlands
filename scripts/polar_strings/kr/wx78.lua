@@ -90,7 +90,7 @@ DESCRIBE.POLARBEAR = {
 }
 DESCRIBE.POLARFLEA = {
 	GENERIC = "나는 피부가 없다고, 이 자식아",
-	HELD = "내가 왜 이걸 집었지?",
+	HELD_INV = "내가 왜 이걸 집었지?",
 	HELD_BACKPACK = "축하한다. expendable ally(소모성 부하) 되었다",
 }
 DESCRIBE.POLARFOX = {

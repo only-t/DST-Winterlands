@@ -8,6 +8,7 @@ local descriptions = {
 
 local customizations = {
 --	WORLDSETTINGS
+	antler_trees_regrowth = {category = LEVELCATEGORY.SETTINGS, desc = "speed_descriptions", group = "resources", image = "antler_trees.tex", world = {"forest", "shipwrecked", "porkland"}},
 	arctic_fools = 			{category = LEVELCATEGORY.SETTINGS, desc = "extraevent_descriptions", group = "events", masteroption = true, master_controlled = true, order = 0.14},
 	--emperor_penguin = 	{category = LEVELCATEGORY.SETTINGS, group = "giants", world = {"forest"}},
 	icelettuce_regrowth = 	{category = LEVELCATEGORY.SETTINGS, desc = "speed_descriptions", group = "resources", world = {"forest", "shipwrecked", "porkland"}},
@@ -17,13 +18,24 @@ local customizations = {
 	polarfleas = 			{category = LEVELCATEGORY.SETTINGS, group = "monsters"},
 	polarfoxes = 			{category = LEVELCATEGORY.SETTINGS, group = "animals", world = {"forest", "shipwrecked", "porkland"}},
 	tumbleweed_polar = 		{category = LEVELCATEGORY.SETTINGS, group = "misc", world = {"forest", "shipwrecked", "porkland"}},
-			
+	
 --	WORLDGEN
 	antler_trees = 			{category = LEVELCATEGORY.WORLDGEN, desc = "worldgen_frequency_descriptions", group = "resources", world = {"forest", "shipwrecked", "porkland"}},
 	grass_polar = 			{category = LEVELCATEGORY.WORLDGEN, desc = "worldgen_frequency_descriptions", group = "resources", world = {"forest", "shipwrecked", "porkland"}},
 	polarbearhouses = 		{category = LEVELCATEGORY.WORLDGEN, desc = "worldgen_frequency_descriptions", group = "animals", world = {"forest", "shipwrecked", "porkland"}},
 	rocks_polar = 			{category = LEVELCATEGORY.WORLDGEN, desc = "worldgen_frequency_descriptions", group = "resources", world = {"forest", "shipwrecked", "porkland"}},
 }
+
+for k, v in pairs(customizations) do
+	v.name = k
+	v.image = v.image or k..".tex"
+	
+	v.category = v.category
+	--v.group = v.group or "polar"
+	
+	v.value = v.value or "default"
+	v.desc = v.desc or "frequency_descriptions"
+end
 
 --
 
@@ -49,6 +61,18 @@ local function OverrideTuningVariables(tuning)
 			TUNING[k] = v
 		end
 	end
+end
+
+WSO.Pre.antler_trees_regrowth = function(difficulty)
+	local tuning_vars = {
+		never = {ANTLER_TREE_REGROWTH_TIME_MULT = 0},
+		veryslow = {ANTLER_TREE_REGROWTH_TIME_MULT = 0.25},
+		slow = {ANTLER_TREE_REGROWTH_TIME_MULT = 0.5},
+		--default = {ANTLER_TREE_REGROWTH_TIME_MULT = 1},
+		fast = {ANTLER_TREE_REGROWTH_TIME_MULT = 1.5},
+		veryfast = {ANTLER_TREE_REGROWTH_TIME_MULT = 3},
+	}
+	OverrideTuningVariables(tuning_vars[difficulty])
 end
 
 WSO.Pre.icelettuce_regrowth = function(difficulty)
@@ -136,18 +160,6 @@ WSO.Pre.emperor_penguin = function(difficulty)
 		always = {SPAWN_EMPEROR_PENGUIN_MOD = 2},
 	}
 	OverrideTuningVariables(tuning_vars[difficulty])
-end
-
---
-
-for k, v in pairs(customizations) do
-	v.name = k
-	
-	v.category = v.category
-	--v.group = v.group or "polar"
-	
-	v.value = v.value or "default"
-	v.desc = v.desc or "frequency_descriptions"
 end
 
 return customizations

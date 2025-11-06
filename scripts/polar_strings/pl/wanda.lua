@@ -68,7 +68,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WANDA.DESCRIBE
 	}
 	DESCRIBE.POLARFLEA = {
 		GENERIC = "Aj! Precz!",
-		HELD = "Boli, ale pozbycie się go bolałoby bardziej.",
+		HELD_INV = "Boli, ale pozbycie się go bolałoby bardziej.",
 		HELD_BACKPACK = "Są nakręcone jak sprężyna i gotowe do wyskoczenia!",
 	}
 	DESCRIBE.POLARFOX = {

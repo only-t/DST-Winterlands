@@ -62,7 +62,7 @@ local DESCRIBE = STRINGS.CHARACTERS.GENERIC.DESCRIBE
 	}
 	DESCRIBE.POLARFLEA = {
 		GENERIC = "该逃咯！",
-		HELD = "它的下颚已经深入我的皮肤了。",
+		HELD_INV = "它的下颚已经深入我的皮肤了。",
 		HELD_BACKPACK = "我对这个想法充满信心，它一定会成功。",
 	}
 	DESCRIBE.POLARFOX = {

@@ -56,7 +56,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WAXWELL.DESCRIBE
     }
     DESCRIBE.POLARFLEA = {
         GENERIC = "안 돼! 절대 안 돼!",
-        HELD = "아프긴 하겠지만, 애완용으론 무리지.",
+        HELD_INV = "아프긴 하겠지만, 애완용으론 무리지.",
         HELD_BACKPACK = "내가 저걸 품고 다니라고?",
     }
     DESCRIBE.POLARFOX = {

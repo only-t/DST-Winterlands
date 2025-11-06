@@ -18,6 +18,15 @@ local function OnLoad(inst, data)
 	end
 end
 
+local function OnGetPolarFlea(inst, data)
+	local flea = data and data.flea
+	
+	if flea and flea:IsValid() and inst.components.inventoryitem then
+		local x, y, z = inst.Transform:GetWorldPosition()
+		inst.components.inventoryitem:DoDropPhysics(x, y, z, true, 0.23)
+	end
+end
+
 local function OnLootDropped(inst, data)
 	if data and data.dropper then
 		inst.colour = data.dropper.body_paint
@@ -39,6 +48,8 @@ local function fn()
 	inst.AnimState:SetBank("polarbearfur")
 	inst.AnimState:SetBuild("polarbearfur")
 	inst.AnimState:PlayAnimation("idle")
+	
+	inst:AddTag("fleahosted")
 	
 	inst.pickupsound = "cloth"
 	
@@ -67,6 +78,7 @@ local function fn()
 	inst.OnSave = OnSave
 	inst.OnLoad = OnLoad
 	
+	inst:ListenForEvent("gotpolarflea", OnGetPolarFlea)
 	inst:ListenForEvent("on_loot_dropped", OnLootDropped)
 	
 	return inst

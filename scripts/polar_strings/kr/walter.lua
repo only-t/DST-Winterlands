@@ -56,7 +56,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WALTER.DESCRIBE
 	}
 	DESCRIBE.POLARFLEA = {
 		GENERIC = "이거 봐봐— 아니, 이 벌레들 말이야!",
-		HELD = "책에 따르면... 이미 늦었대.",
+		HELD_INV = "책에 따르면... 이미 늦었대.",
 		HELD_BACKPACK = "이제 나와 벌레들은 무적이지!",
 	}
 	DESCRIBE.POLARFOX = {

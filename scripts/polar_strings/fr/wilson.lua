@@ -59,7 +59,7 @@ local DESCRIBE = STRINGS.CHARACTERS.GENERIC.DESCRIBE
 	}
 	DESCRIBE.POLARFLEA = {
 		GENERIC = "On vient de me mettre la puce à l'oreille qu'il faudrait fuir.",
-		HELD = "Ses mandibules sont déjà assez loin sous ma peau.",
+		HELD_INV = "Ses mandibules sont déjà assez loin sous ma peau.",
 		HELD_BACKPACK = "Je suis sûr que tout va très bien se passer.",
 	}
 	DESCRIBE.POLARFOX = {

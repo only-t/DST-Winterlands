@@ -56,7 +56,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WANDA.DESCRIBE
 	}
 	DESCRIBE.POLARFLEA = {
 		GENERIC = "으앗! 저리 가!",
-		HELD = "아프지만 떼어내는 게 더 아플걸...",
+		HELD_INV = "아프지만 떼어내는 게 더 아플걸...",
 		HELD_BACKPACK = "팽팽하게 감겨 있다가 금방이라도 튀어나올 기세야!",
 	}
 	DESCRIBE.POLARFOX = {

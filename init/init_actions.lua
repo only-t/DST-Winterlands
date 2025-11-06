@@ -76,6 +76,16 @@ local CASTSPELLSTR = ACTIONS.CASTSPELL.strfn
 		end
 	end
 	
+local MURDERFN = ACTIONS.MURDER.fn -- NOTE: Wack, but vanilla has nothing that tells an entity directly that it got murdered... needed for snowfleas biting from any inv/container
+	ACTIONS.MURDER.fn = function(act, ...)
+		local murdered = act.invobject or act.target
+		if murdered and (murdered.components.health or murdered.components.murderable) and murdered:HasTag("flea") then
+			murdered:PushEvent("fleabiteback", {doer = act.doer}) -- We need this to happen before being removed from our owner
+		end
+		
+		return MURDERFN(act, ...)
+	end
+	
 local TURNONSTR = ACTIONS.TURNON.stroverridefn
 	ACTIONS.TURNON.stroverridefn = function(act, ...)
 		local target = act.invobject or act.target
@@ -87,7 +97,7 @@ local TURNONSTR = ACTIONS.TURNON.stroverridefn
 			return TURNONSTR(act, ...)
 		end
 	end
-
+	
 --	Components, SGs
 
 AddComponentAction("POINT", "polarplower", function(inst, doer, pos, actions, right)

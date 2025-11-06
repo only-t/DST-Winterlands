@@ -11,7 +11,8 @@ description = info_version..[[
 Where winter reigns eternal, and deadlier than ever... amid the snow lies a world brimming with untamed beauty to undig.
 
 
-󰀏 Best experienced with Winter's Feast enabled!
+󰀏 Best experienced with Winter's Feast enabled
+OR on exclusive start World Preset!
 
 
 Look up your configs + new world settings before starting ⬇]]

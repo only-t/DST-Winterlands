@@ -56,7 +56,7 @@ DESCRIBE.POLARBEAR = {
 }
 DESCRIBE.POLARFLEA = {
     GENERIC = "으악!",
-    HELD = "쉽게 안 놔줘.",
+    HELD_INV = "쉽게 안 놔줘.",
     HELD_BACKPACK = "얌전히 있으면 안 누를게.",
 }
 DESCRIBE.POLARFOX = {

@@ -68,7 +68,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WURT.DESCRIBE
     }
     DESCRIBE.POLARFLEA = {
         GENERIC = "Glurg, jest wszędzie!",
-        HELD = "Idź sobie! Idź sobieee!",
+        HELD_INV = "Idź sobie! Idź sobieee!",
         HELD_BACKPACK = "Posiadać wielkie plany dla ciebie.",
     }
     DESCRIBE.POLARFOX = {

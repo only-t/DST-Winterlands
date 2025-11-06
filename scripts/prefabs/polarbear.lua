@@ -180,13 +180,24 @@ local function GetTeethReward(inst, item, giver)
 		end
 	end
 	
-	if #loot > 0 and inst._snowfleas and #inst._snowfleas > 0 then
-		for i, v in ipairs(inst._snowfleas) do
-			if v:IsValid() then
-				table.insert(loot, "polarflea")
-				v:Remove()
-				break
+	if #loot > 0 then
+		if inst._snowfleas then -- OLD, this shouldn't occur because fleas now properly occupy all inventories, with method under
+			for i, v in ipairs(inst._snowfleas) do
+				if v:IsValid() then
+					table.insert(loot, "polarflea")
+					v:Remove()
+					break
+				end
 			end
+		end
+		
+		if inst.components.inventory then
+			inst.components.inventory:ForEachItem(function(item)
+				if item:HasTag("flea") then
+					table.insert(loot, "polarflea")
+					v:Remove()
+				end
+			end)
 		end
 	end
 	

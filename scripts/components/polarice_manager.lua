@@ -87,6 +87,14 @@ return Class(function(self, inst)
 	end
 	
 	local function InitialLoad() -- Similar to the normal Update fn but skips the ice tile queueing to reduce lag
+		for x = 0, _map:GetSize() - 1 do
+			for y = 0, _map:GetSize() - 1 do
+				if _map:GetTile(x, y) == WORLD_TILES.POLAR_ICE then
+					_map:SetTile(x, y, WORLD_TILES.OCEAN_POLAR) -- Used to immediately populate the world with our water in some rooms (generating land is easier than water...)
+				end
+			end
+		end
+		
 		local _temperature = math.clamp(_world_temperature, MIN_TEMPERATURE, MAX_TEMPERATURE)
 		
 		local mult = Lerp(1, 4, (_temperature - MIN_TEMPERATURE) / (MAX_TEMPERATURE - MIN_TEMPERATURE))
@@ -332,10 +340,10 @@ return Class(function(self, inst)
 	end
 	
 	function self:CanCreateIce(tx, ty)
-		local cx, cy, cz = TheWorld.Map:GetTileCenterPoint(tx, ty)
+		local cx, cy, cz = _map:GetTileCenterPoint(tx, ty)
 		
 		if next(TheSim:FindEntities(cx, cy, cz, ICE_BLOCKER_DIST, nil, nil, self.ICE_FORMING_BLOCKER_TAGS)) == nil then
-			local tile = TheWorld.Map:GetTile(tx, ty)
+			local tile = _map:GetTile(tx, ty)
 			
 			if TileGroupManager:IsOceanTile(tile) or tile == WORLD_TILES.POLAR_ICE then
 				return true
@@ -514,7 +522,7 @@ return Class(function(self, inst)
 							ent:OnPolarFreeze(false)
 						elseif ent.components.submersible then
 							ent.components.submersible:Submerge()
-						elseif ent.components.inventoryitem then
+						elseif ent.components.inventoryitem and ent.components.health == nil then
 							ent.components.inventoryitem:SetLanded(false, true)
 						elseif not ent:HasTag("ignorewalkableplatforms") then -- Not ocean stuff
 							print("Polar Ice (Breaking) removed ent:", ent)

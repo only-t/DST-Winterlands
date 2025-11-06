@@ -56,7 +56,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WANDA.DESCRIBE
 	}
 	DESCRIBE.POLARFLEA = {
 		GENERIC = "啊！滾開！",
-		HELD = "這很痛，但移除它會更痛。",
+		HELD_INV = "這很痛，但移除它會更痛。",
 		HELD_BACKPACK = "它們像彈簧一樣被緊緊纏繞，隨時準備爆發！",
 	}
 	DESCRIBE.POLARFOX = {

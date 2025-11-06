@@ -56,7 +56,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WAXWELL.DESCRIBE
 	}
 	DESCRIBE.POLARFLEA = {
 		GENERIC = "Ah non ! Non et non !",
-		HELD = "Ça va faire mal, mais ce n'est pas comme si j'allais le garder.",
+		HELD_INV = "Ça va faire mal, mais ce n'est pas comme si j'allais le garder.",
 		HELD_BACKPACK = "Vous ne me ferai pas garder ce truc.",
 	}
 	DESCRIBE.POLARFOX = {

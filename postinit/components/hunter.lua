@@ -15,6 +15,11 @@ ENV.AddComponentPostInit("hunter", function(self)
 			end
 			
 			local season = POLARRIFY_MOD_SEASONS[TheWorld.state.season] or "autumn"
+			
+			if (season == "autumn" or season == "spring") and math.random() < TUNING.HUNT_KOALEFANT_POLAR_CHANCE then
+				return "koalefant_winter"
+			end
+			
 			local surprise_chance = (season == "winter" and TUNING.HUNT_ALTERNATE_POLAR_CHANCE_MAX)
 				or (season == "summer" and TUNING.HUNT_ALTERNATE_POLAR_CHANCE_MIN)
 				or TUNING.HUNT_ALTERNATE_POLAR_CHANCE

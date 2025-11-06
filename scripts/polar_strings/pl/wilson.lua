@@ -71,7 +71,7 @@ local DESCRIBE = STRINGS.CHARACTERS.GENERIC.DESCRIBE
     }
     DESCRIBE.POLARFLEA = {
         GENERIC = "Czas się zwijać!",
-        HELD = "Żuchwy są już dość głęboko pod moją skórą.",
+        HELD_INV = "Żuchwy są już dość głęboko pod moją skórą.",
         HELD_BACKPACK = "Jestem pewien, że cały ten pomysł wypali.",
     }
     DESCRIBE.POLARFOX = {

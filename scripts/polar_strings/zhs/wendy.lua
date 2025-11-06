@@ -56,7 +56,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WENDY.DESCRIBE
 	}
 	DESCRIBE.POLARFLEA = {
 		GENERIC = "我们不应该跑吗？",
-		HELD = "嗯，失礼了？",
+		HELD_INV = "嗯，失礼了？",
 		HELD_BACKPACK = "终于，一只我可能真的能养活的宠物。",
 	}
 	DESCRIBE.POLARFOX = {

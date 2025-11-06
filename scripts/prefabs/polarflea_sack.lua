@@ -7,9 +7,11 @@ local assets =
 local FLEA_TAGS = {"flea"}
 local FLEA_NOT_TAGS = {"INLIMBO"}
 
-local function UpdateFleas(inst)
+local function UpdateFleas(inst) -- Call fleas to find a host ASAP if we have room, they will choose Itchhiker Packs in priority in the brain
 	local owner = inst.components.inventoryitem and inst.components.inventoryitem:GetGrandOwner()
-	if inst.components.container and inst.components.container:IsFull() and owner and owner.components.inventory and owner.components.inventory:IsFull() then
+	if inst.components.container == nil or (inst.components.container:IsFull() and (owner == nil or owner.components.inventory and owner.components.inventory:IsFull()))
+		or (owner and (not inst.components.container:IsOpen() or owner:HasTag("hiding"))) then
+		
 		return
 	end
 	
@@ -17,6 +19,10 @@ local function UpdateFleas(inst)
 	local ents = TheSim:FindEntities(x, y, z, TUNING.POLARFLEA_SACK_CALL_DIST, FLEA_TAGS, FLEA_NOT_TAGS)
 	
 	for i, v in ipairs(ents) do
+		if v.CanBeHost and not v:CanBeHost(owner or inst) then
+			return
+		end
+		
 		if v.components.sleeper and v.components.sleeper:IsAsleep() then
 			v.components.sleeper:WakeUp()
 		end
@@ -41,11 +47,7 @@ local function OnEquip(inst, owner)
 	
 	inst.components.container:Open(owner)
 	inst.components.container:ForEachItem(function(item)
-		if item:HasTag("flea") and item.SetHost and item._host == nil then
-			if item.OnInvRefresh then
-				item:OnInvRefresh(true, true)
-			end
-			
+		if item:HasTag("flea") and item.SetHost then
 			item:SetHost(owner)
 		end
 	end)
@@ -54,7 +56,7 @@ local function OnEquip(inst, owner)
 		inst.components.fueled:StartConsuming()
 	end
 	
-	inst._updatefleas = inst:DoPeriodicTask(0.5, inst.UpdateFleas)
+	--inst._updatefleas = inst:DoPeriodicTask(0.5, inst.UpdateFleas)
 end
 
 local function OnUnequip(inst, owner)
@@ -67,12 +69,8 @@ local function OnUnequip(inst, owner)
 	
 	inst.components.container:Close(owner)
 	inst.components.container:ForEachItem(function(item)
-		if item:HasTag("flea") and item.SetHost and item._host == owner then
-			item._ignore_kick = true
-			if item.OnInvRefresh then
-				item:OnInvRefresh(false, false)
-			end
-			item._ignore_kick = nil
+		if item:HasTag("flea") and item.SetHost then
+			item:SetHost(inst)
 		end
 	end)
 	
@@ -80,10 +78,10 @@ local function OnUnequip(inst, owner)
 		inst.components.fueled:StopConsuming()
 	end
 	
-	if inst._updatefleas then
+	--[[if inst._updatefleas then
 		inst._updatefleas:Cancel()
 		inst._updatefleas = nil
-	end
+	end]]
 end
 
 local function OnEquipToModel(inst, owner)
@@ -194,6 +192,8 @@ local function fn()
 	MakeHauntableLaunchAndDropFirstItem(inst)
 	
 	inst.UpdateFleas = UpdateFleas
+	
+	inst._updatefleas = inst:DoPeriodicTask(0.5, inst.UpdateFleas)
 	
 	return inst
 end

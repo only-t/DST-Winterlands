@@ -56,7 +56,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WURT.DESCRIBE
 	}
 	DESCRIBE.POLARFLEA = {
 		GENERIC = "Glurg, elles sont partout !",
-		HELD = "Va-t'en ! Vaaaa-t'en !",
+		HELD_INV = "Va-t'en ! Vaaaa-t'en !",
 		HELD_BACKPACK = "J'ai de grands plans pour toi, florp.",
 	}
 	DESCRIBE.POLARFOX = {

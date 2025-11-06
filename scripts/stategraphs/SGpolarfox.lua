@@ -67,9 +67,8 @@ local states = {
 		onenter = function(inst, data)
 			inst.sg.statemem.alerted = data and data.alerted and inst.wantstoalert
 			
-			local temperature = TheWorld.state.temperature
-			if not (inst.components.follower and inst.components.follower.leader) and ((temperature and temperature >= TUNING.POLAR_SNOW_MELT_TEMP)
-				or (TheWorld.components.polarstorm and TheWorld.components.polarstorm:IsInPolarStorm(inst))) then
+			if not (inst.components.follower and inst.components.follower.leader) and TheWorld.components.polarstorm
+				and TheWorld.components.polarstorm:IsInPolarStorm(inst) then
 				
 				inst.wantstodive_forced = true
 			else
@@ -143,9 +142,9 @@ local states = {
 				if inst.AnimState:AnimDone() then
 					inst.wantstosit = math.random() < 0.9 and not inst.wantstoalert
 					
-					local temperature = TheWorld.state.temperature
-					if not (inst.components.follower and inst.components.follower.leader) and ((temperature and temperature >= TUNING.POLAR_SNOW_MELT_TEMP)
-						or (TheWorld.components.polarstorm and TheWorld.components.polarstorm:IsInPolarStorm(inst))) then
+					if not (inst.components.follower and inst.components.follower.leader) and TheWorld.components.polarstorm
+						and TheWorld.components.polarstorm:IsInPolarStorm(inst) then
+						
 						inst.wantstosit = nil
 						inst.sg:GoToState("sit")
 					else
@@ -489,10 +488,7 @@ local states = {
 				end
 			end
 			
-			local temperature = TheWorld.state.temperature
-			if inst.components.follower and inst.components.follower.leader or not ((temperature and temperature >= TUNING.POLAR_SNOW_MELT_TEMP)
-				or (TheWorld.components.polarstorm and TheWorld.components.polarstorm:IsInPolarStorm(inst))) then
-				
+			if (inst.components.follower and inst.components.follower.leader) or not (TheWorld.components.polarstorm and TheWorld.components.polarstorm:IsInPolarStorm(inst)) then
 				inst.sg.statemem.exit_dive = true
 			end
 			

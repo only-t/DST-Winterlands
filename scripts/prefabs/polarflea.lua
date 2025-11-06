@@ -4,10 +4,6 @@ local assets = {
 
 local brain = require("brains/polarfleabrain")
 
---[[SetSharedLootTable("polarflea", {
-	{"monstermeat", 1},
-})]]
-
 local function KeepTargetFn(inst, target)
 	return target and inst:IsNear(target, 30)
 end
@@ -23,7 +19,7 @@ local function Retarget(inst)
 		
 		if inventory then
 			for k, v in pairs(inventory.equipslots) do
-				if v:HasTag("fleapack") and v.components.container then
+				if v:HasTag("fleapack") and v.components.container and v.components.container:IsOpen() then
 					fleapack = v
 					break
 				end
@@ -37,34 +33,93 @@ local function Retarget(inst)
 	return target
 end
 
-local function HostMaxFleas(inst, host)
-	if host._fleacapacity then
-		return FunctionOrValue(host._fleacapacity, host, inst)
-	elseif host:HasTag("epic") or host:HasTag("largecreature") then
-		return TUNING.POLARFLEA_HOST_MAXFLEAS_LARGE
-	elseif host:HasTag("prey") then
-		return TUNING.POLARFLEA_HOST_MAXFLEAS_SMALL
+local function HostCapacity(inst, host)
+	local inventory = host.components.inventory or host.components.container
+	local max
+	
+	if not (host.components.container or host:HasTag("player")) then
+		max = (host:HasAnyTag({"epic", "largecreature"}) and TUNING.POLARFLEA_HOST_MAXFLEAS_LARGE)
+			or (host:HasAnyTag({"_inventoryitem", "prey"}) and TUNING.POLARFLEA_HOST_MAXFLEAS_SMALL)
+			or TUNING.POLARFLEA_HOST_MAXFLEAS
 	end
 	
-	return TUNING.POLARFLEA_HOST_MAXFLEAS
+	if host._fleacapacity then
+		local val = FunctionOrValue(host._fleacapacity, host, inst)
+		
+		max = max and math.min(val, max) or val
+	elseif inventory then
+		local stackmax = (inst.components.stackable and inst.components.stackable.maxsize) or 1
+		local containers = {inventory}
+		
+		if host.components.inventory then
+			local overflow = host.components.inventory:GetOverflowContainer()
+			if overflow then
+				table.insert(containers, overflow)
+			end
+		end
+		
+		local fleas_in_inv, free = 0, 0
+		
+		for _, c in ipairs(containers) do
+			local maxslots = c.maxslots or c.numslots or 0
+			local slots = c.itemslots or c.slots
+			
+			for i = 1, maxslots do
+				local v = slots[i]
+				
+				if v then
+					if v.prefab == inst.prefab then
+						if v.components.stackable then
+							fleas_in_inv = fleas_in_inv + v.components.stackable:StackSize()
+							free = free + v.components.stackable:RoomLeft()
+						else
+							fleas_in_inv = fleas_in_inv + 1
+						end
+					end
+				elseif c:CanTakeItemInSlot(inst, i) then
+					free = free + (c:AcceptsStacks() and stackmax or 1)
+				end
+			end
+		end
+		
+		if max then
+			max = math.min(math.max(0, max - fleas_in_inv), free)
+		else
+			max = free
+		end
+	end
+	
+	local current = (not inventory and host._snowfleas and #host._snowfleas) or 0
+	
+	return math.max((max or 0) - current, 0)
 end
 
-local function CanBeHost(inst, host, capacity_mod)
-	if host and host:IsValid() and not (host.components.health and host.components.health:IsDead()) and host.entity:IsVisible() then
+local function CanBeHost(inst, host)
+	if host and host:IsValid() and not (host.components.health and host.components.health:IsDead()) and host.entity:IsVisible() and inst:HostCapacity(host) > 0 and
+		not host:HasAnyTag({"fire", "fleaghosted", "likewateroffducksback", "smallcreature"}) then
+		
+		--	Player logic
 		if host:HasTag("player") then
 			local inventory = host.components.inventory
 			if inventory then
 				for k, v in pairs(inventory.equipslots) do
-					if v:HasTag("fleapack") and v.components.container and not v.components.container:IsFull() then
+					if v:HasTag("fleapack") and v.components.container and v.components.container:IsOpen() and v.components.container:CanAcceptCount(inst, 1) then
 						return true
 					end
 				end
 			end
 			
-			return not (host:HasAnyTag(SOULLESS_TARGET_TAGS) or host:HasTag("fire") or host:GetIsWet()) and inventory and not inventory:IsFull()
-		elseif (host._snowfleas and #host._snowfleas or 0) < inst:HostMaxFleas(host) + (capacity_mod or 0) then
-			if not host:HasTag("likewateroffducksback") and (host:HasTag("animal") or host:HasTag("character") or host:HasTag("fleahosted") or host:HasTag("monster")) then
-				return not (host:HasAnyTag(SOULLESS_TARGET_TAGS) or host:HasTag("fleaghosted") or host:HasTag("fire") or host:GetIsWet())
+			return not host:HasAnyTag(SOULLESS_TARGET_TAGS) and inventory and not inventory:IsFull() and not host:GetIsWet()
+		--	Anything else...
+		else
+			--	Containers logic
+			if host.components.container and host.components.container.canbeopened then
+				return host.components.container:CanAcceptCount(inst, 1) > 0
+			end
+			
+			--	Creatures logic
+			if host:HasAnyTag({"animal", "character", "monster", "fleahosted"}) then
+				return not host:HasAnyTag(SOULLESS_TARGET_TAGS) and not host:GetIsWet()
 			end
 		end
 	end
@@ -83,13 +138,16 @@ local function SetHost(inst, host, kick, given)
 		end
 	end
 	
+	--	Removing old host
+	
 	if inst._host then
+		inst:RemoveEventCallback("onignite", inst.on_host_attacked, inst._host)
 		inst:RemoveEventCallback("attacked", inst.on_host_attacked, inst._host)
 		inst:RemoveEventCallback("onattackother", inst.on_host_attackother, inst._host)
+		inst:RemoveEventCallback("onpickup", inst.on_host_pickedup, inst._host)
+		inst:RemoveEventCallback("picked", inst.on_host_pickedup, inst._host)
 		
 		if inst._host:IsValid() then
-			inst.Transform:SetPosition(inst._host.Transform:GetWorldPosition())
-			
 			if inst._host._snowfleas then
 				for i, v in ipairs(inst._host._snowfleas) do
 					if v == inst then
@@ -103,54 +161,55 @@ local function SetHost(inst, host, kick, given)
 		end
 	end
 	
-	if inst.components.knownlocations then
-		inst.components.knownlocations:RememberLocation("home", inst:GetPosition())
-	end
-	
 	if kick or host == nil then
-		if not inst._ignore_kick then
+		local inventory = inst._host and (inst._host.components.inventory or inst._host.components.container)
+		
+		if inventory and inst.components.inventoryitem and inst.components.inventoryitem:IsHeld() then
+			inventory:RemoveItem(inst, true)
+			inventory:DropItem(inst, true)
+		else
 			inst:ReturnToScene()
-		
-			if inst.components.health then
-				inst.components.health:StopRegen()
-			end
 		end
 		
-		if inst._host and inst._host:IsValid() and inst._host.components.inventory and inst.components.inventoryitem
-			and (inst.components.inventoryitem:GetGrandOwner() == inst._host) then
-			
-			if inst.on_host_grab then
-				inst:RemoveEventCallback("murdered", inst.on_host_grab, inst._host)
-				inst:RemoveEventCallback("newactiveitem", inst.on_host_grab, inst._host)
-				inst.on_host_grab = nil
-			end
-			
-			if not inst._ignore_kick then
-				inst._host.components.inventory:RemoveItem(inst, true)
-				inst._host.components.inventory:DropItem(inst, true)
-			end
+		if inst.components.health then
+			inst.components.health:StopRegen()
 		end
+		
 		inst:PushEvent("fleahostkick", inst._host)
-		
 		inst._host = nil
+		
 		return
 	end
 	
+	local pt = inst:GetPosition()
+	if inst.components.knownlocations then
+		inst.components.knownlocations:RememberLocation("home", pt)
+	end
+	
+	--	Setting new host
+	
 	inst._host = host
+	inst:ListenForEvent("onignite", inst.on_host_attacked, inst._host)
 	inst:ListenForEvent("attacked", inst.on_host_attacked, inst._host)
 	inst:ListenForEvent("onattackother", inst.on_host_attackother, inst._host)
+	inst:ListenForEvent("onpickup", inst.on_host_pickedup, inst._host)
+	inst:ListenForEvent("picked", inst.on_host_pickedup, inst._host)
 	
 	if inst.components.health then
 		inst.components.health:StartRegen(TUNING.POLARFLEA_POCKET_REGEN, TUNING.POLARFLEA_REGEN_RATE)
 	end
 	
-	if not given and inst._host:HasTag("player") and inst._host.components.inventory then
-		inst._try_fleapack = true
-		inst._host.components.inventory:GiveItem(inst, nil, inst:GetPosition())
-		inst._try_fleapack = nil
+	local inventory = inst._host and (inst._host.components.inventory or inst._host.components.container)
+	
+	if inventory then
+		if inst.components.inventoryitem and not inst.components.inventoryitem:IsHeld() then
+			inst._try_fleapack = true -- Fleas will try to move in Itchhiker Pack in priority
+			inventory:GiveItem(inst, nil, pt)
+			inst._try_fleapack = nil
+		end
 	else
 		if inst._host._snowfleas == nil then
-			inst._host._snowfleas = {}
+			inst._host._snowfleas = {} -- Only used for things without inv
 		end
 		if not table.contains(inst._host._snowfleas, inst) then
 			table.insert(inst._host._snowfleas, inst)
@@ -165,10 +224,133 @@ end
 local function GetStatus(inst)
 	local owner = inst.components.inventoryitem and inst.components.inventoryitem.owner
 	
-	if owner then
-		return owner:HasTag("fleapack") and "HELD_BACKPACK" or "HELD"
+	if owner and owner:HasTag("fleapack") then
+		return "HELD_BACKPACK"
+	end
+	
+	return owner == inst and "HELD_INV" or nil -- HELD is autocompleted by game but we use another logic
+end
+
+--	Host events
+
+local function OnHostAttacked(inst, host, data) -- This is for both onattacked and onignite
+	if host and inst.components.combat then
+		local attacker = data and (data.attacker or data.doer)
+		local isbuddy = attacker and attacker:HasTag("bearbuddy")
+		local isflea = attacker and attacker:HasTag("flea")
+		
+		local release_chance = ((host.components.burnable and host.components.burnable:IsBurning())
+			or (host.components.health and host.components.health:IsDead())) and 1 or TUNING.POLARFLEA_HOST_HIT_DROPCHANCE
+		
+		local fleapack
+		if host.components.inventory then
+			for k, v in pairs(host.components.inventory.equipslots) do
+				if v:HasTag("fleapack") then
+					fleapack = v
+					break
+				end
+			end
+		end
+		
+		if fleapack then
+			release_chance = (fleapack.components.container == nil or fleapack.components.container:IsOpen()) and 1 or 0
+		end
+		
+		if math.random() <= release_chance and not isflea then
+			inst:SetHost(nil, true)
+			
+			if attacker and not isflea and not isbuddy then
+				inst.components.combat:SetTarget(attacker)
+			end
+		end
 	end
 end
+
+local function OnHostAttackOther(inst, host, data)
+	if host and inst.components.combat then
+		local fleapack
+		if host.components.inventory then
+			for k, v in pairs(host.components.inventory.equipslots) do
+				if v:HasTag("fleapack") then
+					fleapack = v
+					break
+				end
+			end
+		end
+		
+		if fleapack then
+			if fleapack.components.container and not fleapack.components.container:IsOpen() then
+				return
+			else
+				local target = data and data.target
+				if target and not target:HasTag("flea") and not (target.components.health and target.components.health:IsDead())
+					and inst.components.combat:CanTarget(target) then
+					
+					inst:SetHost(nil, true)
+					
+					inst.components.combat:SetTarget(target)
+				end
+			end
+		end
+	end
+end
+
+local function OnHostPickedUp(inst, host, data) -- This is for both items and pickables
+	if host and not host.components.container and inst.components.combat then
+		local picker = data and (data.picker or data.owner)
+		local isbuddy = picker and picker:HasTag("bearbuddy")
+		local isflea = picker and picker:HasTag("flea")
+		
+		inst:SetHost(nil, true)
+		
+		if picker and not isflea and not isbuddy then
+			inst.components.combat:SetTarget(picker)
+		end
+	end
+end
+
+--	Inventory
+
+local function OnBecomeActiveItem(inst, doer)
+	local owner = inst.components.inventoryitem and inst.components.inventoryitem.owner
+	local prevcontainer = inst.prevcontainer and inst.prevcontainer.inst
+	
+	-- Fleas are intended to bite in the pocket they are stored. So players, chesters, etc, but not in backpacks
+	if inst._host and inst._host.components.combat and inst._host == owner and
+		not (prevcontainer and prevcontainer:HasTag("fleapack")) then -- Itchhiker Pack transfers ownership
+		
+		inst._host.components.combat:GetAttacked(inst, TUNING.POLARFLEA_HOST_REMOVE_DAMAGE)
+	end
+	
+	inst:DoTaskInTime(0, function()
+		local inventory = inst._host and (inst._host.components.inventory or inst._host.components.container)
+		
+		if inst:IsValid() then
+			if inventory then
+				inventory:RemoveItem(inst, true)
+				inventory:DropItem(inst, true)
+			end
+			
+			local doer_inv = doer and doer.components.inventory
+			if doer_inv then
+				doer_inv:RemoveItem(inst, true)
+				doer_inv:DropItem(inst, true)
+			end
+			
+			inst:SetHost(nil, true)
+		end
+	end)
+end
+
+local function OnMurdered(inst, data)
+	local owner = inst.components.inventoryitem and inst.components.inventoryitem.owner
+	
+	if owner and owner.components.combat then
+		owner.components.combat:GetAttacked(inst, TUNING.POLARFLEA_HOST_REMOVE_DAMAGE)
+	end
+end
+
+--
 
 local function OnSave(inst, data)
 	local ents = {}
@@ -190,27 +372,6 @@ local function OnLoadPostPass(inst, newents, savedata)
 	end
 end
 
-local function OnEntitySleep(inst)
-	if not inst.inlimbo and not TheWorld.Map:IsPassableAtPoint(inst.Transform:GetWorldPosition()) then
-		inst:Remove()
-	end
-end
-
-local function OnEntityWake(inst)
-	if not inst.inlimbo and not TheWorld.Map:IsPassableAtPoint(inst.Transform:GetWorldPosition()) then
-		inst:Remove()
-	end
-end
-
-local function OnAttacked(inst, data)
-	if data and data.attacker then
-		inst.components.combat:SetTarget(data.attacker)
-		inst.components.combat:ShareTarget(data.attacker, TUNING.POLARFLEA_CHASE_RANGE, function(dude)
-			return dude:HasTag("flea") and not dude.components.health:IsDead()
-		end, 10)
-	end
-end
-
 local function OnRemove(inst)
 	if inst._host and inst._host._snowfleas then
 		for i, v in ipairs(inst._host._snowfleas) do
@@ -225,6 +386,15 @@ local function OnRemove(inst)
 	end
 end
 
+local function OnAttacked(inst, data)
+	if data and data.attacker then
+		inst.components.combat:SetTarget(data.attacker)
+		inst.components.combat:ShareTarget(data.attacker, TUNING.POLARFLEA_CHASE_RANGE, function(dude)
+			return dude:HasTag("flea") and not dude.components.health:IsDead()
+		end, 10)
+	end
+end
+
 local function OnTimerDone(inst, data)
 	if data.name == "leavehost" then -- Unused
 		inst:SetHost(nil, true)
@@ -236,190 +406,18 @@ local function OnTimerDone(inst, data)
 	end
 end
 
-local function OnHostAttacked(inst, host, data)
-	if host and inst.components.combat then
-		local attacker = data and data.attacker
-		local isbuddy = attacker and attacker:HasTag("bearbuddy")
-		local isflea = attacker and attacker:HasTag("flea")
-		local release_chance = TUNING.POLARFLEA_HOST_HIT_DROPCHANCE
-		
-		local fleapack
-		local inventory = host.components.inventory
-		
-		if inventory then
-			for k, v in pairs(inventory.equipslots) do
-				if v:HasTag("fleapack") then
-					fleapack = v
-					break
-				end
-			end
-		end
-		
-		if fleapack then
-			release_chance = (fleapack.components.container == nil or fleapack.components.container:IsOpen()) and 1 or 0
-		end
-		
-		if (host.components.health and host.components.health:IsDead()) or ((math.random() <= release_chance) and not isflea) then
-			if inventory then
-				inventory:RemoveItem(inst, true)
-				inventory:DropItem(inst, true)
-			else
-				inst:SetHost(nil, true)
-			end
-			
-			if attacker and not isflea and not isbuddy then
-				inst.components.combat:SetTarget(data.attacker)
-			end
-		end
-	end
-end
-
-local function OnHostAttackOther(inst, host, data)
-	if host and inst.components.combat then
-		local fleapack
-		local inventory = host.components.inventory
-		
-		if inventory then
-			for k, v in pairs(inventory.equipslots) do
-				if v:HasTag("fleapack") then
-					fleapack = v
-					break
-				end
-			end
-		end
-		
-		if fleapack then
-			if fleapack.components.container and not fleapack.components.container:IsOpen() then
-				return
-			else
-				local target = data and data.target
-				if target and not target:HasTag("flea") and not (target.components.health and target.components.health:IsDead())
-					and inst.components.combat:CanTarget(target) then
-					
-					if inventory then
-						inventory:RemoveItem(inst, true)
-						inventory:DropItem(inst, true)
-					end
-					
-					inst.components.combat:SetTarget(data.target)
-				end
-			end
-		end
-	end
-end
-
-local function OnHostGrab(inst, host, data)
-	if data == nil then
-		return
-	end
-	
-	local item = data.item or data.victim
-	local is_grabbed = item == inst
-	
-	if is_grabbed and host and inst._host == host and host.components.inventory then
-		host:DoTaskInTime(0, function()
-			local owner = inst.components.inventory.owner
-			if not inst.skip_grab_bite and host.components.health and not host.components.health:IsDead() then
-				host.components.combat:GetAttacked(inst, TUNING.POLARFLEA_HOST_REMOVE_DAMAGE)
-			end
-			
-			if inst:IsValid() then
-				host.components.inventory:RemoveItem(inst, true)
-				host.components.inventory:DropItem(inst, true)
-			end
-			
-			inst.skip_grab_bite = nil
-		end)
-	end
-end
-
 local function HostingInit(inst)
-	if inst.components.inventoryitem then
-		inst.components.inventoryitem.canonlygoinpocketorpocketcontainers = true -- Do this later or Itchhiker Pack vomits us on load :<
-	end
+	TheWorld._numfleas = (TheWorld._numfleas or 0) + 1
 	
-	inst.OnEntitySleep = OnEntitySleep -- Also fix "Jesus fleas" later, this can cause certain worlds to delete fleas on migration as we load at 0,0
-	inst.OnEntityWake = OnEntityWake
-	
-	if TheWorld._numfleas == nil then
-		TheWorld._numfleas = 0
-	end
-	
-	TheWorld._numfleas = TheWorld._numfleas + 1
 	if inst._host == nil then
 		local owner = inst.components.inventoryitem and inst.components.inventoryitem:GetGrandOwner()
 		
-		if owner and owner:HasTag("player") then
+		if owner then
 			inst:SetHost(inst.components.inventoryitem:GetGrandOwner())
 		elseif owner == nil and inst.components.timer and not inst.components.timer:TimerExists("findhost") then
 			inst.components.timer:StartTimer("findhost", 2 + math.random(TUNING.POLARFLEA_HOST_FINDTIME))
 		end
 	end
-end
-
-local function OnInvRefresh(inst, picked, keep_host)
-	if picked then
-		if inst._host == nil and not keep_host then
-			local owner = inst.components.inventoryitem:GetGrandOwner()
-			
-			if owner and owner.components.inventory then
-				inst:SetHost(owner, nil, true)
-			end
-		end
-		
-		if inst._host and not keep_host then
-			if inst.skip_grab_bite == nil then
-				local backpack = inst.components.inventoryitem.owner
-				inst.skip_grab_bite = backpack and backpack.components.container and backpack:HasTag("fleapack") or nil
-			end
-			
-			if inst.on_host_grab == nil then
-				inst.on_host_grab = function(target, data) OnHostGrab(inst, target, data) end
-				
-				inst:ListenForEvent("murdered", inst.on_host_grab, inst._host)
-				inst:ListenForEvent("newactiveitem", inst.on_host_grab, inst._host)
-			end
-		end
-		
-		inst.sg:GoToState("idle")
-		inst.SoundEmitter:KillAllSounds()
-		
-	elseif inst._host then
-		if inst.on_host_grab then
-			inst:RemoveEventCallback("murdered", inst.on_host_grab, inst._host)
-			inst:RemoveEventCallback("newactiveitem", inst.on_host_grab, inst._host)
-			inst.on_host_grab = nil
-		end
-		
-		if not keep_host then
-			inst:SetHost(nil, false)
-		else
-			return
-		end
-		
-		--[[if inst.components.stackable and inst.components.stackable:IsStack() then
-			local x, y, z = inst.Transform:GetWorldPosition()
-			
-			while inst.components.stackable:IsStack() do
-				local item = inst.components.stackable:Get()
-				
-				if item then
-					if item.components.inventoryitem then
-						item.components.inventoryitem:OnDropped()
-					end
-					item.Physics:Teleport(x, y, z)
-				end
-			end
-		end]]
-	end
-end
-
-local function OnDropped(inst)
-	inst:OnInvRefresh(false, false)
-end
-
-local function OnPickedUp(inst)
-	inst:OnInvRefresh(true, false)
 end
 
 local function CanMouseThrough(inst)
@@ -484,9 +482,11 @@ local function fn()
 	inst.components.inspectable.getstatus = GetStatus
 	
 	inst:AddComponent("inventoryitem")
+	inst.components.inventoryitem.onactiveitemfn = OnBecomeActiveItem
 	inst.components.inventoryitem.canbepickedup = false
 	inst.components.inventoryitem.canbepickedupalive = false
 	inst.components.inventoryitem.nobounce = true
+	inst.components.inventoryitem:SetSinks(true)
 	
 	inst:AddComponent("knownlocations")
 	
@@ -508,19 +508,20 @@ local function fn()
 	
 	MakeHauntablePanic(inst)
 	
-	MakeFeedableSmallLivestock(inst, TUNING.POLARFLEA_STARVE_TIME, OnPickedUp, OnDropped)
+	MakeFeedableSmallLivestock(inst, TUNING.POLARFLEA_STARVE_TIME)
 	
 	inst.CanBeHost = CanBeHost
-	inst.HostMaxFleas = HostMaxFleas
-	inst.OnInvRefresh = OnInvRefresh
+	inst.HostCapacity = HostCapacity
 	inst.OnSave = OnSave
 	inst.OnLoadPostPass = OnLoadPostPass
 	inst.SetHost = SetHost
 	
 	inst.on_host_attacked = function(target, data) OnHostAttacked(inst, target, data) end
 	inst.on_host_attackother = function(target, data) OnHostAttackOther(inst, target, data) end
+	inst.on_host_pickedup = function(target, data) OnHostPickedUp(inst, target, data) end
 	
 	inst:ListenForEvent("attacked", OnAttacked)
+	inst:ListenForEvent("fleabiteback", OnMurdered)
 	inst:ListenForEvent("onremove", OnRemove)
 	inst:ListenForEvent("timerdone", OnTimerDone)
 	

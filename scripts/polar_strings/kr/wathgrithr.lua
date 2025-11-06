@@ -56,7 +56,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE
 	}
 	DESCRIBE.POLARFLEA = {
 		GENERIC = "이런! 헬의 벌레인가!",
-		HELD = "뗄 수는 있겠지만, 살도 함께 가져가겠지.",
+		HELD_INV = "뗄 수는 있겠지만, 살도 함께 가져가겠지.",
 		HELD_BACKPACK = "이 벌레들은 나와 함께 전장에 나설 준비가 되어 있다!",
 	}
 	DESCRIBE.POLARFOX = {

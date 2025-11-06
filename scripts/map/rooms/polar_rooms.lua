@@ -73,6 +73,7 @@ AddRoom("PolarIsland_Lakes", {
 	colour = {r = 0.1, g = 0.1, b = 0.8, a = 0.9},
 	value = WORLD_TILES.POLAR_FOREST_NOISE,
 	internal_type = NODE_INTERNAL_CONNECTION_TYPE.EdgeCentroid,
+	tags = {"PolarThrone"},
 	contents = {
 		countprefabs = {
 			leif_sparse = function() return math.random() < 0.02 and math.random(4) or 0 end,
@@ -103,12 +104,13 @@ AddRoom("PolarIsland_Lakes", {
 AddRoom("PolarIsland_Walrus", {
 	colour = {r = 0.1, g = 0.1, b = 0.8, a = 0.9},
 	value = WORLD_TILES.POLAR_FOREST_NOISE,
-	required_prefabs = {"blowdart_pipe"},
+	tags = {"PolarTusks"},
+	--[[required_prefabs = {"blowdart_pipe"},
 	contents = {
 		countstaticlayouts = {
 			["PolarTuskTown"] = 1,
 		},
-	}
+	}]]
 })
 
 -- Optionals
@@ -122,6 +124,8 @@ AddRoom("PolarIsland_FloeField", {
 		countprefabs = {
 			icelettuce_spawner = 2,
 			snowwave_itemrespawner = 6,
+			polarfish_shoalspawner_spawner_ice = 1,
+			polarfox = function() return math.random() < 0.3 and 1 or 0 end,
 		},
 		
 		distributepercent = 0.1,
@@ -174,6 +178,7 @@ AddRoom("PolarIsland_IceQuarry", {
 AddRoom("PolarIsland_BurntForest", {
 	colour = {r = 0.1, g = 0.1, b = 0.8, a = 0.9},
 	value = WORLD_TILES.POLAR_FOREST_NOISE,
+	tags = {"PolarThrone"},
 	contents = {
 		countprefabs = {
 			leif_sparse = function() return math.random() < 0.01 and math.random(4) or 0 end,
@@ -247,7 +252,7 @@ AddRoom("PolarIsland_Rink", {
 AddRoom("PolarIsland_BG", {
 	colour = {r = 0.1, g = 0.1, b = 0.8, a = 0.9},
 	value = WORLD_TILES.POLAR_TUNDRA_NOISE,
-	tags = {"PolarFleas"},
+	tags = {"PolarFleas", "PolarThrone"},
 	contents = {
 		countstaticlayouts = {
 			["PolarSnowman"] = function() return math.random() < (IsSpecialEventActive(SPECIAL_EVENTS.WINTERS_FEAST) and 0.5 or 0) and math.random(2, 3) or 0 end,

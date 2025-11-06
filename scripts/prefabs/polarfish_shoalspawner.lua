@@ -4,6 +4,10 @@ local prefabs = {
 	"oceanfish_medium_polar1",
 }
 
+local spawner_prefabs = {
+	"polarfish_shoalspawner",
+}
+
 local function OnSpawnFish(inst, child)
 	if child and child.sg then
 		child.sg:GoToState("arrive")
@@ -45,9 +49,9 @@ local function fn()
 	end
 	
 	inst:AddComponent("childspawner")
-	inst.components.childspawner:SetRegenPeriod(TUNING.OCEANFISH_SHOAL.CHILD_REGENPERIOD)
+	inst.components.childspawner:SetRegenPeriod(TUNING.OCEANFISH_SHOAL.POLAR_CHILD_REGENPERIOD)
 	inst.components.childspawner:SetSpawnPeriod(TUNING.OCEANFISH_SHOAL.CHILD_SPAWNPERIOD)
-	inst.components.childspawner:SetMaxChildren(TUNING.OCEANFISH_SHOAL.MAX_CHILDREN)
+	inst.components.childspawner:SetMaxChildren(TUNING.OCEANFISH_SHOAL.POLAR_MAX_CHILDREN)
 	inst.components.childspawner:SetSpawnedFn(OnSpawnFish)
 	inst.components.childspawner:StartRegen()
 	inst.components.childspawner.spawnradius = TUNING.OCEANFISH_SHOAL.SPAWNRADIUS
@@ -61,4 +65,15 @@ local function fn()
 	return inst
 end
 
-return Prefab("polarfish_shoalspawner", fn, assets, prefabs)
+local function spawner_fn()
+	local inst = CreateEntity()
+	
+	inst.entity:AddTransform()
+	
+	inst:AddTag("CLASSIFIED")
+	
+	return inst
+end
+
+return Prefab("polarfish_shoalspawner", fn, assets, prefabs),
+	Prefab("polarfish_shoalspawner_spawner_ice", spawner_fn, assets, spawner_prefabs)

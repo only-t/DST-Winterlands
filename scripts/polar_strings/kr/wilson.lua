@@ -59,7 +59,7 @@ DESCRIBE.POLARBEAR = {
 }
 DESCRIBE.POLARFLEA = {
     GENERIC = "지금 도망쳐야 해!",
-    HELD = "턱이 벌써 피부 밑으로 파고들었어!",
+    HELD_INV = "턱이 벌써 피부 밑으로 파고들었어!",
     HELD_BACKPACK = "이 아이디어, 왠지 잘 될 것 같은 느낌이야. 아마도.",
 }
 DESCRIBE.POLARFOX = {

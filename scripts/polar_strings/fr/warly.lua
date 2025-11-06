@@ -56,7 +56,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WARLY.DESCRIBE
 	}
 	DESCRIBE.POLARFLEA = {
 		GENERIC = "Oh non !",
-		HELD = "Bon appétit, et adieu !",
+		HELD_INV = "Bon appétit, et adieu !",
 		HELD_BACKPACK = "Je pense qu'elles hibernent là.",
 	}
 	DESCRIBE.POLARFOX = {

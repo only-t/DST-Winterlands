@@ -59,7 +59,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WORTOX.DESCRIBE
 	}
 	DESCRIBE.POLARFLEA = {
 		GENERIC = "哦不！不不不！",
-		HELD = "没關係，我很快就會反過來吞噬你。",
+		HELD_INV = "没關係，我很快就會反過來吞噬你。",
 		HELD_BACKPACK = "這是一種囤積靈魂的方式。",
 	}
 	DESCRIBE.POLARFOX = {

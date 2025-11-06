@@ -56,7 +56,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WOLFGANG.DESCRIBE
 	}
 	DESCRIBE.POLARFLEA = {
 		GENERIC = "哎呀！",
-		HELD = "不會輕易放手。",
+		HELD_INV = "不會輕易放手。",
 		HELD_BACKPACK = "如果蟲子乖乖的，沃爾夫岡就不會捏扁牠。",
 	}
 	DESCRIBE.POLARFOX = {

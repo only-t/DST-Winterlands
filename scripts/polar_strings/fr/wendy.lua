@@ -56,7 +56,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WENDY.DESCRIBE
 	}
 	DESCRIBE.POLARFLEA = {
 		GENERIC = "On devrait s'enfuir peut-être ?",
-		HELD = "Euh, excuse-moi ?",
+		HELD_INV = "Euh, excuse-moi ?",
 		HELD_BACKPACK = "Enfin un animal de compagnie que je pourrais garder en vie.",
 	}
 	DESCRIBE.POLARFOX = {

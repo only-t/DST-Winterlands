@@ -56,7 +56,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WILLOW.DESCRIBE
 	}
 	DESCRIBE.POLARFLEA = {
 		GENERIC = "糟糕糟糕！",
-		HELD = "呃！把它弄掉！",
+		HELD_INV = "呃！把它弄掉！",
 		HELD_BACKPACK = "嘿，威爾森！來甩甩我的包！",
 	}
 	DESCRIBE.POLARFOX = {

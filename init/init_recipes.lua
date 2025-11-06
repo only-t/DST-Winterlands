@@ -70,7 +70,7 @@ PolarRecipe("polaricepack", 		{Ingredient("polar_dryice", 1), Ingredient("bluege
 PolarRecipe("polarice_plow_item", 	{Ingredient("log", 3), Ingredient("cutstone", 1), Ingredient("mole", 1)}, 	TECH.SEAFARING_ONE, 	nil, 	{"FISHING", "WINTER"}, {"ocean_trawler_kit", "winterometer"})
 
 --	Decor / Structure
-PolarRecipe("polar_brazier_item", 	{Ingredient("boneshard", 3), Ingredient("cutstone", 1), Ingredient("rope", 1)}, 			TECH.LOST, 				nil, 									{"LIGHT", "STRUCTURES", "WINTER"}, {"dragonflyfurnace", "dragonflyfurnace", "dragonflyfurnace"})
+PolarRecipe("polar_brazier_item", 	{Ingredient("boneshard", 2), Ingredient("cutstone", 1), Ingredient("rope", 1)}, 			TECH.LOST, 				nil, 									{"LIGHT", "STRUCTURES", "WINTER"}, {"dragonflyfurnace", "dragonflyfurnace", "dragonflyfurnace"})
 PolarRecipe("polarbearhouse", 		{Ingredient("boards", 4), Ingredient("polar_dryice", 3), Ingredient("polarbearfur", 4)}, 	TECH.SCIENCE_TWO, 		{placer = "polarbearhouse_placer"}, 	{"STRUCTURES"}, {"rabbithouse"})
 PolarRecipe("turf_polar_caves", 	{Ingredient("ice", 2), Ingredient("rocks", 1)}, 											TECH.TURFCRAFTING_TWO, 	{numtogive = 4}, 						{"DECOR"}, {"turf_underrock"})
 PolarRecipe("turf_polar_dryice", 	{Ingredient("polar_dryice", 1), Ingredient("bluegem", 1)}, 									TECH.SCIENCE_TWO, 		{numtogive = 4}, 						{"DECOR"}, {"turf_dragonfly"})
@@ -109,7 +109,7 @@ for phase, phase_data in pairs(POLARAMULET_STATION_MOONPHASE_TRADEDATA) do
 	for i, recipe_data in ipairs(phase_data) do
 		local recipe_name = string.format("polar_trade_%s_%d", phase, i)
 		
-		PolarRecipe(recipe_name, recipe_data.ingredients, TECH.LOST, {product = recipe_data.product, description = recipe_data.description or "polar_trade_"..i, numtogive = recipe_data.numtogive, limitedamount = true, nounlock = true, sg_state = "give"}, {"CRAFTING_STATION"})
+		PolarRecipe(recipe_name, recipe_data.ingredients, TECH.LOST, {product = recipe_data.product, description = recipe_data.description or "polar_trade_"..i, numtogive = recipe_data.numtogive, limitedamount = true, nounlock = true, sg_state = "give", hint_msg = "NEEDSPOLARAMULET_STATION"}, {"CRAFTING_STATION"})
 	end
 end
 

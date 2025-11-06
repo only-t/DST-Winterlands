@@ -68,7 +68,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WEBBER.DESCRIBE
 	}
 	DESCRIBE.POLARFLEA = {
 		GENERIC = "Ajaj!",
-		HELD = "Następnym razem, trzymamy nasze kieszenie zamknięte!",
+		HELD_INV = "Następnym razem, trzymamy nasze kieszenie zamknięte!",
 		HELD_BACKPACK = "Mama zawszę mówiła, żadnych owadów w plecaku...",
 	}
 	DESCRIBE.POLARFOX = {

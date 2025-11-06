@@ -56,7 +56,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WINONA.DESCRIBE
 	}
 	DESCRIBE.POLARFLEA = {
 		GENERIC = "我知道我最好离它们远点。",
-		HELD = "哎呀！走开！",
+		HELD_INV = "哎呀！走开！",
 		HELD_BACKPACK = "我才是这里的老大。我说了才能咬人。",
 	}
 	DESCRIBE.POLARFOX = {

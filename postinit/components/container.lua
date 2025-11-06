@@ -7,7 +7,7 @@ local Container = require("components/container")
 	
 	local OldCanTakeItemInSlot = Container.CanTakeItemInSlot
 	function Container:CanTakeItemInSlot(item, slot, ...)
-		if item and item._try_fleapack and item:HasTag("flea") and self.inst:HasTag("fleapack") and (self.itemtestfn == nil or self:itemtestfn(item, slot)) then
+		if item and item._try_fleapack and item:HasTag("flea") and self.inst:HasTag("fleapack") and self:IsOpen() and (self.itemtestfn == nil or self:itemtestfn(item, slot)) then
 			return true
 		end
 		
@@ -16,7 +16,7 @@ local Container = require("components/container")
 	
 	local OldShouldPrioritizeContainer = Container.ShouldPrioritizeContainer
 	function Container:ShouldPrioritizeContainer(item, ...)
-		if item and item._try_fleapack and item:HasTag("flea") and self.inst:HasTag("fleapack") and (self.priorityfn == nil or self:priorityfn(item)) then
+		if item and item._try_fleapack and item:HasTag("flea") and self.inst:HasTag("fleapack") and self:IsOpen() and (self.priorityfn == nil or self:priorityfn(item)) then
 			return true
 		end
 		

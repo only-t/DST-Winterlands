@@ -9,10 +9,10 @@ local WEIGHTED_VINE_LOOT = TREE_ROCK_DATA.WEIGHTED_VINE_LOOT
 
 local LOOT = {
 	POLAR_AREA = {
-		["rocks"] 			= 4,
-		["flint"] 			= 1,
-		["polarflea"] 		= 3,
-		["boneshard"] 		= 2,
+		["rocks"] 			= 3,
+		["flint"] 			= 2,
+		["polarflea"] 		= 2,
+		["boneshard"] 		= 3,
 	},
 	
 	POLARCAVE_AREA = {

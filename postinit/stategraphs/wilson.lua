@@ -102,7 +102,7 @@ local states = {
 	
 	State{
 		name = "polarspawn",
-		tags = {"busy", "noattack", "nopredict", "nodangle"},
+		tags = {"busy", "noattack", "nopredict", "nodangle", "notalking"},
 		
 		onenter = function(inst)
 			inst.components.locomotor:Stop()

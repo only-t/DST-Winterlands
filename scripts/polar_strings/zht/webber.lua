@@ -56,7 +56,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WEBBER.DESCRIBE
 	}
 	DESCRIBE.POLARFLEA = {
 		GENERIC = "哎呀！",
-		HELD = "下次，我們要把口袋關好！",
+		HELD_INV = "下次，我們要把口袋關好！",
 		HELD_BACKPACK = "媽媽總是說書包裡不能有蟲蟲...",
 	}
 	DESCRIBE.POLARFOX = {

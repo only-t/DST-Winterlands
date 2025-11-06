@@ -56,7 +56,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WURT.DESCRIBE
 	}
 	DESCRIBE.POLARFLEA = {
 		GENERIC = "咕嚕，它到處都是！",
-		HELD = "走開！快走開！",
+		HELD_INV = "走開！快走開！",
 		HELD_BACKPACK = "我有大計畫要用上你。",
 	}
 	DESCRIBE.POLARFOX = {

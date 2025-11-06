@@ -56,7 +56,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE
 	}
 	DESCRIBE.POLARFLEA = {
 		GENERIC = "哦，親愛的……",
-		HELD = "多麼無禮，令人厭惡的害蟲！",
+		HELD_INV = "多麼無禮，令人厭惡的害蟲！",
 		HELD_BACKPACK = "我不會容忍任何人靠近我的書籍。",
 	}
 	DESCRIBE.POLARFOX = {

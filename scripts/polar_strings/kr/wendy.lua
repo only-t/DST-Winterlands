@@ -56,7 +56,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WENDY.DESCRIBE
     }
     DESCRIBE.POLARFLEA = {
         GENERIC = "도망쳐야 하지 않을까?",
-        HELD = "실례 아닌가요?",
+        HELD_INV = "실례 아닌가요?",
         HELD_BACKPACK = "이번엔... 죽지 않고 오래 같이 있을지도.",
     }
     DESCRIBE.POLARFOX = {

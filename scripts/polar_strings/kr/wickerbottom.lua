@@ -56,7 +56,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE
     }
     DESCRIBE.POLARFLEA = {
         GENERIC = "이런, 큰일이군요...",
-        HELD = "예의도 없고 혐오스러운 해충이에요!",
+        HELD_INV = "예의도 없고 혐오스러운 해충이에요!",
         HELD_BACKPACK = "내 책 가까이에 오게 둘 수는 없어요.",
     }
     DESCRIBE.POLARFOX = {

@@ -40,6 +40,7 @@ local polar_layouts = {
 	},
 	
 	["BearOnIce"] = 			{},
+	["PolarTuskCamp"] = 		{},
 	["PolarTuskTown"] = 		{},
 	["PolarAmulet_Shack"] = 	{},
 	["PolarThrone"] = 			{},
@@ -137,6 +138,8 @@ ENV.AddGlobalClassPostConstruct("map/storygen", "Story", function(self)
 	if self.map_tags then
 		self.map_tags.TagData["PolarBearTown"] = true
 		self.map_tags.TagData["PolarFleas"] = true
+		self.map_tags.TagData["PolarThrone"] = true
+		self.map_tags.TagData["PolarTusks"] = true
 		
 		--
 		
@@ -166,6 +169,24 @@ ENV.AddGlobalClassPostConstruct("map/storygen", "Story", function(self)
 			tagdata["PolarFleas"] = (setpiece == "PolarFlea_Farm" and math.random() < 0.25) and "extra_setpiece" or false
 			
 			return "STATIC", setpiece
+		end
+		
+		self.map_tags.Tag["PolarThrone"] = function(tagdata)
+			if tagdata["PolarThrone"] == false then
+				return
+			end
+			tagdata["PolarThrone"] = false
+			
+			return "STATIC", "PolarThrone"
+		end
+		
+		self.map_tags.Tag["PolarTusks"] = function(tagdata)
+			if tagdata["PolarTusks"] == false then
+				return
+			end
+			tagdata["PolarTusks"] = false
+			
+			return "STATIC", math.random() < 0.5 and "PolarTuskCamp" or "PolarTuskTown"
 		end
 	end
 end)

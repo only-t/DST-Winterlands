@@ -56,7 +56,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE
 	}
 	DESCRIBE.POLARFLEA = {
 		GENERIC = "Par Toutatis !",
-		HELD = "Elle peut être retiré, au prix de ma peau.",
+		HELD_INV = "Elle peut être retiré, au prix de ma peau.",
 		HELD_BACKPACK = "Les insectes aspirent à se joindre à moi dans la bataille.",
 	}
 	DESCRIBE.POLARFOX = {

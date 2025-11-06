@@ -56,7 +56,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WILLOW.DESCRIBE
 	}
 	DESCRIBE.POLARFLEA = {
 		GENERIC = "Oh bordel !",
-		HELD = "Argh ! Enlèvez-la !",
+		HELD_INV = "Argh ! Enlèvez-la !",
 		HELD_BACKPACK = "Hé, Wilson ! Viens secouer mon sac !",
 	}
 	DESCRIBE.POLARFOX = {

@@ -13,5 +13,14 @@ local Brushable = require("components/brushable")
 			end
 		end
 		
+		local inventory = self.inst.components.inventory or self.inst.components.container
+		if inventory then
+			inventory:ForEachItem(function(item)
+				if item:HasTag("flea") and item.SetHost then
+					item:SetHost(nil, true)
+				end
+			end)
+		end
+		
 		return OldBrush(self, doer, brush, ...)
 	end
