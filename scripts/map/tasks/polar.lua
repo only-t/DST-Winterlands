@@ -81,7 +81,7 @@ AddTask("Polar Floe", {
 
 AddTask("Polar Quarry", {
 	locks = {LOCKS.ISLAND_TIERPOLAR, LOCKS.ISLAND_TIER2},
-	keys_given = {LOCKS.ISLAND_TIER3},
+	keys_given = {},
 	region_id = polar_region,
 	level_set_piece_blocker = true,
 	room_tags = {"RoadPoison", "polararea", "not_mainland"},

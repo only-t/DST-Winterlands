@@ -80,16 +80,9 @@ local function OnCreate(inst, scenariorunner)
 			item = "twigs",
 			count = math.random(4, 6),
 		},
-		--[[{
-			item = "mole",
-			initfn = RandomPerishPercent,
-		},
-		{
-			item = "mole",
-			chance = 0.5,
-			initfn = RandomPerishPercent,
-		},]]
 	}
+	
+	shuffleArray(loot)
 	
 	chestfunctions.AddChestItems(inst, loot)
 end

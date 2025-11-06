@@ -192,12 +192,14 @@ local function GetTeethReward(inst, item, giver)
 		end
 		
 		if inst.components.inventory then
-			inst.components.inventory:ForEachItem(function(item)
-				if item:HasTag("flea") then
-					table.insert(loot, "polarflea")
-					v:Remove()
-				end
+			local flea = inst.components.inventory:FindItem(function(item)
+				return item:HasTag("flea")
 			end)
+			
+			if flea then
+				table.insert(loot, "polarflea")
+				flea:Remove()
+			end
 		end
 	end
 	

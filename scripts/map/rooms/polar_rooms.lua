@@ -121,6 +121,7 @@ AddRoom("PolarIsland_FloeField", {
 	random_node_entrance_weight = 0,
 	tags = {"ForceDisconnected"},
 	contents = {
+		countprefabs_uses_filters = true,
 		countprefabs = {
 			icelettuce_spawner = 2,
 			snowwave_itemrespawner = 6,
@@ -128,7 +129,7 @@ AddRoom("PolarIsland_FloeField", {
 			polarfox = function() return math.random() < 0.3 and 1 or 0 end,
 		},
 		
-		distributepercent = 0.1,
+		distributepercent = 0.3,
 		distributeprefabs = {
 			marsh_bush = 1,
 			rock_ice = 2,

@@ -95,36 +95,47 @@ local function HostCapacity(inst, host)
 end
 
 local function CanBeHost(inst, host)
-	if host and host:IsValid() and not (host.components.health and host.components.health:IsDead()) and host.entity:IsVisible() and inst:HostCapacity(host) > 0 and
-		not host:HasAnyTag({"fire", "fleaghosted", "likewateroffducksback", "smallcreature"}) then
-		
-		--	Player logic
-		if host:HasTag("player") then
-			local inventory = host.components.inventory
-			if inventory then
-				for k, v in pairs(inventory.equipslots) do
-					if v:HasTag("fleapack") and v.components.container and v.components.container:IsOpen() and v.components.container:CanAcceptCount(inst, 1) then
+	inst._try_hosting = true
+	
+	local function test_hosting()
+		if host and host:IsValid() and not (host.components.health and host.components.health:IsDead()) and host.entity:IsVisible() and inst:HostCapacity(host) > 0 and
+			not host:HasAnyTag({"fire", "fleaghosted", "likewateroffducksback", "smallcreature"}) then
+			
+			--	Player logic
+			if host:HasTag("player") then
+				local inventory = host.components.inventory
+				if inventory then
+					for k, v in pairs(inventory.equipslots) do
+						if v:HasTag("fleapack") and v.components.container and v.components.container:IsOpen() and v.components.container:CanAcceptCount(inst, 1) then
+							return true
+						end
+					end
+				end
+				
+				return not host:HasAnyTag(SOULLESS_TARGET_TAGS) and inventory and not inventory:IsFull() and not host:GetIsWet()
+			--	Anything else...
+			else
+				--	Containers logic
+				if host.components.container and host.components.container.canbeopened then
+					if host.components.container:CanAcceptCount(inst, 1) > 0 then
 						return true
 					end
 				end
-			end
-			
-			return not host:HasAnyTag(SOULLESS_TARGET_TAGS) and inventory and not inventory:IsFull() and not host:GetIsWet()
-		--	Anything else...
-		else
-			--	Containers logic
-			if host.components.container and host.components.container.canbeopened then
-				return host.components.container:CanAcceptCount(inst, 1) > 0
-			end
-			
-			--	Creatures logic
-			if host:HasAnyTag({"animal", "character", "monster", "fleahosted"}) then
-				return not host:HasAnyTag(SOULLESS_TARGET_TAGS) and not host:GetIsWet()
+				
+				--	Creatures logic
+				if host:HasAnyTag({"animal", "character", "monster", "fleahosted"}) then
+					return not host:HasAnyTag(SOULLESS_TARGET_TAGS) and not host:GetIsWet()
+				end
 			end
 		end
+		
+		return false
 	end
 	
-	return false
+	local can_host = test_hosting()
+	inst._try_hosting = nil
+	
+	return can_host
 end
 
 local function SetHost(inst, host, kick, given)
@@ -203,9 +214,9 @@ local function SetHost(inst, host, kick, given)
 	
 	if inventory then
 		if inst.components.inventoryitem and not inst.components.inventoryitem:IsHeld() then
-			inst._try_fleapack = true -- Fleas will try to move in Itchhiker Pack in priority
+			inst._try_hosting = true -- Needed for fleas to go in pockets and prioritize Itchhiker Pack
 			inventory:GiveItem(inst, nil, pt)
-			inst._try_fleapack = nil
+			inst._try_hosting = nil
 		end
 	else
 		if inst._host._snowfleas == nil then
@@ -418,6 +429,8 @@ local function HostingInit(inst)
 			inst.components.timer:StartTimer("findhost", 2 + math.random(TUNING.POLARFLEA_HOST_FINDTIME))
 		end
 	end
+	
+	inst._try_hosting = nil
 end
 
 local function CanMouseThrough(inst)
@@ -462,6 +475,9 @@ local function fn()
 	if not TheWorld.ismastersim then
 		return inst
 	end
+	
+	-- Important on load or containers will kick our bum out, otherwise this is useful to let fleas pick their pocket space, while restricting player inv actions
+	inst._try_hosting = true
 	
 	inst:AddComponent("combat")
 	inst.components.combat.hiteffectsymbol = "bottom"

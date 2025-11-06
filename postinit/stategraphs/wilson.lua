@@ -3,7 +3,9 @@ GLOBAL.setfenv(1, GLOBAL)
 
 local events = {
 	EventHandler("gotpolarflea", function(inst, data)
-		if data and not data.given and not (inst.components.inventory and inst.components.inventory:EquipHasTag("fleapack")) then
+		local flea = data and data.flea
+		
+		if flea and not data.given and flea.components.inventoryitem and flea.components.inventoryitem.owner == inst then -- Only if jumping into inv pocket directly
 			inst.sg:GoToState("hit")
 		end
 	end),

@@ -7,8 +7,8 @@ local Container = require("components/container")
 	
 	local OldCanTakeItemInSlot = Container.CanTakeItemInSlot
 	function Container:CanTakeItemInSlot(item, slot, ...)
-		if item and item._try_fleapack and item:HasTag("flea") and self.inst:HasTag("fleapack") and self:IsOpen() and (self.itemtestfn == nil or self:itemtestfn(item, slot)) then
-			return true
+		if item and item:HasTag("flea") then
+			return item._try_hosting and (self.itemtestfn == nil or self:itemtestfn(item, slot))
 		end
 		
 		return OldCanTakeItemInSlot(self, item, slot, ...)
@@ -16,8 +16,28 @@ local Container = require("components/container")
 	
 	local OldShouldPrioritizeContainer = Container.ShouldPrioritizeContainer
 	function Container:ShouldPrioritizeContainer(item, ...)
-		if item and item._try_fleapack and item:HasTag("flea") and self.inst:HasTag("fleapack") and self:IsOpen() and (self.priorityfn == nil or self:priorityfn(item)) then
-			return true
+		if item and item:HasTag("flea") and item._try_hosting and self.inst:HasTag("fleapack") and (self.priorityfn == nil or self:priorityfn(item)) then
+			return self:IsOpen()
+		end
+		
+		return OldShouldPrioritizeContainer(self, item, ...)
+	end
+	
+local Container_Replica = require("components/container_replica") -- TODO: Idk why but client tries to accept moving fleas from containers to Itchhicker Pack. Not critical but...
+	
+	local OldCanTakeItemInSlot_Replica = Container_Replica.CanTakeItemInSlot
+	function Container_Replica:CanTakeItemInSlot(item, slot, ...)
+		if item and item:HasTag("flea") then
+			return false
+		end
+		
+		return OldCanTakeItemInSlot_Replica(self, item, slot, ...)
+	end
+	
+	local OldCanTakeItemInSlot_Replica = Container_Replica.ShouldPrioritizeContainer
+	function Container_Replica:ShouldPrioritizeContainer(item, slot, ...)
+		if item and item:HasTag("flea") then
+			return false
 		end
 		
 		return OldShouldPrioritizeContainer(self, item, ...)
@@ -28,11 +48,7 @@ local Inventory = require("components/inventory")
 	local OldCanTakeItemInSlot_Inv = Inventory.CanTakeItemInSlot
 	function Inventory:CanTakeItemInSlot(item, slot, ...)
 		if item and item:HasTag("flea") then
-			local owner = item.components.inventoryitem and item.components.inventoryitem.owner
-			
-			if owner and owner:HasTag("fleapack") then
-				return false
-			end
+			return item._try_hosting
 		end
 		
 		return OldCanTakeItemInSlot_Inv(self, item, slot, ...)
