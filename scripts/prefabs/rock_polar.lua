@@ -218,5 +218,16 @@ local function spawner()
 	return inst
 end
 
+local function rock_ice_spawner() -- This is the bunch spawner for rock_ice at sea
+	local inst = CreateEntity()
+	
+	inst.entity:AddTransform()
+	
+	inst:AddTag("CLASSIFIED")
+	
+	return inst
+end
+
 return Prefab("rock_polar", fn, assets, prefabs),
-	Prefab("rock_polar_spawner", spawner)
+	Prefab("rock_polar_spawner", spawner),
+	Prefab("rock_ice_spawner_polar", rock_ice_spawner)

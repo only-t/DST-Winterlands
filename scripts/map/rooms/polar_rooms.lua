@@ -121,18 +121,20 @@ AddRoom("PolarIsland_FloeField", {
 	random_node_entrance_weight = 0,
 	tags = {"ForceDisconnected"},
 	contents = {
-		countprefabs_uses_filters = true,
 		countprefabs = {
-			icelettuce_spawner = 2,
-			snowwave_itemrespawner = 6,
 			polarfish_shoalspawner_spawner_ice = 1,
-			polarfox = function() return math.random() < 0.3 and 1 or 0 end,
+			rock_ice_spawner_polar = function() return math.random() < 0.5 and 1 or 0 end,
 		},
 		
 		distributepercent = 0.3,
 		distributeprefabs = {
-			marsh_bush = 1,
+			marsh_bush = 1.4,
 			rock_ice = 2,
+			
+			polarfox = 0.15,
+			
+			icelettuce_spawner = 0.5,
+			snowwave_itemrespawner = 0.6,
 		},
 		
 		prefabdata = {
@@ -260,7 +262,7 @@ AddRoom("PolarIsland_BG", {
 			["PolarSpookman"] = function() return math.random() < (IsSpecialEventActive(SPECIAL_EVENTS.HALLOWED_NIGHTS) and 0.33 or 0) and math.random(3, 5) or 0 end,
 		},
 		countprefabs = {
-			icelettuce_spawner = function(area) return math.max(1, math.floor(area / 42)) end,
+			icelettuce_spawner = function(area) return math.max(1, math.floor(area / 50)) end,
 			snowwave_itemrespawner = function() return math.random(10, 16) end,
 		},
 		

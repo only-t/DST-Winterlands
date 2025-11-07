@@ -56,6 +56,16 @@ AddRoomPreInit("OceanRough", function(self)
 	end
 end)
 
+AddRoomPreInit("OceanCoastal", function(self)
+	if GLOBAL.Polar_CompatibleShard("forest") then
+		if self.contents.countprefabs == nil then
+			self.contents.countprefabs = {}
+		end
+		
+		self.contents.countprefabs["rock_ice_spawner_polar"] = 38
+	end
+end)
+
 --	World Settings
 
 --AddCustomizeGroup(LEVELCATEGORY.SETTINGS, "polar", STRINGS.UI.SANDBOXMENU.WORLDSETTINGS_POLAR, nil, nil, 4.1)

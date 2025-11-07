@@ -21,7 +21,7 @@ AddTask("Polar Village", {
 
 AddTask("Polar Lands", {
 	locks = {LOCKS.ISLAND_TIERPOLAR},
-	keys_given = {LOCKS.ISLAND_TIER2},
+	keys_given = {LOCKS.ISLAND_TIER2, LOCKS.ISLAND_TIER3},
 	region_id = polar_region,
 	level_set_piece_blocker = true,
 	room_tags = {"RoadPoison", "polararea", "not_mainland"},

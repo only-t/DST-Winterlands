@@ -17,13 +17,15 @@ local polar_filters = {
 	antler_tree_burnt = OnlyAllow({WORLD_TILES.POLAR_SNOW}),
 	antler_tree_stump = OnlyAllow({WORLD_TILES.POLAR_SNOW}),
 	grass_polar = OnlyAllow({WORLD_TILES.POLAR_SNOW}),
+	icelettuce_spawner = OnlyAllow({WORLD_TILES.POLAR_SNOW}),
 	pillar_polar = OnlyAllow({WORLD_TILES.POLAR_CAVES, WORLD_TILES.POLAR_SNOW}),
 	polarfox = OnlyAllow({WORLD_TILES.POLAR_SNOW}),
 	polar_icicle_rock = OnlyAllow({WORLD_TILES.POLAR_CAVES}),
 	polarbearhouse = {WORLD_TILES.POLAR_ICE},
+	rock_ice_spawner_polar = OnlyAllow({WORLD_TILES.OCEAN_COASTAL, WORLD_TILES.OCEAN_POLAR, WORLD_TILES.POLAR_ICE}),
 	rock_polar = OnlyAllow({WORLD_TILES.POLAR_CAVES}),
 	snowwave_itemrespawner = {WORLD_TILES.POLAR_ICE, WORLD_TILES.POLAR_CAVES, WORLD_TILES.PEBBLEBEACH, WORLD_TILES.ROCKY},
-	polarfish_shoalspawner_spawner_ice = OnlyAllow({WORLD_TILES.OCEAN_POLAR, WORLD_TILES.POLAR_ICE}),
+	polarfish_shoalspawner_spawner_ice = OnlyAllow({WORLD_TILES.OCEAN_COASTAL, WORLD_TILES.OCEAN_POLAR, WORLD_TILES.POLAR_ICE}),
 }
 
 local polar_addedtiles = {

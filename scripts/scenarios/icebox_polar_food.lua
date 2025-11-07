@@ -10,19 +10,19 @@ local function OnCreate(inst, scenariorunner)
 	local loot = {
 		{
 			item = {"fishmeat", "fishmeat_small"},
-			count = math.random(1, 2),
+			count = math.random(2, 4),
 			initfn = RandomPerishPercent,
 		},
 		{
 			item = {"fishmeat", "fishmeat_small"},
 			chance = 0.5,
-			count = math.random(2, 4),
+			count = math.random(1, 3),
 			initfn = RandomPerishPercent,
 		},
 		{
 			item = "monstermeat",
 			chance = 0.5,
-			count = math.random(1, 3),
+			count = math.random(2, 5),
 			initfn = RandomPerishPercent,
 		},
 		{
@@ -41,7 +41,7 @@ local function OnCreate(inst, scenariorunner)
 		},
 		{
 			item = "polar_dryice",
-			count = math.random(1, 2),
+			count = math.random(1, 3),
 			chance = 0.5,
 		},
 	}

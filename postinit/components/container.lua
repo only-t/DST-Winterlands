@@ -35,7 +35,7 @@ local Container_Replica = require("components/container_replica") -- TODO: Idk w
 	end
 	
 	local OldCanTakeItemInSlot_Replica = Container_Replica.ShouldPrioritizeContainer
-	function Container_Replica:ShouldPrioritizeContainer(item, slot, ...)
+	function Container_Replica:ShouldPrioritizeContainer(item, ...)
 		if item and item:HasTag("flea") then
 			return false
 		end
