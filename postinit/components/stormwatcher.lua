@@ -45,7 +45,7 @@ StormWatcher.GetCurrentStorm = function(self, ...)
 	local currentstorm = old_StormWatcher_GetCurrentStorm(self, ...)
 	
 	if TheWorld.components.polarstorm and TheWorld.components.polarstorm:IsInPolarStorm(self.inst) then
-		assert(currentstorm == STORM_TYPES.NONE, "CAN'T BE IN TWO STORMS AT ONCE")
+		--assert(currentstorm == STORM_TYPES.NONE, "CAN'T BE IN TWO STORMS AT ONCE")
 		currentstorm = STORM_TYPES.POLARSTORM
 	end
 	

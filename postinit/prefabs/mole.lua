@@ -2,7 +2,6 @@ local ENV = env
 GLOBAL.setfenv(1, GLOBAL)
 
 local function MoleOnLocomote(inst)
-	local x, y, z = inst.Transform:GetWorldPosition()
 	local inpolar = IsInPolar(inst)
 	
 	if inpolar and not inst.polar_mole then
@@ -18,7 +17,23 @@ local function MoleOnLocomote(inst)
 	inst.polar_mole = inpolar
 end
 
+local olddisplaynamefn
+local function displaynamefn(inst, ...)
+	local name = olddisplaynamefn and olddisplaynamefn(inst, ...)
+	
+	if name == STRINGS.NAMES.MOLE_UNDERGROUND and IsInPolar(inst) then
+		name = STRINGS.NAMES.MOLE_UNDERGROUND_POLAR
+	end
+	
+	return name
+end
+
 ENV.AddPrefabPostInit("mole", function(inst)
+	if olddisplaynamefn == nil then
+		olddisplaynamefn = inst.displaynamefn
+	end
+	inst.displaynamefn = displaynamefn
+	
 	if not TheWorld.ismastersim then
 		return
 	end
@@ -30,8 +45,7 @@ end)
 --
 
 local function PolarInit(inst)
-	local x, y, z = inst.Transform:GetWorldPosition()
-	if GetClosestPolarTileToPoint(x, 0, z, 32) then
+	if IsInPolar(inst) then
 		inst.AnimState:OverrideSymbol("dirt_base", "dirt_to_polar_builds", "dirt_base")
 		inst.AnimState:OverrideSymbol("hill", "dirt_to_polar_builds", "hill")
 		inst.AnimState:OverrideSymbol("wormmovefx", "dirt_to_polar_builds", "wormmovefx")
@@ -51,10 +65,20 @@ end)
 --
 
 local function PolarInit_Fx(inst)
-	local x, y, z = inst.Transform:GetWorldPosition()
-	if GetClosestPolarTileToPoint(x, 0, z, 32) then
+	if IsInPolar(inst) then
 		ReplacePrefab(inst, "mole_move_polar_fx")
 	end
+end
+
+local olddisplaynamefn_fx
+local function displaynamefn_fx(inst, ...)
+	local name = olddisplaynamefn_fx and olddisplaynamefn_fx(inst, ...)
+	
+	if IsInPolar(inst) then
+		name = STRINGS.NAMES.MOLE_UNDERGROUND_POLAR
+	end
+	
+	return name
 end
 
 ENV.AddPrefabPostInit("mole_move_fx", function(inst)

@@ -55,6 +55,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WORMWOOD.DESCRIBE
 		HOSTILE = "Angry? Yes",
 	}
 	DESCRIBE.EMPEROR_PENGUIN_GUARD = "Got your nose?"
+	DESCRIBE.GIRL_WALRUS = "Branches make funny noise"
 	DESCRIBE.MOOSE_POLAR = {
 		GENERIC = "Lesson learned. Should not fight friend",
 		ANTLER = "Got big branches!",
@@ -111,7 +112,9 @@ local DESCRIBE = STRINGS.CHARACTERS.WORMWOOD.DESCRIBE
 	
 	--	Food
 	DESCRIBE.DRYICECREAM = "(lick) Brrr! (lick) Brrr-"
+	DESCRIBE.FILET_O_FLEA = "Found where Bzzter went"
 	DESCRIBE.ICELETTUCE = "Friend want big warm hug?"
+	DESCRIBE.ICELETTUCE_OVERSIZED = "Whew!"
 	DESCRIBE.ICEBURRITO = "Glub Glub sleeping in roll"
 	DESCRIBE.POLARCRABLEGS = "Won't let legs escape"
 	
@@ -138,10 +141,13 @@ local DESCRIBE = STRINGS.CHARACTERS.WORMWOOD.DESCRIBE
 	DESCRIBE.POLARFLEA_SACK = "Warm! Is nice"
 	DESCRIBE.POLARICESTAFF = "Everything go Brrr"
 	DESCRIBE.POLARMOOSEHAT = "Axe friend?"
+	DESCRIBE.WALRUS_BAGPIPE = "TOOOOOOOOOOOOT!"
+	DESCRIBE.WALRUS_BEARTRAP = "Oh no, Teeth branches lost thing!"
 	DESCRIBE.WINTERS_FISTS = "Hand Thing for balling"
 	
 	--	Others
 	DESCRIBE.ARCTIC_FOOL_FISH = "Put on back"
+	DESCRIBE.BOAT_ICE_ITEM = "Finally. Floaty not made of friends"
 	DESCRIBE.POLARGLOBE = {
 		GENERIC = "Hmm... Someone touched?",
 		INUSE = "No no no. Go back inside!",

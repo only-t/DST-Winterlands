@@ -169,6 +169,24 @@ ENV.AddStategraphPostInit("wilson", function(sg)
 		return oldCASTSPELL(inst, action, ...)
 	end
 	
+	--	events
+	
+	local oldemote_event = sg.events["emote"].fn
+	sg.events["emote"].fn = function(inst, data, ...)
+		if data and data.insnowonly then
+			local tile, tileinfo = inst:GetCurrentTileType()
+			local in_snow = tile and (tile == WORLD_TILES.POLAR_SNOW or (tileinfo and not tileinfo.nogroundoverlays and TheWorld.state.snowlevel and TheWorld.state.snowlevel > 0.5))
+			
+			if not in_snow then
+				return
+			end
+		end
+		
+		if oldemote_event then
+			oldemote_event(inst, data, ...)
+		end
+	end
+	
 	--	states
 	
 	local oldattack = sg.states["attack"].onenter
@@ -178,6 +196,44 @@ ENV.AddStategraphPostInit("wilson", function(sg)
 		local equip = inst.components.inventory and inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
 		if equip and equip:HasTag("antlerstick") then
 			inst.SoundEmitter:PlaySound("polarsounds/antler_tree/swoop", nil, nil, true)
+		end
+	end
+	
+	local oldemote_enter = sg.states["emote"].onenter
+	sg.states["emote"].onenter = function(inst, data, ...)
+		if data and data.insnowonly then
+			inst.sg.statemem.emoteinsnow = true
+			inst.DynamicShadow:Enable(false)
+			
+			if data.insnowfn and inst.sg.statemem.emoteinsnowtask == nil then
+				inst.sg.statemem.emoteinsnowtask = inst:DoPeriodicTask(data.insnowfnperiod or 1, data.insnowfn, data.insnowfnfirstperiod or nil)
+			end
+			if data.insnowfn2 and inst.sg.statemem.emoteinsnowtask2 == nil then
+				inst.sg.statemem.emoteinsnowtask2 = inst:DoPeriodicTask(data.insnowfnperiod2 or 1, data.insnowfn2, data.insnowfnfirstperiod2 or nil)
+			end
+		end
+		
+		if oldemote_enter then
+			oldemote_enter(inst, data, ...)
+		end
+	end
+	
+	local oldemote_exit = sg.states["emote"].onexit
+	sg.states["emote"].onexit = function(inst, ...)
+		if inst.sg.statemem.emoteinsnow then
+			inst.DynamicShadow:Enable(true)
+		end
+		if inst.sg.statemem.emoteinsnowtask then
+			inst.sg.statemem.emoteinsnowtask:Cancel()
+			inst.sg.statemem.emoteinsnowtask = nil
+		end
+		if inst.sg.statemem.emoteinsnowtask2 then
+			inst.sg.statemem.emoteinsnowtask2:Cancel()
+			inst.sg.statemem.emoteinsnowtask2 = nil
+		end
+		
+		if oldemote_exit then
+			oldemote_exit(inst, ...)
 		end
 	end
 	

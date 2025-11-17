@@ -55,6 +55,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WAXWELL.DESCRIBE
 		HOSTILE = "Definitively wasn't for his cool temper.",
 	}
 	DESCRIBE.EMPEROR_PENGUIN_GUARD = "I call them \"Pawnguins\"."
+	DESCRIBE.GIRL_WALRUS = "Good for him... good for him."
 	DESCRIBE.MOOSE_POLAR = {
 		GENERIC = "It's hardly intimidating now.",
 		ANTLER = "Big antlers, big attitude.",
@@ -111,7 +112,9 @@ local DESCRIBE = STRINGS.CHARACTERS.WAXWELL.DESCRIBE
 	
 	--	Food
 	DESCRIBE.DRYICECREAM = "You could break a skull open with that thing."
+	DESCRIBE.FILET_O_FLEA = "Don't starve you say? I think I'd prefer to."
 	DESCRIBE.ICELETTUCE = "So, we are eating crunchy water now?"
+	DESCRIBE.ICELETTUCE_OVERSIZED = "And this thing didn't even want us to care for it."
 	DESCRIBE.ICEBURRITO = "I don't assume it tastes bad but..."
 	DESCRIBE.POLARCRABLEGS = "Would be perfect with melted butter."
 	
@@ -138,10 +141,13 @@ local DESCRIBE = STRINGS.CHARACTERS.WAXWELL.DESCRIBE
 	DESCRIBE.POLARFLEA_SACK = "Hardly preferable over freezing to death."
 	DESCRIBE.POLARICESTAFF = "The right spell, in wrong hands."
 	DESCRIBE.POLARMOOSEHAT = "Hm. Very... rustic."
+	DESCRIBE.WALRUS_BAGPIPE = "They may not recall me, but they will obey me."
+	DESCRIBE.WALRUS_BEARTRAP = "Ruins a leg and a good pair of trousers."
 	DESCRIBE.WINTERS_FISTS = "Only a tidbit too brutish... really."
 	
 	--	Others
 	DESCRIBE.ARCTIC_FOOL_FISH = "A spell for embarrassment."
+	DESCRIBE.BOAT_ICE_ITEM = "I don't like the sound of it, especially this cracking."
 	DESCRIBE.POLARGLOBE = {
 		GENERIC = "Don't. Touch. It.",
 		INUSE = "I knew this was a bad idea.",

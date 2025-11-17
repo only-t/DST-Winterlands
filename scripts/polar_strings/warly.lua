@@ -55,6 +55,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WARLY.DESCRIBE
 		HOSTILE = "Ah, are we overthrowing the monarchy now?",
 	}
 	DESCRIBE.EMPEROR_PENGUIN_GUARD = "Guess I'll find eggs someplace else..."
+	DESCRIBE.GIRL_WALRUS = "Not too happy to make your acquaintance, madame."
 	DESCRIBE.MOOSE_POLAR = {
 		GENERIC = "It lost its garnish.",
 		ANTLER = "A grand beast sure to yield robust, gamey flavors.",
@@ -111,7 +112,9 @@ local DESCRIBE = STRINGS.CHARACTERS.WARLY.DESCRIBE
 	
 	--	Food
 	DESCRIBE.DRYICECREAM = "Ice cream for the cool kids!"
+	DESCRIBE.FILET_O_FLEA = "The secret ingredient is a dash of shame."
 	DESCRIBE.ICELETTUCE = "Brr... could use dressing..."
+	DESCRIBE.ICELETTUCE_OVERSIZED = "Ça alors, what big salade!"
 	DESCRIBE.ICEBURRITO = "This is the last time I rely on Wilson to name my recipes."
 	DESCRIBE.POLARCRABLEGS = "Mwah! Simplement par-fait!"
 	
@@ -138,10 +141,13 @@ local DESCRIBE = STRINGS.CHARACTERS.WARLY.DESCRIBE
 	DESCRIBE.POLARFLEA_SACK = "Better inside than on my skin."
 	DESCRIBE.POLARICESTAFF = "Pardon, but I need to breathe some fresh air."
 	DESCRIBE.POLARMOOSEHAT = "There better be no vinous hunter in these parts."
+	DESCRIBE.WALRUS_BAGPIPE = "Bon dieu, my ears!"
+	DESCRIBE.WALRUS_BEARTRAP = "A trap eager to make a mouthful of me."
 	DESCRIBE.WINTERS_FISTS = "Now I'm seriously offhanded..."
 	
 	--	Others
 	DESCRIBE.ARCTIC_FOOL_FISH = "A classic, harmless prank! Or at least it should be..."
+	DESCRIBE.BOAT_ICE_ITEM = "Anything to stay a-flotte."
 	DESCRIBE.POLARGLOBE = {
 		GENERIC = "This makes for a good feasting table decoration.",
 		INUSE = "Well. I'd better prep some soup for everyone.",

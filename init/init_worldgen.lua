@@ -62,7 +62,7 @@ AddRoomPreInit("OceanCoastal", function(self)
 			self.contents.countprefabs = {}
 		end
 		
-		self.contents.countprefabs["rock_ice_spawner_polar"] = 38
+		self.contents.countprefabs["rock_ice_spawner_polar"] = 60
 	end
 end)
 

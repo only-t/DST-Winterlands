@@ -36,13 +36,13 @@ local Bunches = {
 					
 					local tile = world:GetTile(x, z)
 					if tile == WORLD_TILES.POLAR_SNOW or tile == WORLD_TILES.POLAR_ICE or tile == WORLD_TILES.OCEAN_POLAR then
-						return "rock_ice"
+						return math.random() < 0.8 and "rock_ice" or "boat_ice_item_worldgen"
 					end
 				end
 			end
 		end,
 		range = 20,
-		min = 1,
+		min = 3,
 		max = 6,
 		min_spacing = 8,
 		valid_tile_types = {

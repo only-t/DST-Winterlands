@@ -17,7 +17,7 @@ local PolarFleaBrain = Class(Brain, function(self, inst)
 	Brain._ctor(self, inst)
 end)
 
-local HOST_TAGS =  {"_health", "chest", "backpack", "fleahosted"}
+local HOST_TAGS =  {"_container", "_health", "fleahosted"}
 local HOST_NOT_TAGS = {"INLIMBO", "hiding", "outofreach", "smallcreature"}
 
 local function SortValidHosts(ents, pt)

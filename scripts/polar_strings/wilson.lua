@@ -58,6 +58,7 @@ local DESCRIBE = STRINGS.CHARACTERS.GENERIC.DESCRIBE
 		HOSTILE = "He's got home-ice advantage!",
 	}
 	DESCRIBE.EMPEROR_PENGUIN_GUARD = "Looks pecky."
+	DESCRIBE.GIRL_WALRUS = "There's fun for the whole family."
 	DESCRIBE.MOOSE_POLAR = {
 		GENERIC = "It moose be tough to cope with antler loss.",
 		ANTLER = "I'd rather stay clear from its path.",
@@ -114,7 +115,9 @@ local DESCRIBE = STRINGS.CHARACTERS.GENERIC.DESCRIBE
 	
 	--	Food
 	DESCRIBE.DRYICECREAM = "Carbon dioxide flavor is hard to best."
+	DESCRIBE.FILET_O_FLEA = "Hmm. Has anyone ordered a bug-er?"
 	DESCRIBE.ICELETTUCE = "That's a little too much seasoning."
+	DESCRIBE.ICELETTUCE_OVERSIZED = "This one knows to dress to impress!"
 	DESCRIBE.ICEBURRITO = "I really dig that name."
 	DESCRIBE.POLARCRABLEGS = "The good thing about having ten legs, is that there's enough for everyone."
 	
@@ -141,10 +144,13 @@ local DESCRIBE = STRINGS.CHARACTERS.GENERIC.DESCRIBE
 	DESCRIBE.POLARFLEA_SACK = "To fill with bite-sized allies."
 	DESCRIBE.POLARICESTAFF = "I like all my staves but this one is frost among equals."
 	DESCRIBE.POLARMOOSEHAT = "Quite the articstic headpiece."
+	DESCRIBE.WALRUS_BAGPIPE = "Welcome to MacTusk N' Wilson hunting party."
+	DESCRIBE.WALRUS_BEARTRAP = "That's lucky I'm not a bear!"
 	DESCRIBE.WINTERS_FISTS = "Packed ice for packing a punch."
 	
 	--	Others
 	DESCRIBE.ARCTIC_FOOL_FISH = "All I got to do is act natural."
+	DESCRIBE.BOAT_ICE_ITEM = "These are just good to get a-round."
 	DESCRIBE.POLARGLOBE = {
 		GENERIC = "It's still going.",
 		INUSE = "Let's not do this again!",

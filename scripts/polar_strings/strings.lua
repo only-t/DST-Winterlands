@@ -19,7 +19,9 @@ local RECIPE_DESC = STRINGS.RECIPE_DESC
 	
 	--	Misc
 	NAMES.CAVE_ENTRANCE_POLAR = "Sinkhole?" -- TEMP NAME
+	NAMES.DIRTPILE_POLAR = "Singular Snow Mass"
 	NAMES.IN_POLARSNOW = "Snow?"
+	NAMES.MOLE_UNDERGROUND_POLAR = "Raised Snow"
 	NAMES.POLARSNOW_MATERIAL = "In High Snow"
 	NAMES.TOWER_POLAR = "Icy Tower"
 	NAMES.TOWER_POLAR_FLAG = "Empire Fanion"
@@ -29,6 +31,7 @@ local RECIPE_DESC = STRINGS.RECIPE_DESC
 	
 	NAMES.EMPEROR_PENGUIN = "Emperor Pengull"
 	NAMES.EMPEROR_PENGUIN_GUARD = "Penguard"
+	NAMES.GIRL_WALRUS = "MaTusk"
 	NAMES.MOOSE_POLAR = "Moose"
 	NAMES.MOOSE_SPECTER = "Spectral Moose"
 	NAMES.OCEANFISH_MEDIUM_POLAR1 = "Boreal Bass"
@@ -42,6 +45,7 @@ local RECIPE_DESC = STRINGS.RECIPE_DESC
 	
 --	Buildings
 	
+	NAMES.BOAT_ICE = "Ice Floe"
 	NAMES.CHESSPIECE_EMPEROR_PENGUIN_FRUITY = "Emperor Pengull Figure"
 	NAMES.CHESSPIECE_EMPEROR_PENGUIN_FRUITY_BUILDER = "(Fruity) Emperor Figure"
 	NAMES.CHESSPIECE_EMPEROR_PENGUIN_JUGGLE = "Emperor Pengull Figure"
@@ -63,8 +67,11 @@ local RECIPE_DESC = STRINGS.RECIPE_DESC
 	
 	--	Food
 	NAMES.DRYICECREAM = "Dry Ice Cream"
+	NAMES.FILET_O_FLEA = "Filet-O-Flea"
 	NAMES.ICECREAM_EMPEROR = NAMES.ICECREAM
 	NAMES.ICELETTUCE = "Iceberg Lettuce"
+	NAMES.ICELETTUCE_OVERSIZED = "Giant Iceberg Lettuce"
+	NAMES.ICELETTUCE_OVERSIZED_ROTTEN = "Giant Rotting Iceberg Lettuce"
 	NAMES.ICEBURRITO = "Brrito"
 	NAMES.POLARCRABLEGS = "King Crab Legs"
 	NAMES.WINTERCOOKING_POLARCRABLEGS = "King Crab Legs"
@@ -93,11 +100,14 @@ local RECIPE_DESC = STRINGS.RECIPE_DESC
 	NAMES.POLARFLEA_SACK = "Itchhiker Pack"
 	NAMES.POLARICESTAFF = "Winter Wand"
 	NAMES.POLARMOOSEHAT = "Ushanka"
+	NAMES.WALRUS_BAGPIPE = "Bagpipes"
+	NAMES.WALRUS_BEARTRAP = "Bear Trap"
 	NAMES.WINTERS_FISTS = "Winter's Fists"
 	NAMES.WINTERS_FISTS_BLUEPRINT = "Winter's Fists Blueprint"
 	
 	--	Others
 	NAMES.ARCTIC_FOOL_FISH = "Arctic Fools' Fish"
+	NAMES.BOAT_ICE_ITEM = "Ice Floe Kit"
 	NAMES.DUG_GRASS_POLAR = "Tundra Tuft"
 	NAMES.POLARGLOBE = "Strange Snowglobe"
 	NAMES.OCEANFISH_IN_ICE = "Fishy Ice Cube"
@@ -120,6 +130,7 @@ local RECIPE_DESC = STRINGS.RECIPE_DESC
 --	Skins
 	
 	--	Names
+	STRINGS.SKIN_NAMES.ms_bushhat_polar = "My-Wee-Glacier"
 	STRINGS.SKIN_NAMES.ms_dragonflychest_polarice = "Dry \"Ice Box\""
 	STRINGS.SKIN_NAMES.ms_polarmoosehat_white = "Hornamented Ushanka"
 	STRINGS.SKIN_NAMES.ms_treasurechest_polarice = "\"Ice Box\""
@@ -127,11 +138,15 @@ local RECIPE_DESC = STRINGS.RECIPE_DESC
 	STRINGS.SKIN_NAMES.ms_loading_polarfox = "Slick in the Snow"
 	
 	--	Desc
-	STRINGS.SKIN_DESCRIPTIONS.ms_dragonflychest_polarice = "It's almost like if you had a large Ice Box. Well, The impression strikes out more in the dead of winter."
+	STRINGS.SKIN_DESCRIPTIONS.ms_bushhat_polar = "Ideal for hiding among Pengulls, less so around tumbleweeds and cacti."
+	STRINGS.SKIN_DESCRIPTIONS.ms_dragonflychest_polarice = "It's almost like if you had a large Ice Box. Well, the impression strikes out more in the dead of winter."
 	STRINGS.SKIN_DESCRIPTIONS.ms_polarmoosehat_white = "Twigs, bones... anything 'fur holding this loose hat together!"
 	STRINGS.SKIN_DESCRIPTIONS.ms_treasurechest_polarice = "Got no gears for the real thing? Afraid you'll have to make do with this."
 	
 	STRINGS.SKIN_DESCRIPTIONS.ms_loading_polarfox = "Bearfolklore says: do a high snow angel just right, and you'll only find its pawprints the next day."
+	
+	--	Emotes
+	STRINGS.UI.EMOTES.SNOWANGEL = "Snow Angel"
 	
 --	Speech, etc
 	
@@ -354,6 +369,7 @@ local RECIPE_DESC = STRINGS.RECIPE_DESC
 	RECIPE_DESC.ARCTIC_FOOL_FISH = "Put it on someone's back for guaranteed fun! For you at least."
 	RECIPE_DESC.ARMORPOLAR = "Protects of damage and the biting cold."
 	RECIPE_DESC.BLUEGEM_OVERCHARGED = "...hunt it down...\n...it hides in the storm."
+	RECIPE_DESC.BOAT_ICE_ITEM = "Go with the floe!"
 	RECIPE_DESC.CHESSPIECE_EMPEROR_PENGUIN_FRUITY_BUILDER = "Sculpt the emperor like one of your French gulls."
 	RECIPE_DESC.CHESSPIECE_EMPEROR_PENGUIN_JUGGLE_BUILDER = "He really knew how to throw a party."
 	RECIPE_DESC.CHESSPIECE_EMPEROR_PENGUIN_MAGESTIC_BUILDER = "This pose puts the brrr in burlesque."
@@ -423,6 +439,11 @@ local RECIPE_DESC = STRINGS.RECIPE_DESC
 	STRINGS.UI.SPECIAL_EVENT_NAMES.ARCTIC_FOOLS = "Arctic Fools"
 	
 	STRINGS.UI.ARCTIC_FOOL_FISH_BUTTON = "\"Hit me!\""
+	
+	table.insert(STRINGS.UI.WORLDGEN.NOUNS, "icicles...")
+	table.insert(STRINGS.UI.WORLDGEN.NOUNS, "way too many snowfleas...")
+	table.insert(STRINGS.UI.WORLDGEN.VERBS, "Freezing")
+	table.insert(STRINGS.UI.WORLDGEN.VERBS, "Thawing")
 	
 --	Tweaked
 	

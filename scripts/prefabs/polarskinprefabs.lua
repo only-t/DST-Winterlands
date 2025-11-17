@@ -64,4 +64,18 @@ table.insert(prefs, CreatePrefabSkin("ms_dragonflychest_upgraded_polarice", {
 	skin_tags = {},
 }))
 
+table.insert(prefs, CreatePrefabSkin("ms_bushhat_polar", {
+	assets = {
+		Asset("DYNAMIC_ANIM", "anim/dynamic/ms_bushhat_polar.zip"),
+		Asset("PKGREF", "anim/dynamic/ms_bushhat_polar.dyn"),
+	},
+	base_prefab = "bushhat",
+	type = "item",
+	build_name_override = "ms_bushhat_polar",
+	rarity = "ModMade",
+	prefabs = {"polar_snow_bush"},
+	skin_tags = {"POLAR", "BUSHHAT", "CRAFTABLE"},
+	fx_prefab = {"polar_snow_bush"},
+}))
+
 return unpack(prefs)

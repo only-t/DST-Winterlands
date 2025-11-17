@@ -55,6 +55,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WILLOW.DESCRIBE
 		HOSTILE = "He's losing his cool!",
 	}
 	DESCRIBE.EMPEROR_PENGUIN_GUARD = "Woah man, chill down!"
+	DESCRIBE.GIRL_WALRUS = "Her mustache's fake, right? It HAS to be."
 	DESCRIBE.MOOSE_POLAR = {
 		GENERIC = "Pfft, look who's extra stupid now.",
 		ANTLER = "Oh great, another stupid deer of some sort.",
@@ -111,7 +112,9 @@ local DESCRIBE = STRINGS.CHARACTERS.WILLOW.DESCRIBE
 	
 	--	Food
 	DESCRIBE.DRYICECREAM = "Warly. Listen here."
+	DESCRIBE.FILET_O_FLEA = "It's still twitching. Awesome!"
 	DESCRIBE.ICELETTUCE = "This is the opposite of good."
+	DESCRIBE.ICELETTUCE_OVERSIZED = "Great."
 	DESCRIBE.ICEBURRITO = "I don't think any hot sauce can fix this."
 	DESCRIBE.POLARCRABLEGS = "Never had one of these before, I'll try ten."
 	
@@ -138,10 +141,13 @@ local DESCRIBE = STRINGS.CHARACTERS.WILLOW.DESCRIBE
 	DESCRIBE.POLARFLEA_SACK = "Uhhh... why are we doing this again?"
 	DESCRIBE.POLARICESTAFF = "Next time we're going someplace else...\nlike where I can get myself an Inferno Wand and all that!"
 	DESCRIBE.POLARMOOSEHAT = "Smells fishy."
+	DESCRIBE.WALRUS_BAGPIPE = "I'd take a mandrake opera anyday over this!"
+	DESCRIBE.WALRUS_BEARTRAP = "I hate these things with a burning passion."
 	DESCRIBE.WINTERS_FISTS = "Snowballs are lame. I want me some fireballs!"
 	
 	--	Others
 	DESCRIBE.ARCTIC_FOOL_FISH = "We should light them on fire for extra fun! No? Pfft."
+	DESCRIBE.BOAT_ICE_ITEM = "Suuure, what could possibly go wrong?"
 	DESCRIBE.POLARGLOBE = {
 		GENERIC = "What a dumb toy.",
 		INUSE = "Why did you have to shake it, why?",

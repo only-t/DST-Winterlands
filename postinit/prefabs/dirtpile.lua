@@ -10,12 +10,28 @@ local function PolarInit(inst)
 	end
 end
 
+local olddisplaynamefn
+local function displaynamefn(inst, ...)
+	local name = olddisplaynamefn and olddisplaynamefn(inst, ...)
+	
+	if (name == nil or name == STRINGS.NAMES.DIRTPILE) and IsInPolar(inst) then
+		name = STRINGS.NAMES.DIRTPILE_POLAR
+	end
+	
+	return name
+end
+
 for i, v in ipairs(tracks) do
 	ENV.AddPrefabPostInit(v, function(inst)
 		inst:AddTag("snowblocker")
 		
 		inst._snowblockrange = net_smallbyte(inst.GUID, "animal_track._snowblockrange")
 		inst._snowblockrange:set(3)
+		
+		if olddisplaynamefn == nil then
+			olddisplaynamefn = inst.displaynamefn
+		end
+		inst.displaynamefn = displaynamefn
 		
 		if not TheWorld.ismastersim then
 			return

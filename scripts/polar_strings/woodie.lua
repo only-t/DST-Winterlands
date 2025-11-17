@@ -55,6 +55,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WOODIE.DESCRIBE
 		HOSTILE = "Down with the monarchy!",
 	}
 	DESCRIBE.EMPEROR_PENGUIN_GUARD = "These birds are up to something..."
+	DESCRIBE.GIRL_WALRUS = "I don't like the sound of that..."
 	DESCRIBE.MOOSE_POLAR = {
 		GENERIC = "Hmph, amateur. Lemme show you how it's done.",
 		ANTLER = "Big, bold, and proud of his woods like I am!",
@@ -111,7 +112,9 @@ local DESCRIBE = STRINGS.CHARACTERS.WOODIE.DESCRIBE
 	
 	--	Food
 	DESCRIBE.DRYICECREAM = "I actually prefer ice cream in winter, yup."
+	DESCRIBE.FILET_O_FLEA = "That'll teach you goin' in places you shouldn't, eh."
 	DESCRIBE.ICELETTUCE = "Like biting ice cubes in a drink."
+	DESCRIBE.ICELETTUCE_OVERSIZED = "Didn't think you had it in you, buddy."
 	DESCRIBE.ICEBURRITO = "It's better to eat fresh."
 	DESCRIBE.POLARCRABLEGS = "Yer doing a fine job at cracking 'em, Luce."
 	
@@ -138,10 +141,13 @@ local DESCRIBE = STRINGS.CHARACTERS.WOODIE.DESCRIBE
 	DESCRIBE.POLARFLEA_SACK = "They're my bugs now."
 	DESCRIBE.POLARICESTAFF = "Makes me feel right at home, eh."
 	DESCRIBE.POLARMOOSEHAT = "That's more my kind of headwear!"
+	DESCRIBE.WALRUS_BAGPIPE = "I'll give 'er a go."
+	DESCRIBE.WALRUS_BEARTRAP = "Careful 'round that. It can take a toe clean off!"
 	DESCRIBE.WINTERS_FISTS = "I do like to keep some snow at hand."
 	
 	--	Others
 	DESCRIBE.ARCTIC_FOOL_FISH = "I gotta find the perfect back..."
+	DESCRIBE.BOAT_ICE_ITEM = "I merely remember making the joke, I didn't mean it."
 	DESCRIBE.POLARGLOBE = {
 		GENERIC = "I kinda want to go in here, eh.",
 		INUSE = "C'mon, I didn't mean it seriously.",

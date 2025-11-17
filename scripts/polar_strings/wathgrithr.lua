@@ -55,6 +55,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE
 		HOSTILE = "Surrender while thee can!",
 	}
 	DESCRIBE.EMPEROR_PENGUIN_GUARD = "What hurts more between the pecking and the stabbing?"
+	DESCRIBE.GIRL_WALRUS = "Ha! Let thy pipes sound my glory as the battle rages!"
 	DESCRIBE.MOOSE_POLAR = {
 		GENERIC = "Bah! 'Thou hath disarmed thyself!",
 		ANTLER = "Freya's grace touches even these frozen lands.",
@@ -111,7 +112,9 @@ local DESCRIBE = STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE
 	
 	--	Food
 	DESCRIBE.DRYICECREAM = "Home flavored!"
+	DESCRIBE.FILET_O_FLEA = "Who shall devour it as a test of their might?"
 	DESCRIBE.ICELETTUCE = "Non-meat made of ice."
+	DESCRIBE.ICELETTUCE_OVERSIZED = "You fought well, plant, but we persevered!"
 	DESCRIBE.ICEBURRITO = "Fish lying in its frozen bedroll!"
 	DESCRIBE.POLARCRABLEGS = "The beast ascends to Valhalla... and to my belly!"
 	
@@ -138,10 +141,13 @@ local DESCRIBE = STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE
 	DESCRIBE.POLARFLEA_SACK = "Full of mine tiny warriors, ready for battle!"
 	DESCRIBE.POLARICESTAFF = "Steer clear, or stay put."
 	DESCRIBE.POLARMOOSEHAT = "A horned helmet to fight off the cold."
+	DESCRIBE.WALRUS_BAGPIPE = "Though it stinks, it strengthens my allies."
+	DESCRIBE.WALRUS_BEARTRAP = "A snare for a beast and the heedless."
 	DESCRIBE.WINTERS_FISTS = "Not my prefered weaponry, but it doth well on the battlefield."
 	
 	--	Others
 	DESCRIBE.ARCTIC_FOOL_FISH = "Beware of the cursed sigil..."
+	DESCRIBE.BOAT_ICE_ITEM = "'Tis only good to jump across a pond."
 	DESCRIBE.POLARGLOBE = {
 		GENERIC = "It contain the power to unleash the winter!",
 		INUSE = "'Tis vigorous shake hath displeased the gods!",

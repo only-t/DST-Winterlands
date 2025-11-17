@@ -191,7 +191,7 @@ local function Wolfgang_Polar_Time(inst, slowtime)
 	return mighty_time
 end
 
-ENV.AddPrefabPostInit("wolfgang", function(inst)
+AddPrefabPostInit("wolfgang", function(inst)
 	if not TheWorld.ismastersim then
 		return
 	end
@@ -205,7 +205,7 @@ local function Woodie_Polar_Time(inst, slowtime)
 	return inst:HasTag("wereplayer") and (slowtime * TUNING.WEREMODE_POLAR_SLOWTIME) or 0
 end
 
-ENV.AddPrefabPostInit("woodie", function(inst)
+AddPrefabPostInit("woodie", function(inst)
 	if not TheWorld.ismastersim then
 		return
 	end

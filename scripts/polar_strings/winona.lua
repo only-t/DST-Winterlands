@@ -55,6 +55,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WINONA.DESCRIBE
 		HOSTILE = "Yeow, he's got moves!",
 	}
 	DESCRIBE.EMPEROR_PENGUIN_GUARD = "It pecks, it stabs. But worse: its feather tickles!"
+	DESCRIBE.GIRL_WALRUS = "She's givin' me the look like I'm tonight's dinner."
 	DESCRIBE.MOOSE_POLAR = {
 		GENERIC = "Ran headfirst into trouble, huh?",
 		ANTLER = "Looks tough. Time to find out if it really is.",
@@ -111,7 +112,9 @@ local DESCRIBE = STRINGS.CHARACTERS.WINONA.DESCRIBE
 	
 	--	Food
 	DESCRIBE.DRYICECREAM = "Snow sure is nothin' after you eat that stuff."
+	DESCRIBE.FILET_O_FLEA = "Should've looked in the pot twice."
 	DESCRIBE.ICELETTUCE = "In mint condition? It's practically cryopreserved!"
+	DESCRIBE.ICELETTUCE_OVERSIZED = "Sure hope y'all love eating salad!"
 	DESCRIBE.ICEBURRITO = "Just what I needed to wrap up the day."
 	DESCRIBE.POLARCRABLEGS = "I'm good with only a small pinch of luxury."
 	
@@ -138,10 +141,13 @@ local DESCRIBE = STRINGS.CHARACTERS.WINONA.DESCRIBE
 	DESCRIBE.POLARFLEA_SACK = "If you mess with me, you mess with my back bugs."
 	DESCRIBE.POLARICESTAFF = "You gotta freeze to please."
 	DESCRIBE.POLARMOOSEHAT = "Hey, Woodie. Do you still have all of your backside?"
+	DESCRIBE.WALRUS_BAGPIPE = "Walruses'll follow this thing anywhere."
+	DESCRIBE.WALRUS_BEARTRAP = "That'll clamp ya good."
 	DESCRIBE.WINTERS_FISTS = "A tool to make snowballs... that hit like cinder blocks."
 	
 	--	Others
 	DESCRIBE.ARCTIC_FOOL_FISH = "The mackerel of mockery strikes when we least expect it."
+	DESCRIBE.BOAT_ICE_ITEM = "I give it at best thirty seconds."
 	DESCRIBE.POLARGLOBE = {
 		GENERIC = "Ha! Charlie loved these lil' things.",
 		INUSE = "Oh you...",

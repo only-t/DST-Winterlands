@@ -37,6 +37,7 @@ Assets = {
 	Asset("IMAGE", "images/polarpillar.tex"),
 	
 	-- Anims / Builds
+	Asset("ANIM", "anim/player_emotes_snowangel.zip"),
 	Asset("ANIM", "anim/player_flea_itchy.zip"),
 	Asset("ANIM", "anim/player_polarcast.zip"),
 	Asset("ANIM", "anim/player_winterfists.zip"),
@@ -64,6 +65,7 @@ local ITEMS = {
 	"armorpolar",
 	"bluegem_overcharged",
 	"bluegem_shards",
+	"boat_ice_item",
 	"chesspiece_emperor_penguin_fruity",
 	"chesspiece_emperor_penguin_fruity_moonglass",
 	"chesspiece_emperor_penguin_fruity_sketch",
@@ -85,6 +87,7 @@ local ITEMS = {
 	"dug_grass_polar",
 	"emperor_egg",
 	"emperor_penguinhat",
+	"filet_o_flea",
 	"frostwalkeramulet",
 	"iceburrito",
 	"icelettuce",
@@ -125,6 +128,7 @@ local ITEMS = {
 	"winters_fists",
 	"wx78module_naughty",
 	
+	"ms_bushhat_polar",
 	"ms_dragonflychest_polarice",
 	"ms_treasurechest_polarice",
 	"ms_polarmoosehat_white",

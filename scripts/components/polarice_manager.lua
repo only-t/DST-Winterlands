@@ -23,7 +23,7 @@ local MAX_TEMPERATURE = 100
 
 local FLOATEROBJECT_TAGS = {"floaterobject"}
 local IGNORE_ICE_TAGS = {"activeprojectile", "oceanshoalspawner", "irreplaceable", "flying", "FX", "DECOR", "INLIMBO", "NOCLICK"}
-local ICE_BLOCKER_DIST = 10
+local ICE_BLOCKER_DIST = 8
 
 return Class(function(self, inst)
     assert(inst.ismastersim, "Polar Ice Manager should not exist on the client!")

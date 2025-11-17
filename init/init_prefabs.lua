@@ -5,6 +5,7 @@ PrefabFiles = {
 	"armor_polar",
 	"bluegem_overcharged",
 	"bluegem_shards",
+	"boat_ice_item",
 	"chesspieces_polar",
 	"chesspieces_polar_materials",
 	"compass_polar",
@@ -69,5 +70,9 @@ PrefabFiles = {
 	"winters_fists_snowballs",
 	"wysp_skeleton",
 	
+--	Skin stuff
+	
 	"polarskinprefabs",
+	"polar_snow_angel",
+	"polar_snow_bush",
 }

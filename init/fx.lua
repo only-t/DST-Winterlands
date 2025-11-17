@@ -65,7 +65,7 @@ local POLAR_FX = {
 		bank = "mole_fx",
 		build = "mole_move_fx",
 		anim = "move",
-		nameoverride = STRINGS.NAMES.MOLE_UNDERGROUND,
+		nameoverride = STRINGS.NAMES.MOLE_UNDERGROUND_POLAR,
 		description = function(inst, viewer)
 			return GetString(viewer, "DESCRIBE", {"MOLE", "UNDERGROUND"})
 		end,

@@ -55,6 +55,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WENDY.DESCRIBE
 		HOSTILE = "Are you worthy, governor?",
 	}
 	DESCRIBE.EMPEROR_PENGUIN_GUARD = "To be pecked by flint sounds... unpleasant."
+	DESCRIBE.GIRL_WALRUS = "Her song is bewitching... but oh, so completely off-key!"
 	DESCRIBE.MOOSE_POLAR = {
 		GENERIC = "Heehee...",
 		ANTLER = "Those antlers look dear to you, hm?",
@@ -111,7 +112,9 @@ local DESCRIBE = STRINGS.CHARACTERS.WENDY.DESCRIBE
 	
 	--	Food
 	DESCRIBE.DRYICECREAM = "A mouthful of snowstorm."
+	DESCRIBE.FILET_O_FLEA = "I wanted treats, not a threat."
 	DESCRIBE.ICELETTUCE = "This year's harvest was most disappointing."
+	DESCRIBE.ICELETTUCE_OVERSIZED = "What did this crop do to deserve such love and care?"
 	DESCRIBE.ICEBURRITO = "My frozen heart won't feel the change."
 	DESCRIBE.POLARCRABLEGS = "We removed its legs one by one!"
 	
@@ -138,10 +141,13 @@ local DESCRIBE = STRINGS.CHARACTERS.WENDY.DESCRIBE
 	DESCRIBE.POLARFLEA_SACK = "A storage for little parasites."
 	DESCRIBE.POLARICESTAFF = "An effortful pulse of cold. Much like my heart."
 	DESCRIBE.POLARMOOSEHAT = "Even I don't know who it's made of."
+	DESCRIBE.WALRUS_BAGPIPE = "Its song echoes with sorrow."
+	DESCRIBE.WALRUS_BEARTRAP = "Like a grave waiting to be filled..."
 	DESCRIBE.WINTERS_FISTS = "Heehee. Hey, Wolfgang, how about some arm wrestling?"
 	
 	--	Others
 	DESCRIBE.ARCTIC_FOOL_FISH = "Should I write something on it? Like: \"Come and stab me\"."
+	DESCRIBE.BOAT_ICE_ITEM = "This will go horribly wrong. I'm coming."
 	DESCRIBE.POLARGLOBE = {
 		GENERIC = "This looks so fragile...",
 		INUSE = "I see. Breaking it would have lasting consequences.",

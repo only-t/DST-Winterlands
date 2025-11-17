@@ -18,6 +18,21 @@ local polar_preparedfoods = {
 		card_def = {ingredients = {{"icelettuce", 2}, {"oceanfish_medium_polar1_inv", 1}, {"tomato", 1}}},
 	},
 	
+	filet_o_flea = {
+		test = function(cooker, names, tags) return tags.monster and tags.monster >= 1 and names.polarflea end,
+		hunger = TUNING.CALORIES_SMALL * 4,
+		health = -TUNING.HEALING_MED,
+		sanity = -TUNING.SANITY_MEDLARGE,
+		cooktime = 0.25,
+		foodtype = FOODTYPE.MEAT,
+		perishtime = TUNING.PERISH_SLOW,
+		priority = 15,
+		tags = {"monstermeat"},
+		secondaryfoodtype = FOODTYPE.MONSTER,
+		potlevel = "low",
+		floater = {"med", nil, 0.58},
+	},
+	
 	icecream_emperor = {
 		test = function(cooker, names, tags) return names.emperor_egg and not tags.inedible and not tags.monster end,
 		name = "icecream_emperor", -- postinit/components/stewer is where its at

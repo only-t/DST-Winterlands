@@ -55,6 +55,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WEBBER.DESCRIBE
 		HOSTILE = "Let's see which is best, okay?",
 	}
 	DESCRIBE.EMPEROR_PENGUIN_GUARD = "We didn't steal any egg! Promise!"
+	DESCRIBE.GIRL_WALRUS = "She seems right in her flippers."
 	DESCRIBE.MOOSE_POLAR = {
 		GENERIC = "It bumped its head! Poor moosey...",
 		ANTLER = "They're much bigger than what we imagined!",
@@ -111,7 +112,9 @@ local DESCRIBE = STRINGS.CHARACTERS.WEBBER.DESCRIBE
 	
 	--	Food
 	DESCRIBE.DRYICECREAM = "It won't drop even if we hold it upside down!"
+	DESCRIBE.FILET_O_FLEA = "Not bad... a bit fleecy though."
 	DESCRIBE.ICELETTUCE = "Eat our greens? But it's all blue."
+	DESCRIBE.ICELETTUCE_OVERSIZED = "Hooray! Wait. We're eating salad all week now? Not hooray."
 	DESCRIBE.ICEBURRITO = "Legend says this burrito never falls apart!"
 	DESCRIBE.POLARCRABLEGS = "It got more legs than us to share!"
 	
@@ -138,10 +141,13 @@ local DESCRIBE = STRINGS.CHARACTERS.WEBBER.DESCRIBE
 	DESCRIBE.POLARFLEA_SACK = "To carry a whole troop on our back."
 	DESCRIBE.POLARICESTAFF = "Emergency ice web."
 	DESCRIBE.POLARMOOSEHAT = "A hat made of Mr. Woodie's friends."
+	DESCRIBE.WALRUS_BAGPIPE = "We wanna toot it!"
+	DESCRIBE.WALRUS_BEARTRAP = "Who's gonna poke it?"
 	DESCRIBE.WINTERS_FISTS = "It's not too uncomfortable when you have fuzzy hands."
 	
 	--	Others
 	DESCRIBE.ARCTIC_FOOL_FISH = "It's all fools and games until it's on your back!"
+	DESCRIBE.BOAT_ICE_ITEM = "We could skip across the whole ocean with enough of these."
 	DESCRIBE.POLARGLOBE = {
 		GENERIC = "The snow is moving, slowly. Too slowly...",
 		INUSE = "Will that get me on the naughty list?",

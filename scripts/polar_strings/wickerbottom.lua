@@ -55,6 +55,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE
 		HOSTILE = "Your reign ends here!",
 	}
 	DESCRIBE.EMPEROR_PENGUIN_GUARD = "I could use this feather..."
+	DESCRIBE.GIRL_WALRUS = "Oh dear, they brought support this time."
 	DESCRIBE.MOOSE_POLAR = {
 		GENERIC = "Make no mistake, it can still hold a fight.",
 		ANTLER = "A fine specimen with defenses fit for the wilds.",
@@ -111,7 +112,9 @@ local DESCRIBE = STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE
 	
 	--	Food
 	DESCRIBE.DRYICECREAM = "His secret recipes aren't all that secret sometimes."
+	DESCRIBE.FILET_O_FLEA = "I can taste the entomology."
 	DESCRIBE.ICELETTUCE = "Frigidaria brassica. Its leaves put mint to shame."
+	DESCRIBE.ICELETTUCE_OVERSIZED = "The result of perseverance, brute-forcing and, perhaps, stubbornness."
 	DESCRIBE.ICEBURRITO = "Fresh sustenance, followed by a certain brain freeze."
 	DESCRIBE.POLARCRABLEGS = "The kids have been very crabby to try them. That means more for me!"
 	
@@ -138,10 +141,13 @@ local DESCRIBE = STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE
 	DESCRIBE.POLARFLEA_SACK = "I'm not sure about this... insect domestication thing."
 	DESCRIBE.POLARICESTAFF = "A good clunk brings everyone back to their manners."
 	DESCRIBE.POLARMOOSEHAT = "To keep one's warmth while the cold rages on."
+	DESCRIBE.WALRUS_BAGPIPE = "An instrument of leadership, or so it seems."
+	DESCRIBE.WALRUS_BEARTRAP = "A deadly spring mechanism."
 	DESCRIBE.WINTERS_FISTS = "No dear, I meant \"Feast\". As in... ah, whatever."
 	
 	--	Others
 	DESCRIBE.ARCTIC_FOOL_FISH = "The token of a social custom, cherished by both Ursidae and the French."
+	DESCRIBE.BOAT_ICE_ITEM = "The most hazardous transportation device I've seen yet, I must applaud."
 	DESCRIBE.POLARGLOBE = {
 		GENERIC = "How strange. Has anyone touched it recently?",
 		INUSE = "Oh dear... was everyone ready for this?",

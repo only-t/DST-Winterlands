@@ -55,6 +55,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WORTOX.DESCRIBE
 		HOSTILE = "Try and get me!",
 	}
 	DESCRIBE.EMPEROR_PENGUIN_GUARD = "Peck me not, please!"
+	DESCRIBE.GIRL_WALRUS = "When her pipes skirl, the whole clan unfurls."
 	DESCRIBE.MOOSE_POLAR = {
 		GENERIC = "Don't worry, my dear, they will grow back.",
 		ANTLER = "What large horns you have! Can I have them?",
@@ -111,7 +112,9 @@ local DESCRIBE = STRINGS.CHARACTERS.WORTOX.DESCRIBE
 	
 	--	Food
 	DESCRIBE.DRYICECREAM = "I know a prank when I see one!"
+	DESCRIBE.FILET_O_FLEA = "Oh noes! I've got nothing to do with this, promise!"
 	DESCRIBE.ICELETTUCE = "Mortals will cultivate plants, no matter how mean they come by."
+	DESCRIBE.ICELETTUCE_OVERSIZED = "The pain was veritable, to grow such vegetable."
 	DESCRIBE.ICEBURRITO = "I suppose I could have a bite. A frostbite, hyuyu!"
 	DESCRIBE.POLARCRABLEGS = "Fine, fine, I will grab some of that crab."
 	
@@ -138,10 +141,13 @@ local DESCRIBE = STRINGS.CHARACTERS.WORTOX.DESCRIBE
 	DESCRIBE.POLARFLEA_SACK = "What's inside? That's a surprise!"
 	DESCRIBE.POLARICESTAFF = "It's not nice to leave our guests trapped in ice!"
 	DESCRIBE.POLARMOOSEHAT = "A fuzzy crown to hide one's frosty frown."
+	DESCRIBE.WALRUS_BAGPIPE = "My ears twist in agony!"
+	DESCRIBE.WALRUS_BEARTRAP = "Mind your toesies! Traps below-sies!"
 	DESCRIBE.WINTERS_FISTS = "The difference between a prank and cold murder is so thin sometimes."
 	
 	--	Others
 	DESCRIBE.ARCTIC_FOOL_FISH = "Ooo, Wes! You should have told me sooner about those pranks!"
+	DESCRIBE.BOAT_ICE_ITEM = "Poor hop-less mortals..."
 	DESCRIBE.POLARGLOBE = {
 		GENERIC = "A frozen realm, mine for the shaking! Hyuyu!",
 		INUSE = "What a tempting, cursed trinket!",

@@ -8,7 +8,7 @@ local SentientAxe = require("components/sentientaxe")
 		local container = self.inst.components.inventoryitem and self.inst.components.inventoryitem:GetContainer() or nil
 		local possessedaxe = self.inst.components.possessedaxe
 		
-		if self:ShouldMakeConversation() and possessedaxe and container and container.inst:HasTag("fleapack") and container:HasItemWithTag("flea", 1) then
+		if self:ShouldMakeConversation() and possessedaxe and container and container:HasItemWithTag("flea", 1) then
 			possessedaxe:Drop()
 			
 			self:Say(STRINGS.LUCY.container_has_fleas)

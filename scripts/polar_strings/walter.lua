@@ -55,6 +55,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WALTER.DESCRIBE
 		HOSTILE = "Uh oh... I think we just started a war, Woby.",
 	}
 	DESCRIBE.EMPEROR_PENGUIN_GUARD = "Think a whole regiment could take down a Deerclops?"
+	DESCRIBE.GIRL_WALRUS = "Hey, no littering!"
 	DESCRIBE.MOOSE_POLAR = {
 		GENERIC = "How it lost its antlers? Well it's a tragic tale, really.",
 		ANTLER = "Hm. Not too mysterious looking! But maybe if it was white and hiding in a blizzard...",
@@ -111,7 +112,9 @@ local DESCRIBE = STRINGS.CHARACTERS.WALTER.DESCRIBE
 	
 	--	Food
 	DESCRIBE.DRYICECREAM = "Ice cream, sparkling water edition."
+	DESCRIBE.FILET_O_FLEA = "This won't get me to quit outdoor cooking, but yikes!"
 	DESCRIBE.ICELETTUCE = "Would it lettuce freeze? Get it? Because... forget it..."
+	DESCRIBE.ICELETTUCE_OVERSIZED = "I knew this seed wouldn't lettuce dow- okay I'll stop now."
 	DESCRIBE.ICEBURRITO = "It won't fall apart one bit."
 	DESCRIBE.POLARCRABLEGS = "Mmmm! Hey, anybody wants to listen to my crab horror stories?"
 	
@@ -138,10 +141,13 @@ local DESCRIBE = STRINGS.CHARACTERS.WALTER.DESCRIBE
 	DESCRIBE.POLARBEARHAT = "Woby won't stop growling about it..."
 	DESCRIBE.POLARICESTAFF = "I feel sorry for all the bugs around, just minding their own business."
 	DESCRIBE.POLARMOOSEHAT = "Moose fur, no doubt. Did you smell it?"
+	DESCRIBE.WALRUS_BAGPIPE = "Walruses'll follow this thing anywhere."
+	DESCRIBE.WALRUS_BEARTRAP = "Best pick this up before someone gets hurt!"
 	DESCRIBE.WINTERS_FISTS = "I aim better with my slingshot than... my own two hands."
 	
 	--	Others
 	DESCRIBE.ARCTIC_FOOL_FISH = "I didn't know that fish sticks! Heh, get it?"
+	DESCRIBE.BOAT_ICE_ITEM = "Just don't slip overboard. Ha ha. That'd be pretty bad..."
 	DESCRIBE.POLARGLOBE = {
 		GENERIC = "Hey, shake this out!",
 		INUSE = "That means... I finally got my hands on an haunted trinket!",

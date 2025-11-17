@@ -14,6 +14,10 @@ local function OnUnequip(inst, owner)
 	owner.AnimState:ClearOverrideSymbol("swap_object")
 	owner.AnimState:Show("ARM_normal")
 	owner.AnimState:Hide("ARM_carry")
+	
+	if inst:HasTag("antlerstick") and owner.components.slipperyfeet then
+		owner.components.slipperyfeet.threshold = owner.components.slipperyfeet.threshold - TUNING.ANTLER_TREE_STICK_SLIPPINESS
+	end
 end
 
 local function OnFinished(inst)
@@ -62,6 +66,10 @@ local function commonfn(name, tags)
 		owner.AnimState:OverrideSymbol("swap_object", "polarstaffs", "swap_"..name.."staff")
 		owner.AnimState:Show("ARM_carry")
 		owner.AnimState:Hide("ARM_normal")
+		
+		if inst:HasTag("antlerstick") and owner.components.slipperyfeet then
+			owner.components.slipperyfeet.threshold = owner.components.slipperyfeet.threshold + TUNING.ANTLER_TREE_STICK_SLIPPINESS
+		end
 	end)
 	inst.components.equippable:SetOnUnequip(OnUnequip)
 	

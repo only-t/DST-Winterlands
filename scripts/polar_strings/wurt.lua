@@ -54,6 +54,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WURT.DESCRIBE
 		GENERIC = "Should join forces and conquer Pigfolk!",
 		HOSTILE = "Why can't get along?",
 	}
+	DESCRIBE.GIRL_WALRUS = "Hee-hee. Weird family just got weirder."
 	DESCRIBE.EMPEROR_PENGUIN_GUARD = "Is protecting Snowfolk, florp!"
 	DESCRIBE.MOOSE_POLAR = {
 		GENERIC = "Me want horn bit to grow back too, florp.",
@@ -111,7 +112,9 @@ local DESCRIBE = STRINGS.CHARACTERS.WURT.DESCRIBE
 	
 	--	Food
 	DESCRIBE.DRYICECREAM = "Glurr- tonguh-- stuuucc!"
+	DESCRIBE.FILET_O_FLEA = "Blegh!! How it got in here?"
 	DESCRIBE.ICELETTUCE = "Is icy-cream growing in ground?!"
+	DESCRIBE.ICELETTUCE_OVERSIZED = "Me did it! Me finally did it!"
 	DESCRIBE.ICEBURRITO = "Huh? Gluurrgh... poor fish in it."
 	DESCRIBE.POLARCRABLEGS = "Want to eat all lemon slices!"
 	
@@ -138,10 +141,13 @@ local DESCRIBE = STRINGS.CHARACTERS.WURT.DESCRIBE
 	DESCRIBE.POLARFLEA_SACK = "Guess they friends now, flort."
 	DESCRIBE.POLARICESTAFF = "Got all of winter in a stick, florp."
 	DESCRIBE.POLARMOOSEHAT = "Hee-hee, got your hat pbbbth!"
+	DESCRIBE.WALRUS_BAGPIPE = "LOUD! TOO LOUD!"
+	DESCRIBE.WALRUS_BEARTRAP = "Not sure what thing is."
 	DESCRIBE.WINTERS_FISTS = "Snow is weapon? Me been eating weapons all that time!"
 	
 	--	Others
 	DESCRIBE.ARCTIC_FOOL_FISH = "Ooooh, fishie! Clown man has fun games!"
+	DESCRIBE.BOAT_ICE_ITEM = "Lots of tiny boats."
 	DESCRIBE.POLARGLOBE = {
 		GENERIC = "Haha! Winter trapped inside!",
 		INUSE = "G-glurp! Didn't do it!",

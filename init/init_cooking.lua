@@ -6,6 +6,7 @@ local Cooking = require("cooking")
 	AddIngredientValues({"icelettuce"}, {veggie = 1, frozen = 1})
 	AddIngredientValues({"oceanfish_medium_polar1_inv"}, {meat = 1, fish = 1})
 	AddIngredientValues({"polar_dryice"}, {frozen = 2})
+	AddIngredientValues({"polarflea"}, {meat = 0.5, monster = 1})
 	
 --	Add Recipes
 	

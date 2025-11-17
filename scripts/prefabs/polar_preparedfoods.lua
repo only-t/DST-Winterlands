@@ -2,11 +2,29 @@ local prefabs = {
 	"spoiled_food",
 }
 
+local function filet_o_flea_fn(inst)
+	if not inst.AnimState:IsCurrentAnimation("idle_filet") then
+		inst.AnimState:ClearOverrideSymbol("swap_food")
+		inst.AnimState:SetBuild("filet_o_flea_anim")
+		inst.AnimState:SetBank("filet_o_flea_anim")
+		inst.AnimState:PlayAnimation("idle_filet", true)
+	else
+		inst.AnimState:PlayAnimation("twitching_"..math.random(3))
+		inst.AnimState:PushAnimation("idle_filet")
+	end
+	
+	inst:DoTaskInTime(0.5 + math.random() * 4, filet_o_flea_fn)
+end
+
 local function MakePreparedFood(data)
 	local foodassets = {
 		Asset("ANIM", "anim/cook_pot_food_polar.zip"),
 		Asset("INV_IMAGE", data.name),
 	}
+	
+	if data.name == "filet_o_flea" then
+		table.insert(foodassets, Asset("ANIM", "anim/filet_o_flea_anim.zip"))
+	end
 	
 	if data.overridebuild then
 		table.insert(foodassets, Asset("ANIM", "anim/"..data.overridebuild..".zip"))
@@ -94,6 +112,7 @@ local function MakePreparedFood(data)
 		
 		inst:AddComponent("edible")
 		inst.components.edible.foodtype = data.foodtype or FOODTYPE.GENERIC
+		inst.components.edible.secondaryfoodtype = data.secondaryfoodtype or nil
 		inst.components.edible.hungervalue = data.hunger or 0
 		inst.components.edible.healthvalue = data.health or 0
 		inst.components.edible.sanityvalue = data.sanity or 0
@@ -135,6 +154,10 @@ local function MakePreparedFood(data)
 		MakeSmallBurnable(inst)
 		MakeSmallPropagator(inst)
 		MakeHauntableLaunchAndPerish(inst)
+		
+		if data.name == "filet_o_flea" then
+			filet_o_flea_fn(inst)
+		end
 		
 		return inst
 	end

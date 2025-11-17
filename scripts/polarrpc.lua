@@ -13,6 +13,12 @@ AddModRPCHandler("Winterlands", "PolarCaveEntrance_GetPos", function(player)
 	end
 end)
 
+AddModRPCHandler("Winterlands", "SnowAngel_SetOwnerRotation", function(player, angel, rot)
+	if angel and rot then
+		angel.Transform:SetRotation(rot)
+	end
+end)
+
 AddClientModRPCHandler("Winterlands", "PolarCaveEntrance_SetPos", function(player, x, z)
 	if player then
 		local data = {}

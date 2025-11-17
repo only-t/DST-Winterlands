@@ -55,6 +55,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WANDA.DESCRIBE
 		HOSTILE = "I'd rather die fighting than end up in jail!",
 	}
 	DESCRIBE.EMPEROR_PENGUIN_GUARD = "You definitively can't see much in this."
+	DESCRIBE.GIRL_WALRUS = "Fake 'stache or not, she's a real problem."
 	DESCRIBE.MOOSE_POLAR = {
 		GENERIC = "Well. Does that mean you won?",
 		ANTLER = "Probably more susceptible to hold its ground than the other ones.",
@@ -111,7 +112,9 @@ local DESCRIBE = STRINGS.CHARACTERS.WANDA.DESCRIBE
 	
 	--	Food
 	DESCRIBE.DRYICECREAM = "And, when will you add the flavor? Ah."
+	DESCRIBE.FILET_O_FLEA = "Wait a tick... I don't remember cooking... this?"
 	DESCRIBE.ICELETTUCE = "Do I have to wait and drink it... or?"
+	DESCRIBE.ICELETTUCE_OVERSIZED = "Good thing it grew quite large, I was growing quite tired of it!"
 	DESCRIBE.ICEBURRITO = "I'm still figuring things out."
 	DESCRIBE.POLARCRABLEGS = "They better not scuttle off my plate."
 	
@@ -138,10 +141,13 @@ local DESCRIBE = STRINGS.CHARACTERS.WANDA.DESCRIBE
 	DESCRIBE.POLARFLEA_SACK = "Well, as long they jump right in, no fuss..."
 	DESCRIBE.POLARICESTAFF = "Everyone, and I mean EVERYONE deserves a break."
 	DESCRIBE.POLARMOOSEHAT = "I just hope I won't be mistaken for a walking steak..."
+	DESCRIBE.WALRUS_BAGPIPE = "Wait a tick. Have we ruled out the possibility that we are all simply in Scotland?"
+	DESCRIBE.WALRUS_BEARTRAP = "Not only does it hurt, it also keeps one in place!"
 	DESCRIBE.WINTERS_FISTS = "I wouldn't ever have to take them off if they weren't so heavy."
 	
 	--	Others
 	DESCRIBE.ARCTIC_FOOL_FISH = "I don't have time to play these games! (Or do I...?)"
+	DESCRIBE.BOAT_ICE_ITEM = "For small skips above that bothersome water all around me!"
 	DESCRIBE.POLARGLOBE = {
 		GENERIC = "I don't have time to stare at this.",
 		INUSE = "Actually... I might have some time to look into this.",
