@@ -14,9 +14,6 @@ CommonStates.AddWalrusBeartrapHandlers = function(states, events, sg_data, dont_
 		-- Declare these, or else...
 		trapped_playanim = sg_data.anims.trapped_playanim == nil and "beartrap_snared_pre" or sg_data.anims.trapped_playanim,
 		trapped_pushanim = sg_data.anims.trapped_pushanim == nil and "beartrap_snared_loop" or sg_data.anims.trapped_pushanim,
-		-- We don't really care, bonus
-		released_playanim = nil,
-		released_pushanim = nil,
 	}
 	
 	local function GetTrapAnim(category, inst)

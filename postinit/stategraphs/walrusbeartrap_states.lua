@@ -4,29 +4,30 @@ GLOBAL.setfenv(1, GLOBAL)
 require("stategraphs/commonstates_polar")
 
 local function Bearger_trapped_playanim(inst)
-	return inst.prefab == "mutatedbearger" and "stagger_pre" or nil
+	return inst.prefab == "mutatedbearger" and "stagger_pre" or "beartrap_snared_pre"
 end
 
 local function Bearger_trapped_pushanim(inst)
-	return inst.prefab == "mutatedbearger" and "stagger" or nil
+	return inst.prefab == "mutatedbearger" and "stagger" or "beartrap_snared_loop"
 end
 
 local function Bearger_hit_playanim(inst)
-	return inst.prefab == "mutatedbearger" and "stagger_hit" or nil
+	return inst.prefab == "mutatedbearger" and "stagger_hit" or "beartrap_snared_hit"
 end
 
 --TODO: daywalker(s) break his foot if snared
 
 local trapped_stategraphs = {
 	bunnyman 	= {anims = {trapped_playanim = "hit", trapped_pushanim = "frozen_loop_pst"}},
+	hound 		= {anims = {trapped_playanim = "scared_pre", trapped_pushanim = "scared_loop"}, no_hit_state = true},
 	merm 		= {anims = {trapped_playanim = "hit", trapped_pushanim = "idle_scared"}},
 	pig 		= {anims = {trapped_playanim = "hit", trapped_pushanim = "idle_scared"}},
 -- 	walrus 		= walrus postinit
 	
-	-- TODO: This is going to require some custom animation, basic Bearger/Varg can't replicate these animations from missing symbols. I'll do it tomorrow-row-row
-	bearger 	= {anims = {trapped_playanim = Bearger_trapped_playanim, trapped_pushanim = Bearger_trapped_pushanim, struggle_playanim = Bearger_hit_playanim}},
-	hound 		= {anims = {trapped_playanim = "scared_pre", trapped_pushanim = "scared_loop"}, no_hit_state = true},
-	warg 		= {anims = {trapped_playanim = "stagger_pre", trapped_pushanim = "stagger", hit_playanim = "stagger_hit", struggle_playanim = "stagger_hit"}},
+--	NOTE: Bearger/Walrus could use their stagger states but animations are alas broken for non-mutated type. For now we let them fallback to panic behavior...
+
+	--bearger 	= {anims = {trapped_playanim = Bearger_trapped_playanim, trapped_pushanim = Bearger_trapped_pushanim, struggle_playanim = Bearger_hit_playanim}},
+	--warg 		= {anims = {trapped_playanim = "stagger_pre", trapped_pushanim = "stagger", hit_playanim = "stagger_hit", struggle_playanim = "stagger_hit"}},
 }
 
 for sg_name, sg_data in pairs(trapped_stategraphs) do

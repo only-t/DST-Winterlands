@@ -168,7 +168,7 @@ local COMPONENT_ACTIONS = PolarUpvalue(EntityScript.CollectActions, "COMPONENT_A
 
 local oldcombat = COMPONENT_ACTIONS.SCENE.combat
 	COMPONENT_ACTIONS.SCENE.combat = function(inst, doer, actions, right, ...)
-		if right and inst:HasTag("walrus_beartrapped") and inst ~= doer then
+		if right and inst:HasTag("walrus_beartrapped_auto") and inst ~= doer then
 			table.insert(actions, ACTIONS.WALRUS_BEARTRAP_REMOVE)
 		end
 		if oldcombat then

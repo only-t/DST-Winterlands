@@ -233,6 +233,7 @@ local function SetTrapTarget(inst, target, trapped)
 	
 	inst:AddOrRemoveTag("mine_not_reusable", trapped)
 	inst:AddOrRemoveTag("NOCLICK", trapped)
+	target:AddOrRemoveTag("walrus_beartrapped_auto", trapped)
 	target:PushEvent("walrus_beartrapped", {trap = inst, captured = trapped, released = not trapped})
 end
 
@@ -320,6 +321,18 @@ local function OnHaunt(inst, haunter)
 	return false
 end
 
+local function OnSave(inst, data)
+	data.walrus_owned = inst.components.mine and inst.components.mine.alignment == "walrus"
+end
+
+local function OnLoad(inst, data)
+	if data then
+		if data.walrus_owned then
+			inst.components.mine:SetAlignment("walrus")
+		end
+	end
+end
+
 --
 
 local PLAYER_TAGS = {"player"}
@@ -402,6 +415,8 @@ local function fn()
 	
 	inst.DoTrapStruggle = DoTrapStruggle
 	inst.SetTrapTarget = SetTrapTarget
+	inst.OnSave = OnSave
+	inst.OnLoad = OnLoad
 	
 	inst:ListenForEvent("animover", OnAnimOver)
 	

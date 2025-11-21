@@ -97,9 +97,12 @@ local function OnActivate(inst, doer, recipe)
 			local recipe_name = string.format(inst.prefab.."_trade_%s%d", data.product, product_counts[data.product])
 			
 			local old = inst.components.craftingstation:GetRecipeCraftingLimit(recipe_name) or 0
-			local new = math.max(0, old - amount + 1)
+			local new = math.max(0, old - amount + (recipe.name == recipe_name and 1 or 0))
 			
 			inst.components.craftingstation:SetRecipeCraftingLimit(recipe_name, new)
+			if recipe.name ~= recipe_name then
+				inst.components.craftingstation:ForgetRecipe(recipe_name)
+			end
 		end
 	end
 end
@@ -210,6 +213,7 @@ local function fn()
 	
 	inst.AnimState:SetBank("walrus")
 	inst.AnimState:SetBuild("walrus_girl")
+	inst.AnimState:SetMultColour(0.9, 0.9, 0.95, 1)
 	inst.AnimState:Hide("hat")
 	
 	inst:AddTag("character")

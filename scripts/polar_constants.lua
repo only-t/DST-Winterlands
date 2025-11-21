@@ -68,9 +68,9 @@ POLARWALRUS_TRADEDATA = {
 		{product = "blowdart_pipe",	 	ingredients = {Ingredient("smallmeat", 2)}, 		limit = 4},
 		{product = "blowdart_sleep",	ingredients = {Ingredient("smallmeat", 1)}, 		limit = 6, numtogive = 2},
 		{product = "flint", 			ingredients = {Ingredient("fishmeat_small", 2)}, 	limit = 8},
-		{product = "goldnugget", 		ingredients = {Ingredient("fishmeat", 2)}, 			limit = 20}, -- NOTE: Respect same limits / restocks on same product!
-		{product = "goldnugget", 		ingredients = {Ingredient("trunk_summer", 1)}, 		limit = 20, numtogive = 4},
-		{product = "goldnugget", 		ingredients = {Ingredient("trunk_winter", 1)}, 		limit = 20, numtogive = 6},
+		{product = "goldnugget", 		ingredients = {Ingredient("fishmeat", 2)}, 			limit = 12}, -- NOTE: Respect same limits / restocks on same product!
+		{product = "goldnugget", 		ingredients = {Ingredient("trunk_summer", 1)}, 		limit = 12, numtogive = 4},
+		{product = "goldnugget", 		ingredients = {Ingredient("trunk_winter", 1)}, 		limit = 12, numtogive = 6},
 		{product = "walrushat",		 	ingredients = {Ingredient("polarbearfur", 2)}, 		limit = 1},
 	},
 	little_walrus = {
