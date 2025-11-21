@@ -14,19 +14,24 @@ POLARBEAR_FISHY_TAGS = {
 local TechTree = require("techtree")
 
 table.insert(TechTree.AVAILABLE_TECH, "POLARAMULET_STATION")
+table.insert(TechTree.AVAILABLE_TECH, "WANDERINGWALRUSSHOP")
 
 for k, v in pairs(TUNING.PROTOTYPER_TREES) do
 	v.POLARAMULET_STATION = 0
+	v.WANDERINGWALRUSSHOP = 0
 end
 
 for k, v in pairs(AllRecipes) do
 	v.level.POLARAMULET_STATION = 0
+	v.level.WANDERINGWALRUSSHOP = 0
 end
 
 TECH.NONE.POLARAMULET_STATION = 0
+TECH.NONE.WANDERINGWALRUSSHOP = 0
 
 TECH.ARCTIC_FOOLS = {SCIENCE = 10}
 TECH.POLARAMULET_STATION = {POLARAMULET_STATION = 1}
+TECH.WANDERINGWALRUSSHOP = {WANDERINGWALRUSSHOP = 1}
 
 TECH_INGREDIENT.POLARSNOW = "polarsnow_material"
 
@@ -55,6 +60,41 @@ POLARAMULET_STATION_MOONPHASE_TRADEDATA = {
 		{product = "cutgrass", 			ingredients = {Ingredient("houndstooth", 1)}, 	limits = {min = 9, max = 18}},
 		{product = "bluegem_shards", 	ingredients = {Ingredient("houndstooth", 1)}, 	limits = {min = 3, max = 6}},
 		{product = "glommerfuel", 		ingredients = {Ingredient("spoiled_food", 1), Ingredient("spoiled_fish", 1), Ingredient("rottenegg", 1)}, limits = {min = 1, max = 1}, description = "polar_trade_glommerfuel"},
+	},
+}
+
+POLARWALRUS_TRADEDATA = {
+	walrus = {
+		{product = "blowdart_pipe",	 	ingredients = {Ingredient("smallmeat", 2)}, 		limit = 4},
+		{product = "blowdart_sleep",	ingredients = {Ingredient("smallmeat", 1)}, 		limit = 6, numtogive = 2},
+		{product = "flint", 			ingredients = {Ingredient("fishmeat_small", 2)}, 	limit = 8},
+		{product = "goldnugget", 		ingredients = {Ingredient("fishmeat", 2)}, 			limit = 20}, -- NOTE: Respect same limits / restocks on same product!
+		{product = "goldnugget", 		ingredients = {Ingredient("trunk_summer", 1)}, 		limit = 20, numtogive = 4},
+		{product = "goldnugget", 		ingredients = {Ingredient("trunk_winter", 1)}, 		limit = 20, numtogive = 6},
+		{product = "walrushat",		 	ingredients = {Ingredient("polarbearfur", 2)}, 		limit = 1},
+	},
+	little_walrus = {
+		{product = "smallmeat", 		ingredients = {Ingredient("ice", 2)}, 				limit = 8, restock = 6},
+		{product = "meat", 				ingredients = {Ingredient("ice", 4)}, 				limit = 4, restock = 2},
+		{product = "monstermeat", 		ingredients = {Ingredient("ice", 3)}, 				limit = 4, restock = 3},
+		{product = "saltrock", 			ingredients = {Ingredient("smallmeat_dried", 1)}, 	limit = 10, numtogive = 2},
+		{product = "saltrock", 			ingredients = {Ingredient("meat_dried", 1)}, 		limit = 10, numtogive = 3},
+		{product = "boneshard", 		ingredients = {Ingredient("goldnugget", 1)}, 		limit = 4},
+		{product = "houndstooth", 		ingredients = {Ingredient("flint", 1)}, 			limit = 4},
+		{product = "trunk_summer", 		ingredients = {Ingredient("saltrock", 4)}, 			limit = 1},
+		{product = "trunk_winter", 		ingredients = {Ingredient("saltrock", 6)}, 			limit = 1},
+	},
+	girl_walrus = {
+		{product = "walrus_beartrap", 	ingredients = {Ingredient("houndstooth", 4)}, 		limit = 3, restock = 1},
+		{product = "trap_teeth", 		ingredients = {Ingredient("flint", 2)}, 			limit = 5},
+		{product = "sewing_kit", 		ingredients = {Ingredient("boneshard", 3)}, 		limit = 1},
+		{product = "beefalowool", 		ingredients = {Ingredient("saltrock", 2)}, 			limit = 6},
+		{product = "pigskin", 			ingredients = {Ingredient("saltrock", 4)}, 			limit = 4},
+		{product = "polarbearfur", 		ingredients = {Ingredient("saltrock", 6)}, 			limit = 2},
+		{product = "steelwool", 		ingredients = {Ingredient("saltrock", 20)}, 		limit = 1},
+		{product = "saltrock", 			ingredients = {Ingredient("beefalowool", 1)}, 		limit = 10},
+		{product = "saltrock", 			ingredients = {Ingredient("pigskin", 1)}, 			limit = 10, numtogive = 3},
+		{product = "saltrock", 			ingredients = {Ingredient("polarbearfur", 1)}, 		limit = 10, numtogive = 5},
 	},
 }
 

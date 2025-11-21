@@ -1,4 +1,5 @@
 require("stategraphs/commonstates")
+require("stategraphs/commonstates_polar")
 
 local actionhandlers = {
 	ActionHandler(ACTIONS.ADDFUEL, "pickup"),
@@ -485,5 +486,22 @@ CommonStates.AddSinkAndWashAshoreStates(states)
 CommonStates.AddVoidFallStates(states)
 CommonStates.AddIpecacPoopState(states)
 CommonStates.AddElectrocuteStates(states)
+
+CommonStates.AddWalrusBeartrapHandlers(states, events, {
+	anims = {
+		trapped_playanim = "hit",
+		trapped_pushanim = "idle_scared",
+	},
+	
+	ontrappedfn = function(inst, trap)
+		inst:SetEnraged(false)
+	end,
+	onstrugglefn = function(inst, trap)
+		inst:SetEnraged(false)
+	end,
+	onexitfn = function(inst, trap)
+		inst:SetEnraged(true)
+	end,
+})
 
 return StateGraph("polarbear", states, events, "idle", actionhandlers)

@@ -1,6 +1,16 @@
 local ENV = env
 GLOBAL.setfenv(1, GLOBAL)
 
+require("stategraphs/commonstates_polar")
+
+local function DoHurtSound(inst)
+	if inst.hurtsoundoverride then
+		inst.SoundEmitter:PlaySound(inst.hurtsoundoverride, nil, inst.hurtsoundvolume)
+	elseif not inst:HasTag("mime") then
+		inst.SoundEmitter:PlaySound((inst.talker_path_override or "dontstarve/characters/")..(inst.soundsname or inst.prefab).."/hurt", nil, inst.hurtsoundvolume)
+	end
+end
+
 local events = {
 	EventHandler("gotpolarflea", function(inst, data)
 		local flea = data and data.flea
@@ -146,6 +156,23 @@ local states = {
 }
 
 ENV.AddStategraphPostInit("wilson", function(sg)
+	CommonStates.AddWalrusBeartrapHandlers(states, events, {
+		ontrappedfn = function(inst, trap)
+			inst:ClearBufferedAction()
+			
+			--inst:ShowHUD(false)
+			inst:ShowCrafting(false)
+			inst:SetCameraZoomed(true)
+			
+			DoHurtSound(inst)
+		end,
+		onexitfn = function(inst, trap)
+			--inst:ShowHUD(true)
+			inst:ShowCrafting(true)
+			inst:SetCameraZoomed(false)
+		end,
+	}, true)
+	
 	for _, state in pairs(states) do
 		sg.states[state.name] = state
 	end

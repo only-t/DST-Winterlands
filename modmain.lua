@@ -72,10 +72,12 @@ local prefabs = {
 	"snowball_item",
 	"tree_rock_data",
 	"walrus",
+	"walrus_camp",
 	"wilson",
 	"winona_spotlight",
 	"wintersfeastcookedfoods",
 	
+	"any", -- hound, walrus, ...
 	"bear_treasures",
 	"chesspieces_polar_materials",
 	"ents_onfreeze",
@@ -112,6 +114,8 @@ local components = {
 	"moonstormmanager",
 	"oceanfishinghook",
 	"pickable",
+	"playeractionpicker",
+	"playercontroller",
 	"playerspawner",
 	"playervision",
 	"preserver",
@@ -141,7 +145,14 @@ local stategraphs = {
 	"krampus",
 	"lavae",
 	"penguin",
+	"walrus",
 	"wilson",
+	
+	"walrusbeartrap_states",
+}
+
+local brains = {
+	"walrus",
 }
 
 for _, v in pairs(prefabs) do
@@ -156,4 +167,9 @@ for _, v in pairs(stategraphs) do
 	modimport("postinit/stategraphs/"..v)
 end
 
+for _, v in pairs(brains) do
+	modimport("postinit/brains/"..v)
+end
+
+require("brains/braincommon_polar")
 require("polarcommands")

@@ -313,6 +313,10 @@ local RECIPE_DESC = STRINGS.RECIPE_DESC
 	STRINGS.ACTIONS.CASTSPELL.WINTERS_FISTS_1 = "Snowball!"
 	STRINGS.ACTIONS.CASTSPELL.WINTERS_FISTS_2 = "Bigball!!"
 	STRINGS.ACTIONS.CASTSPELL.WINTERS_FISTS_3 = "Hugeball!!!"
+	STRINGS.ACTIONS.WALRUS_BEARTRAP_REMOVE = {
+		GENERIC = "Struggle",
+		HELP_OTHER = "Rescue",
+	}
 	STRINGS.ACTIONS.STICK_ARCTIC_FISH = {
 		GENERIC = "Stick it to 'em!",
 		VAR2 = "Do it!",
@@ -357,6 +361,7 @@ local RECIPE_DESC = STRINGS.RECIPE_DESC
 	STRINGS.SCRAPBOOK.SPECIALINFO.POLARICESTAFF = "Sends a freezing shockwave in a large range."
 	STRINGS.SCRAPBOOK.SPECIALINFO.TUMBLEWEED_POLAR = "These flutter in the blizzard and collect junk along the way.\n\nAll sorts of crazy junk.\n\nYou'd be surprised."
 	STRINGS.SCRAPBOOK.SPECIALINFO.WALL_POLAR = "Whoever messes with this wall better chill out."
+	STRINGS.SCRAPBOOK.SPECIALINFO.WALRUS_BEARTRAP = "A nasty trap deployed and hidden in the snow by trappers.\n\nCreatures caught by the mechanism will be stuck in place momentarily. One can attempt to break free from it, or be rescued by allies or foes' attacks alike.\n\nCan be disarmed by placing an item atop, or risking your life."
 	STRINGS.SCRAPBOOK.SPECIALINFO.WINTERS_FISTS = "Pound the ground with these heavy ice chunks to burst temporary snowy areas.\n\nSnowball combos can be performed while standing in snow: first causing minor damage, then pushing back, and finally causing a deadly avalanche!"
 	STRINGS.SCRAPBOOK.SPECIALINFO.WX78MODULE_NAUGHTY = "Plugs into WX78's circuit board.\n\nRequires 1 socket and multiplies all sorts of Naughtiness gained as followed per circuit installed:\nx2 > x3 > x3.5 > x4 > x4.5 > x5"
 	
@@ -398,6 +403,26 @@ local RECIPE_DESC = STRINGS.RECIPE_DESC
 	RECIPE_DESC.TURF_POLAR_CAVES = "The chilly stone of the chillest cave."
 	RECIPE_DESC.TURF_POLAR_DRYICE = "A road sure to keep your toes frosty."
 	RECIPE_DESC.WALL_POLAR_ITEM = "The best defence is the coolest one."
+	RECIPE_DESC.WALRUSTRADE_BLOWDART_PIPE = "(Sharp squeak)"
+	RECIPE_DESC.WALRUSTRADE_BLOWDART_SLEEP = "(Bwoorp noises)"
+	RECIPE_DESC.WALRUSTRADE_FLINT = "(Cleans monocle)"
+	RECIPE_DESC.WALRUSTRADE_GOLDNUGGET = "(Impressed whistle)"
+	RECIPE_DESC.WALRUSTRADE_WALRUSHAT = "(Clicks of approval)"
+	RECIPE_DESC.WALRUSTRADE_SEWING_KIT = "(Miscontent clicks)"
+	RECIPE_DESC.WALRUSTRADE_MEAT = "(Incoherant squealing)"
+	RECIPE_DESC.WALRUSTRADE_MONSTERMEAT = "(Rapid squeaky protests)"
+	RECIPE_DESC.WALRUSTRADE_SMALLMEAT = "(Deep bellow)"
+	RECIPE_DESC.WALRUSTRADE_BONESHARD = "(Pets Ice Hound)"
+	RECIPE_DESC.WALRUSTRADE_HOUNDSTOOTH = "(Sad frown)"
+	RECIPE_DESC.WALRUSTRADE_TRUNK_SUMMER = "(Happy claps)"
+	RECIPE_DESC.WALRUSTRADE_TRUNK_WINTER = "(Very happy claps)"
+	RECIPE_DESC.WALRUSTRADE_STEELWOOL = "(Scratches moustache)"
+	RECIPE_DESC.WALRUSTRADE_WALRUS_BEARTRAP = "(Firm grunt)"
+	RECIPE_DESC.WALRUSTRADE_TRAP_TEETH = "(Numerous belly taps)"
+	RECIPE_DESC.WALRUSTRADE_BEEFALOWOOL = "(Scratches tusk)"
+	RECIPE_DESC.WALRUSTRADE_PIGSKIN = "(Determined growls)"
+	RECIPE_DESC.WALRUSTRADE_POLARBEARFUR = "(Stares menacingly)"
+	RECIPE_DESC.WALRUSTRADE_SALTROCK = "(Aknowledging rasps)"
 	RECIPE_DESC.WINTERS_FISTS = "Let the fist-ivities begin!"
 	RECIPE_DESC.WINTERS_FISTS_BLUEPRINT = "...forgotten knowledge comes... at a price."
 	RECIPE_DESC.WINTERCOOKING_POLARCRABLEGS = "Crack into coastal cuisine."
@@ -405,8 +430,10 @@ local RECIPE_DESC = STRINGS.RECIPE_DESC
 	
 	STRINGS.UI.CRAFTING.NEEDSARCTIC_FOOL = "Available during Arctic Fools!"
 	STRINGS.UI.CRAFTING.NEEDSPOLARAMULET_STATION = "Unlock by trading with some shady individual..."
+	STRINGS.UI.CRAFTING.NEEDSWANDERINGWALRUSSHOP = "Get along Walruses to make this trade!"
 	STRINGS.UI.CRAFTING.NEEDSTECH.POLARSNOW = "There's not enough snow!"
 	STRINGS.UI.CRAFTING_STATION_FILTERS.POLARAMULET_STATION = "\"The Polar Exchange\""
+	STRINGS.UI.CRAFTING_STATION_FILTERS.WANDERINGWALRUSSHOP = "MacTusk N' Son"
 	
 	--	Misc
 	STRINGS.UI.SANDBOXMENU.POLARSTART = "Winterlands"

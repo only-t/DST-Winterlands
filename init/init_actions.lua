@@ -14,7 +14,7 @@ local function PolarAction(name, act)
 	return action
 end
 
---	Actions
+--	New Actions
 
 local POLARPLOW = PolarAction("POLARPLOW", {distance = 4, priority = 1})
 	POLARPLOW.fn = function(act)
@@ -35,6 +35,22 @@ local POLARAMULET_CRAFT = PolarAction("POLARAMULET_CRAFT", {mount_valid = true, 
 		if act.target and act.target.MakeAmulet then
 			return act.target:MakeAmulet(act.doer)
 		end
+	end
+	
+local WALRUS_BEARTRAP_REMOVE = PolarAction("WALRUS_BEARTRAP_REMOVE", {priority = 3})
+	WALRUS_BEARTRAP_REMOVE.fn = function(act)
+		local trap = act.target and act.target._walrus_beartrap
+		
+		if trap and trap:IsValid() and trap.DoTrapStruggle then
+			trap:DoTrapStruggle(act.target, act.doer ~= act.target)
+		end
+		
+		return true
+	end
+	
+	WALRUS_BEARTRAP_REMOVE.strfn = function(act)
+		local guid = act.target and act.target.GUID
+		return guid and guid ~= ThePlayer.GUID and "HELP_OTHER" or nil
 	end
 	
 local STICK_ARCTIC_FISH = PolarAction("STICK_ARCTIC_FISH", {priority = 4})
@@ -64,6 +80,8 @@ local STICK_ARCTIC_FISH = PolarAction("STICK_ARCTIC_FISH", {priority = 4})
 			return var > 1 and "VAR"..var or nil
 		end
 	end
+	
+--	Patches
 	
 local CASTSPELLSTR = ACTIONS.CASTSPELL.strfn
 	ACTIONS.CASTSPELL.strfn = function(act, ...)
@@ -98,6 +116,35 @@ local TURNONSTR = ACTIONS.TURNON.stroverridefn
 		end
 	end
 	
+local BAITFN = ACTIONS.BAIT.fn
+	ACTIONS.BAIT.fn = function(act, ...)
+		if act.invobject and act.target and act.target:HasTag("walrus_beartrap") and act.doer.components.inventory then
+			local bait = act.doer.components.inventory:RemoveItem(act.invobject)
+			
+			if bait then
+				bait.Transform:SetPosition(act.target.Transform:GetWorldPosition())
+				if act.target.components.mine then
+					act.target.components.mine:Explode(act.invobject)
+				end
+				
+				return true
+			end
+		end
+		
+		return BAITFN(act, ...)
+	end
+	
+local DEPLOYDIST = ACTIONS.DEPLOY.extra_arrive_dist
+	ACTIONS.DEPLOY.extra_arrive_dist = function(doer, dest, bufferedaction, ...)
+		local dist = DEPLOYDIST(doer, dest, bufferedaction, ...) or 0
+		local invobject = bufferedaction and bufferedaction.invobject or nil
+		if invobject and invobject:HasTag("walrus_beartrap") then
+			dist = dist + 0.8
+		end
+		
+		return dist
+	end
+	
 --	Components, SGs
 
 AddComponentAction("POINT", "polarplower", function(inst, doer, pos, actions, right)
@@ -115,9 +162,19 @@ AddComponentAction("USEITEM", "arcticfoolfish", function(inst, doer, target, act
 	end
 end)
 
---
+--	Patches
 
 local COMPONENT_ACTIONS = PolarUpvalue(EntityScript.CollectActions, "COMPONENT_ACTIONS")
+
+local oldcombat = COMPONENT_ACTIONS.SCENE.combat
+	COMPONENT_ACTIONS.SCENE.combat = function(inst, doer, actions, right, ...)
+		if right and inst:HasTag("walrus_beartrapped") and inst ~= doer then
+			table.insert(actions, ACTIONS.WALRUS_BEARTRAP_REMOVE)
+		end
+		if oldcombat then
+			oldcombat(inst, doer, actions, right, ...)
+		end
+	end
 
 local oldcontainer = COMPONENT_ACTIONS.SCENE.container -- Needed for controller support
 	COMPONENT_ACTIONS.SCENE.container = function(inst, doer, actions, right, ...)
@@ -177,6 +234,16 @@ local oldportablestructure = COMPONENT_ACTIONS.SCENE.portablestructure -- Waltuh
 		end
 	end
 	
+local oldinventoryitem = COMPONENT_ACTIONS.USEITEM.inventoryitem
+	COMPONENT_ACTIONS.USEITEM.inventoryitem = function(inst, doer, target, actions, ...)
+		if target:HasTag("walrus_beartrap") and target:HasTag("canbait") then
+			table.insert(actions, ACTIONS.BAIT)
+		end
+		if oldinventoryitem then
+			oldinventoryitem(inst, doer, target, actions, ...)
+		end
+	end
+	
 --
 
 local function AddToSGAC(action, state)
@@ -188,6 +255,7 @@ local actionhandlers = {
 	POLARPLOW = "dig_start",
 	POLARAMULET_CRAFT = "give",
 	STICK_ARCTIC_FISH = "give",
+	WALRUS_BEARTRAP_REMOVE = "dolongaction",
 }
 
 for action, state in pairs(actionhandlers) do

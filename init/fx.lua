@@ -73,6 +73,13 @@ local POLAR_FX = {
 			inst.AnimState:OverrideSymbol("molemovefx", "dirt_to_polar_builds", "molemovefx")
 		end,
 	},
+	{
+		name = "walrus_beartrap_snapfx",
+		bank = "walrus_beartrap",
+		build = "walrus_beartrap",
+		anim = "fx",
+		fn = FinalOffset3,
+	},
 }
 
 require("fx")

@@ -14,11 +14,13 @@ local Combat_Replica = require("components/combat_replica")
 	
 	local OldIsAlly = Combat_Replica.IsAlly
 	function Combat_Replica:IsAlly(guy, ...)
-		if guy and guy:HasTag("flea") then
-			if self.inst.replica.inventory and self.inst.replica.inventory:EquipHasTag("fleapack") then
+		local inventory = self.inst.replica.inventory or self.inst.components.inventory
+		
+		if guy and inventory then
+			if guy:HasTag("flea") and inventory:EquipHasTag("fleapack") then
 				return guy.replica.combat == nil or guy.replica.combat:GetTarget() ~= self.inst
-			elseif self.inst.components.inventory and self.inst.components.inventory:EquipHasTag("fleapack") then
-				return guy.components.combat == nil or guy.components.combat:GetTarget() ~= self.inst
+			elseif (guy:HasTag("walrus") or guy:HasTag("hound")) and self.inst:HasTag("walruspal") then -- Bagpipes buffed
+				return guy.replica.combat == nil or guy.replica.combat:GetTarget() ~= self.inst
 			end
 		end
 		

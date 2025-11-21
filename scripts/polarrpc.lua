@@ -19,6 +19,23 @@ AddModRPCHandler("Winterlands", "SnowAngel_SetOwnerRotation", function(player, a
 	end
 end)
 
+AddModRPCHandler("Winterlands", "WalrusTrap_Remove", function(player, isblink, act_x, act_y, act_z, use_invobject, has_target)
+	if player and player.AnimState:IsCurrentAnimation("beartrap_snared_loop") then
+		local x, y, z = player.Transform:GetWorldPosition()
+		
+		if isblink then
+			local invobject = (use_invobject and player.components.inventory) and player.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
+			local pos = Vector3(act_x, act_y, act_z)
+			local act = BufferedAction(player, nil, ACTIONS.BLINK, invobject, pos)
+			
+			player:FacePoint(pos)
+			player:PushBufferedAction(act)
+		elseif y <= 2 then
+			player:PushEvent("walrus_beartrapped", {doer = player, struggle = true})
+		end
+	end
+end)
+
 AddClientModRPCHandler("Winterlands", "PolarCaveEntrance_SetPos", function(player, x, z)
 	if player then
 		local data = {}

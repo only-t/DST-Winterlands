@@ -1,124 +1,130 @@
 local ENV = env
 GLOBAL.setfenv(1, GLOBAL)
 
-local OldUpdateCampOccupied
-local function UpdateCampOccupied(inst, ...)
-	if not IsInPolar(inst) then
-		return OldUpdateCampOccupied(inst, ...)
+local walruses = {"walrus", "little_walrus"}
+
+local function OnTurnOn(inst)
+	local target = inst.components.combat.target
+	
+	if target == nil and inst.sg and not inst.sg:HasStateTag("busy") and inst.components.timer and not inst.components.timer:TimerExists("walrustrade_greet") then
+		inst.components.timer:StartTimer("walrustrade_greet", 30)
+		inst.sg:GoToState("funny_idle")
+		inst.AnimState:PlayAnimation("idle_creepy")
 	end
 end
 
-local OldSetOccupied
-local function SetOccupied(inst, occupied, ...)
-	occupied = IsInPolar(inst) or occupied
+local function OnTurnOff(inst)
 	
-	return OldSetOccupied(inst, occupied, ...)
 end
 
-local OldSpawnHuntingParty
-
-local OldCheckSpawnHuntingParty
-local function CheckSpawnHuntingParty(inst, target, houndsonly, ...)
-	if not IsInPolar(inst) then
-		return OldCheckSpawnHuntingParty(inst, target, houndsonly, ...)
+local function OnActivate(inst, doer, recipe)
+	local target = inst.components.combat.target
+	
+	if target == nil and inst.sg and not inst.sg:HasStateTag("busy") then
+		inst.sg:GoToState("funny_idle")
 	end
 	
-	if OldSpawnHuntingParty then
-		OldSpawnHuntingParty(inst, target, houndsonly, ...)
+	if recipe == nil or inst.components.craftingstation == nil then
+		return
+	end
+	
+	local product = recipe.product
+	local amount = recipe.numtogive or 1
+	
+	local trades_data = POLARWALRUS_TRADEDATA[inst.prefab]
+	if trades_data == nil then
+		return
+	end
+	
+	local product_counts = {}
+	
+	for i, data in ipairs(trades_data) do
+		product_counts[data.product] = (product_counts[data.product] or 0) + 1
+		
+		if data.product == product then
+			local recipe_name = string.format(inst.prefab.."_trade_%s%d", data.product, product_counts[data.product])
+			
+			local old = inst.components.craftingstation:GetRecipeCraftingLimit(recipe_name) or 0
+			local new = math.max(0, old - amount + 1)
+			
+			inst.components.craftingstation:SetRecipeCraftingLimit(recipe_name, new)
+		end
+	end
+end
+
+local function OnTimerDone(inst, data)
+	if data.name == "walrustrade_refresh" then
+		inst:PolarTradesRefresh()
+		inst.components.timer:StartTimer("walrustrade_refresh", math.random(TUNING.WALRUSTRADES_REFRESH_TIMES.min, TUNING.WALRUSTRADES_REFRESH_TIMES.max))
+	end
+end
+
+local function PolarTradesRefresh(inst, initial)
+	local trades_data = POLARWALRUS_TRADEDATA[inst.prefab]
+	
+	if trades_data == nil or inst.components.craftingstation == nil then
+		return
+	end
+	
+	local product_counts = {}
+	
+	for i, recipe_data in ipairs(trades_data) do
+		product_counts[recipe_data.product] = (product_counts[recipe_data.product] or 0) + 1
+		local recipe_name = string.format(inst.prefab.."_trade_%s%d", recipe_data.product, product_counts[recipe_data.product])
+		
+		inst.components.craftingstation:LearnItem(recipe_name, recipe_name)
+		
+		if recipe_data.limit then
+			if initial then
+				inst.components.craftingstation:SetRecipeCraftingLimit(recipe_name, recipe_data.limit)
+			else
+				local old = inst.components.craftingstation:GetRecipeCraftingLimit(recipe_name) or 0
+				local restock_amt = recipe_data.restock or TUNING.WALRUSTRADES_RESTOCK_AMT
+				
+				local new = math.min(recipe_data.limit, old + restock_amt)
+				
+				inst.components.craftingstation:SetRecipeCraftingLimit(recipe_name, new)
+			end
+		end
 	end
 end
 
 local function PolarInit(inst)
-	if IsInPolar(inst) then
-		SetOccupied(inst, true)
-	end
-	
-	if TheWorld.event_listeners.megaflare_detonated and TheWorld.event_listeners.megaflare_detonated[inst] then
-		local OnMegaFlare = TheWorld.event_listeners.megaflare_detonated[inst][1]
-		--	TP only the MacTusk & Friends from the current region !!
-		
-		TheWorld.event_listeners.megaflare_detonated[inst][1] = function(src, data, ...)
-			local flare_inpolar = (data and data.sourcept) and IsInPolarAtPoint(data.sourcept.x, data.sourcept.y, data.sourcept.z)
-			
-			if ((not IsInPolar(inst) and not flare_inpolar) or IsInPolar(inst) and flare_inpolar) and OnMegaFlare then
-				OnMegaFlare(src, data, ...)
-			end
-		end
+	if inst.components.timer and not inst.components.timer:TimerExists("walrustrade_refresh") then
+		inst:PolarTradesRefresh(true)
+		inst.components.timer:StartTimer("walrustrade_refresh", math.random(TUNING.WALRUSTRADES_REFRESH_TIMES.min, TUNING.WALRUSTRADES_REFRESH_TIMES.max))
 	end
 end
 
-local function OnPolarstormChanged(inst, active)
-	if active and TheWorld.components.polarstorm and TheWorld.components.polarstorm:IsInPolarStorm(inst) then
-		inst._leavestormtask = inst:DoPeriodicTask(1, function()
-			local childrens = inst.data and inst.data.children
-			
-			if childrens and not IsTableEmpty(childrens) then
-				for child in pairs(childrens) do
-					if child:IsValid() and child.components.combat and child.components.combat.target == nil
-						and child.components.health and not child.components.health:IsDead() then
-						if child.components.entitytracker then
-							child.components.entitytracker:ForgetEntity("leader")
-						end
-						
-						if child:HasTag("walrus") then
-							child:AddTag("taunt_attack")
-							
-							if child.components.leader then
-								child.components.leader:RemoveAllFollowers()
-							end
-							if child.components.locomotor then
-								local action = BufferedAction(child, inst, ACTIONS.GOHOME, nil, inst:GetPosition())
-								
-								child.components.locomotor:PushAction(action, true, true)
-							end
-						end
-					end
-				end
-			end
-		end)
-	elseif inst._leavestormtask then
-		inst._leavestormtask:Cancel()
-		inst._leavestormtask = nil
-	end
+for i, prefab in ipairs(walruses) do
+	ENV.AddPrefabPostInit(prefab, function(inst)
+		inst:AddTag("prototyper")
+		
+		if not TheWorld.ismastersim then
+			return
+		end
+		
+		if inst.components.craftingstation == nil then
+			inst:AddComponent("craftingstation")
+		end
+		
+		if inst.components.prototyper == nil then
+			inst:AddComponent("prototyper")
+			inst.components.prototyper.onturnon = OnTurnOn
+			inst.components.prototyper.onturnoff = OnTurnOff
+			inst.components.prototyper.onactivate = OnActivate
+			inst.components.prototyper.trees = TUNING.PROTOTYPER_TREES.WANDERINGWALRUSSHOP
+			inst.components.prototyper.restrictedtag = "walruspal"
+		end
+		
+		if inst.components.timer == nil then
+			inst:AddComponent("timer")
+		end
+		
+		inst.PolarTradesRefresh = PolarTradesRefresh
+		
+		inst:ListenForEvent("timerdone", OnTimerDone)
+		
+		inst:DoTaskInTime(0, PolarInit)
+	end)
 end
-
-ENV.AddPrefabPostInit("walrus_camp", function(inst)
-	inst:AddTag("snowblocker")
-	
-	inst._snowblockrange = net_smallbyte(inst.GUID, "polarbearhouse._snowblockrange")
-	inst._snowblockrange:set(5)
-	
-	if not TheWorld.ismastersim then
-		return
-	end
-	
-	if inst.OnEntitySleep and OldUpdateCampOccupied == nil then
-		OldUpdateCampOccupied = PolarUpvalue(inst.OnEntitySleep, "UpdateCampOccupied")
-		OldCheckSpawnHuntingParty = PolarUpvalue(inst.OnEntitySleep, "CheckSpawnHuntingParty")
-		
-		if OldUpdateCampOccupied and OldSetOccupied == nil then
-			OldSetOccupied = PolarUpvalue(OldUpdateCampOccupied, "SetOccupied")
-			
-			PolarUpvalue(inst.OnEntitySleep, "UpdateCampOccupied", UpdateCampOccupied)
-			PolarUpvalue(inst.OnEntitySleep, "CheckSpawnHuntingParty", CheckSpawnHuntingParty)
-		end
-		
-		if OldSetOccupied then
-			PolarUpvalue(OldUpdateCampOccupied, "SetOccupied", SetOccupied)
-		end
-		
-		if OldCheckSpawnHuntingParty then
-			OldSpawnHuntingParty = PolarUpvalue(OldCheckSpawnHuntingParty, "SpawnHuntingParty")
-		end
-	end
-	
-	inst.onpolarstormchanged = function(src, data)
-		if data and data.stormtype == STORM_TYPES.POLARSTORM then
-			OnPolarstormChanged(inst, data.setting)
-		end
-	end
-	
-	inst:ListenForEvent("ms_stormchanged", inst.onpolarstormchanged, TheWorld)
-	
-	inst:DoTaskInTime(0, PolarInit)
-end)

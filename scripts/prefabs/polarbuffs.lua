@@ -93,6 +93,16 @@ local function Wetness_OnDetached(inst, target)
 	SetPolarWetness(target, 0)
 end
 
+--
+
+local function WalrusAlly_OnAttached(inst, target)
+	target:AddTag("walruspal")
+end
+
+local function WalrusAlly_OnDetached(inst, target)
+	target:RemoveTag("walruspal")
+end
+
 -------------------------------------------------------------------------
 ----------------------- Prefab building functions -----------------------
 -------------------------------------------------------------------------
@@ -185,4 +195,5 @@ local function MakeBuff(name, onattachedfn, onextendedfn, ondetachedfn, duration
 end
 
 return MakeBuff("polarwetness", Wetness_OnAttached, nil, Wetness_OnDetached, nil, 2, true, TUNING.POLARWETNESS_DEBUFF_STARTTEMP),
-	MakeBuff("polarimmunity", Immunity_OnAttached, nil, Immunity_OnDetached, TUNING.POLAR_IMMUNITY_DURATION, 2, false)
+	MakeBuff("polarimmunity", Immunity_OnAttached, nil, Immunity_OnDetached, TUNING.POLAR_IMMUNITY_DURATION, 2, false),
+	MakeBuff("walrusally", WalrusAlly_OnAttached, nil, WalrusAlly_OnDetached, TUNING.POLAR_WALRUSALLY_BUFF_DURATION, 2, false)

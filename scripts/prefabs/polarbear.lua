@@ -230,6 +230,8 @@ local function ShouldAcceptItem(inst, item, giver)
 	end
 end
 
+local FISHMEAT_TAGS = {"fish", "fishmeat"}
+
 local function OnGetItemFromPlayer(inst, giver, item)
 	if item.components.edible then
 		if (item.components.edible.foodtype == FOODTYPE.MEAT or item.components.edible.foodtype == FOODTYPE.HORRIBLE) and item.components.inventoryitem and
@@ -245,7 +247,10 @@ local function OnGetItemFromPlayer(inst, giver, item)
 				giver:PushEvent("makefriend")
 				giver.components.leader:AddFollower(inst)
 				
-				inst.components.follower:AddLoyaltyTime(item.components.edible:GetHunger() * TUNING.POLARBEAR_LOYALTY_PER_HUNGER)
+				local loyalty = (item.components.edible:GetHunger() * TUNING.POLARBEAR_LOYALTY_PER_HUNGER) * (item:HasAnyTag(FISHMEAT_TAGS)
+					and TUNING.POLARBEAR_LOYALTY_FISHMEAT_MULT or 1)
+				
+				inst.components.follower:AddLoyaltyTime(loyalty)
 				inst.components.follower.maxfollowtime = giver:HasTag("polite")
 					and TUNING.POLARBEAR_LOYALTY_MAXTIME + TUNING.PIG_LOYALTY_POLITENESS_MAXTIME_BONUS or TUNING.POLARBEAR_LOYALTY_MAXTIME
 			end

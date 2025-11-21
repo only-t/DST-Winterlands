@@ -37,6 +37,7 @@ Assets = {
 	Asset("IMAGE", "images/polarpillar.tex"),
 	
 	-- Anims / Builds
+	Asset("ANIM", "anim/player_beartrap_snared.zip"),
 	Asset("ANIM", "anim/player_emotes_snowangel.zip"),
 	Asset("ANIM", "anim/player_flea_itchy.zip"),
 	Asset("ANIM", "anim/player_polarcast.zip"),
@@ -122,6 +123,7 @@ local ITEMS = {
 	"turf_polar_caves",
 	"turf_polar_dryice",
 	"wall_polar_item",
+	"walrus_beartrap",
 	"winter_ornament_boss_emperor_penguin",
 	"winter_ornament_polar_icicle_blue",
 	"winter_ornament_polar_icicle_white",

@@ -6,8 +6,6 @@ local function ListingOrConsolePlayer(input)
 	return input or ConsoleCommandPlayer()
 end
 
-
-
 --	Toggle Blizzard
 function c_blizzard(duration, in_cooldown)
 	if TheWorld.components.polarstorm then
@@ -32,7 +30,7 @@ end
 function c_polartime(player)
 	player = ListingOrConsolePlayer(player)
 	
-	local items = {"antler_tree_stick", "torch", "shovel", "polarmoosehat", "raincoat", "log", "cutgrass", "twigs", "rocks", "smallmeat_dried"}
+	local items = {"antler_tree_stick", "torch", "shovel", "polarmoosehat", "trunkvest_winter", "log", "cutgrass", "twigs", "rocks", "smallmeat_dried"}
 	if player then
 		c_select(player)
 		

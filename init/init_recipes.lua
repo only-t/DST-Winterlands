@@ -33,8 +33,11 @@ end
 
 local POLAR_CRAFTING_ATLAS = "images/crafting_menu_polar.xml"
 
-PROTOTYPER_DEFS["polarsnow"] = {icon_atlas = POLAR_CRAFTING_ATLAS, icon_image = "station_none.tex", is_crafting_station = false}
 PROTOTYPER_DEFS["polaramulet_station"] = {icon_atlas = POLAR_CRAFTING_ATLAS, icon_image = "polaramulet_station.tex", action_str = "TRADE", is_crafting_station = true, filter_text = STRINGS.UI.CRAFTING_STATION_FILTERS.POLARAMULET_STATION}
+
+PROTOTYPER_DEFS["walrus"] = PROTOTYPER_DEFS["walrus"] or {icon_atlas = POLAR_CRAFTING_ATLAS, icon_image = "station_walrustrader.tex", action_str = "TRADE", is_crafting_station = true, filter_text = STRINGS.UI.CRAFTING_STATION_FILTERS.WANDERINGWALRUSSHOP}
+PROTOTYPER_DEFS["girl_walrus"] = {icon_atlas = POLAR_CRAFTING_ATLAS, icon_image = "station_girl_walrustrader.tex", action_str = "TRADE", is_crafting_station = true, filter_text = STRINGS.UI.CRAFTING_STATION_FILTERS.WANDERINGWALRUSSHOP}
+PROTOTYPER_DEFS["little_walrus"] = PROTOTYPER_DEFS["little_walrus"] or {icon_atlas = POLAR_CRAFTING_ATLAS, icon_image = "station_little_walrustrader.tex", action_str = "TRADE", is_crafting_station = true, filter_text = STRINGS.UI.CRAFTING_STATION_FILTERS.WANDERINGWALRUSSHOP}
 
 local POLAR_TECHING = {"polarsnow_material"}
 
@@ -92,6 +95,8 @@ PolarRecipe("wx78module_naughty", 		{Ingredient("scandata", 4), Ingredient("char
 
 --	[ 	Crafting Station	]	--
 
+--	Shack
+
 PolarRecipe("polaramulet_builder", 			{Ingredient("rope", 3)}, 		TECH.POLARAMULET_STATION, 	{image = "polaramulet.tex", manufactured = true, nounlock = true, sg_state = "give"}, 	{"CRAFTING_STATION"})
 PolarRecipe("polar_fishingrod",				{Ingredient("smallmeat", 2)}, 								TECH.POLARAMULET_STATION, 	{product = "fishingrod", nounlock = true, image = "fishingrod.tex", actionstr = "TRADE", sg_state = "give"}, 					{"CRAFTING_STATION"})
 PolarRecipe("polar_oceanfishingrod",		{Ingredient("fishingrod", 1), Ingredient("meat", 4)}, 		TECH.POLARAMULET_STATION, 	{product = "oceanfishingrod", nounlock = true, image = "oceanfishingrod.tex", actionstr = "TRADE", sg_state = "give"}, 			{"CRAFTING_STATION"})
@@ -104,13 +109,31 @@ PolarRecipe("iciclestaff", 					{Ingredient("polar_dryice", 1), Ingredient("blue
 PolarRecipe("polaricestaff", 				{Ingredient("antler_tree_stick", 1), Ingredient("bluegem_overcharged", 1)}, 								TECH.LOST, 					{nounlock = true, actionstr = "TRADE", sg_state = "give", hint_msg = "NEEDSPOLARAMULET_STATION"}, 	{"CRAFTING_STATION"})--{"MAGIC"}, {"icestaff"})
 PolarRecipe("polar_lavae_tooth", 			{Ingredient("lavae_egg", 1), Ingredient("redgem", 1)}, 														TECH.LOST, 					{product = "lavae_tooth", description = "polar_lavae_tooth", nounlock = true, actionstr = "TRADE", sg_state = "give", hint_msg = "NEEDSPOLARAMULET_STATION"}, 	{"CRAFTING_STATION"})
 
-PolarRecipe("bluegem_overcharged", 			{Ingredient("moose_polar_antler", 1), Ingredient("bluegem", 1)}, 	TECH.POLARAMULET_STATION, 	{nounlock = true, sg_state = "give"}, 																{"CRAFTING_STATION"})
+PolarRecipe("bluegem_overcharged", 			{Ingredient("moose_polar_antler", 1), Ingredient("bluegem", 1)}, 	TECH.POLARAMULET_STATION, 	{nounlock = true, sg_state = "give"}, 	{"CRAFTING_STATION"})
 
 for phase, phase_data in pairs(POLARAMULET_STATION_MOONPHASE_TRADEDATA) do
 	for i, recipe_data in ipairs(phase_data) do
 		local recipe_name = string.format("polar_trade_%s_%d", phase, i)
-		
 		PolarRecipe(recipe_name, recipe_data.ingredients, TECH.LOST, {product = recipe_data.product, description = recipe_data.description or "polar_trade_"..i, numtogive = recipe_data.numtogive, limitedamount = true, nounlock = true, sg_state = "give", hint_msg = "NEEDSPOLARAMULET_STATION"}, {"CRAFTING_STATION"})
+	end
+end
+
+--	Walrus
+
+for walrus, walrus_data in pairs(POLARWALRUS_TRADEDATA) do
+	local product_counts = {}
+	
+	for i, recipe_data in ipairs(walrus_data) do
+		product_counts[recipe_data.product] = (product_counts[recipe_data.product] or 0) + 1
+		
+		local recipe_name = string.format(walrus.."_trade_%s%d", recipe_data.product, product_counts[recipe_data.product])
+		local base_name = STRINGS.NAMES[string.upper(recipe_data.product)]
+		
+		if recipe_data.numtogive then
+			STRINGS.NAMES[string.upper(recipe_name)] = string.format("%s x%d", base_name, recipe_data.numtogive)
+		end
+		
+		PolarRecipe(recipe_name, recipe_data.ingredients, TECH.LOST, {product = recipe_data.product, description = recipe_data.description or "walrustrade_"..recipe_data.product, numtogive = recipe_data.numtogive, limitedamount = true, nounlock = true, actionstr = "TRADE", sg_state = "give", hint_msg = "NEEDSWANDERINGWALRUSSHOP"}, {"CRAFTING_STATION"})
 	end
 end
 
