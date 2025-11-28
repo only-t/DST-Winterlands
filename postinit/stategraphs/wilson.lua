@@ -183,6 +183,15 @@ ENV.AddStategraphPostInit("wilson", function(sg)
 	
 	--	actions
 	
+	local oldACTIVATE = sg.actionhandlers[ACTIONS.ACTIVATE].deststate
+	sg.actionhandlers[ACTIONS.ACTIVATE].deststate = function(inst, action, ...)
+		if action.target and action.target:HasTag("dirtpile") and inst:GetDebuff("buff_huntmoar") then
+			return "domediumaction"
+		end
+		
+		return oldACTIVATE(inst, action, ...)
+	end
+	
 	local oldCASTSPELL = sg.actionhandlers[ACTIONS.CASTSPELL].deststate
 	sg.actionhandlers[ACTIONS.CASTSPELL].deststate = function(inst, action, ...)
 		if action.invobject then
@@ -198,6 +207,16 @@ ENV.AddStategraphPostInit("wilson", function(sg)
 	
 	--	events
 	
+	local oldattacked_event = sg.events["attacked"].fn
+	sg.events["attacked"].fn = function(inst, data, ...)
+		if inst:HasTag("frozenstats") then
+			return
+		end
+		
+		if oldattacked_event then
+			oldattacked_event(inst, data, ...)
+		end
+	end
 	local oldemote_event = sg.events["emote"].fn
 	sg.events["emote"].fn = function(inst, data, ...)
 		if data and data.insnowonly then

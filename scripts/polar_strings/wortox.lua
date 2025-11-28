@@ -19,6 +19,8 @@ local DESCRIBE = STRINGS.CHARACTERS.WORTOX.DESCRIBE
 	ANNOUNCE.ANNOUNCE_THRONE_GIFT_TAKEN = "See? You should trust me sometimes-"
 	
 	--	Buffs
+	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_HUNTMOAR = "My sniffer tingles with mischief!"
+	ANNOUNCE.ANNOUNCE_DETACH_BUFF_HUNTMOAR = "Am I following my own hoove tracks?"
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_POLARWETNESS = "M-my oh my, I must stay warm and d-dry..."
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_POLARWETNESS = "No more snow! Almost good to go!"
 	
@@ -116,6 +118,8 @@ local DESCRIBE = STRINGS.CHARACTERS.WORTOX.DESCRIBE
 	DESCRIBE.ICELETTUCE = "Mortals will cultivate plants, no matter how mean they come by."
 	DESCRIBE.ICELETTUCE_OVERSIZED = "The pain was veritable, to grow such vegetable."
 	DESCRIBE.ICEBURRITO = "I suppose I could have a bite. A frostbite, hyuyu!"
+	DESCRIBE.KOALEFRIED_TRUNK_SUMMER = "The humans should be taking notes... I'm just saying!"
+	DESCRIBE.KOALEFRIED_TRUNK_WINTER = "The humans should be taking notes... I'm just saying!"
 	DESCRIBE.POLARCRABLEGS = "Fine, fine, I will grab some of that crab."
 	
 	--	Crafting
@@ -148,6 +152,10 @@ local DESCRIBE = STRINGS.CHARACTERS.WORTOX.DESCRIBE
 	--	Others
 	DESCRIBE.ARCTIC_FOOL_FISH = "Ooo, Wes! You should have told me sooner about those pranks!"
 	DESCRIBE.BOAT_ICE_ITEM = "Poor hop-less mortals..."
+	DESCRIBE.POCKETWATCH_POLAR = {
+		GENERIC = "Mortals keep coming up with such funny tricks!",
+		RECHARGING = "These clocks, you will find, need some time to unwind.",
+	}
 	DESCRIBE.POLARGLOBE = {
 		GENERIC = "A frozen realm, mine for the shaking! Hyuyu!",
 		INUSE = "What a tempting, cursed trinket!",

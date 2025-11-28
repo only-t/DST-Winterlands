@@ -19,6 +19,8 @@ local DESCRIBE = STRINGS.CHARACTERS.WINONA.DESCRIBE
 	ANNOUNCE.ANNOUNCE_THRONE_GIFT_TAKEN = "At least some bosses leave presents."
 	
 	--	Buffs
+	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_HUNTMOAR = "Huh. I'm pickin' up THAT smell like never before."
+	ANNOUNCE.ANNOUNCE_DETACH_BUFF_HUNTMOAR = "The smell's gone. Finally."
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_POLARWETNESS = "Yeesh! I ain't dressed enough for that!"
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_POLARWETNESS = "And now to go through the wringer..."
 	
@@ -116,6 +118,8 @@ local DESCRIBE = STRINGS.CHARACTERS.WINONA.DESCRIBE
 	DESCRIBE.ICELETTUCE = "In mint condition? It's practically cryopreserved!"
 	DESCRIBE.ICELETTUCE_OVERSIZED = "Sure hope y'all love eating salad!"
 	DESCRIBE.ICEBURRITO = "Just what I needed to wrap up the day."
+	DESCRIBE.KOALEFRIED_TRUNK_SUMMER = "And them's walruses be makin' these with just their two flippers?!"
+	DESCRIBE.KOALEFRIED_TRUNK_WINTER = "And them's walruses be makin' these with just their two flippers?!"
 	DESCRIBE.POLARCRABLEGS = "I'm good with only a small pinch of luxury."
 	
 	--	Crafting
@@ -148,6 +152,10 @@ local DESCRIBE = STRINGS.CHARACTERS.WINONA.DESCRIBE
 	--	Others
 	DESCRIBE.ARCTIC_FOOL_FISH = "The mackerel of mockery strikes when we least expect it."
 	DESCRIBE.BOAT_ICE_ITEM = "I give it at best thirty seconds."
+	DESCRIBE.POCKETWATCH_POLAR = {
+		GENERIC = "I wouldn't mind takin' a look at its inner workings.",
+		RECHARGING = "Doesn't look like it's in working condition right now.",
+	}
 	DESCRIBE.POLARGLOBE = {
 		GENERIC = "Ha! Charlie loved these lil' things.",
 		INUSE = "Oh you...",

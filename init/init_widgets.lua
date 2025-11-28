@@ -99,6 +99,7 @@ STORM_TYPES.POLARSTORM = i
 
 local PolarOver = require("widgets/polarover")
 local PolarDustOver = require("widgets/polardustover")
+local WandaTimeFreezeOver = require("widgets/wandatimefreezeover")
 local PlayerHud = require("screens/playerhud")
 
 local old_PlayerHud_CreateOverlays = PlayerHud.CreateOverlays
@@ -107,6 +108,7 @@ PlayerHud.CreateOverlays = function(self, owner, ...)
 	
 	self.polardustover = self.storm_overlays:AddChild(PolarDustOver(owner))
 	self.polarover = self.overlayroot:AddChild(PolarOver(owner, self.polardustover))
+	self.wandatimefreezeover = self.overlayroot:AddChild(WandaTimeFreezeOver(owner))
 end
 
 --	Polar Wetness

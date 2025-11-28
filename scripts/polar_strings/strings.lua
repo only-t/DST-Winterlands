@@ -73,6 +73,8 @@ local RECIPE_DESC = STRINGS.RECIPE_DESC
 	NAMES.ICELETTUCE_OVERSIZED = "Giant Iceberg Lettuce"
 	NAMES.ICELETTUCE_OVERSIZED_ROTTEN = "Giant Rotting Iceberg Lettuce"
 	NAMES.ICEBURRITO = "Brrito"
+	NAMES.KOALEFRIED_TRUNK_SUMMER = "Snoot Platter"
+	NAMES.KOALEFRIED_TRUNK_WINTER = "Winter Snoot Platter"
 	NAMES.POLARCRABLEGS = "King Crab Legs"
 	NAMES.WINTERCOOKING_POLARCRABLEGS = "King Crab Legs"
 	
@@ -109,6 +111,7 @@ local RECIPE_DESC = STRINGS.RECIPE_DESC
 	NAMES.ARCTIC_FOOL_FISH = "Arctic Fools' Fish"
 	NAMES.BOAT_ICE_ITEM = "Ice Floe Kit"
 	NAMES.DUG_GRASS_POLAR = "Tundra Tuft"
+	NAMES.POCKETWATCH_POLAR = "Timefreeze Watch"
 	NAMES.POLARGLOBE = "Strange Snowglobe"
 	NAMES.OCEANFISH_IN_ICE = "Fishy Ice Cube"
 	NAMES.POLARICEPACK = "Icepack"
@@ -123,8 +126,10 @@ local RECIPE_DESC = STRINGS.RECIPE_DESC
 	NAMES.WINTER_ORNAMENTPOLAR = "Chilly Adornment"
 	NAMES.WX78MODULE_NAUGHTY = "Evildoer Circuit"
 	
-	--	Recipe Names (needed for blueprints)
+	--	Recipe Names (can be required for blueprints)
 	NAMES.SHARDS_BLUEGEM = "Blue Gem Shards"
+	NAMES.COOKINGRECIPECARD_KOALEFRIED_TRUNK_SUMMER = "Snoot Platter Recipe Card"
+	NAMES.COOKINGRECIPECARD_KOALEFRIED_TRUNK_WINTER = "Winter Snoot Platter Recipe Card"
 	NAMES.SNOWBALL_ITEM_POLAR = "Snowball"
 	
 --	Skins
@@ -337,6 +342,8 @@ local RECIPE_DESC = STRINGS.RECIPE_DESC
 	
 	--	Scrapbook, Cookbook
 	STRINGS.UI.COOKBOOK.FOOD_EFFECTS_ICELETTUCE = "Accustoms the body to snow"
+	STRINGS.UI.COOKBOOK.FOOD_EFFECTS_HUNTMOAR_KOALEFANTS = "Improves animal tracking"
+	STRINGS.UI.COOKBOOK.FOOD_EFFECTS_HUNTMOAR_SURPRISES = "Improves monster tracking"
 	
 	STRINGS.SCRAPBOOK.SPECIALINFO.ANTLER_TREE = "This tree has robust branches that could prove to be useful.\nHowever, axes won't cut it to take them off properly..."
 	STRINGS.SCRAPBOOK.SPECIALINFO.ANTLER_TREE_STICK = "Improves movement in high snow and speed by 25% when held.\n\nAlso increases stability on ice."
@@ -345,6 +352,7 @@ local RECIPE_DESC = STRINGS.RECIPE_DESC
 	STRINGS.SCRAPBOOK.SPECIALINFO.FROSTWALKERAMULET = "Freezes the water around the wearer and under itself when dropped.\n\nAlso greatly increases stability on ice."
 	STRINGS.SCRAPBOOK.SPECIALINFO.ICELETTUCE = "Ingesting this will help you brave high snow with ease for a while."
 	STRINGS.SCRAPBOOK.SPECIALINFO.ICICLESTAFF = "Creates a salvo of 15 Icicles.\n\nNote to self: Keep clear from the area."
+	STRINGS.SCRAPBOOK.SPECIALINFO.POCKETWATCH_POLAR = "Stops Wanda's health, hunger, sanity, temperature, et cetera (from going down OR up), plus immunity to most buffs and debuffs.\nThe duration of the effect varies with how much your stats are theoretically changed, so keep things stable!"
 	STRINGS.SCRAPBOOK.SPECIALINFO.POLAR_BRAZIER = "Makes light and heat while fueled and can be used to cook food.\n\nIt can be reused and even dismantled back into an inventory item."
 	STRINGS.SCRAPBOOK.SPECIALINFO.POLAR_THRONE = "Someone or something is often leaving presents here... although they seem to be moved elsewhere at times."
 	STRINGS.SCRAPBOOK.SPECIALINFO.POLAR_THRONE_GIFTS = "Free gifts!"
@@ -381,6 +389,7 @@ local RECIPE_DESC = STRINGS.RECIPE_DESC
 	RECIPE_DESC.CHESSPIECE_EMPEROR_PENGUIN_SPIN_BUILDER = "Frozen in a fabulous flurry."
 	RECIPE_DESC.FROSTWALKERAMULET = "Never was water this cool before!"
 	RECIPE_DESC.ICICLESTAFF = "Summon the very things you swore to destroy."
+	RECIPE_DESC.POCKETWATCH_POLAR = "Press pause on your stats."
 	RECIPE_DESC.POLAR_BRAZIER_ITEM = "A campfire to take anywhere with you."
 	RECIPE_DESC.POLAR_DRYICE = "Winter, in brick shape."
 	RECIPE_DESC.POLAR_LAVAE_TOOTH = "Is parenting too much responsibilities?"
@@ -409,6 +418,7 @@ local RECIPE_DESC = STRINGS.RECIPE_DESC
 	RECIPE_DESC.WALRUSTRADE_GOLDNUGGET = "(Impressed whistle)"
 	RECIPE_DESC.WALRUSTRADE_WALRUSHAT = "(Clicks of approval)"
 	RECIPE_DESC.WALRUSTRADE_SEWING_KIT = "(Miscontent clicks)"
+	RECIPE_DESC.WALRUSTRADE_COOKINGRECIPECARD = "(Pinch flippers)"
 	RECIPE_DESC.WALRUSTRADE_MEAT = "(Incoherant squealing)"
 	RECIPE_DESC.WALRUSTRADE_MONSTERMEAT = "(Rapid squeaky protests)"
 	RECIPE_DESC.WALRUSTRADE_SMALLMEAT = "(Deep bellow)"

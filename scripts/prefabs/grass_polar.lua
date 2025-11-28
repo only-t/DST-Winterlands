@@ -9,8 +9,8 @@ local prefabs = {
 local WAXED_PLANTS = require("prefabs/waxed_plant_common")
 
 local function OnAnimOverStorm(inst)
-	if inst.AnimState:IsCurrentAnimation("blown_loop1") or inst.AnimState:IsCurrentAnimation("blown_loop2") and inst:HasTag("pickable")
-		and TheWorld.components.polarstorm and TheWorld.components.polarstorm:GetPolarStormLevel(inst) >= TUNING.SANDSTORM_FULL_LEVEL then
+	if inst.AnimState:IsCurrentAnimation("idle") or inst.AnimState:IsCurrentAnimation("blown_loop1") or inst.AnimState:IsCurrentAnimation("blown_loop2")
+		and inst:HasTag("pickable") and TheWorld.components.polarstorm and TheWorld.components.polarstorm:GetPolarStormLevel(inst) >= TUNING.SANDSTORM_FULL_LEVEL then
 		
 		inst.AnimState:PlayAnimation("blown_loop"..math.random(2))
 	end

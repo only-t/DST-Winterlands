@@ -19,6 +19,8 @@ local DESCRIBE = STRINGS.CHARACTERS.WALTER.DESCRIBE
 	ANNOUNCE.ANNOUNCE_THRONE_GIFT_TAKEN = "Neat! Almost what I wanted."
 	
 	--	Buffs
+	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_HUNTMOAR = "Sniff, sniff... can you smell this, Woby? Cause I do!"
+	ANNOUNCE.ANNOUNCE_DETACH_BUFF_HUNTMOAR = "You know. I kind of miss old school hunting."
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_POLARWETNESS = "T-that demands for a-adequate clothing...!"
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_POLARWETNESS = "My hairs are thawed out at least."
 	
@@ -116,6 +118,8 @@ local DESCRIBE = STRINGS.CHARACTERS.WALTER.DESCRIBE
 	DESCRIBE.ICELETTUCE = "Would it lettuce freeze? Get it? Because... forget it..."
 	DESCRIBE.ICELETTUCE_OVERSIZED = "I knew this seed wouldn't lettuce dow- okay I'll stop now."
 	DESCRIBE.ICEBURRITO = "It won't fall apart one bit."
+	DESCRIBE.KOALEFRIED_TRUNK_SUMMER = "Wow, Warly's got some serious competition with MaTusk around!"
+	DESCRIBE.KOALEFRIED_TRUNK_WINTER = "Wow, Warly's got some serious competition with MaTusk around!"
 	DESCRIBE.POLARCRABLEGS = "Mmmm! Hey, anybody wants to listen to my crab horror stories?"
 	
 	--	Crafting
@@ -148,6 +152,10 @@ local DESCRIBE = STRINGS.CHARACTERS.WALTER.DESCRIBE
 	--	Others
 	DESCRIBE.ARCTIC_FOOL_FISH = "I didn't know that fish sticks! Heh, get it?"
 	DESCRIBE.BOAT_ICE_ITEM = "Just don't slip overboard. Ha ha. That'd be pretty bad..."
+	DESCRIBE.POCKETWATCH_POLAR = {
+		GENERIC = "Ms. Wanda sure has a lot of clocks!",
+		RECHARGING = "Is that clock ticking backwards?",
+	}
 	DESCRIBE.POLARGLOBE = {
 		GENERIC = "Hey, shake this out!",
 		INUSE = "That means... I finally got my hands on an haunted trinket!",
@@ -164,3 +172,4 @@ local DESCRIBE = STRINGS.CHARACTERS.WALTER.DESCRIBE
 	DESCRIBE.WALL_POLAR_ITEM = "Don't you dare lick it, Woby!"
 	DESCRIBE.WINTER_ORNAMENTPOLAR = "Well, it match the season."
 	DESCRIBE.WX78MODULE_NAUGHTY = "Robot guts! Neat!"
+	

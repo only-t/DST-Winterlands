@@ -19,6 +19,8 @@ local DESCRIBE = STRINGS.CHARACTERS.WEBBER.DESCRIBE
 	ANNOUNCE.ANNOUNCE_THRONE_GIFT_TAKEN = "Well that's quite nice-"
 	
 	--	Buffs
+	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_HUNTMOAR = "We can smell everything now! And ew..."
+	ANNOUNCE.ANNOUNCE_DETACH_BUFF_HUNTMOAR = "Oh. The air doesn't smell like poo anymore."
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_POLARWETNESS = "Mom would be upset if she saw me like this..."
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_POLARWETNESS = "Can we go play in snow again... but with a coat?"
 	
@@ -116,6 +118,8 @@ local DESCRIBE = STRINGS.CHARACTERS.WEBBER.DESCRIBE
 	DESCRIBE.ICELETTUCE = "Eat our greens? But it's all blue."
 	DESCRIBE.ICELETTUCE_OVERSIZED = "Hooray! Wait. We're eating salad all week now? Not hooray."
 	DESCRIBE.ICEBURRITO = "Legend says this burrito never falls apart!"
+	DESCRIBE.KOALEFRIED_TRUNK_SUMMER = "No wonder walruses are all chubby."
+	DESCRIBE.KOALEFRIED_TRUNK_WINTER = "No wonder walruses are all chubby."
 	DESCRIBE.POLARCRABLEGS = "It got more legs than us to share!"
 	
 	--	Crafting
@@ -148,6 +152,10 @@ local DESCRIBE = STRINGS.CHARACTERS.WEBBER.DESCRIBE
 	--	Others
 	DESCRIBE.ARCTIC_FOOL_FISH = "It's all fools and games until it's on your back!"
 	DESCRIBE.BOAT_ICE_ITEM = "We could skip across the whole ocean with enough of these."
+	DESCRIBE.POCKETWATCH_POLAR = {
+		GENERIC = "Would we change anything if we could go back in time?",
+		RECHARGING = "It's resting.",
+	}
 	DESCRIBE.POLARGLOBE = {
 		GENERIC = "The snow is moving, slowly. Too slowly...",
 		INUSE = "Will that get me on the naughty list?",

@@ -19,6 +19,8 @@ local DESCRIBE = STRINGS.CHARACTERS.WOODIE.DESCRIBE
 	ANNOUNCE.ANNOUNCE_THRONE_GIFT_TAKEN = "Hoo! Lucy, you shouldn't have-"
 	
 	--	Buffs
+	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_HUNTMOAR = "I feel like my nose's tuned ta beast mode."
+	ANNOUNCE.ANNOUNCE_DETACH_BUFF_HUNTMOAR = "My nose's all stuffy again."
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_POLARWETNESS = "I could use a big, warm fur right aboot now."
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_POLARWETNESS = "That's better."
 	
@@ -116,6 +118,8 @@ local DESCRIBE = STRINGS.CHARACTERS.WOODIE.DESCRIBE
 	DESCRIBE.ICELETTUCE = "Like biting ice cubes in a drink."
 	DESCRIBE.ICELETTUCE_OVERSIZED = "Didn't think you had it in you, buddy."
 	DESCRIBE.ICEBURRITO = "It's better to eat fresh."
+	DESCRIBE.KOALEFRIED_TRUNK_SUMMER = "I'm game for another hunt after this."
+	DESCRIBE.KOALEFRIED_TRUNK_WINTER = "I'm game for another hunt after this."
 	DESCRIBE.POLARCRABLEGS = "Yer doing a fine job at cracking 'em, Luce."
 	
 	--	Crafting
@@ -148,6 +152,10 @@ local DESCRIBE = STRINGS.CHARACTERS.WOODIE.DESCRIBE
 	--	Others
 	DESCRIBE.ARCTIC_FOOL_FISH = "I gotta find the perfect back..."
 	DESCRIBE.BOAT_ICE_ITEM = "I merely remember making the joke, I didn't mean it."
+	DESCRIBE.POCKETWATCH_POLAR = {
+		GENERIC = "That's a pretty fancy lookin' clock.",
+		RECHARGING = "Doesn't look like it's doing much right now.",
+	}
 	DESCRIBE.POLARGLOBE = {
 		GENERIC = "I kinda want to go in here, eh.",
 		INUSE = "C'mon, I didn't mean it seriously.",

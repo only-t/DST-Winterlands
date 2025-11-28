@@ -246,7 +246,7 @@ local function OnIgnite(inst)
 	end
 end
 
-local function OnPolarstormChanged(inst, active)
+local function OnPolarstormChanged(inst, active) -- TODO: This could need some improvement cause they don't go home if unloaded and returning later...
 	local child = inst.components.spawner and inst.components.spawner.child
 	
 	if child and active and TheWorld.components.polarstorm and TheWorld.components.polarstorm:GetPolarStormLevel(inst) >= TUNING.SANDSTORM_FULL_LEVEL then

@@ -189,7 +189,7 @@ function HasPolarDebuffImmunity(inst, ignorewaterproof)
 end
 
 function HasPolarSnowImmunity(inst)
-	if inst:HasTag("polarsnowimmune") or inst:HasTag("weregoose") or inst:HasTag("playerghost") then
+	if inst:HasTag("polarsnowimmune") or inst:HasTag("weregoose") or inst:HasTag("playerghost") or inst:HasTag("vigorbuff") then
 		return true
 	end
 	
@@ -202,4 +202,27 @@ function HasPolarSnowImmunity(inst)
 	end
 	
 	return false
+end
+
+local TIMEFREEZE_DRAINS = TUNING.POCKERWATCH_BUFF_DRAINS
+
+function WandaTimeFreezeDrain(inst, stat, delta, old, max, min)
+	local buff = inst:GetDebuff("buff_wandatimefreeze")
+	if not buff or not (buff.components.timer and buff.components.timer:TimerExists("buffover")) then
+		return
+	end
+	
+	local new = math.clamp(old + delta, min or 0, max or 100) - old
+	local mult = TIMEFREEZE_DRAINS[stat] or 0
+	local drain = math.abs(new) * mult
+	
+	if new == 0 or mult == 0 or drain <= 0 then
+		return
+	end
+	if buff.debugstatdrain then
+		buff:debugstatdrain(stat, drain)
+	end
+	
+	local timeleft = buff.components.timer:GetTimeLeft("buffover")
+	buff.components.timer:SetTimeLeft("buffover", math.max(timeleft - drain, 0))
 end

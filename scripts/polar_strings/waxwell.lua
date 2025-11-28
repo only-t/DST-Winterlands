@@ -19,6 +19,8 @@ local DESCRIBE = STRINGS.CHARACTERS.WAXWELL.DESCRIBE
 	ANNOUNCE.ANNOUNCE_THRONE_GIFT_TAKEN = "I feel like there's a string attached."
 	
 	--	Buffs
+	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_HUNTMOAR = "Is my nose getting... bigger, or?"
+	ANNOUNCE.ANNOUNCE_DETACH_BUFF_HUNTMOAR = "And just like that, mundane again."
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_POLARWETNESS = "I'm not dressed adequately for this."
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_POLARWETNESS = "(Sigh) That's a lesson learned."
 	
@@ -116,6 +118,8 @@ local DESCRIBE = STRINGS.CHARACTERS.WAXWELL.DESCRIBE
 	DESCRIBE.ICELETTUCE = "So, we are eating crunchy water now?"
 	DESCRIBE.ICELETTUCE_OVERSIZED = "And this thing didn't even want us to care for it."
 	DESCRIBE.ICEBURRITO = "I don't assume it tastes bad but..."
+	DESCRIBE.KOALEFRIED_TRUNK_SUMMER = "That's a lot of fat. Oh but I'll still eat it."
+	DESCRIBE.KOALEFRIED_TRUNK_WINTER = "That's a lot of fat. Oh but I'll still eat it."
 	DESCRIBE.POLARCRABLEGS = "Would be perfect with melted butter."
 	
 	--	Crafting
@@ -148,6 +152,10 @@ local DESCRIBE = STRINGS.CHARACTERS.WAXWELL.DESCRIBE
 	--	Others
 	DESCRIBE.ARCTIC_FOOL_FISH = "A spell for embarrassment."
 	DESCRIBE.BOAT_ICE_ITEM = "I don't like the sound of it, especially this cracking."
+	DESCRIBE.POCKETWATCH_POLAR = {
+		GENERIC = "Careful, madam. I know where this trail ultimately leads.",
+		RECHARGING = "It looks like she'll have to wait, for once.",
+	}
 	DESCRIBE.POLARGLOBE = {
 		GENERIC = "Don't. Touch. It.",
 		INUSE = "I knew this was a bad idea.",

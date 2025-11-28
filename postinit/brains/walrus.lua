@@ -14,12 +14,12 @@ local WalrusBrain = require("brains/walrusbrain")
 		end
 	end
 	
-	local ALLY_TAGS = {"walruspal"}
-	local ALLY_NOT_TAGS = {"INLIMBO", "isdead"}
+	local PLAYER_ALLY_TAGS = {"walruspal"}
+	local PLAYER_ALLY_NOT_TAGS = {"INLIMBO", "isdead"}
 	
 	local OldGetNoLeaderFollowTarget = PolarUpvalue(WalrusBrain.OnStart, "GetNoLeaderFollowTarget")
 	local function GetNoLeaderFollowTarget(inst, ...)
-		local ally = FindEntity(inst, 10, nil, ALLY_TAGS, ALLY_NOT_TAGS)
+		local ally = FindEntity(inst, 10, nil, PLAYER_ALLY_TAGS, PLAYER_ALLY_NOT_TAGS)
 		
 		if ally == nil and OldGetNoLeaderFollowTarget then
 			return OldGetNoLeaderFollowTarget(inst, ...)

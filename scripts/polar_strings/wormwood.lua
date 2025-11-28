@@ -19,6 +19,8 @@ local DESCRIBE = STRINGS.CHARACTERS.WORMWOOD.DESCRIBE
 	ANNOUNCE.ANNOUNCE_THRONE_GIFT_TAKEN = "Yay!"
 	
 	--	Buffs
+	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_HUNTMOAR = "Mmm, smells nice here"
+	ANNOUNCE.ANNOUNCE_DETACH_BUFF_HUNTMOAR = "Lost the smell"
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_POLARWETNESS = "Noo! Cold!"
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_POLARWETNESS = "Ahhh. Snow is all gone"
 	
@@ -116,6 +118,8 @@ local DESCRIBE = STRINGS.CHARACTERS.WORMWOOD.DESCRIBE
 	DESCRIBE.ICELETTUCE = "Friend want big warm hug?"
 	DESCRIBE.ICELETTUCE_OVERSIZED = "Whew!"
 	DESCRIBE.ICEBURRITO = "Glub Glub sleeping in roll"
+	DESCRIBE.KOALEFRIED_TRUNK_SUMMER = "Makes belly big"
+	DESCRIBE.KOALEFRIED_TRUNK_WINTER = "Makes belly big"
 	DESCRIBE.POLARCRABLEGS = "Won't let legs escape"
 	
 	--	Crafting
@@ -148,6 +152,10 @@ local DESCRIBE = STRINGS.CHARACTERS.WORMWOOD.DESCRIBE
 	--	Others
 	DESCRIBE.ARCTIC_FOOL_FISH = "Put on back"
 	DESCRIBE.BOAT_ICE_ITEM = "Finally. Floaty not made of friends"
+	DESCRIBE.POCKETWATCH_POLAR = {
+		GENERIC = "Tick tock tick tock",
+		RECHARGING = "Tock tick tock tick",
+	}
 	DESCRIBE.POLARGLOBE = {
 		GENERIC = "Hmm... Someone touched?",
 		INUSE = "No no no. Go back inside!",

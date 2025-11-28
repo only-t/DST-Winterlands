@@ -50,8 +50,15 @@ local function GetLeader(inst)
 	return inst.components.follower and inst.components.follower.leader or nil
 end
 
+local PLAYER_ALLY_TAGS = {"walruspal"}
+local PLAYER_ALLY_NOT_TAGS = {"INLIMBO", "isdead"}
+
 local function GetNoLeaderFollowTarget(inst)
-	return GetLeader(inst) == nil and FindClosestPlayerToInst(inst, MAX_PLAYER_STALK_DISTANCE, true) or nil
+	local ally = FindEntity(inst, 10, nil, PLAYER_ALLY_TAGS, PLAYER_ALLY_NOT_TAGS)
+	
+	if ally == nil then
+		return GetLeader(inst) == nil and FindClosestPlayerToInst(inst, MAX_PLAYER_STALK_DISTANCE, true) or nil
+	end
 end
 
 local function GetHome(inst)
@@ -92,7 +99,7 @@ local function ShouldGoHomeAtNight(inst)
 end
 
 local ALLY_TAGS = {"walrus", "hound"}
-local ALLY_NOT_TAGS = {"isdead", "walrus_support"}
+local ALLY_NOT_TAGS = {"isdead"}
 
 local function ShouldGoHomeScared(inst)
 	if GetLeader(inst) or inst.components.leader:CountFollowers() > 0 then

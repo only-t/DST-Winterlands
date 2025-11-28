@@ -1,5 +1,5 @@
 local assets = {
-	Asset("ANIM", "anim/armor_onemanband.zip"),
+	Asset("ANIM", "anim/armor_walrus_bagpipe.zip"),
 }
 
 local function band_disable(inst)
@@ -118,8 +118,8 @@ local function fn()
 	
 	inst:AddTag("walrusbagpipe")
 	
-	inst.AnimState:SetBank("onemanband")
-	inst.AnimState:SetBuild("armor_onemanband")
+	inst.AnimState:SetBank("walrus_bagpipe")
+	inst.AnimState:SetBuild("armor_walrus_bagpipe")
 	inst.AnimState:PlayAnimation("anim")
 	
 	--inst.foleysound = "dontstarve/wilson/onemanband"

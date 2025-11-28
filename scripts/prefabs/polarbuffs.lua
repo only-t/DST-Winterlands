@@ -2,15 +2,7 @@
 ---------------------- Attach and dettach functions ---------------------
 -------------------------------------------------------------------------
 
-local function Immunity_OnAttached(inst, target)
-	target:AddTag("polarimmune")
-end
-
-local function Immunity_OnDetached(inst, target)
-	target:RemoveTag("polarimmune")
-end
-
---
+--	[[			Frozen Wetness			]]	--
 
 local HEATSOURCE_TAGS = {"HASHEATER"}
 local HEATSOURCE_NOT_TAGS = {"heatrock"}
@@ -93,7 +85,17 @@ local function Wetness_OnDetached(inst, target)
 	SetPolarWetness(target, 0)
 end
 
---
+--	[[		Frozen Wetness Imunity		]]	--
+
+local function Immunity_OnAttached(inst, target)
+	target:AddTag("polarimmune")
+end
+
+local function Immunity_OnDetached(inst, target)
+	target:RemoveTag("polarimmune")
+end
+
+--	[[		Walrus' Bagpipes Buff		]]	--
 
 local function WalrusAlly_OnAttached(inst, target)
 	target:AddTag("walruspal")
@@ -101,6 +103,174 @@ end
 
 local function WalrusAlly_OnDetached(inst, target)
 	target:RemoveTag("walruspal")
+end
+
+--	[[		Snoot Platter Hunting		]]	--
+
+local DIRTPILE_TAGS = {"dirtpile"}
+
+local function huntmoar_onhunt(target, data)
+	local hunt = data and data.hunt
+	if hunt and data.pt and data.hunt.direction then
+		local dir = data.hunt.direction
+		local rot = dir / DEGREES - 90
+		
+		local dx, dz = math.cos(dir), -math.sin(dir)
+		local px, pz = -dz, dx
+		
+		local ismonster = hunt.monster_track_num and hunt.trackspawned >= hunt.monster_track_num
+		local dist = TUNING.HUNT_SPAWN_DIST - 2 - (ismonster and 5 or 0)
+		for i = 2, dist, 2 do
+			target:DoTaskInTime(0.19 * i, function()
+				local j = (math.random() * 2 - 1) * 1.2
+				local x, y, z = data.pt.x + dx * i + px * j, 0, data.pt.z + dz * i + pz * j
+				
+				if TheWorld.Map:IsAboveGroundAtPoint(x, 0, z) then
+					local track = SpawnPrefab("animal_track")
+					
+					if ismonster then
+						track.AnimState:PlayAnimation("clawed"..math.random(1, 3))
+					end
+					track.Transform:SetPosition(x, y, z)
+					track.Transform:SetRotation(rot)
+					PlayFootstep(track, 0.2 + math.random() * 0.3)
+					
+					if track.SetBaseAlpha then
+						track:SetBaseAlpha(0)
+						if track.components.colourtweener == nil then
+							track:AddComponent("colourtweener")
+						end
+						
+						track.components.colourtweener:StartTween({1, 1, 1, 0.5}, 1, function() track:SetBaseAlpha(0.5) end)
+					end
+				end
+			end)
+		end
+	end
+end
+
+local function HuntMoar_OnAttached(inst, target)
+	inst:ListenForEvent("huntmoartracking", huntmoar_onhunt, target)
+end
+
+local function HuntMoar_OnDetached(inst, target)
+	inst:RemoveEventCallback("huntmoartracking", huntmoar_onhunt, target)
+end
+
+local function HuntMoar_OnSave(inst, data)
+	data.mode = inst.mode
+end
+
+local function HuntMoar_OnLoad(inst, data)
+	if data and data.mode then
+		inst.mode = data.mode
+	end
+end
+
+--	[[	Timefreeze Watch Invincibility	]]	--
+
+local function wandatimefreeze_debugstatdrain(inst, stat, amt)
+	if inst._statdrains == nil then
+		inst._statdrains = {}
+		for k, v in pairs(TUNING.POCKERWATCH_BUFF_DRAINS) do
+			inst._statdrains[k] = 0
+		end
+	end
+	
+	if inst._statdrains[stat] then
+		inst._statdrains[stat] = inst._statdrains[stat] + amt
+	end
+	
+	if inst._debugdraintask == nil then
+		inst._debugdraintask = inst:DoPeriodicTask(1, function()
+			print("Timefreeze Watch Start drain :")
+			local total = 0
+			for k, v in pairs(inst._statdrains) do
+				total = total + v
+				print(string.format("	%-12s %.3fs", k..":", v))
+			end
+			print(string.format("		total: %.3fs\n", total))
+		end)
+	end
+end
+
+local function wandatimefreeze_ontemperaturedelta(inst, target, data)
+	if not target:HasTag("frozenstats") or target.components.temperature == nil then
+		return
+	end
+	
+	local dangeriness = math.abs(target.components.temperature.delta) * math.abs(target.components.temperature.delta)
+	local mult = TUNING.POCKERWATCH_BUFF_DRAINS.temperature
+	local drain = dangeriness * mult * FRAMES
+	
+	local timeleft = inst.components.timer and inst.components.timer:GetTimeLeft("buffover")
+	if timeleft then
+		if inst.debugstatdrain then
+			inst:debugstatdrain("temperature", drain)
+		end
+		
+		inst.components.timer:SetTimeLeft("buffover", math.max(0, timeleft - drain))
+	end
+end
+
+local function wandatimefreeze_nexttween(inst)
+	if inst and inst:IsValid() then
+		inst._tweening = inst._tweening == 2 and 3 or 1
+	end
+end
+
+local function wandatimefreeze_ontick(inst, target)
+	target:AddTag("vigorbuff")
+	
+	local fx = SpawnPrefab("wandatimefreeze_player_fx")
+	if fx and fx.SetPuppetStyle then
+		local x, y, z = target.Transform:GetWorldPosition()
+		fx:SetPuppetStyle({doer = target, x = x, y = y - 0.08, z = z})
+	end
+	
+	if target.components.colourtweener then
+		if inst._tweening == 1 then
+			inst._tweening = 2
+			target.components.colourtweener:StartTween({0.63, 0.7, 0.9, 0.6}, 1, function() wandatimefreeze_nexttween(inst) end)
+		elseif inst._tweening == 3 then
+			inst._tweening = 4
+			target.components.colourtweener:StartTween({0.8, 0.8, 0.8, 1}, 1, function() wandatimefreeze_nexttween(inst) end)
+		end
+	end
+	
+	local percent = math.clamp(inst.components.timer:GetTimeLeft("buffover") / TUNING.POCKETWATCH_BUFF_DURATION, 0, 1)
+	target:PushEvent("timefreezepercent_changed", {percent = percent})
+	if target._timefreezepercent then
+		target._timefreezepercent:set(percent)
+	end
+end
+
+local function WandaTimeFreeze_OnAttached(inst, target)
+	target:AddTag("frozenstats")
+	
+	--This tests how much time is lost per stats
+	--inst.debugstatdrain = function(src, stat, amt) wandatimefreeze_debugstatdrain(inst, stat, amt) end
+	inst.ontemperaturedeltafn = function(src, data) wandatimefreeze_ontemperaturedelta(inst, target, data) end
+	inst:ListenForEvent("temperaturedelta", inst.ontemperaturedeltafn, target)
+	
+	inst:DoTaskInTime(1, function() inst._tweening = 1 end)
+	inst.task = inst:DoPeriodicTask(TUNING.POCKETWATCH_BUFF_TICK, wandatimefreeze_ontick, nil, target)
+end
+
+local function WandaTimeFreeze_OnDetached(inst, target)
+	target:RemoveTag("frozenstats")
+	
+	if target.components.colourtweener then
+		target.components.colourtweener:EndTween()
+	end
+	target.AnimState:SetMultColour(1, 1, 1, 1)
+	
+	inst:RemoveEventCallback("temperaturedelta", inst.ontemperaturedeltafn, target)
+	
+	target:PushEvent("timefreezepercent_changed", {percent = 0})
+	if target._timefreezepercent then
+		target._timefreezepercent:set(0)
+	end
 end
 
 -------------------------------------------------------------------------
@@ -113,7 +283,7 @@ local function OnTimerDone(inst, data)
 	end
 end
 
-local function MakeBuff(name, onattachedfn, onextendedfn, ondetachedfn, duration, priority, announce, temperature)
+local function MakeBuff(name, onattachedfn, onextendedfn, ondetachedfn, duration, priority, announce, temperature, savefn, loadfn)
 	local function OnAttached(inst, target)
 		inst.entity:SetParent(target.entity)
 		inst.Transform:SetPosition(0, 0, 0)
@@ -186,7 +356,12 @@ local function MakeBuff(name, onattachedfn, onextendedfn, ondetachedfn, duration
 		
 		inst:ListenForEvent("timerdone", OnTimerDone)
 		
-		inst.persists = false
+		if savefn ~= nil then
+			inst.OnSave = savefn
+			inst.OnLoad = loadfn
+		else
+			inst.persists = false
+		end
 		
 		return inst
 	end
@@ -196,4 +371,6 @@ end
 
 return MakeBuff("polarwetness", Wetness_OnAttached, nil, Wetness_OnDetached, nil, 2, true, TUNING.POLARWETNESS_DEBUFF_STARTTEMP),
 	MakeBuff("polarimmunity", Immunity_OnAttached, nil, Immunity_OnDetached, TUNING.POLAR_IMMUNITY_DURATION, 2, false),
-	MakeBuff("walrusally", WalrusAlly_OnAttached, nil, WalrusAlly_OnDetached, TUNING.POLAR_WALRUSALLY_BUFF_DURATION, 2, false)
+	MakeBuff("walrusally", WalrusAlly_OnAttached, nil, WalrusAlly_OnDetached, TUNING.POLAR_WALRUSALLY_BUFF_DURATION, 2, false),
+	MakeBuff("huntmoar", HuntMoar_OnAttached, nil, HuntMoar_OnDetached, TUNING.MOARHUNT_BUFF_DURATION, 2, true, nil, HuntMoar_OnSave, HuntMoar_OnLoad),
+	MakeBuff("wandatimefreeze", WandaTimeFreeze_OnAttached, nil, WandaTimeFreeze_OnDetached, TUNING.POCKETWATCH_BUFF_DURATION, 2, true)

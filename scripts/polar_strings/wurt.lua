@@ -19,6 +19,8 @@ local DESCRIBE = STRINGS.CHARACTERS.WURT.DESCRIBE
 	ANNOUNCE.ANNOUNCE_THRONE_GIFT_TAKEN = "Best day ever, florp!"
 	
 	--	Buffs
+	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_HUNTMOAR = "Wait. What? How?"
+	ANNOUNCE.ANNOUNCE_DETACH_BUFF_HUNTMOAR = "That was weird, florp..."
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_POLARWETNESS = "Glurgh! Big sea of snow is wet AND cold!"
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_POLARWETNESS = "Aaah... it good wet again."
 	
@@ -116,6 +118,8 @@ local DESCRIBE = STRINGS.CHARACTERS.WURT.DESCRIBE
 	DESCRIBE.ICELETTUCE = "Is icy-cream growing in ground?!"
 	DESCRIBE.ICELETTUCE_OVERSIZED = "Me did it! Me finally did it!"
 	DESCRIBE.ICEBURRITO = "Huh? Gluurrgh... poor fish in it."
+	DESCRIBE.KOALEFRIED_TRUNK_SUMMER = "Sigh... can't have good things."
+	DESCRIBE.KOALEFRIED_TRUNK_WINTER = "Sigh... can't have good things."
 	DESCRIBE.POLARCRABLEGS = "Want to eat all lemon slices!"
 	
 	--	Crafting
@@ -148,6 +152,10 @@ local DESCRIBE = STRINGS.CHARACTERS.WURT.DESCRIBE
 	--	Others
 	DESCRIBE.ARCTIC_FOOL_FISH = "Ooooh, fishie! Clown man has fun games!"
 	DESCRIBE.BOAT_ICE_ITEM = "Lots of tiny boats."
+	DESCRIBE.POCKETWATCH_POLAR = {
+		GENERIC = "Only chewed on it little bit! But Wandy-lady got mad...",
+		RECHARGING = "Wandy-lady say it \"ree-plin-ishing tem-pooral\"... glurgh. Forget rest.",
+	}
 	DESCRIBE.POLARGLOBE = {
 		GENERIC = "Haha! Winter trapped inside!",
 		INUSE = "G-glurp! Didn't do it!",

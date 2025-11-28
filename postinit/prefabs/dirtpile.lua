@@ -23,15 +23,21 @@ end
 
 for i, v in ipairs(tracks) do
 	ENV.AddPrefabPostInit(v, function(inst)
+		if inst.SoundEmitter == nil then
+			inst.entity:AddSoundEmitter()
+		end
+		
 		inst:AddTag("snowblocker")
 		
 		inst._snowblockrange = net_smallbyte(inst.GUID, "animal_track._snowblockrange")
 		inst._snowblockrange:set(3)
 		
-		if olddisplaynamefn == nil then
-			olddisplaynamefn = inst.displaynamefn
+		if v == "dirtpile" then
+			if olddisplaynamefn == nil then
+				olddisplaynamefn = inst.displaynamefn
+			end
+			inst.displaynamefn = displaynamefn
 		end
-		inst.displaynamefn = displaynamefn
 		
 		if not TheWorld.ismastersim then
 			return

@@ -19,8 +19,8 @@ Assets = {
 	Asset("IMAGE", "images/crafting_menu_polar.tex"),
 	
 	Asset("ANIM", "anim/meter_polar_over.zip"),
-	
 	Asset("ANIM", "anim/polarstorm_over.zip"),
+	Asset("ANIM", "anim/wanda_timefreeze_over.zip"),
 	
 	Asset("ANIM", "anim/polar_amulet_ui.zip"),
 	
@@ -94,6 +94,8 @@ local ITEMS = {
 	"icelettuce",
 	"icelettuce_seeds",
 	"iciclestaff",
+	"koalefried_trunk_summer",
+	"koalefried_trunk_winter",
 	"moose_polar_antler",
 	"oceanfish_medium_polar1_inv",
 	"polar_brazier_item",
@@ -123,6 +125,7 @@ local ITEMS = {
 	"turf_polar_caves",
 	"turf_polar_dryice",
 	"wall_polar_item",
+	"walrus_bagpipes",
 	"walrus_beartrap",
 	"winter_ornament_boss_emperor_penguin",
 	"winter_ornament_polar_icicle_blue",

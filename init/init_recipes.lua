@@ -91,7 +91,10 @@ PolarRecipe("snowball_item_polar", 			{Ingredient("ice", 1), Ingredient(TECH_ING
 PolarRecipe("wintercooking_polarcrablegs",	{Ingredient("wintersfeastfuel", 1), Ingredient("polarflea", 2)}, 		TECH.WINTERSFEASTCOOKING_ONE, 	{nounlock = true, manufactured = true, actionstr = "COOK", image = "polarcrablegs.tex"}, 			{"CRAFTING_STATION"}, {"wintercooking_tourtiere"})
 
 --	Survivors
-PolarRecipe("wx78module_naughty", 		{Ingredient("scandata", 4), Ingredient("charcoal", 2)}, 	TECH.ROBOTMODULECRAFT_ONE, 		{builder_tag = "upgrademoduleowner", nounlock = false}, 	{"CHARACTER", "MAGIC"}, {"wx78module_light", "nightmarefuel"})
+local function pocketwatch_nodecon(inst) return not inst:HasTag("pocketwatch_inactive") end
+
+PolarRecipe("pocketwatch_polar", 		{Ingredient("pocketwatch_parts", 1), Ingredient("bluegem_shards", 3), Ingredient("polarwargstooth", 1)}, 	TECH.NONE, 					{builder_tag = "clockmaker", no_deconstruction = pocketwatch_nodecon}, 	{"CHARACTER", "ARMOUR"}, {"pocketwatch_portal", "wathgrithr_shield"})
+PolarRecipe("wx78module_naughty", 		{Ingredient("scandata", 4), Ingredient("charcoal", 2)}, 													TECH.ROBOTMODULECRAFT_ONE, 	{builder_tag = "upgrademoduleowner", nounlock = false}, 				{"CHARACTER", "MAGIC"}, {"wx78module_light", "nightmarefuel"})
 
 --	[ 	Crafting Station	]	--
 
@@ -114,7 +117,7 @@ PolarRecipe("bluegem_overcharged", 			{Ingredient("moose_polar_antler", 1), Ingr
 for phase, phase_data in pairs(POLARAMULET_STATION_MOONPHASE_TRADEDATA) do
 	for i, recipe_data in ipairs(phase_data) do
 		local recipe_name = string.format("polar_trade_%s_%d", phase, i)
-		PolarRecipe(recipe_name, recipe_data.ingredients, TECH.LOST, {product = recipe_data.product, description = recipe_data.description or "polar_trade_"..i, numtogive = recipe_data.numtogive, limitedamount = true, nounlock = true, sg_state = "give", hint_msg = "NEEDSPOLARAMULET_STATION"}, {"CRAFTING_STATION"})
+		PolarRecipe(recipe_name, recipe_data.ingredients, TECH.LOST, {product = recipe_data.product, description = recipe_data.description or "polar_trade_"..i, numtogive = recipe_data.numtogive, limitedamount = true, nounlock = true, sg_state = "give", nameoverride = recipe_data.nameoverride, image = recipe_data.image, hint_msg = "NEEDSPOLARAMULET_STATION"}, {"CRAFTING_STATION"})
 	end
 end
 
@@ -133,7 +136,7 @@ for walrus, walrus_data in pairs(POLARWALRUS_TRADEDATA) do
 			STRINGS.NAMES[string.upper(recipe_name)] = string.format("%s x%d", base_name, recipe_data.numtogive)
 		end
 		
-		PolarRecipe(recipe_name, recipe_data.ingredients, TECH.LOST, {product = recipe_data.product, description = recipe_data.description or "walrustrade_"..recipe_data.product, numtogive = recipe_data.numtogive, limitedamount = true, nounlock = true, actionstr = "TRADE", sg_state = "give", hint_msg = "NEEDSWANDERINGWALRUSSHOP"}, {"CRAFTING_STATION"})
+		PolarRecipe(recipe_name, recipe_data.ingredients, TECH.LOST, {product = recipe_data.product, description = recipe_data.description or "walrustrade_"..recipe_data.product, numtogive = recipe_data.numtogive, limitedamount = true, nounlock = true, actionstr = "TRADE", sg_state = "give", nameoverride = recipe_data.nameoverride, image = recipe_data.image, hint_msg = "NEEDSWANDERINGWALRUSSHOP"}, {"CRAFTING_STATION"})
 	end
 end
 

@@ -19,6 +19,8 @@ local DESCRIBE = STRINGS.CHARACTERS.WOLFGANG.DESCRIBE
 	ANNOUNCE.ANNOUNCE_THRONE_GIFT_TAKEN = "I like present!"
 	
 	--	Buffs
+	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_HUNTMOAR = "Game is close. I can smell it!"
+	ANNOUNCE.ANNOUNCE_DETACH_BUFF_HUNTMOAR = "Did nose fell off?"
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_POLARWETNESS = "Wolfgang does not like snow in shoes."
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_POLARWETNESS = "Hah! Santa won't stop me."
 	
@@ -116,6 +118,8 @@ local DESCRIBE = STRINGS.CHARACTERS.WOLFGANG.DESCRIBE
 	DESCRIBE.ICELETTUCE = "Leaves very crunchy..."
 	DESCRIBE.ICELETTUCE_OVERSIZED = "Will carry it into the pot! But with gloves."
 	DESCRIBE.ICEBURRITO = "Is first burrito to survive Wolfgang's grip."
+	DESCRIBE.KOALEFRIED_TRUNK_SUMMER = "Mmm. Wolfgang should go hunting more often!"
+	DESCRIBE.KOALEFRIED_TRUNK_WINTER = "Mmm. Wolfgang should go hunting more often!"
 	DESCRIBE.POLARCRABLEGS = "From scary leggy bug to yummy leggy bug."
 	
 	--	Crafting
@@ -148,6 +152,10 @@ local DESCRIBE = STRINGS.CHARACTERS.WOLFGANG.DESCRIBE
 	--	Others
 	DESCRIBE.ARCTIC_FOOL_FISH = "Clownman may be strong at his game, but Wolfgang will try his best!"
 	DESCRIBE.BOAT_ICE_ITEM = "Wolfgang isn't scared, his legs are just cold..."
+	DESCRIBE.POCKETWATCH_POLAR = {
+		GENERIC = "Is just little clock.",
+		RECHARGING = "Little clock sleeps now.",
+	}
 	DESCRIBE.POLARGLOBE = {
 		GENERIC = "Wolfgang likes pretty snow ball.",
 		INUSE = "Wolfgang shake too hard?",

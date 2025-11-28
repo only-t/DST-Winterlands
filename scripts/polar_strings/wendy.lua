@@ -19,6 +19,8 @@ local DESCRIBE = STRINGS.CHARACTERS.WENDY.DESCRIBE
 	ANNOUNCE.ANNOUNCE_THRONE_GIFT_TAKEN = "...I was hoping for something else."
 	
 	--	Buffs
+	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_HUNTMOAR = "Let the hunt continue. I hunger."
+	ANNOUNCE.ANNOUNCE_DETACH_BUFF_HUNTMOAR = "My senses dulls again..."
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_POLARWETNESS = "The cold seeps into my very soul."
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_POLARWETNESS = "The cold snow bled out."
 	
@@ -116,6 +118,8 @@ local DESCRIBE = STRINGS.CHARACTERS.WENDY.DESCRIBE
 	DESCRIBE.ICELETTUCE = "This year's harvest was most disappointing."
 	DESCRIBE.ICELETTUCE_OVERSIZED = "What did this crop do to deserve such love and care?"
 	DESCRIBE.ICEBURRITO = "My frozen heart won't feel the change."
+	DESCRIBE.KOALEFRIED_TRUNK_SUMMER = "A delicious fate. More koalefants must meet it."
+	DESCRIBE.KOALEFRIED_TRUNK_WINTER = "A delicious fate. More koalefants must meet it."
 	DESCRIBE.POLARCRABLEGS = "We removed its legs one by one!"
 	
 	--	Crafting
@@ -148,6 +152,10 @@ local DESCRIBE = STRINGS.CHARACTERS.WENDY.DESCRIBE
 	--	Others
 	DESCRIBE.ARCTIC_FOOL_FISH = "Should I write something on it? Like: \"Come and stab me\"."
 	DESCRIBE.BOAT_ICE_ITEM = "This will go horribly wrong. I'm coming."
+	DESCRIBE.POCKETWATCH_POLAR = {
+		GENERIC = "It's soothing to watch the seconds tick away.",
+		RECHARGING = "Its power is spent.",
+	}
 	DESCRIBE.POLARGLOBE = {
 		GENERIC = "This looks so fragile...",
 		INUSE = "I see. Breaking it would have lasting consequences.",

@@ -22,8 +22,12 @@ local DESCRIBE = STRINGS.CHARACTERS.GENERIC.DESCRIBE
 	ANNOUNCE.ANNOUNCE_WX_NAUGHTYCHIP_RABBIT = {"only_used_by_wx78"}
 	
 	--	Buffs
+	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_HUNTMOAR = "My tracking senses feel... unusually precise."
+	ANNOUNCE.ANNOUNCE_DETACH_BUFF_HUNTMOAR = "Back to ordinary observation."
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_POLARWETNESS = "Brrr...! This is snow joke!"
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_POLARWETNESS = "I'm dry. But only in terms of snow."
+	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_WANDATIMEFREEZE = "only_used_by_wanda"
+	ANNOUNCE.ANNOUNCE_DETACH_BUFF_WANDATIMEFREEZE = "only_used_by_wanda"
 	
 --	Worldgen
 	
@@ -119,6 +123,8 @@ local DESCRIBE = STRINGS.CHARACTERS.GENERIC.DESCRIBE
 	DESCRIBE.ICELETTUCE = "That's a little too much seasoning."
 	DESCRIBE.ICELETTUCE_OVERSIZED = "This one knows to dress to impress!"
 	DESCRIBE.ICEBURRITO = "I really dig that name."
+	DESCRIBE.KOALEFRIED_TRUNK_SUMMER = "Smoked and fried aliments is chemistry at its best."
+	DESCRIBE.KOALEFRIED_TRUNK_WINTER = "Smoked and fried aliments is chemistry at its best."
 	DESCRIBE.POLARCRABLEGS = "The good thing about having ten legs, is that there's enough for everyone."
 	
 	--	Crafting
@@ -151,6 +157,10 @@ local DESCRIBE = STRINGS.CHARACTERS.GENERIC.DESCRIBE
 	--	Others
 	DESCRIBE.ARCTIC_FOOL_FISH = "All I got to do is act natural."
 	DESCRIBE.BOAT_ICE_ITEM = "These are just good to get a-round."
+	DESCRIBE.POCKETWATCH_POLAR = {
+		GENERIC = "Ms. Wanda sure has a lot of clocks!",
+		RECHARGING = "Is that clock ticking backwards?",
+	}
 	DESCRIBE.POLARGLOBE = {
 		GENERIC = "It's still going.",
 		INUSE = "Let's not do this again!",

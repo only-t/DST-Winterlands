@@ -19,6 +19,8 @@ local DESCRIBE = STRINGS.CHARACTERS.WARLY.DESCRIBE
 	ANNOUNCE.ANNOUNCE_THRONE_GIFT_TAKEN = "Merci-- oh. I should have brought gifts too!"
 	
 	--	Buffs
+	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_HUNTMOAR = "The wilderness reveals its aromas to me."
+	ANNOUNCE.ANNOUNCE_DETACH_BUFF_HUNTMOAR = "Enough hunting, I'd prefer some variety."
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_POLARWETNESS = "Q-quel froid! I need a bigger coat..."
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_POLARWETNESS = "Aaahhh... what would we do without fire?"
 	
@@ -114,8 +116,10 @@ local DESCRIBE = STRINGS.CHARACTERS.WARLY.DESCRIBE
 	DESCRIBE.DRYICECREAM = "Ice cream for the cool kids!"
 	DESCRIBE.FILET_O_FLEA = "The secret ingredient is a dash of shame."
 	DESCRIBE.ICELETTUCE = "Brr... could use dressing..."
-	DESCRIBE.ICELETTUCE_OVERSIZED = "Ça alors, what big salade!"
+	DESCRIBE.ICELETTUCE_OVERSIZED = "Ça alors, it's a huge salade!"
 	DESCRIBE.ICEBURRITO = "This is the last time I rely on Wilson to name my recipes."
+	DESCRIBE.KOALEFRIED_TRUNK_SUMMER = "Ooh la la, this hunters' cookbook holds treasures!"
+	DESCRIBE.KOALEFRIED_TRUNK_WINTER = "Ooh la la, this hunters' cookbook holds treasures!"
 	DESCRIBE.POLARCRABLEGS = "Mwah! Simplement par-fait!"
 	
 	--	Crafting
@@ -148,6 +152,10 @@ local DESCRIBE = STRINGS.CHARACTERS.WARLY.DESCRIBE
 	--	Others
 	DESCRIBE.ARCTIC_FOOL_FISH = "A classic, harmless prank! Or at least it should be..."
 	DESCRIBE.BOAT_ICE_ITEM = "Anything to stay a-flotte."
+	DESCRIBE.POCKETWATCH_POLAR = {
+		GENERIC = "Maybe I could ask her to make me a kitchen timer...",
+		RECHARGING = "I don't think it's ready just yet.",
+	}
 	DESCRIBE.POLARGLOBE = {
 		GENERIC = "This makes for a good feasting table decoration.",
 		INUSE = "Well. I'd better prep some soup for everyone.",

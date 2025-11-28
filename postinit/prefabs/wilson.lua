@@ -212,3 +212,20 @@ AddPrefabPostInit("woodie", function(inst)
 	
 	inst.polar_slowtime = Woodie_Polar_Time
 end)
+
+--	Wanda's new Timefreeze watch has a networked overlay showing for how long it'll last
+
+AddPrefabPostInit("wanda", function(inst)
+	inst._timefreezepercent = net_float(inst.GUID, "wanda._timefreezepercent", "timefreezepercent_dirty")
+	
+	if not TheWorld.ismastersim then
+		inst:ListenForEvent("timefreezepercent_dirty", function()
+			local v = inst._timefreezepercent:value()
+			
+			inst:PushEvent("timefreezepercent_changed", {percent = v})
+		end)
+		
+		return inst
+	end
+end)
+

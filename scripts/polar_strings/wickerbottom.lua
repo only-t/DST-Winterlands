@@ -19,6 +19,8 @@ local DESCRIBE = STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE
 	ANNOUNCE.ANNOUNCE_THRONE_GIFT_TAKEN = "Ooo. What a serviceable present!"
 	
 	--	Buffs
+	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_HUNTMOAR = "My senses acuity seems sharpened all a sudden."
+	ANNOUNCE.ANNOUNCE_DETACH_BUFF_HUNTMOAR = "It smells like the effect has run its course."
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_POLARWETNESS = "I am ill-equipped for such conditions."
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_POLARWETNESS = "I am left soggy from the thaw."
 	
@@ -116,6 +118,8 @@ local DESCRIBE = STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE
 	DESCRIBE.ICELETTUCE = "Frigidaria brassica. Its leaves put mint to shame."
 	DESCRIBE.ICELETTUCE_OVERSIZED = "The result of perseverance, brute-forcing and, perhaps, stubbornness."
 	DESCRIBE.ICEBURRITO = "Fresh sustenance, followed by a certain brain freeze."
+	DESCRIBE.KOALEFRIED_TRUNK_SUMMER = "Surprisingly palatable."
+	DESCRIBE.KOALEFRIED_TRUNK_WINTER = "Surprisingly palatable."
 	DESCRIBE.POLARCRABLEGS = "The kids have been very crabby to try them. That means more for me!"
 	
 	--	Crafting
@@ -148,6 +152,10 @@ local DESCRIBE = STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE
 	--	Others
 	DESCRIBE.ARCTIC_FOOL_FISH = "The token of a social custom, cherished by both Ursidae and the French."
 	DESCRIBE.BOAT_ICE_ITEM = "The most hazardous transportation device I've seen yet, I must applaud."
+	DESCRIBE.POCKETWATCH_POLAR = {
+		GENERIC = "Horology mixed with magic, truly fascinating.",
+		RECHARGING = "It appears to require some time to replenish its power between uses.",
+	}
 	DESCRIBE.POLARGLOBE = {
 		GENERIC = "How strange. Has anyone touched it recently?",
 		INUSE = "Oh dear... was everyone ready for this?",

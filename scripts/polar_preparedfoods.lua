@@ -4,9 +4,11 @@ local polar_preparedfoods = {
 		hunger = TUNING.CALORIES_SMALL * 4,
 		health = TUNING.HEALING_MEDLARGE,
 		sanity = 0,
-		cooktime = 0.5,
-		foodtype = FOODTYPE.MEAT,
+		temperature = TUNING.COLD_FOOD_BONUS_TEMP,
+		temperatureduration = TUNING.FOOD_TEMP_LONG,
 		perishtime = TUNING.PERISH_FAST,
+		foodtype = FOODTYPE.MEAT,
+		cooktime = 0.5,
 		priority = 30,
 		tags = {"catfood"},
 		floater = {"med", 0, {1, 0.8, 1}},
@@ -23,14 +25,70 @@ local polar_preparedfoods = {
 		hunger = TUNING.CALORIES_SMALL * 4,
 		health = -TUNING.HEALING_MED,
 		sanity = -TUNING.SANITY_MEDLARGE,
-		cooktime = 0.25,
-		foodtype = FOODTYPE.MEAT,
 		perishtime = TUNING.PERISH_SLOW,
+		foodtype = FOODTYPE.MEAT,
+		cooktime = 0.25,
 		priority = 15,
 		tags = {"monstermeat"},
 		secondaryfoodtype = FOODTYPE.MONSTER,
 		potlevel = "low",
 		floater = {"med", nil, 0.58},
+	},
+	
+	koalefried_trunk_summer = {
+		test = function(cooker, names, tags) return (names.trunk_summer or names.trunk_cooked) and (names.onion or names.onion_cooked) end,
+		hunger = TUNING.CALORIES_SMALL * 8,
+		health = TUNING.HEALING_LARGE,
+		sanity = TUNING.SANITY_LARGE,
+		temperature = TUNING.HOT_FOOD_BONUS_TEMP,
+		temperatureduration = TUNING.FOOD_TEMP_AVERAGE,
+		perishtime = TUNING.PERISH_MED,
+		foodtype = FOODTYPE.MEAT,
+		cooktime = 0.5,
+		priority = 30,
+		potlevel = "low",
+		floater = {"med", nil, 0.68},
+		prefabs = {"buff_huntmoar"},
+		oneat_desc = STRINGS.UI.COOKBOOK.FOOD_EFFECTS_HUNTMOAR_KOALEFANTS,
+		oneatenfn = function(inst, eater)
+			if eater.components.debuffable == nil then
+				eater:AddComponent("debuffable")
+			end
+			
+			local buff = eater.components.debuffable:AddDebuff("buff_huntmoar", "buff_huntmoar")
+			if buff then
+				buff.mode = "normal"
+			end
+		end,
+		card_def = {ingredients = {{"trunk_cooked", 1}, {"onion", 1}, {"carrot", 2}}},
+	},
+	
+	koalefried_trunk_winter = {
+		test = function(cooker, names, tags) return names.trunk_winter and (names.onion or names.onion_cooked) end,
+		hunger = TUNING.CALORIES_SMALL * 8,
+		health = TUNING.HEALING_LARGE,
+		sanity = TUNING.SANITY_LARGE,
+		temperature = TUNING.HOT_FOOD_BONUS_TEMP,
+		temperatureduration = TUNING.FOOD_TEMP_AVERAGE,
+		perishtime = TUNING.PERISH_MED,
+		foodtype = FOODTYPE.MEAT,
+		cooktime = 0.5,
+		priority = 30,
+		potlevel = "low",
+		floater = {"med", nil, 0.68},
+		prefabs = {"buff_huntmoar"},
+		oneat_desc = STRINGS.UI.COOKBOOK.FOOD_EFFECTS_HUNTMOAR_SURPRISES,
+		oneatenfn = function(inst, eater)
+			if eater.components.debuffable == nil then
+				eater:AddComponent("debuffable")
+			end
+			
+			local buff = eater.components.debuffable:AddDebuff("buff_huntmoar", "buff_huntmoar")
+			if buff then
+				buff.mode = "monster"
+			end
+		end,
+		card_def = {ingredients = {{"trunk_winter", 1}, {"onion", 1}, {"potato", 2}}},
 	},
 	
 	icecream_emperor = {
@@ -39,12 +97,12 @@ local polar_preparedfoods = {
 		hunger = TUNING.CALORIES_MED,
 		health = 0,
 		sanity = TUNING.SANITY_HUGE,
-		cooktime = 0.5,
-		foodtype = FOODTYPE.GOODIES,
-		perishtime = TUNING.PERISH_SUPERFAST,
-		priority = 10,
 		temperature = TUNING.COLD_FOOD_BONUS_TEMP,
 		temperatureduration = TUNING.FOOD_TEMP_LONG,
+		perishtime = TUNING.PERISH_SUPERFAST,
+		foodtype = FOODTYPE.GOODIES,
+		cooktime = 0.5,
+		priority = 40,
 		stacksize = 6,
 		potlevel = "low",
 		floater = {"small", nil, nil},

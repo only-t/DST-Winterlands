@@ -19,8 +19,12 @@ local DESCRIBE = STRINGS.CHARACTERS.WANDA.DESCRIBE
 	ANNOUNCE.ANNOUNCE_THRONE_GIFT_TAKEN = "My thanks... but now I will take my leaves."
 	
 	--	Buffs
+	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_HUNTMOAR = "I'm feeling pulled in the right direction..."
+	ANNOUNCE.ANNOUNCE_DETACH_BUFF_HUNTMOAR = "All this tracking is taking too long again... why bother!"
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_POLARWETNESS = "Oh botheration! I wasn't prepared for that."
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_POLARWETNESS = "Let's not waste more time in here."
+	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_WANDATIMEFREEZE = "This should save us some time!"
+	ANNOUNCE.ANNOUNCE_DETACH_BUFF_WANDATIMEFREEZE = "Aaand that's all the time I could save."
 	
 --	Worldgen
 	
@@ -116,6 +120,8 @@ local DESCRIBE = STRINGS.CHARACTERS.WANDA.DESCRIBE
 	DESCRIBE.ICELETTUCE = "Do I have to wait and drink it... or?"
 	DESCRIBE.ICELETTUCE_OVERSIZED = "Good thing it grew quite large, I was growing quite tired of it!"
 	DESCRIBE.ICEBURRITO = "I'm still figuring things out."
+	DESCRIBE.KOALEFRIED_TRUNK_SUMMER = "I just wish hunting didn't take so long."
+	DESCRIBE.KOALEFRIED_TRUNK_WINTER = "I just wish hunting didn't take so long."
 	DESCRIBE.POLARCRABLEGS = "They better not scuttle off my plate."
 	
 	--	Crafting
@@ -148,6 +154,10 @@ local DESCRIBE = STRINGS.CHARACTERS.WANDA.DESCRIBE
 	--	Others
 	DESCRIBE.ARCTIC_FOOL_FISH = "I don't have time to play these games! (Or do I...?)"
 	DESCRIBE.BOAT_ICE_ITEM = "For small skips above that bothersome water all around me!"
+	DESCRIBE.POCKETWATCH_POLAR = {
+		GENERIC = "If I can't have more time, I should at least preserve the present.",
+		RECHARGING = "It's on cool down. Or rather, on cool up.",
+	}
 	DESCRIBE.POLARGLOBE = {
 		GENERIC = "I don't have time to stare at this.",
 		INUSE = "Actually... I might have some time to look into this.",

@@ -44,12 +44,14 @@ local function OnActivate(inst, doer, recipe)
 		if data.product == product then
 			local recipe_name = string.format(inst.prefab.."_trade_%s%d", data.product, product_counts[data.product])
 			
-			local old = inst.components.craftingstation:GetRecipeCraftingLimit(recipe_name) or 0
-			local new = math.max(0, old - amount + (recipe.name == recipe_name and 1 or 0))
-			
-			inst.components.craftingstation:SetRecipeCraftingLimit(recipe_name, new)
-			if recipe.name ~= recipe_name then
-				inst.components.craftingstation:ForgetRecipe(recipe_name)
+			if not trades_data[i].nosharedstock then
+				local old = inst.components.craftingstation:GetRecipeCraftingLimit(recipe_name) or 0
+				local new = math.max(0, old - amount + (recipe.name == recipe_name and 1 or 0))
+				
+				inst.components.craftingstation:SetRecipeCraftingLimit(recipe_name, new)
+				if recipe.name ~= recipe_name then
+					inst.components.craftingstation:ForgetRecipe(recipe_name)
+				end
 			end
 		end
 	end
@@ -78,16 +80,16 @@ local function PolarTradesRefresh(inst, initial)
 		inst.components.craftingstation:LearnItem(recipe_name, recipe_name)
 		
 		if recipe_data.limit then
-			if initial then
+			--[[if initial then
 				inst.components.craftingstation:SetRecipeCraftingLimit(recipe_name, recipe_data.limit)
-			else
+			else]]
 				local old = inst.components.craftingstation:GetRecipeCraftingLimit(recipe_name) or 0
 				local restock_amt = recipe_data.restock or TUNING.WALRUSTRADES_RESTOCK_AMT
 				
 				local new = math.min(recipe_data.limit, old + restock_amt)
 				
 				inst.components.craftingstation:SetRecipeCraftingLimit(recipe_name, new)
-			end
+			--end
 		end
 	end
 end

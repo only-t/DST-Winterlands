@@ -19,6 +19,8 @@ local DESCRIBE = STRINGS.CHARACTERS.WILLOW.DESCRIBE
 	ANNOUNCE.ANNOUNCE_THRONE_GIFT_TAKEN = "That could've been worse."
 	
 	--	Buffs
+	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_HUNTMOAR = "I'm fired up for a hunt!"
+	ANNOUNCE.ANNOUNCE_DETACH_BUFF_HUNTMOAR = "Okay, that's enough licking dirt..."
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_POLARWETNESS = "Ack! Get this snow off me!"
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_POLARWETNESS = "Ugh, better but not by much."
 	
@@ -116,6 +118,8 @@ local DESCRIBE = STRINGS.CHARACTERS.WILLOW.DESCRIBE
 	DESCRIBE.ICELETTUCE = "This is the opposite of good."
 	DESCRIBE.ICELETTUCE_OVERSIZED = "Great."
 	DESCRIBE.ICEBURRITO = "I don't think any hot sauce can fix this."
+	DESCRIBE.KOALEFRIED_TRUNK_SUMMER = "Anything this smoky has got to taste good!"
+	DESCRIBE.KOALEFRIED_TRUNK_WINTER = "Anything this smoky has got to taste good!"
 	DESCRIBE.POLARCRABLEGS = "Never had one of these before, I'll try ten."
 	
 	--	Crafting
@@ -148,6 +152,10 @@ local DESCRIBE = STRINGS.CHARACTERS.WILLOW.DESCRIBE
 	--	Others
 	DESCRIBE.ARCTIC_FOOL_FISH = "We should light them on fire for extra fun! No? Pfft."
 	DESCRIBE.BOAT_ICE_ITEM = "Suuure, what could possibly go wrong?"
+	DESCRIBE.POCKETWATCH_POLAR = {
+		GENERIC = "Why worry about the past or future? It'll all go up in flames eventually.",
+		RECHARGING = "It's not doing much right now.",
+	}
 	DESCRIBE.POLARGLOBE = {
 		GENERIC = "What a dumb toy.",
 		INUSE = "Why did you have to shake it, why?",

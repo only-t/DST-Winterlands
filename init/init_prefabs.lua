@@ -21,6 +21,7 @@ PrefabFiles = {
 	"moose_polar",
 	"moose_polar_antler",
 	"oceanfish_in_ice",
+	"pocketwatch_polar",
 	"polar_amulet",
 	"polar_amulet_station",
 	"polar_brazier",

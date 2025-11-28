@@ -19,6 +19,8 @@ local DESCRIBE = STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE
 	ANNOUNCE.ANNOUNCE_THRONE_GIFT_TAKEN = "What was that?"
 	
 	--	Buffs
+	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_HUNTMOAR = "I feel the pull of glorious prey!"
+	ANNOUNCE.ANNOUNCE_DETACH_BUFF_HUNTMOAR = "The hunt dims but I shall endure."
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_POLARWETNESS = "Ullr has cast a curse upon me!"
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_POLARWETNESS = "May Loge dry me from this watery nightmare!"
 	
@@ -116,6 +118,8 @@ local DESCRIBE = STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE
 	DESCRIBE.ICELETTUCE = "Non-meat made of ice."
 	DESCRIBE.ICELETTUCE_OVERSIZED = "You fought well, plant, but we persevered!"
 	DESCRIBE.ICEBURRITO = "Fish lying in its frozen bedroll!"
+	DESCRIBE.KOALEFRIED_TRUNK_SUMMER = "Smoked spoils from the hunt."
+	DESCRIBE.KOALEFRIED_TRUNK_WINTER = "Smoked spoils from the hunt."
 	DESCRIBE.POLARCRABLEGS = "The beast ascends to Valhalla... and to my belly!"
 	
 	--	Crafting
@@ -148,6 +152,10 @@ local DESCRIBE = STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE
 	--	Others
 	DESCRIBE.ARCTIC_FOOL_FISH = "Beware of the cursed sigil..."
 	DESCRIBE.BOAT_ICE_ITEM = "'Tis only good to jump across a pond."
+	DESCRIBE.POCKETWATCH_POLAR = {
+		GENERIC = "A Viking warrior can tell the time by the position of the sun.",
+		RECHARGING = "'Tis merely biding its time.",
+	}
 	DESCRIBE.POLARGLOBE = {
 		GENERIC = "It contain the power to unleash the winter!",
 		INUSE = "'Tis vigorous shake hath displeased the gods!",
