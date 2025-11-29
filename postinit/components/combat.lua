@@ -26,3 +26,18 @@ local Combat_Replica = require("components/combat_replica")
 		
 		return OldIsAlly(self, guy, ...)
 	end
+
+
+local Combat = require("components/combat")
+local old_Combat_GetAttacked = Combat.GetAttacked
+Combat.GetAttacked = function(self, attacker, damage, weapon, ...)
+    if self.inst.components.health and self.inst.components.health:IsDead() then
+        return old_Combat_GetAttacked(self, attacker, damage, weapon, ...)
+    end
+
+	if self.inst.components.frozenarmor then
+		damage = self.inst.components.frozenarmor:ApplyFrozenArmor(attacker, damage, weapon)
+	end
+
+	return old_Combat_GetAttacked(self, attacker, damage, weapon, ...)
+end

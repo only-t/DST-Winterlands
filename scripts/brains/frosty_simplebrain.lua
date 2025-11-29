@@ -36,7 +36,7 @@ function FrostySimpleBrain:OnStart()
         WhileNode(function() return ShouldRush(self.inst) end, "IsRushing",
             PriorityNode({
                 ConditionNode(function() return TryBodySlamming(self.inst) end, "TryingBodySlamming"),
-                Follow(self.inst, GetBodySlamTarget, 0, TUNING.FROSTY.SIMPLE.BODY_SLAM_JUMP_RANGE, TUNING.FROSTY.SIMPLE.BODY_SLAM_JUMP_RANGE)
+                Follow(self.inst, GetBodySlamTarget, 0, 0, TUNING.FROSTY.SIMPLE.BODY_SLAM_JUMP_RANGE)
             }, 0.25)
         ),
         WhileNode(function() return not ShouldRush(self.inst) end, "IsNotRushing",

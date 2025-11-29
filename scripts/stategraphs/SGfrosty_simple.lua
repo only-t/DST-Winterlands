@@ -25,6 +25,12 @@ local events = {
         end
     end),
 
+    EventHandler("player_snowed", function(inst)
+        if not inst.components.health:IsDead() then
+            inst.sg:GoToState("laugh")
+        end
+    end),
+
     EventHandler("locomote", function(inst)
         if not inst.sg:HasStateTag("busy") then
             local is_moving = inst.sg:HasStateTag("moving")
@@ -154,6 +160,26 @@ local states = {
     },
 
     State{
+        name = "laugh",
+        tags = { "busy" },
+
+        onenter = function(inst)
+            inst.Physics:Stop()
+            inst.AnimState:PlayAnimation("taunt", true)
+        end,
+
+        timeline = {
+            TimeEvent(3*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/common/teleportato/teleportato_maxwelllaugh", nil, 0.3) end),
+            TimeEvent(55*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/common/teleportato/teleportato_maxwelllaugh", nil, 0.3) end),
+            TimeEvent(120*FRAMES, function(inst) inst.sg:GoToState("idle") end)
+        },
+
+        onexit = function(inst)
+            inst:FinishLaughing()
+        end
+    },
+
+    State{
         name = "attack",
         tags = { "attack", "busy", "canrotate" },
 
@@ -178,10 +204,12 @@ local states = {
 
         events = {
             EventHandler("animover", function(inst)
-                if inst.sg.statemem.buffer_rangedattack then
+                if inst.buffer_rangedattack then
                     inst:DoRangedAttack()
-                elseif inst.sg.statemem.buffer_bodyslamattack then
+                    inst.buffer_rangedattack = nil
+                elseif inst.buffer_bodyslamattack then
                     inst:StartBodySlamAttack()
+                    inst.buffer_bodyslamattack = nil
                 else
                     inst.sg:GoToState("idle")
                 end
@@ -201,7 +229,14 @@ local states = {
 
         timeline = {
             TimeEvent(30*FRAMES, function(inst) inst:ThrowSnowball() end),
-            TimeEvent(36*FRAMES, function(inst) inst.sg:GoToState("idle") end)
+            TimeEvent(36*FRAMES, function(inst)
+                if inst.buffer_bodyslamattack then
+                    inst:StartBodySlamAttack()
+                    inst.buffer_bodyslamattack = nil
+                else
+                    inst.sg:GoToState("idle")
+                end
+            end)
         }
     },
 
@@ -230,7 +265,14 @@ local states = {
                 MakeGiantCharacterPhysics(inst, 1000, 1.6)
                 inst:DoBodySlamLanding(inst)
             end),
-            TimeEvent(36*FRAMES, function(inst) inst.sg:GoToState("idle") end)
+            TimeEvent(36*FRAMES, function(inst)
+                if inst.buffer_rangedattack then
+                    inst:DoRangedAttack()
+                    inst.buffer_rangedattack = nil
+                else
+                    inst.sg:GoToState("idle")
+                end
+            end)
         }
     },
 

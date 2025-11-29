@@ -7,10 +7,8 @@ local function OnSnowBuriedAttacked(inst)
 end
 
 local function OnSnowBuriedUnpin(inst)
-    if inst ~= nil and inst:IsValid() then
-        inst:RemoveEventCallback("attacked", OnSnowBuriedAttacked)
-        inst:RemoveEventCallback("onunpin", OnSnowBuriedUnpin)
-    end
+    inst:RemoveEventCallback("attacked", OnSnowBuriedAttacked)
+    inst:RemoveEventCallback("onunpin", OnSnowBuriedUnpin)
 end
 
 local TARGET_EXCLUDE_TAGS = { "INLIMBO", "notarget", "noattack", "flight", "invisible", "playerghost" }
@@ -18,6 +16,7 @@ local function OnHit(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
     local ents = TheSim:FindEntities(x, y, z, TUNING.FROSTY.SIMPLE.RANGED_SPLASH_RANGE, nil, TARGET_EXCLUDE_TAGS)
 
+    local player_hit
     for i, ent in ipairs(ents) do
         if ent ~= inst.owner and
         ent:IsValid() and
@@ -25,10 +24,14 @@ local function OnHit(inst)
         ent.components.health and not ent.components.health:IsDead() then
             ent.components.combat:GetAttacked(inst, TUNING.FROSTY.SIMPLE.RANGED_DAMAGE)
 
+            if ent:HasTag("player") then -- Cache the last hit player target
+                player_hit = ent
+            end
+
             if ent.components.pinnable then -- Pinnable entities don't get frozen but will be buried in snow instead
-                ent.components.pinnable:Stick()
-                ent:ListenForEvent("attacked", OnSnowBuriedAttacked)
-                ent:ListenForEvent("onunpin", OnSnowBuriedUnpin)
+                -- ent.components.pinnable:Stick()
+                -- ent:ListenForEvent("attacked", OnSnowBuriedAttacked)
+                -- ent:ListenForEvent("onunpin", OnSnowBuriedUnpin)
             else
                 if ent.components.freezable then
                     ent.components.freezable:AddColdness(TUNING.FROSTY_SNOWBALL_FREEZE_POWER)
@@ -47,6 +50,10 @@ local function OnHit(inst)
     end
 
     SpawnPrefab("splash_snow_fx").Transform:SetPosition(x, y, z)
+
+    if player_hit ~= nil then
+        inst.owner:PushEvent("player_snowed", player_hit)
+    end
 
     inst:Remove()
 end
