@@ -81,6 +81,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WAXWELL.DESCRIBE
 		GENERIC = "Be on your way.",
 	}
 	DESCRIBE.POLARWARG = "What wonderful adaptation."
+	DESCRIBE.FROSTY_SIMPLE = "Frosty"
 	
 --	Buildings
 	

@@ -81,6 +81,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WEBBER.DESCRIBE
 		GENERIC = "I bet it's hungry.",
 	}
 	DESCRIBE.POLARWARG = "Who knew the yeti had a puppy?"
+	DESCRIBE.FROSTY_SIMPLE = "Frosty"
 	
 --	Buildings
 	

@@ -81,6 +81,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WINONA.DESCRIBE
 		GENERIC = "Get over here, you little rascal!",
 	}
 	DESCRIBE.POLARWARG = "I've got no doubt about his minty breath."
+	DESCRIBE.FROSTY_SIMPLE = "Frosty"
 	
 --	Buildings
 	

@@ -81,6 +81,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WORTOX.DESCRIBE
 		GENERIC = "Catch it before it digs itself six hooves under!",
 	}
 	DESCRIBE.POLARWARG = "It got a chilling howl to freeze the soul!"
+	DESCRIBE.FROSTY_SIMPLE = "Frosty"
 	
 --	Buildings
 	

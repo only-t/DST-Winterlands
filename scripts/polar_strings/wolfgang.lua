@@ -81,6 +81,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WOLFGANG.DESCRIBE
 		GENERIC = "Ha! Is puny critter!",
 	}
 	DESCRIBE.POLARWARG = "Puppy got new coat?"
+	DESCRIBE.FROSTY_SIMPLE = "Frosty"
 	
 --	Buildings
 	

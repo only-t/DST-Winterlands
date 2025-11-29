@@ -81,6 +81,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WALTER.DESCRIBE
 		GENERIC = "Get'em, girl!",
 	}
 	DESCRIBE.POLARWARG = "The poor thing must be lost."
+	DESCRIBE.FROSTY_SIMPLE = "Frosty"
 	
 --	Buildings
 	

@@ -86,6 +86,7 @@ local DESCRIBE = STRINGS.CHARACTERS.GENERIC.DESCRIBE
 		GENERIC = "Aha! Come here!",
 	}
 	DESCRIBE.POLARWARG = "The cold must be trivial with fur like his."
+	DESCRIBE.FROSTY_SIMPLE = "Frosty"
 	
 --	Buildings
 	

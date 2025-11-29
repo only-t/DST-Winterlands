@@ -81,6 +81,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WARLY.DESCRIBE
 		GENERIC = "A cunning little renard.",
 	}
 	DESCRIBE.POLARWARG = "I'm all shivery, and it's not just the cold..."
+	DESCRIBE.FROSTY_SIMPLE = "Frosty"
 	
 --	Buildings
 	

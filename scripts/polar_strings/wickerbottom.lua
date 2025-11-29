@@ -81,6 +81,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE
 		GENERIC = "Vulpes lagopus, frolicking happily in the snow!",
 	}
 	DESCRIBE.POLARWARG = "He will be hard to defeat at field advantage."
+	DESCRIBE.FROSTY_SIMPLE = "Frosty"
 	
 --	Buildings
 	
