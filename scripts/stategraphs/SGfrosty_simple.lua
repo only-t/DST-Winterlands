@@ -169,8 +169,8 @@ local states = {
         end,
 
         timeline = {
-            TimeEvent(3*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/common/teleportato/teleportato_maxwelllaugh", nil, 0.5) end),
-            TimeEvent(55*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/common/teleportato/teleportato_maxwelllaugh", nil, 0.5) end),
+            TimeEvent(3*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/common/teleportato/teleportato_maxwelllaugh", nil, 0.3) end),
+            TimeEvent(55*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/common/teleportato/teleportato_maxwelllaugh", nil, 0.3) end),
             TimeEvent(120*FRAMES, function(inst) inst.sg:GoToState("idle") end)
         },
 

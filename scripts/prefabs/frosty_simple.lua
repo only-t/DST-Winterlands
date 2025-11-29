@@ -12,11 +12,14 @@ local prefabs = {
     "frosty_snowball"
 }
 
-local function PickAttackTargetInRange(inst, range)
+local function PickSpecialAttackTargetInRange(inst, range)
     local target
     local far_distsq = 0
     for player, _ in pairs(inst.player_targets) do
-        if player:IsValid() and not player.components.health:IsDead() and not player:HasTag("playerghost") then
+        if player:IsValid() and
+        not player.components.health:IsDead() and
+        not player:HasTag("playerghost") and
+        not player:HasTag("pinned") then
             local distsq_to_player = inst:GetDistanceSqToInst(player)
             if distsq_to_player <= range * range then
                 if distsq_to_player > far_distsq then
@@ -35,7 +38,7 @@ local function RetargetBodySlam(inst)
     if inst.body_slam_active and
     (inst.body_slam_target == nil or inst.body_slam_target.components.health:IsDead()) or
     (inst.body_slam_target ~= nil and (inst.body_slam_start == nil or inst.body_slam_start + BODY_SLAM_TARGET_TIMEOUT <= GetTime())) then
-        local target = PickAttackTargetInRange(inst, TUNING.FROSTY.SIMPLE.BODY_SLAM_TARGET_RANGE)
+        local target = PickSpecialAttackTargetInRange(inst, TUNING.FROSTY.SIMPLE.BODY_SLAM_TARGET_RANGE)
         
         if target == nil then
             inst.body_slam_active = false
@@ -168,7 +171,7 @@ local function OnHitOther(inst, data)
 end
 
 local function ThrowSnowball(inst)
-    local target = PickAttackTargetInRange(inst, TUNING.FROSTY.SIMPLE.RANGED_RANGE)
+    local target = PickSpecialAttackTargetInRange(inst, TUNING.FROSTY.SIMPLE.RANGED_RANGE)
     if target and target:IsValid() then
         local snowball = SpawnPrefab("frosty_snowball")
         snowball.owner = inst
@@ -415,6 +418,10 @@ local function fn()
     inst.components.combat:SetKeepTargetFunction(KeepTargetFn)
     inst.components.combat.hiteffectsymbol = "body"
     inst.components.combat.playerdamagepercent = TUNING.FROSTY.SIMPLE.MELEE_PLAYER_DMG_PERCENT
+
+    inst:AddComponent("frozenarmor")
+    inst.components.frozenarmor:InitProtection(TUNING.FROSTY.SIMPLE.FROZEN_ARMOR_PROTECTION, TUNING.FROSTY.SIMPLE.FROZEN_ARMOR_DURABILITY)
+    inst.components.frozenarmor:SetRegenTime(TUNING.FROSTY.SIMPLE.FROZEN_ARMOR_REGEN_TIME)
 
     inst:AddComponent("timer")
 
