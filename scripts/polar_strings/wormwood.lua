@@ -81,6 +81,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WORMWOOD.DESCRIBE
 		GENERIC = "Aww! Come, COME!",
 	}
 	DESCRIBE.POLARWARG = "Big chilly woofer"
+	DESCRIBE.FROSTY_SIMPLE = "Frosty"
 	
 --	Buildings
 	

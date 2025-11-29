@@ -81,6 +81,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WENDY.DESCRIBE
 		GENERIC = "A sly shade in the snow.",
 	}
 	DESCRIBE.POLARWARG = "The champion of the tundra."
+	DESCRIBE.FROSTY_SIMPLE = "Frosty"
 	
 --	Buildings
 	

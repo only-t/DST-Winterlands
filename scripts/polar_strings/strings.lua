@@ -42,6 +42,7 @@ local RECIPE_DESC = STRINGS.RECIPE_DESC
 	NAMES.POLARFOX = "Frost Tail"
 	NAMES.POLARWARG = "Ice Varg"
 	NAMES.SHADOW_ICICLER = "Shadow Spine"
+	NAMES.FROSTY_SIMPLE = "Frosty"
 	
 --	Buildings
 	

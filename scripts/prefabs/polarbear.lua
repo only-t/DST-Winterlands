@@ -33,7 +33,7 @@ local BODY_PAINTINGS = {
 }
 
 local RETARGET_MUST_TAGS = {"_combat", "_health"}
-local RETARGET_ONEOF_TAGS = {"hound", "walrus", "warg", "pirate", "wonkey"}
+local RETARGET_ONEOF_TAGS = {"hound", "walrus", "warg", "pirate", "wonkey", "abominable_snowman"}
 local RETARGET_NOT_TAGS = {"bearbuddy"}
 
 local function RetargetFn(inst)

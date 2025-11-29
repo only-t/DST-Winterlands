@@ -13,7 +13,6 @@ PrefabFiles = {
 	"emperor_penguin",
 	"emperor_penguinhat",
 	"frostwalkeramulet",
-	"frosty",
 	"girl_walrus",
 	"grass_polar",
 	"icelettuce_spawner",
@@ -73,6 +72,8 @@ PrefabFiles = {
 	"winters_fists",
 	"winters_fists_snowballs",
 	"wysp_skeleton",
+	"frosty_simple",
+	"frosty_snowball",
 	
 --	Skin stuff
 	

@@ -81,6 +81,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE
 		GENERIC = "'Twas no chance to escape me!",
 	}
 	DESCRIBE.POLARWARG = "A glorious battle awaits me on this frozen land."
+	DESCRIBE.FROSTY_SIMPLE = "Frosty"
 	
 --	Buildings
 	

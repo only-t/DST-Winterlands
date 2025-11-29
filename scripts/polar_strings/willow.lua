@@ -81,6 +81,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WILLOW.DESCRIBE
 		GENERIC = "Hey there little guy!",
 	}
 	DESCRIBE.POLARWARG = "Get your fleas away from me."
+	DESCRIBE.FROSTY_SIMPLE = "Frosty"
 	
 --	Buildings
 	

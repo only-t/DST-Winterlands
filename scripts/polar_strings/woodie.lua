@@ -81,6 +81,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WOODIE.DESCRIBE
 		GENERIC = "A rare sight even up in the North.",
 	}
 	DESCRIBE.POLARWARG = "It could pull a sled on its own."
+	DESCRIBE.FROSTY_SIMPLE = "Frosty"
 	
 --	Buildings
 	

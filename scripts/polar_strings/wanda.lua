@@ -83,6 +83,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WANDA.DESCRIBE
 		GENERIC = "Ooooh you! You won't get away this time!",
 	}
 	DESCRIBE.POLARWARG = "For how long has this monster been prowling around here?"
+	DESCRIBE.FROSTY_SIMPLE = "Frosty"
 	
 --	Buildings
 	

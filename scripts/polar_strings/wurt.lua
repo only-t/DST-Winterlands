@@ -81,6 +81,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WURT.DESCRIBE
 		GENERIC = "It like swimming in big sea of snow, flort.",
 	}
 	DESCRIBE.POLARWARG = "Wanna help kill Bearfolk?"
+	DESCRIBE.FROSTY_SIMPLE = "Frosty"
 	
 --	Buildings
 	
