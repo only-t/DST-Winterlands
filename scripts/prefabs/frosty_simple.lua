@@ -173,6 +173,19 @@ local function ThrowSnowball(inst)
         local snowball = SpawnPrefab("frosty_snowball")
         snowball.owner = inst
         snowball.Transform:SetPosition(inst.Transform:GetWorldPosition())
+
+        local distsq = inst:GetDistanceSqToInst(target)
+        if distsq <= 6 * 6 then
+            snowball.components.complexprojectile:SetHorizontalSpeed(TUNING.FROSTY_SNOWBALL_SPEED_NEAR)
+            snowball.components.complexprojectile:SetGravity(TUNING.FROSTY_SNOWBALL_GRAVITY_NEAR)
+        elseif distsq <= 12 * 12 then
+            snowball.components.complexprojectile:SetHorizontalSpeed(TUNING.FROSTY_SNOWBALL_SPEED_FAR)
+            snowball.components.complexprojectile:SetGravity(TUNING.FROSTY_SNOWBALL_GRAVITY_FAR)
+        else
+            snowball.components.complexprojectile:SetHorizontalSpeed(TUNING.FROSTY_SNOWBALL_SPEED_VERYFAR)
+            snowball.components.complexprojectile:SetGravity(TUNING.FROSTY_SNOWBALL_GRAVITY_VERYFAR)
+        end
+
         snowball.components.complexprojectile:Launch(target:GetPosition(), inst)
     end
 
@@ -240,13 +253,17 @@ local function DoBodySlamLanding(inst)
     SpawnPrefab("splash_snow_fx").Transform:SetPosition(x, y, z)
     inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/bearger/groundpound")
 
+    local player_hit = false
     local ents = TheSim:FindEntities(x, y, z, TUNING.FROSTY.SIMPLE.BODY_SLAM_HIT_RANGE, { "_combat" })
     for i, ent in ipairs(ents) do
         if ent ~= inst then
             local damage = TUNING.FROSTY.SIMPLE.BODY_SLAM_DAMAGE
             if ent:HasTag("player") then
+                player_hit = ent
                 damage = damage * TUNING.FROSTY.SIMPLE.BODY_SLAM_PLAYER_DMG_PERCENT
             end
+
+            ent.components.combat:GetAttacked(inst, damage)
 
             if ent.components.pinnable then
                 ent.components.pinnable:Stick()
@@ -266,9 +283,11 @@ local function DoBodySlamLanding(inst)
                     end
                 end
             end
-
-            ent.components.combat:GetAttacked(inst, damage)
         end
+    end
+
+    if player_hit then
+        inst:PushEvent("player_snowed", player_hit)
     end
 
     inst.components.locomotor.walkspeed = TUNING.FROSTY.SIMPLE.WALK_SPEED
@@ -294,17 +313,39 @@ local function OnTimerDone(inst, data)
     if data then
         if data.name == "ranged_cd" then
             if inst.sg:HasStateTag("attack") then
-                inst.sg.statemem.buffer_rangedattack = true
+                inst.buffer_rangedattack = true
             else
                 DoRangedAttack(inst)
             end
         elseif data.name == "body_slam_cd" then
             if inst.sg:HasStateTag("attack") then
-                inst.sg.statemem.buffer_bodyslamattack = true
+                inst.buffer_bodyslamattack = true
             else
                 StartBodySlamAttack(inst)
             end
         end
+    end
+end
+
+local function OnPlayerSnowed(inst, player)
+    inst:ForceFacePoint(player.Transform:GetWorldPosition())
+
+    if inst.components.timer:TimerExists("ranged_cd") then
+        inst.components.timer:PauseTimer("ranged_cd")
+    end
+
+    if inst.components.timer:TimerExists("body_slam_cd") then
+        inst.components.timer:PauseTimer("body_slam_cd")
+    end
+end
+
+local function FinishLaughing(inst)
+    if inst.components.timer:TimerExists("ranged_cd") then
+        inst.components.timer:ResumeTimer("ranged_cd")
+    end
+
+    if inst.components.timer:TimerExists("body_slam_cd") then
+        inst.components.timer:ResumeTimer("body_slam_cd")
     end
 end
 
@@ -388,6 +429,7 @@ local function fn()
     inst:ListenForEvent("newcombattarget", OnNewCombatTarget)
     inst:ListenForEvent("droppedtarget", OnDroppedTarget)
     inst:ListenForEvent("timerdone", OnTimerDone)
+    inst:ListenForEvent("player_snowed", OnPlayerSnowed)
 
     inst.player_targets = {  }
     inst.body_slam_active = false
@@ -399,6 +441,7 @@ local function fn()
     inst.DoBodySlamJump = DoBodySlamJump
     inst.DoBodySlamLanding = DoBodySlamLanding
     inst.ThrowSnowball = ThrowSnowball
+    inst.FinishLaughing = FinishLaughing
 
     inst:SetStateGraph("SGfrosty_simple")
 
