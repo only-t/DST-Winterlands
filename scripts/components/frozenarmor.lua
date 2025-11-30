@@ -1,6 +1,10 @@
+local ZERO_DISTANCE = 10
+
 local function DoRegen(self)
     self.current_durability = self.max_durability
     self.regen_task = nil
+
+    self.inst:StartUpdatingComponent(self)
 end
 
 local FrozenArmor = Class(function(self, inst)
@@ -28,14 +32,21 @@ function FrozenArmor:OnLoad(data)
             self:StartRegenerating(data.regen_time_left)
         elseif data.durabilty_left then
             self.current_durability = data.durabilty_left
+            self.inst:StartUpdatingComponent(self)
         end
     end
 end
 
 function FrozenArmor:InitProtection(protection, durability)
+    if durability <= 0 then
+        return
+    end
+
     self.protection = protection
     self.max_durability = durability
     self.current_durability = durability
+
+    self.inst:StartUpdatingComponent(self)
 end
 
 function FrozenArmor:SetRegenTime(regen_time)
@@ -53,18 +64,42 @@ end
 
 function FrozenArmor:ApplyFrozenArmor(attacker, damage, weapon)
     if (weapon ~= nil and weapon:HasTag("fiery")) or self.current_durability <= 0 then
-        if self.current_durability > 0 then
-            self.current_durability = self.current_durability - damage
-
-            if self.current_durability <= 0 then
-                self:StartRegenerating()
-            end
-        end
+        self:TakeDamage(damage)
 
         return damage
     end
 
     return damage * (1 - self.protection)
+end
+
+function FrozenArmor:TakeDamage(damage)
+    if self.current_durability > 0 then
+        self.current_durability = self.current_durability - damage
+
+        if self.current_durability <= 0 then
+            self.current_durability = 0
+            self:StartRegenerating()
+
+            self.inst:StopUpdatingComponent(self)
+        end
+    end
+end
+
+function FrozenArmor:OnUpdate(dt)
+    local x, y, z = self.inst.Transform:GetWorldPosition()
+    local heaters = TheSim:FindEntities(x, y, z, ZERO_DISTANCE, { "HASHEATER" })
+    local heat = 0
+    for _, heater in ipairs(heaters) do
+        heat = heat + heater.components.heater:GetHeat(self.inst)
+
+        if heat > TUNING.FROSTY.SIMPLE.FROZEN_ARMOR_MAX_HEAT then
+            heat = TUNING.FROSTY.SIMPLE.FROZEN_ARMOR_MAX_HEAT
+            break
+        end
+    end
+
+    local damage = TUNING.FROSTY.SIMPLE.FROZEN_ARMOR_HEAT_MAX_DRAIN * math.pow(heat / TUNING.FROSTY.SIMPLE.FROZEN_ARMOR_MAX_HEAT, 0.33)
+    self:TakeDamage(damage)
 end
 
 return FrozenArmor

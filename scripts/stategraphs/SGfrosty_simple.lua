@@ -2,7 +2,7 @@ require("stategraphs/commonstates")
 
 local events = {
     EventHandler("attacked", function(inst)
-        if not inst.components.health:IsDead() and not inst.sg:HasStateTag("busy") then
+        if not inst.components.health:IsDead() and not inst.sg:HasStateTag("busy") and not inst.body_slam_active then
             inst.sg:GoToState("hit")
         end
     end),
@@ -14,13 +14,13 @@ local events = {
     end),
 
     EventHandler("dorangedattack", function(inst)
-        if not inst.components.health:IsDead() then
+        if not inst.components.health:IsDead() and not inst.sg:HasStateTag("attack") then
             inst.sg:GoToState("snowball_throw")
         end
     end),
 
     EventHandler("dobodyslam", function(inst)
-        if not inst.components.health:IsDead() then
+        if not inst.components.health:IsDead() and not inst.sg:HasStateTag("attack") then
             inst.sg:GoToState("bodyslam")
         end
     end),
@@ -69,7 +69,7 @@ local states = {
 
     State{
         name = "idle",
-        tags = { "idle", "canrotate" },
+        tags = { "idle" },
 
         onenter = function(inst)
             inst.Physics:Stop()
@@ -204,14 +204,14 @@ local states = {
 
         events = {
             EventHandler("animover", function(inst)
+                inst.sg:GoToState("idle")
+
                 if inst.buffer_rangedattack then
                     inst:DoRangedAttack()
                     inst.buffer_rangedattack = nil
                 elseif inst.buffer_bodyslamattack then
                     inst:StartBodySlamAttack()
                     inst.buffer_bodyslamattack = nil
-                else
-                    inst.sg:GoToState("idle")
                 end
             end)
         }
@@ -219,7 +219,7 @@ local states = {
 
     State{
         name = "snowball_throw",
-        tags = { "attack", "busy" },
+        tags = { "attack", "busy", "canrotate" },
 
         onenter = function(inst)
             inst.Physics:Stop()
@@ -242,10 +242,10 @@ local states = {
 
     State{
         name = "bodyslam",
-        tags = { "attack", "busy" },
+        tags = { "attack", "busy", "canrotate", "jumping", "longattack" },
 
         onenter = function(inst)
-            inst.Physics:Stop()
+            inst.components.locomotor:Stop()
             inst.components.locomotor:EnableGroundSpeedMultiplier(false)
 
             inst.components.combat:StartAttack()
@@ -253,16 +253,22 @@ local states = {
             inst.AnimState:PlayAnimation("warrior_atk", true)
         end,
 
+        onexit = function(inst)
+            inst.components.locomotor:Stop()
+            inst.components.locomotor:EnableGroundSpeedMultiplier(true)
+            inst.Physics:ClearMotorVelOverride()
+        end,
+
         timeline = {
-            TimeEvent(7*FRAMES, function(inst)
-                inst.components.locomotor:WalkForward()
-            end),
-            TimeEvent(8*FRAMES, function(inst)
+            TimeEvent(3*FRAMES, function(inst)
                 RemovePhysicsColliders(inst)
-                inst.Physics:SetMotorVelOverride(12,0,0)
+            end),
+            TimeEvent(7*FRAMES, function(inst)
+                inst.Physics:SetMotorVelOverride(8,0,0)
             end),
             TimeEvent(30*FRAMES, function(inst)
                 MakeGiantCharacterPhysics(inst, 1000, 1.6)
+                inst.Physics:ClearMotorVelOverride()
                 inst:DoBodySlamLanding(inst)
             end),
             TimeEvent(36*FRAMES, function(inst)
