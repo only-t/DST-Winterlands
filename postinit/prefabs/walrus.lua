@@ -18,22 +18,16 @@ local function OnTurnOff(inst)
 end
 
 local function OnActivate(inst, doer, recipe)
+	local trades_data = POLARWALRUS_TRADEDATA[inst.prefab]
+	
+	if recipe == nil or trades_data == nil or inst.components.craftingstation == nil then
+		return
+	end
+	
 	local target = inst.components.combat.target
 	
 	if target == nil and inst.sg and not inst.sg:HasStateTag("busy") then
 		inst.sg:GoToState("funny_idle")
-	end
-	
-	if recipe == nil or inst.components.craftingstation == nil then
-		return
-	end
-	
-	local product = recipe.product
-	local amount = recipe.numtogive or 1
-	
-	local trades_data = POLARWALRUS_TRADEDATA[inst.prefab]
-	if trades_data == nil then
-		return
 	end
 	
 	local product_counts = {}
@@ -41,12 +35,12 @@ local function OnActivate(inst, doer, recipe)
 	for i, data in ipairs(trades_data) do
 		product_counts[data.product] = (product_counts[data.product] or 0) + 1
 		
-		if data.product == product then
+		if data.product == recipe.product then
 			local recipe_name = string.format(inst.prefab.."_trade_%s%d", data.product, product_counts[data.product])
 			
 			if not trades_data[i].nosharedstock then
 				local old = inst.components.craftingstation:GetRecipeCraftingLimit(recipe_name) or 0
-				local new = math.max(0, old - amount + (recipe.name == recipe_name and 1 or 0))
+				local new = math.max(0, old - (recipe.numtogive or 1) + (recipe.name == recipe_name and 1 or 0))
 				
 				inst.components.craftingstation:SetRecipeCraftingLimit(recipe_name, new)
 				if recipe.name ~= recipe_name then
@@ -64,32 +58,43 @@ local function OnTimerDone(inst, data)
 	end
 end
 
-local function PolarTradesRefresh(inst, initial)
+local function PolarTradesRefresh(inst)
 	local trades_data = POLARWALRUS_TRADEDATA[inst.prefab]
 	
 	if trades_data == nil or inst.components.craftingstation == nil then
 		return
 	end
 	
-	local product_counts = {}
+	local product_done = {}
 	
 	for i, recipe_data in ipairs(trades_data) do
-		product_counts[recipe_data.product] = (product_counts[recipe_data.product] or 0) + 1
-		local recipe_name = string.format(inst.prefab.."_trade_%s%d", recipe_data.product, product_counts[recipe_data.product])
-		
-		inst.components.craftingstation:LearnItem(recipe_name, recipe_name)
-		
-		if recipe_data.limit then
-			--[[if initial then
-				inst.components.craftingstation:SetRecipeCraftingLimit(recipe_name, recipe_data.limit)
-			else]]
-				local old = inst.components.craftingstation:GetRecipeCraftingLimit(recipe_name) or 0
-				local restock_amt = recipe_data.restock or TUNING.WALRUSTRADES_RESTOCK_AMT
-				
-				local new = math.min(recipe_data.limit, old + restock_amt)
-				
-				inst.components.craftingstation:SetRecipeCraftingLimit(recipe_name, new)
-			--end
+		if not product_done[recipe_data.product] then
+			product_done[recipe_data.product] = true
+			
+			local product_available = math.random() <= (recipe_data.chance or TUNING.WALRUSTRADES_RECIPE_BASE_CHANCE)
+			local product_stock = product_available and 1 or nil
+			
+			if product_available and recipe_data.limits then
+				product_stock = math.random(recipe_data.limits.min, recipe_data.limits.max)
+			end
+			
+			local count = 1
+			for j, data in ipairs(trades_data) do
+				if data.product == recipe_data.product then
+					local recipe_name = string.format(inst.prefab.."_trade_%s%d", recipe_data.product, count)
+					count = count + 1
+					
+					if product_stock and product_stock > 0 then
+						inst.components.craftingstation:LearnItem(recipe_name, recipe_name)
+						if data.limits and not data.nosharedstock then
+							inst.components.craftingstation:SetRecipeCraftingLimit(recipe_name, product_stock)
+						end
+					else
+						inst.components.craftingstation:SetRecipeCraftingLimit(recipe_name, 0)
+						inst.components.craftingstation:ForgetRecipe(recipe_name)
+					end
+				end
+			end
 		end
 	end
 end

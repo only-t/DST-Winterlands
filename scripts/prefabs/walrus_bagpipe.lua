@@ -2,13 +2,6 @@ local assets = {
 	Asset("ANIM", "anim/armor_walrus_bagpipe.zip"),
 }
 
-local function band_disable(inst)
-	if inst.updatetask then
-		inst.updatetask:Cancel()
-		inst.updatetask = nil
-	end
-end
-
 local banddt = 1
 local FOLLOWER_ONEOF_TAGS = {"walrus", "hound", "farm_plant"}
 local FOLLOWER_CANT_TAGS = {"player"}
@@ -28,7 +21,11 @@ local function band_update(inst)
 			end
 		end
 		
-		owner:AddDebuff("buff_walrusally", "buff_walrusally")
+		for _, v in ipairs(AllPlayers) do
+			if not v:HasTag("playerghost") and v:GetDistanceSqToPoint(x, y, z) < TUNING.ONEMANBAND_RANGE * TUNING.ONEMANBAND_RANGE then
+				v:AddDebuff("buff_walrusally", "buff_walrusally")
+			end
+		end
 		
 		--[[for k, v in pairs(owner.components.leader.followers) do
 			if k.components.follower then
@@ -55,55 +52,59 @@ local function band_update(inst)
 	end
 end
 
-local function band_enable(inst)
-	inst.updatetask = inst:DoPeriodicTask(banddt, band_update, 0)
-end
-
-local function band_perish(inst)
-	band_disable(inst)
-	inst:Remove()
-end
-
 local function OnEquip(inst, owner)
-	if owner then
-		owner.AnimState:OverrideSymbol("swap_body_tall", "armor_onemanband", "swap_body_tall")
+	inst.updatetask = inst:DoPeriodicTask(banddt, band_update, 0)
+	
+	owner.AnimState:OverrideSymbol("swap_body_tall", "armor_walrus_bagpipe", "torso")
+	owner:DoTaskInTime(0.2 + math.random(), function()
+		if owner.SoundEmitter and inst.updatetask then
+			owner.SoundEmitter:PlaySound("polarsounds/walrus/bagpipes", "walrus_bagpipe")
+		end
+	end)
+	
+	if inst.components.fueled then
 		inst.components.fueled:StartConsuming()
 	end
-	
-	band_enable(inst)
 end
 
 local function OnUnequip(inst, owner)
-	if owner then
-		owner.AnimState:ClearOverrideSymbol("swap_body_tall")
+	owner.AnimState:ClearOverrideSymbol("swap_body_tall")
+	if owner.SoundEmitter then
+		owner.SoundEmitter:KillSound("walrus_bagpipe")
+	end
+	
+	if inst.components.fueled then
 		inst.components.fueled:StopConsuming()
 	end
 	
-	band_disable(inst)
+	if inst.updatetask then
+		inst.updatetask:Cancel()
+		inst.updatetask = nil
+	end
 end
 
 local function OnEquipToModel(inst, owner)
-	if owner then
+	if owner.SoundEmitter then
+		owner.SoundEmitter:KillSound("walrus_bagpipe")
+	end
+	
+	if inst.components.fueled then
 		inst.components.fueled:StopConsuming()
 	end
 	
-	band_disable(inst)
+	if inst.updatetask then
+		inst.updatetask:Cancel()
+		inst.updatetask = nil
+	end
 end
 
-local function haunt_foley_delayed(inst)
-	--inst.SoundEmitter:PlaySound(inst.foleysound)
-end
-
-local function OnHaunt(inst)
-	OnEquip(inst)
-	inst.hauntsfxtask = inst:DoPeriodicTask(.3, haunt_foley_delayed)
-	return true
-end
-
-local function OnUnHaunt(inst)
-	OnUnequip(inst)
-	inst.hauntsfxtask:Cancel()
-	inst.hauntsfxtask = nil
+local function OnPerish(inst)
+	if inst.updatetask then
+		inst.updatetask:Cancel()
+		inst.updatetask = nil
+	end
+	
+	inst:Remove()
 end
 
 local function fn()
@@ -116,13 +117,14 @@ local function fn()
 	
 	MakeInventoryPhysics(inst)
 	
+	inst:AddTag("band") -- Helps us enter basic onemanband states if no other idle exits take the take before, then we swap over bagpipe states
 	inst:AddTag("walrusbagpipe")
 	
 	inst.AnimState:SetBank("walrus_bagpipe")
 	inst.AnimState:SetBuild("armor_walrus_bagpipe")
 	inst.AnimState:PlayAnimation("anim")
 	
-	--inst.foleysound = "dontstarve/wilson/onemanband"
+	inst.foleysound = "cloth"
 	
 	inst.entity:SetPristine()
 	
@@ -140,7 +142,7 @@ local function fn()
 	inst:AddComponent("fueled")
 	inst.components.fueled.fueltype = FUELTYPE.USAGE
 	inst.components.fueled:InitializeFuelLevel(TUNING.WALRUS_BAGPIPE_PERISHTIME)
-	inst.components.fueled:SetDepletedFn(band_perish)
+	inst.components.fueled:SetDepletedFn(OnPerish)
 	
 	inst:AddComponent("inspectable")
 	
@@ -149,10 +151,7 @@ local function fn()
 	
 	inst:AddComponent("leader")
 	
-	inst:AddComponent("hauntable")
-	inst.components.hauntable:SetHauntValue(TUNING.HAUNT_SMALL)
-	inst.components.hauntable:SetOnHauntFn(OnHaunt)
-	inst.components.hauntable:SetOnUnHauntFn(OnUnHaunt)
+	--TODO: Custom haunt reaction
 	
 	return inst
 end

@@ -153,6 +153,68 @@ local states = {
 			end
 		end,
 	},
+	
+	State{
+		name = "enter_bagpipe",
+		tags = {"playing", "idle"},
+		
+		onenter = function(inst, pushanim)
+			inst.components.locomotor:Stop()
+			
+			if pushanim then
+				inst.AnimState:PushAnimation("idle_onemanband1_pre", false)
+			else
+				inst.AnimState:PlayAnimation("idle_onemanband1_pre")
+			end
+		end,
+		
+		events = {
+			EventHandler("animover", function(inst)
+				if inst.AnimState:AnimDone() and inst.AnimState:IsCurrentAnimation("idle_onemanband1_pre") then
+					inst.sg:GoToState("play_bagpipe")
+				end
+			end),
+		},
+	},
+	
+	State{
+		name = "play_bagpipe",
+		tags = {"playing", "idle"},
+		
+		onenter = function(inst)
+			inst.components.locomotor:Stop()
+			inst.AnimState:PlayAnimation("idle_onemanband1_loop")
+		end,
+		
+		events = {
+			EventHandler("animover", function(inst)
+				if inst.AnimState:AnimDone() then
+					inst.sg:GoToState(math.random() <= 0.15 and "play_bagpipe_stomp" or "play_bagpipe")
+				end
+			end),
+		},
+	},
+	
+	State{
+		name = "play_bagpipe_stomp",
+		tags = {"playing", "idle"},
+		
+		onenter = function(inst)
+			inst.components.locomotor:Stop()
+			inst.AnimState:PlayAnimation("idle_onemanband1_pst")
+			inst.AnimState:PushAnimation("idle_onemanband2_pre")
+			inst.AnimState:PushAnimation("idle_onemanband2_loop")
+			inst.AnimState:PushAnimation("idle_onemanband2_pst", false)
+		end,
+		
+		events = {
+			EventHandler("animqueueover", function(inst)
+				if inst.AnimState:AnimDone() then
+					inst.sg:GoToState("idle")
+				end
+			end),
+		},
+	},
 }
 
 ENV.AddStategraphPostInit("wilson", function(sg)
@@ -281,6 +343,17 @@ ENV.AddStategraphPostInit("wilson", function(sg)
 		if oldemote_exit then
 			oldemote_exit(inst, ...)
 		end
+	end
+	
+	local oldenter_onemanband = sg.states["enter_onemanband"].onenter
+	sg.states["enter_onemanband"].onenter = function(inst, pushanim, ...)
+		local equippedArmor = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY)
+		if equippedArmor and equippedArmor:HasTag("walrusbagpipe") then
+			inst.sg:GoToState("enter_bagpipe", pushanim)
+			return
+		end
+		
+		oldenter_onemanband(inst, pushanim, ...)
 	end
 	
 	local oldfunnyidle = sg.states["funnyidle"].onenter

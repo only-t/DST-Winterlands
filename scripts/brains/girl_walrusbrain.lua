@@ -66,8 +66,7 @@ local function GetHome(inst)
 end
 
 local function ShouldRunAway(inst, guy)
-	local runaway = not (guy:HasTag("walrus") or guy:HasTag("hound") or guy:HasTag("notarget") or guy:HasTag("walruspal"))
-		and (guy:HasTag("character") or guy:HasTag("monster")) and inst.components.combat:InCooldown()
+	local runaway = inst.components.combat:InCooldown() and inst.components.combat.target == guy
 	
 	inst._runaway_allowtraps = runaway
 	
@@ -174,7 +173,7 @@ function Girl_WalrusBrain:OnStart()
 		BrainCommon.PanicTrigger(self.inst),
 		BrainCommon.ElectricFencePanicTrigger(self.inst),
 		
-		Leash(self.inst, GetNoLeaderLeashPos, LEASH_MAX_DIST, LEASH_RETURN_DIST), -- TODO: Consider fixing this stupid behavior with Walruses if they have a MaTusk ?
+		Leash(self.inst, GetNoLeaderLeashPos, LEASH_MAX_DIST, LEASH_RETURN_DIST), -- Dementia behavior, for consistancy...
 		
 		WhileNode(function() return self.inst.components.combat.target end, "ShouldDeployTrap",
 			DoAction(self.inst, function() return DeployTrapAtPoint(self.inst) end, "Deploy Trap", true)),

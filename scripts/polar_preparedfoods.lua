@@ -36,7 +36,7 @@ local polar_preparedfoods = {
 	},
 	
 	koalefried_trunk_summer = {
-		test = function(cooker, names, tags) return (names.trunk_summer or names.trunk_cooked) and (names.onion or names.onion_cooked) end,
+		test = function(cooker, names, tags) return (names.trunk_summer or names.trunk_cooked) and (names.onion or names.onion_cooked or names.potato or names.potato_cooked) end,
 		hunger = TUNING.CALORIES_SMALL * 8,
 		health = TUNING.HEALING_LARGE,
 		sanity = TUNING.SANITY_LARGE,
@@ -64,7 +64,7 @@ local polar_preparedfoods = {
 	},
 	
 	koalefried_trunk_winter = {
-		test = function(cooker, names, tags) return names.trunk_winter and (names.onion or names.onion_cooked) end,
+		test = function(cooker, names, tags) return names.trunk_winter and (names.onion or names.onion_cooked or names.potato or names.potato_cooked) end,
 		hunger = TUNING.CALORIES_SMALL * 8,
 		health = TUNING.HEALING_LARGE,
 		sanity = TUNING.SANITY_LARGE,
@@ -88,7 +88,7 @@ local polar_preparedfoods = {
 				buff.mode = "monster"
 			end
 		end,
-		card_def = {ingredients = {{"trunk_winter", 1}, {"onion", 1}, {"potato", 2}}},
+		card_def = {ingredients = {{"trunk_winter", 1}, {"potato", 2}, {"onion", 1}}},
 	},
 	
 	icecream_emperor = {
