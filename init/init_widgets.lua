@@ -335,6 +335,9 @@ PauseScreen.BuildMenu = function(self, ...)
 	local calendar_btn = self.menu:AddItem("Advent Calendar", function()
 		TheFrontEnd:PushScreen(PolarCalendarScreen(self.owner))
 	end)
+
+	calendar_btn:SetTextures("images/button_winter_carny_xlong.xml", "button_winter_carny_xlong_normal.tex", "button_winter_carny_xlong_hover.tex", "button_winter_carny_xlong_disabled.tex", "button_winter_carny_xlong_down.tex")
+	calendar_btn.image:SetScale(0.7) -- This is how it's done in Menu:AddItem()
 	calendar_btn:SetScale(0.7)
 
 	table.remove(self.menu.items, #self.menu.items) -- Repositioning the button
@@ -348,14 +351,11 @@ PauseScreen.BuildMenu = function(self, ...)
 
     local button_h = 50
 	local buttons = self.menu.items
-
-    --throw up the background
 	local height = button_h * #buttons + 30	-- consoles are shorter since they don't have the '
     height = math.clamp(height, 90, 500)
 	self.bg:SetSize(190, height)
 	self.bg.body:SetRegionSize(190, height)
 
-    --create the menu itself
 	local y_pos = (button_h * (#buttons - 1) / 2)
     self.menu:SetPosition(0, y_pos, 0)
 end
