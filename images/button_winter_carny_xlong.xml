@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Atlas>
+	<Texture filename="button_winter_carny_xlong.tex" />
+	<Elements>
+		<Element name="button_winter_carny_xlong_disabled.tex" u1="0.001" u2="0.840796875" v2="0.477515625" v1="0.3056875" variant="" />
+		<Element name="button_winter_carny_xlong_down.tex" u1="0.001" u2="0.840796875" v2="0.65134375" v1="0.479515625" variant="" />
+		<Element name="button_winter_carny_xlong_hover.tex" u1="0.001" u2="0.840796875" v2="0.825171875" v1="0.65334375" variant="" />
+		<Element name="button_winter_carny_xlong_normal.tex" u1="0.001" u2="0.840796875" v2="0.999" v1="0.827171875" variant="" />
+	</Elements>
+</Atlas>
