@@ -34,6 +34,7 @@ local KEEP_FACE_DIST = MAX_FOLLOW_DIST
 local DEPLOY_TRAP_OFFSET_DIST = 1.2
 local DEPLOY_TRAP_TARGET_DIST = 70
 
+local BOOST_ALLY_DIST = 6
 local SEE_ALLY_DIST = 20
 
 local function GetFaceTargetFn(inst)
@@ -50,6 +51,9 @@ local function GetLeader(inst)
 	return inst.components.follower and inst.components.follower.leader or nil
 end
 
+local ALLY_TAGS = {"walrus", "hound"}
+local ALLY_NOT_TAGS = {"isdead"}
+
 local PLAYER_ALLY_TAGS = {"walruspal"}
 local PLAYER_ALLY_NOT_TAGS = {"INLIMBO", "isdead"}
 
@@ -59,6 +63,10 @@ local function GetNoLeaderFollowTarget(inst)
 	if ally == nil then
 		return GetLeader(inst) == nil and FindClosestPlayerToInst(inst, MAX_PLAYER_STALK_DISTANCE, true) or nil
 	end
+end
+
+local function GetAllies(inst)
+	return inst._wantstoboost and FindEntity(inst, 10, function(guy) return not guy:HasTag("walrus_support") and not guy:HasTag("hound") end, nil, ALLY_NOT_TAGS, ALLY_TAGS)
 end
 
 local function GetHome(inst)
@@ -97,9 +105,6 @@ local function ShouldGoHomeAtNight(inst)
 	return TheWorld.state.isnight and GetLeader(inst) == nil and GetHome(inst) and inst.components.combat.target == nil
 end
 
-local ALLY_TAGS = {"walrus", "hound"}
-local ALLY_NOT_TAGS = {"isdead"}
-
 local function ShouldGoHomeScared(inst)
 	if GetLeader(inst) or inst.components.leader:CountFollowers() > 0 then
 		return false
@@ -120,6 +125,7 @@ end
 
 local function GetHomeLocation(inst)
 	local home = GetHome(inst)
+	
 	return home and home:GetPosition() or nil
 end
 
@@ -127,6 +133,14 @@ local function GetNoLeaderLeashPos(inst)
 	if not inst:HasTag("flare_summoned") then
 		return GetLeader(inst) == nil and GetHomeLocation(inst) or nil
 	end
+end
+
+local function DoWalrusSupport(inst, pos)
+	if not inst._wantstoboost or inst._runaway_allowtraps or FindEntity(inst, BOOST_ALLY_DIST, nil, nil, ALLY_NOT_TAGS, ALLY_TAGS) == nil then
+		return
+	end
+	
+	inst:PushEvent("dowalrusboost")
 end
 
 local function DeployTrapAtPoint(inst, pos)
@@ -175,23 +189,27 @@ function Girl_WalrusBrain:OnStart()
 		
 		Leash(self.inst, GetNoLeaderLeashPos, LEASH_MAX_DIST, LEASH_RETURN_DIST), -- Dementia behavior, for consistancy...
 		
-		WhileNode(function() return self.inst.components.combat.target end, "ShouldDeployTrap",
+		WhileNode(function() return self.inst.components.combat.target and not self.inst.sg:HasStateTag("walrusboosting") end, "ShouldSupport",
 			DoAction(self.inst, function() return DeployTrapAtPoint(self.inst) end, "Deploy Trap", true)),
+			Follow(self.inst, GetAllies, MIN_FOLLOW_LEADER, TARGET_FOLLOW_LEADER, MAX_FOLLOW_LEADER, true),
+			DoAction(self.inst, function() return DoWalrusSupport(self.inst) end, "Play Bagpipes", true),
 		RunAway(self.inst, function(guy) return ShouldRunAway(self.inst, guy) end, RUN_START_DIST, RUN_STOP_DIST),
+		
+		FailIfSuccessDecorator(ConditionWaitNode(function() return not self.inst.sg:HasStateTag("walrusboosting") end, "Block While Playing")),
+		
+		WhileNode(function() return self.inst.components.combat.target == nil or not self.inst.components.combat:InCooldown() end, "AttackMomentarily",
+			ChaseAndAttack(self.inst, MAX_CHASE_TIME)),
+		Follow(self.inst, function() return self.inst.components.combat.target end, MIN_FOLLOW_DIST, TARGET_FOLLOW_DIST, MAX_FOLLOW_DIST, true),
 		
 		WhileNode(function() return ShouldGoHomeAtNight(self.inst) end, "ShouldGoHomeAtNight",
 			DoAction(self.inst, GoHomeAction, "Go Home Night")),
 		
-		WhileNode(function() return self.inst.components.combat.target == nil or not self.inst.components.combat:InCooldown() end, "AttackMomentarily",
-			ChaseAndAttack(self.inst, MAX_CHASE_TIME)),
-		
 		WhileNode(function() return ShouldGoHomeScared(self.inst) end, "ShouldGoHomeScared",
 			DoAction(self.inst, GoHomeAction, "Go Home Scared", true)),
 		
-		Follow(self.inst, function() return self.inst.components.combat.target end, MIN_FOLLOW_DIST, TARGET_FOLLOW_DIST, MAX_FOLLOW_DIST, true),
-		
-		Follow(self.inst, GetLeader, MIN_FOLLOW_LEADER, TARGET_FOLLOW_LEADER, MAX_FOLLOW_LEADER, false),
-		Follow(self.inst, GetNoLeaderFollowTarget, MIN_FOLLOW_DIST, TARGET_FOLLOW_DIST, MAX_FOLLOW_DIST, false),
+		WhileNode(function() return self.inst.components.combat.target == nil end, "FollowMacTusk",
+			Follow(self.inst, GetLeader, MIN_FOLLOW_LEADER, TARGET_FOLLOW_LEADER, MAX_FOLLOW_LEADER, false)),
+			Follow(self.inst, GetNoLeaderFollowTarget, MIN_FOLLOW_DIST, TARGET_FOLLOW_DIST, MAX_FOLLOW_DIST, false),
 		
 		DoAction(self.inst, EatFoodAction, "Eat Food"),
 		

@@ -135,10 +135,18 @@ local function OnStopDay(inst)
 	end
 end
 
+local function OnNewTarget(inst, data)
+	if data and data.target and inst.components.timer and not inst.components.timer:TimerExists("walrusboosting_prep") then
+		inst.components.timer:StartTimer("walrusboosting_prep", TUNING.POLAR_WALRUSBOOST_PREPTIME + math.random())
+	end
+end
+
 local function OnTimerDone(inst, data)
 	if data.name == "walrustrade_refresh" then
 		inst:PolarTradesRefresh()
 		inst.components.timer:StartTimer("walrustrade_refresh", math.random(TUNING.WALRUSTRADES_REFRESH_TIMES.min, TUNING.WALRUSTRADES_REFRESH_TIMES.max))
+	elseif data.name == "walrusboosting_prep" then
+		inst._wantstoboost = true
 	end
 end
 
@@ -299,8 +307,9 @@ local function fn()
 	inst.soundgroup = "matusk" -- Remapped in init_assets
 	
 	inst:ListenForEvent("attacked", OnAttacked)
-	inst:WatchWorldState("stopday", OnStopDay)
 	inst:ListenForEvent("timerdone", OnTimerDone)
+	inst:ListenForEvent("newcombattarget", OnNewTarget)
+	inst:WatchWorldState("stopday", OnStopDay)
 	
 	inst:SetStateGraph("SGwalrus")
 	

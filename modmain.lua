@@ -42,6 +42,7 @@ local prefabs = {
 	"antlion_sinkhole",
 	"bearger",
 	"birds",
+	--"birdcage",
 	"boat_ice",
 	"books",
 	"bluegem",
@@ -77,7 +78,6 @@ local prefabs = {
 	"wilson",
 	"winona_spotlight",
 	"wintersfeastcookedfoods",
-	-- "birdcage",
 	
 	"any", -- hound, walrus, ...
 	"bear_treasures",
@@ -149,6 +149,7 @@ local components = {
 }
 
 local stategraphs = {
+	"hound",
 	"krampus",
 	"lavae",
 	"penguin",

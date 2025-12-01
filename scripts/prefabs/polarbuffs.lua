@@ -95,14 +95,80 @@ local function Immunity_OnDetached(inst, target)
 	target:RemoveTag("polarimmune")
 end
 
---	[[		Walrus' Bagpipes Buff		]]	--
+--	[[		Player's Bagpipes Buff		]]	--
+
+local function walrusally_onattackother(target, data)
+	local victim = data and data.target
+	
+	if victim and (victim:HasTag("walrus") or victim:HasTag("hound")) then
+		target:RemoveDebuff("buff_walrusally")
+		
+		if target.components.timer then
+			if target.components.timer:TimerExist("walrusally_oncooldown") then
+				target.components.timer:SetTimeLeft("walrusally_oncooldown", 4 + math.random())
+			else
+				target.components.timer:StartTimer("walrusally_oncooldown", 4 + math.random())
+			end
+		end
+	end
+end
 
 local function WalrusAlly_OnAttached(inst, target)
 	target:AddTag("walruspal")
+	inst:ListenForEvent("onattackother", walrusally_onattackother, target)
 end
 
 local function WalrusAlly_OnDetached(inst, target)
 	target:RemoveTag("walruspal")
+	inst:RemoveEventCallback("onattackother", walrusally_onattackother, target)
+end
+
+--	[[		MaTusk's Support Buffs		]]	--
+
+local function walrusboost_onattackother(target, data)
+	local victim = data and data.target
+	
+	if target._walrusboost and victim and victim.components.freezable and not victim.components.freezable:IsFrozen() then
+		victim.components.freezable:AddColdness(2)
+	end
+end
+
+local function walrusboost_ontick(inst, target)
+	if not target._walrusboost then
+		if not (target.components.health and target.components.health:IsDead()) then
+			if target:HasTag("hound") then
+				target.sg:GoToState("howl", {})
+				target._walrusboost = true
+			else
+				target:PushEvent("walrusboosted")
+			end
+		end
+	elseif target:HasTag("hound") and inst.buff_fx == nil then
+		inst.buff_fx = SpawnPrefab("beargerfur_sack_frost_fx")
+		inst.buff_fx.Transform:SetScale(1.5, 1.5, 1.5)
+		inst.buff_fx.entity:SetParent(target.entity)
+	end
+end
+
+local function WalrusBoost_OnAttached(inst, target)
+	inst.task = inst:DoPeriodicTask(math.random() * 0.5, walrusboost_ontick, nil, target)
+	
+	if target:HasTag("hound") then
+		inst:ListenForEvent("onattackother", walrusboost_onattackother, target)
+	end
+end
+
+local function WalrusBoost_OnDetached(inst, target)
+	if inst.buff_fx and inst.buff_fx:IsValid() then
+		inst.buff_fx:Remove()
+		inst.buff_fx = nil
+	end
+	
+	if target:HasTag("hound") then
+		inst:RemoveEventCallback("onattackother", walrusboost_onattackother, target)
+	end
+	
+	target._walrusboost = false
 end
 
 --	[[		Snoot Platter Hunting		]]	--
@@ -374,5 +440,6 @@ end
 return MakeBuff("polarwetness", Wetness_OnAttached, nil, Wetness_OnDetached, nil, 2, true, TUNING.POLARWETNESS_DEBUFF_STARTTEMP),
 	MakeBuff("polarimmunity", Immunity_OnAttached, nil, Immunity_OnDetached, TUNING.POLAR_IMMUNITY_DURATION, 2, false),
 	MakeBuff("walrusally", WalrusAlly_OnAttached, nil, WalrusAlly_OnDetached, TUNING.POLAR_WALRUSALLY_BUFF_DURATION, 2, false),
+	MakeBuff("walrusboost", WalrusBoost_OnAttached, nil, WalrusBoost_OnDetached, TUNING.POLAR_WALRUSBOOST_BUFF_DURATION, 2, false),
 	MakeBuff("huntmoar", HuntMoar_OnAttached, nil, HuntMoar_OnDetached, TUNING.MOARHUNT_BUFF_DURATION, 2, true, nil, HuntMoar_OnSave, HuntMoar_OnLoad),
 	MakeBuff("wandatimefreeze", WandaTimeFreeze_OnAttached, nil, WandaTimeFreeze_OnDetached, TUNING.POCKETWATCH_BUFF_DURATION, 2, true)
