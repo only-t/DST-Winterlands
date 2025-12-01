@@ -30,7 +30,14 @@ local function PickSpecialAttackTargetInRange(inst, range)
         end
     end
 
-    return target ~= nil and target or inst.components.combat.target
+    if target == nil then
+        if inst.components.combat.target ~= nil and
+        (not inst.components.combat.target:HasTag("player") or not inst.components.combat.target:HasTag("pinned")) then
+            target = inst.components.combat.target
+        end
+    end
+
+    return target
 end
 
 local BODY_SLAM_TARGET_TIMEOUT = 5
@@ -201,6 +208,12 @@ end
 
 local function DoRangedAttack(inst)
     if inst.components.combat.target then -- Has to be in combat
+        if PickSpecialAttackTargetInRange(inst, TUNING.FROSTY.SIMPLE.RANGED_RANGE) == nil then -- There's no valid special attack targets, don't even bother
+            inst.components.timer:StartTimer("ranged_cd", TUNING.FROSTY.SIMPLE.RANGED_COOLDOWN)
+
+            return
+        end
+
         if inst.components.timer:TimerExists("body_slam_cd") then
             inst.components.timer:PauseTimer("body_slam_cd")
         end
@@ -211,6 +224,12 @@ end
 
 local function StartBodySlamAttack(inst)
     if inst.components.combat.target then
+        if PickSpecialAttackTargetInRange(inst, TUNING.FROSTY.SIMPLE.RANGED_RANGE) == nil then -- There's no valid special attack targets, don't even bother
+            inst.components.timer:StartTimer("body_slam_cd", TUNING.FROSTY.SIMPLE.RANGED_COOLDOWN)
+
+            return
+        end
+        
         if inst.components.timer:TimerExists("ranged_cd") then
             inst.components.timer:PauseTimer("ranged_cd")
         end
@@ -388,6 +407,7 @@ local function fn()
     inst:AddTag("epic")
     inst:AddTag("largecreature")
     inst:AddTag("abominable_snowman")
+    inst:AddTag("fireimmune") -- We're using the burnable component for the Frozen Armor durability but we don't want to actually set Frosty on fire
 
     inst.AnimState:SetBank("spider")
     inst.AnimState:SetBuild("spider_build")
@@ -430,6 +450,14 @@ local function fn()
     inst:AddComponent("sanityaura")
     inst.components.sanityaura.aurafn = CalcSanityAura
 
+    inst:AddComponent("burnable")
+    inst.components.burnable.flammability = TUNING.FROSTY.SIMPLE.FLAMMABILITY
+    local old_Frosty_Burnable_Ignite = inst.components.burnable.Ignite
+    inst.components.burnable.Ignite = function(self, ...)
+        inst.components.frozenarmor:TakeDamage(TUNING.FROSTY.SIMPLE.FROZEN_ARMOR_ONIGNITE_DAMAGE)
+        old_Frosty_Burnable_Ignite(self, ...)
+    end
+
     inst:ListenForEvent("attacked", OnAttacked)
     inst:ListenForEvent("onhitother", OnHitOther)
     inst:ListenForEvent("death", OnDeath)
@@ -437,6 +465,10 @@ local function fn()
     inst:ListenForEvent("droppedtarget", OnDroppedTarget)
     inst:ListenForEvent("timerdone", OnTimerDone)
     inst:ListenForEvent("player_snowed", OnPlayerSnowed)
+
+    inst:DoPeriodicTask(0.1, function()
+        TheNet:Announce("frozen armor - "..tostring(inst.components.frozenarmor.current_durability))
+    end)
 
     inst.player_targets = {  }
     inst.body_slam_active = false

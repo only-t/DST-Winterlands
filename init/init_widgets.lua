@@ -324,3 +324,38 @@ AddClassPostConstruct("widgets/upgrademodulesdisplay", function(self)
 		end
 	end
 end)
+
+--  Advent Calendar
+local PolarCalendarScreen = require("screens/polarcalendarscreen")
+local PauseScreen = require("screens/redux/pausescreen")
+local old_PauseScreen_BuildMenu = PauseScreen.BuildMenu
+PauseScreen.BuildMenu = function(self, ...)
+	old_PauseScreen_BuildMenu(self, ...)
+
+	local calendar_btn = self.menu:AddItem("Advent Calendar", function()
+		TheFrontEnd:PushScreen(PolarCalendarScreen(self.owner))
+	end)
+	calendar_btn:SetScale(0.7)
+
+	table.remove(self.menu.items, #self.menu.items) -- Repositioning the button
+	table.insert(self.menu.items, 6, calendar_btn)
+
+    local pos = Vector3(0, 0, 0)
+	for _, item in ipairs(self.menu.items) do
+		item:SetPosition(pos)
+		pos = pos + Vector3(0, self.menu.offset, 0)
+	end
+
+    local button_h = 50
+	local buttons = self.menu.items
+
+    --throw up the background
+	local height = button_h * #buttons + 30	-- consoles are shorter since they don't have the '
+    height = math.clamp(height, 90, 500)
+	self.bg:SetSize(190, height)
+	self.bg.body:SetRegionSize(190, height)
+
+    --create the menu itself
+	local y_pos = (button_h * (#buttons - 1) / 2)
+    self.menu:SetPosition(0, y_pos, 0)
+end

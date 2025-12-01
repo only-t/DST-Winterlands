@@ -1,5 +1,20 @@
 local assets = {
+    Asset("ANIM", "anim/snowball.zip")
+}
 
+local prefabs = {
+    "icing_splat_fx",
+    "icing_splash_fx_full",
+    "icing_splash_fx_med",
+    "icing_splash_fx_low",
+    "icing_splash_fx_melted"
+}
+
+local splashfxlist = {
+    "icing_splash_fx_full",
+    "icing_splash_fx_med",
+    "icing_splash_fx_low",
+    "icing_splash_fx_melted"
 }
 
 local function OnSnowBuriedAttacked(inst)
@@ -29,9 +44,9 @@ local function OnHit(inst)
             end
 
             if ent.components.pinnable then -- Pinnable entities don't get frozen but will be buried in snow instead
-                -- ent.components.pinnable:Stick()
-                -- ent:ListenForEvent("attacked", OnSnowBuriedAttacked)
-                -- ent:ListenForEvent("onunpin", OnSnowBuriedUnpin)
+                ent.components.pinnable:Stick("goo_icing", splashfxlist)
+                ent:ListenForEvent("attacked", OnSnowBuriedAttacked)
+                ent:ListenForEvent("onunpin", OnSnowBuriedUnpin)
             else
                 if ent.components.freezable then
                     ent.components.freezable:AddColdness(TUNING.FROSTY_SNOWBALL_FREEZE_POWER)
@@ -96,9 +111,9 @@ local function fn()
 	inst:AddTag("complexprojectile")
 	inst:AddTag("NOCLICK")
 
-    inst.AnimState:SetBank("cannonball_rock")
-    inst.AnimState:SetBuild("cannonball_rock")
-    inst.AnimState:PlayAnimation("spin_loop", true)
+    inst.AnimState:SetBank("snowball")
+    inst.AnimState:SetBuild("snowball")
+    inst.AnimState:PlayAnimation("roll_large_loop", true)
 
     inst.entity:SetPristine()
 
@@ -116,4 +131,4 @@ local function fn()
     return inst
 end
 
-return Prefab("frosty_snowball", fn, assets)
+return Prefab("frosty_snowball", fn, assets, prefabs)
