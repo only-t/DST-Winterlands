@@ -77,6 +77,7 @@ local prefabs = {
 	"wilson",
 	"winona_spotlight",
 	"wintersfeastcookedfoods",
+	-- "birdcage",
 	
 	"any", -- hound, walrus, ...
 	"bear_treasures",
