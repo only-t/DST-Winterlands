@@ -5,4 +5,4 @@ function HasPassedCalendarDay(day)
     return date.month ~= 12 or date.day >= day
 end
 
-FINAL_ADVENT_DAY = 10 -- Will increase it to 24 once all updates are finished
+FINAL_ADVENT_DAY = 25

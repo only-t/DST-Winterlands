@@ -340,6 +340,110 @@ local RECIPE_DESC = STRINGS.RECIPE_DESC
 		VAR14 = "Back! Back, I say!",
 		VAR15 = "Fool...",
 	}
+
+	--  Polar Calendar
+	STRINGS.POLAR_CALENDAR = {
+		DAY1_TOOLTIP = {
+			title = "QoL Update",
+			str = "Freezing resistance overhaul, rebalance of many items, crafting recipes and much more... prepare yourself for the days to come! (More details can be found in our daily Discord changelog)"
+		},
+		DAY2_TOOLTIP = {
+			title = "Ice Floe Kits",
+			str = "Craft lots of mini stackable platforms for skipping around the ocean."
+		},
+		DAY3_TOOLTIP = {
+			title = "/snowangel Emote",
+			str = "Print your likeness anywhere snowy with your friends! Also your new last resort option to plowing High Snow"
+		},
+		DAY4_TOOLTIP = {
+			title = "Timefreeze Watch",
+			str = "Wanda's own little gift. Freeze all of your stats and prevent buff + debuff afflictions, for longer shall you keep stable this frame of the timeline..."
+		},
+		DAY5_TOOLTIP = {
+			title = "MaTusk and Beartraps",
+			str = "A new hunter may sometimes join the party, equipped with sharp, snaring traps and a strange invigorating instrument."
+		},
+		DAY6_TOOLTIP = {
+			title = "Bagpipes and Walrus Trades",
+			str = "Play their song, and your past enemies may turn out to be your finest allies, in battle, or in trades of commodities"
+		},
+		DAY7_TOOLTIP = {
+			title = "Snowification and Hunts Rehaul",
+			str = "Changed a whole lot of vanilla things to look less dirty in the Winterlands, hunting in here is more varied and less predictable... for now."
+		},
+		DAY8_TOOLTIP = {
+			title = "Ice Floes Biome Remake",
+			str = "Added and auto-retrofitted lots of icebergs around the Winterlands waters. Boreal Bass shoals are now common \"grounds\" in the Ice Floes area!"
+		},
+		DAY9_TOOLTIP = {
+			title = "Goldenice Pickaxe Skin",
+			str = "Its icy edges hum with subterranean cold..."
+		},
+		DAY10_TOOLTIP = {
+			title = "Snoot Fritters and Hunting Buffs",
+			str = "Two new recipes passed down through generations of hunters. The flavor is sure to awaken your nose's primal instincts to sniff out exactly the prey you're after, and quick!"
+		},
+		DAY11_TOOLTIP = {
+			title = "Glacier Bushhat Skin",
+			str = "Ideal for hiding among Pengulls, less so around tumbleweeds and cacti."
+		},
+		DAY12_TOOLTIP = {
+			title = "Filet-o-Flea",
+			str = "Snowfleas go in all sorts of places to hide. Sometimes in places they probably shouldn't. Bon appetit!"
+		},
+		DAY13_TOOLTIP = {
+			title = "Chilly Setpieces Pack",
+			str = "Visit new hunter village variations, random points of interest, and... other oddities that may show up."
+		},
+		DAY14_TOOLTIP = {
+			title = "Goldenice Shovel Skin",
+			str = "It glints with the pale shimmer of freshly frozen ground."
+		},
+		DAY15_TOOLTIP = {
+			title = "Motherflea and Snowflea Egg Sacs",
+			str = "Be wary squashing too many of the little pests. It might come to be a regrettable decision, even in death."
+		},
+		DAY16_TOOLTIP = {
+			title = "Upgradable Itchhicker Pack",
+			str = "Or perhaps it was an opportunity? Use your Snowflea Egg Sacs to repair and tremendously upgrade your pocket bugs hoarding capacity!"
+		},
+		DAY17_TOOLTIP = {
+			title = "More Hostile Flare Effects",
+			str = "It may only be autumn in the Constant, but that thing you sent flying sure makes the ground tremble a whole lot, don't you think?"
+		},
+		DAY18_TOOLTIP = {
+			title = "Oversized Iceberg Lettuce",
+			str = "Prepare, farmers, for your greatest challenge has yet to grow. Earn your pride, beacons of cold, and weeks long supplies of Brritos."
+		},
+		DAY19_TOOLTIP = {
+			title = "Goldenice Axe Skin",
+			str = "Make trees feel the swing of winter air before your blade!"
+		},
+		DAY20_TOOLTIP = {
+			title = "Emperor Pengull and Ice Castle",
+			str = "His majesty has, at last, reached the Mainland. You are duly invited to your nearest Pengull rookery to witness his full grandeur."
+		},
+		DAY21_TOOLTIP = {
+			title = "Winter's Fists",
+			str = "Embark on a journey to craft the legendary knuckles that pack a punch like packed ice!"
+		},
+		DAY22_TOOLTIP = {
+			title = "Ursa Major, Polar Bear Chieftain",
+			str = "Seek out the village leader to take part in trials of raw strength and earn honor."
+		},
+		DAY23_TOOLTIP = {
+			title = "Mob Heads Crafting",
+			str = "Honor's nice and all but we know what you are truly after..."
+		},
+		DAY24_TOOLTIP = {
+			title = "Boreal Headlamp Skin",
+			str = "Its glow wiggles and waves like a pocket-sized aurora leading the way."
+		},
+		DAY25_TOOLTIP = {
+			title = "Frosty the Snowman, Blue Gems Overcharger",
+			str = "Summon a snowbound giant! This is Phase One of a tougher battle for Overcharged Blue Gems. Stay tuned for more, and happy Winter's Feast!"
+		}
+	}
 	
 	--	Scrapbook, Cookbook
 	STRINGS.UI.COOKBOOK.FOOD_EFFECTS_ICELETTUCE = "Accustoms the body to snow"
