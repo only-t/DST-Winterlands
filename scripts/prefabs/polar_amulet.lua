@@ -78,8 +78,9 @@ local function OnEquip(inst, owner)
 	end
 	
 	local houndstooth = #parts["houndstooth"]
+	local polarwargstooth = #parts["polarwargstooth"]
 	if houndstooth > 0 and owner.components.combat then
-		owner.components.combat.externaldamagemultipliers:SetModifier(inst, 1 + (houndstooth * TUNING.POLARAMULET.HOUNDSTOOTH.DAMAGE_MULT))
+		owner.components.combat.externaldamagemultipliers:SetModifier(inst, 1 + ((houndstooth + polarwargstooth) * TUNING.POLARAMULET.HOUNDSTOOTH.DAMAGE_MULT))
 	end
 	
 	local lavae_tooth = #parts["lavae_tooth"]
@@ -101,7 +102,7 @@ local function OnEquip(inst, owner)
 		end
 	end
 	
-	local polarwargstooth = #parts["polarwargstooth"]
+	--local polarwargstooth = #parts["polarwargstooth"]
 	if polarwargstooth > 0 and owner.components.areaaware then
 		inst._onpolartiles = function(owner, data, amulet, force_disable)
 			OnPolarTiles(inst or amulet, owner, data, force_disable)

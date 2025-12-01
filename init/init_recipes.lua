@@ -93,7 +93,7 @@ PolarRecipe("wintercooking_polarcrablegs",	{Ingredient("wintersfeastfuel", 1), I
 --	Survivors
 local function pocketwatch_nodecon(inst) return not inst:HasTag("pocketwatch_inactive") end
 
-PolarRecipe("pocketwatch_polar", 		{Ingredient("pocketwatch_parts", 1), Ingredient("bluegem_shards", 3), Ingredient("polarwargstooth", 1)}, 	TECH.NONE, 					{builder_tag = "clockmaker", no_deconstruction = pocketwatch_nodecon}, 	{"CHARACTER", "ARMOUR"}, {"pocketwatch_portal", "wathgrithr_shield"})
+PolarRecipe("pocketwatch_polar", 		{Ingredient("pocketwatch_parts", 2), Ingredient("bluegem_shards", 3), Ingredient("polarwargstooth", 2)}, 	TECH.SCIENCE_TWO, 			{builder_tag = "clockmaker", no_deconstruction = pocketwatch_nodecon}, 	{"CHARACTER", "ARMOUR"}, {"pocketwatch_portal", "wathgrithr_shield"})
 PolarRecipe("wx78module_naughty", 		{Ingredient("scandata", 4), Ingredient("charcoal", 2)}, 													TECH.ROBOTMODULECRAFT_ONE, 	{builder_tag = "upgrademoduleowner", nounlock = false}, 				{"CHARACTER", "MAGIC"}, {"wx78module_light", "nightmarefuel"})
 
 --	[ 	Crafting Station	]	--

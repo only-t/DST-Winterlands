@@ -195,6 +195,25 @@ local function OnPolarFreeze(inst, forming)
 	if forming and IsInPolar(inst) then
 		local rock = SpawnPrefab("rock_polar")
 		rock.Transform:SetPosition(inst.Transform:GetWorldPosition())
+		rock:Hide()
+		
+		rock.SoundEmitter:PlaySound("dontstarve/winter/pondfreeze")
+		rock.AnimState:SetMultColour(1, 1, 1, 0.1)
+		if rock.components.colourtweener == nil then
+			rock:AddComponent("colourtweener")
+		end
+		rock.components.colourtweener:StartTween({1, 1, 1, 1}, FRAMES * 18)
+		
+		rock:DoTaskInTime(FRAMES * 2, function()
+			rock:Show()
+			rock.AnimState:PlayAnimation("idle_low")
+		end)
+		rock:DoTaskInTime(FRAMES * 9, function()
+			rock.AnimState:PlayAnimation("idle_med")
+		end)
+		rock:DoTaskInTime(FRAMES * 18, function()
+			rock.AnimState:PlayAnimation("idle_full")
+		end)
 		
 		if TheSim:FindFirstEntityWithTag("polarcave_entrance") == nil then
 			rock:MakeCaveEntrance() -- Only useful in case players broke all their protuberances before update, so no reload is necessary
@@ -204,7 +223,7 @@ local function OnPolarFreeze(inst, forming)
 	inst:Remove()
 end
 
-local function spawner()
+local function spawner() -- These are left by sunken Icicles, grows back into protuberance when ice comes back (if we need to repopulate a little !)
 	local inst = CreateEntity()
 	
 	inst.entity:AddTransform()

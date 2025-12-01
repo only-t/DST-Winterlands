@@ -13,8 +13,9 @@ end
 local olddisplaynamefn
 local function displaynamefn(inst, ...)
 	local name = olddisplaynamefn and olddisplaynamefn(inst, ...)
+	local x, y, z = inst.Transform:GetWorldPosition()
 	
-	if (name == nil or name == STRINGS.NAMES.DIRTPILE) and IsInPolar(inst) then
+	if (name == nil or name == STRINGS.NAMES.DIRTPILE) and z and GetClosestPolarTileToPoint(x, 0, z, 32) then
 		name = STRINGS.NAMES.DIRTPILE_POLAR
 	end
 	

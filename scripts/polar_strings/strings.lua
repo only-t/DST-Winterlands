@@ -370,6 +370,7 @@ local RECIPE_DESC = STRINGS.RECIPE_DESC
 	STRINGS.SCRAPBOOK.SPECIALINFO.POLARICESTAFF = "Sends a freezing shockwave in a large range."
 	STRINGS.SCRAPBOOK.SPECIALINFO.TUMBLEWEED_POLAR = "These flutter in the blizzard and collect junk along the way.\n\nAll sorts of crazy junk.\n\nYou'd be surprised."
 	STRINGS.SCRAPBOOK.SPECIALINFO.WALL_POLAR = "Whoever messes with this wall better chill out."
+	STRINGS.SCRAPBOOK.SPECIALINFO.WALRUS_BAGPIPE = "Lose your wits playing the Bagpipes! Its tune keeps hounds at ease and opens hunters for safe trading."
 	STRINGS.SCRAPBOOK.SPECIALINFO.WALRUS_BEARTRAP = "A nasty trap deployed and hidden in the snow by trappers.\n\nCreatures caught by the mechanism will be stuck in place momentarily. One can attempt to break free from it, or be rescued by allies or foes' attacks alike.\n\nCan be disarmed by placing an item atop, or risking your life."
 	STRINGS.SCRAPBOOK.SPECIALINFO.WINTERS_FISTS = "Pound the ground with these heavy ice chunks to burst temporary snowy areas.\n\nSnowball combos can be performed while standing in snow: first causing minor damage, then pushing back, and finally causing a deadly avalanche!"
 	STRINGS.SCRAPBOOK.SPECIALINFO.WX78MODULE_NAUGHTY = "Plugs into WX78's circuit board.\n\nRequires 1 socket and multiplies all sorts of Naughtiness gained as followed per circuit installed:\nx2 > x3 > x3.5 > x4 > x4.5 > x5"

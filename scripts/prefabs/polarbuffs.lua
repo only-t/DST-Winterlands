@@ -134,6 +134,8 @@ local function huntmoar_onhunt(target, data)
 					track.Transform:SetPosition(x, y, z)
 					track.Transform:SetRotation(rot)
 					PlayFootstep(track, 0.2 + math.random() * 0.3)
+					track:AddTag("NOBLOCK")
+					track:AddTag("NOCLICK")
 					
 					if track.SetBaseAlpha then
 						track:SetBaseAlpha(0)
