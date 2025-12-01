@@ -111,7 +111,7 @@ local states = {
 		onenter = function(inst)
 			inst.AnimState:PlayAnimation("alert_pre")
 			inst.AnimState:PushAnimation("alert_idle", true)
-			inst.SoundEmitter:PlaySound("dontstarve/creatures/together/deer/curious")
+			inst.SoundEmitter:PlaySound("polarsounds/moose/curious")
 			inst.components.locomotor:StopMoving()
 		end,
 		
@@ -230,7 +230,7 @@ local states = {
 		
 		timeline = {
 			TimeEvent(2 * FRAMES, function(inst)
-				inst.SoundEmitter:PlaySound("dontstarve/creatures/together/deer/taunt")
+				inst.SoundEmitter:PlaySound("polarsounds/moose/taunt")
 			end),
 			TimeEvent(35 * FRAMES, function(inst)
 				inst.SoundEmitter:PlaySound("dontstarve/creatures/together/deer/swish")
@@ -311,7 +311,7 @@ local states = {
 		
 		onenter = function(inst)
 			inst.AnimState:PlayAnimation("hit_2")
-			inst.SoundEmitter:PlaySound("dontstarve/creatures/together/deer/hit")
+			inst.SoundEmitter:PlaySound("polarsounds/moose/hit")
 			inst.components.locomotor:StopMoving()
 		end,
 		
@@ -359,11 +359,11 @@ local KNOCK_TARGET_NOT_TAGS = {"INLIMBO", "flight", "invisible", "notarget", "no
 
 CommonStates.AddCombatStates(states, {
 	attacktimeline = {
+		TimeEvent(1 * FRAMES, function(inst)
+			inst.SoundEmitter:PlaySound("polarsounds/moose/taunt")
+		end),
 		TimeEvent(3 * FRAMES, function(inst)
 			inst.SoundEmitter:PlaySound("dontstarve/creatures/together/deer/swish")
-		end),
-		TimeEvent(5 * FRAMES, function(inst)
-			inst.SoundEmitter:PlaySound("dontstarve/creatures/together/deer/taunt")
 		end),
 		TimeEvent(12 * FRAMES, function(inst)
 			inst.components.combat:DoAttack(inst.sg.statemem.target)
@@ -391,14 +391,17 @@ CommonStates.AddCombatStates(states, {
 		end)
 	},
 	hittimeline = {
+		TimeEvent(1 * FRAMES, function(inst)
+			inst.SoundEmitter:PlaySound("polarsounds/moose/hit")
+		end),
 		TimeEvent(12 * FRAMES, DoFootstep),
 	},
 	deathtimeline = {
 		TimeEvent(5 * FRAMES, function(inst)
 			inst.SoundEmitter:PlaySound("dontstarve/creatures/together/deer/bodyfall_2")
 		end),
-		TimeEvent(20 * FRAMES, function(inst)
-			inst.SoundEmitter:PlaySound("dontstarve/creatures/together/deer/hit")
+		TimeEvent(15 * FRAMES, function(inst)
+			inst.SoundEmitter:PlaySound("polarsounds/moose/hit")
 		end),
 		TimeEvent(23 * FRAMES, function(inst)
 			inst.SoundEmitter:PlaySound("dontstarve/creatures/together/deer/bodyfall_2")
