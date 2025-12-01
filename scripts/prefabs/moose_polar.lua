@@ -223,7 +223,6 @@ local function MakeMoose(name, assets)
 		inst.components.combat:SetRange(TUNING.POLAR_MOOSE_ATTACK_RANGE, TUNING.POLAR_MOOSE_ANTLER_HIT_RANGE)
 		inst.components.combat:SetKeepTargetFunction(KeepTargetFn)
 		inst.components.combat:SetRetargetFunction(6, RetargetFn)
-		inst.components.combat:SetHurtSound("dontstarve/creatures/together/deer/hit")
 		inst.components.combat.hiteffectsymbol = "deer_torso"
 		inst.components.combat.battlecryenabled = false
 		

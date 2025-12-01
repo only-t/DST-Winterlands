@@ -56,7 +56,7 @@ local function OnEquip(inst, owner)
 	inst.updatetask = inst:DoPeriodicTask(banddt, band_update, 0)
 	
 	owner.AnimState:OverrideSymbol("swap_body_tall", "armor_walrus_bagpipe", "torso")
-	owner:DoTaskInTime(0.2 + math.random(), function()
+	owner:DoTaskInTime(0.2 + math.random() * 0.5, function()
 		if owner.SoundEmitter and inst.updatetask then
 			owner.SoundEmitter:PlaySound("polarsounds/walrus/bagpipes", "walrus_bagpipe")
 		end

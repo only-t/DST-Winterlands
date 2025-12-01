@@ -12,7 +12,7 @@ local states = {
 	
 }
 
-CommonStates.AddSimpleActionState(states, "deploy_beartrap", "pig_take", 15 * FRAMES, {"busy"})
+CommonStates.AddSimpleActionState(states, "deploy_beartrap", "pig_pickup", 6 * FRAMES, {"busy"})
 
 ENV.AddStategraphPostInit("walrus", function(sg)
 	CommonStates.AddWalrusBeartrapHandlers(states, events, {
@@ -50,6 +50,24 @@ ENV.AddStategraphPostInit("walrus", function(sg)
 			end
 		elseif oldattack then
 			oldattack(inst, ...)
+		end
+	end
+	
+	--	states
+	
+	local oldtaunt_attack = sg.states["taunt_attack"].onenter
+	sg.states["taunt_attack"].onenter = function(inst, ...)
+		oldtaunt_attack(inst, ...) -- Why ? Walrus bank uses the wrong head side when playing 'abandon' anim upward and this is VERY noticeable here (also with arms)
+		if inst.prefab == "girl_walrus" then
+			inst.AnimState:PlayAnimation("idle_angry")
+		end
+	end
+	
+	local oldtaunt_newtarget = sg.states["taunt_newtarget"].onenter
+	sg.states["taunt_newtarget"].onenter = function(inst, ...)
+		oldtaunt_newtarget(inst, ...)
+		if inst.prefab == "girl_walrus" then
+			inst.AnimState:PlayAnimation("idle_angry")
 		end
 	end
 end)

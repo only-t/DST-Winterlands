@@ -71,7 +71,7 @@ POLARWALRUS_TRADEDATA = { -- Note: Default chance for each trade is 50%, respect
 		{product = "goldnugget", 		ingredients = {Ingredient("fishmeat", 2)}, 			limits = {min = 5, max = 12}},
 		{product = "goldnugget", 		ingredients = {Ingredient("trunk_summer", 1)}, 		limits = {min = 5, max = 12}, numtogive = 4},
 		{product = "goldnugget", 		ingredients = {Ingredient("trunk_winter", 1)}, 		limits = {min = 5, max = 12}, numtogive = 5},
-		{product = "walrushat",		 	ingredients = {Ingredient("polarbearfur", 2)}, 		limits = {min = 1, max = 1}},
+		{product = "walrushat",		 	ingredients = {Ingredient("polarbearfur", 2)}, 		limits = {min = 1, max = 1}, chance = 1},
 	},
 	little_walrus = {
 		{product = "smallmeat", 		ingredients = {Ingredient("ice", 2)}, 				limits = {min = 3, max = 8}},

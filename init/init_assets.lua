@@ -32,6 +32,9 @@ Assets = {
 	Asset("ANIM", "anim/polarstatus_wx.zip"),
 	Asset("ANIM", "anim/wx_polarchips.zip"),
 	
+	Asset("ANIM", "anim/polarcalendar.zip"),
+	Asset("ANIM", "anim/polarcalendar_icons.zip"),
+	
 	-- Shaders / Shades
 	Asset("SHADER", "shaders/snowed.ksh"),
 	Asset("IMAGE", "images/polarpillar.tex"),
@@ -50,10 +53,6 @@ Assets = {
 	Asset("ANIM", "anim/polar_snow.zip"),
 	Asset("ANIM", "anim/polar_snowman_decor.zip"),
 	Asset("ANIM", "anim/tree_rock_polar.zip"),
-
-	Asset("ANIM", "anim/polarcalendar.zip"),
-
-	Asset("ANIM", "anim/polarcalendar_icons.zip"),
 	
 	-- Sounds
 	Asset("SOUNDPACKAGE", "sound/polarsounds.fev"),
@@ -144,6 +143,21 @@ local ITEMS = {
 	"ms_polarmoosehat_white",
 	"ms_treasurechest_polarice",
 }
+
+--	Audio Remaps
+
+local SoundRemap = {
+	{sound = "dontstarve/creatures/matusk/attack", 			remap = "polarsounds/walrus/matusk_attack"},
+	{sound = "dontstarve/creatures/matusk/death", 			remap = "polarsounds/walrus/matusk_death"},
+	{sound = "dontstarve/creatures/matusk/hit", 			remap = "polarsounds/walrus/matusk_hit"},
+	{sound = "dontstarve/creatures/matusk/laugh", 			remap = "polarsounds/walrus/matusk_laugh"},
+	{sound = "dontstarve/creatures/matusk/sleep", 			remap = "polarsounds/walrus/matusk_sleep"},
+	{sound = "dontstarve/creatures/matusk/taunt", 			remap = "polarsounds/walrus/matusk_taunt"},
+}
+
+for i, v in ipairs(SoundRemap) do
+	RemapSoundEvent(v.sound, v.remap)
+end
 
 --	Scrapbook Stuff
 

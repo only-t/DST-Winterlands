@@ -90,12 +90,12 @@ local function OnActivate(inst, doer, recipe)
 		if data.product == recipe.product then
 			local recipe_name = string.format(inst.prefab.."_trade_%s%d", data.product, product_counts[data.product])
 			
-			if not trades_data[i].nosharedstock then
+			if not trades_data[i].nosharedstock or recipe.name == recipe_name then
 				local old = inst.components.craftingstation:GetRecipeCraftingLimit(recipe_name) or 0
 				local new = math.max(0, old - (recipe.numtogive or 1) + (recipe.name == recipe_name and 1 or 0))
 				
 				inst.components.craftingstation:SetRecipeCraftingLimit(recipe_name, new)
-				if recipe.name ~= recipe_name then
+				if new <= 0 then
 					inst.components.craftingstation:ForgetRecipe(recipe_name)
 				end
 			end
@@ -296,7 +296,7 @@ local function fn()
 	inst.OnSave = OnSave
 	inst.OnLoad = OnLoad
 	inst.PolarTradesRefresh = PolarTradesRefresh
-	inst.soundgroup = "mctusk"
+	inst.soundgroup = "matusk" -- Remapped in init_assets
 	
 	inst:ListenForEvent("attacked", OnAttacked)
 	inst:WatchWorldState("stopday", OnStopDay)
