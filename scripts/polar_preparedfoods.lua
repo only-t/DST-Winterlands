@@ -21,7 +21,7 @@ local polar_preparedfoods = {
 	},
 	
 	filet_o_flea = {
-		test = function(cooker, names, tags) return tags.monster and tags.monster >= 1 and names.polarflea end,
+		test = function(cooker, names, tags) return HasPassedCalendarDay(12) and tags.monster and tags.monster >= 1 and names.polarflea end,
 		hunger = TUNING.CALORIES_SMALL * 4,
 		health = -TUNING.HEALING_MED,
 		sanity = -TUNING.SANITY_MEDLARGE,
@@ -36,7 +36,7 @@ local polar_preparedfoods = {
 	},
 	
 	koalefried_trunk_summer = {
-		test = function(cooker, names, tags) return (names.trunk_summer or names.trunk_cooked) and (names.onion or names.onion_cooked or names.potato or names.potato_cooked) end,
+		test = function(cooker, names, tags) return HasPassedCalendarDay(10) and (names.trunk_summer or names.trunk_cooked) and (names.onion or names.onion_cooked or names.potato or names.potato_cooked) end,
 		hunger = TUNING.CALORIES_SMALL * 8,
 		health = TUNING.HEALING_LARGE,
 		sanity = TUNING.SANITY_LARGE,
@@ -64,7 +64,7 @@ local polar_preparedfoods = {
 	},
 	
 	koalefried_trunk_winter = {
-		test = function(cooker, names, tags) return names.trunk_winter and (names.onion or names.onion_cooked or names.potato or names.potato_cooked) end,
+		test = function(cooker, names, tags) return HasPassedCalendarDay(10) and names.trunk_winter and (names.onion or names.onion_cooked or names.potato or names.potato_cooked) end,
 		hunger = TUNING.CALORIES_SMALL * 8,
 		health = TUNING.HEALING_LARGE,
 		sanity = TUNING.SANITY_LARGE,

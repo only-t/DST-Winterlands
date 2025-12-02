@@ -344,8 +344,8 @@ local RECIPE_DESC = STRINGS.RECIPE_DESC
 	--  Polar Calendar
 	STRINGS.POLAR_CALENDAR = {
 		DAY1_TOOLTIP = {
-			title = "QoL Update",
-			str = "Freezing resistance overhaul, rebalance of many items, crafting recipes and much more... prepare yourself for the days to come! (More details can be found in our daily Discord changelog)"
+			title = "Coolity Of Life",
+			str = "Freezing resistance overhaul, rebalance of many items, crafting recipes and much more...\nprepare yourself for the days to come! (More details can be found in our daily Discord changelog)"
 		},
 		DAY2_TOOLTIP = {
 			title = "Ice Floe Kits",
@@ -441,8 +441,9 @@ local RECIPE_DESC = STRINGS.RECIPE_DESC
 		},
 		DAY25_TOOLTIP = {
 			title = "Frosty the Snowman, Blue Gems Overcharger",
-			str = "Summon a snowbound giant! This is Phase One of a tougher battle for Overcharged Blue Gems. Stay tuned for more, and happy Winter's Feast!"
-		}
+			str = "Summon a snowbound giant! This is Phase One of a tougher battle for Overcharged Blue Gems.\nStay tuned for more, and happy Winter's Feast!"
+		},
+		SEE_YA = "Next tile unlocks at 0:00 UTC-8!",
 	}
 	
 	--	Scrapbook, Cookbook

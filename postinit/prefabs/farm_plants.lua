@@ -299,7 +299,7 @@ end
 
 local function PolarInit(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
-	if GetClosestPolarTileToPoint(x, 0, z, 32) then
+	if HasPassedCalendarDay(7) and GetClosestPolarTileToPoint(x, 0, z, 32) then
 		inst.AnimState:OverrideSymbol("soil01", "dirt_to_polar_builds", "soil01")
 	end
 end

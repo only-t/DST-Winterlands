@@ -1,10 +1,12 @@
 name = "The Winterlands"
 author = "ADM, Feything, Gearless, LukaS, Notka 󰀃"
 
-version = "1.2.22"
+version = "1.3.0"
 local info_version = "󰀔 [ Version "..version.." ]"
 
-description = info_version..[[ 
+description = info_version..[[ The Advent Calendar
+
+Check out what fantastic features are added in your world daily from the pause menu this December!
 
 󰀛 Set sails to a perilous frozen island -
 

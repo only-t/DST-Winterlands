@@ -80,6 +80,31 @@ local POLAR_FX = {
 		anim = "fx",
 		fn = FinalOffset3,
 	},
+	{
+		name = "pocketwatch_polar_fx",
+		bank = "pocketwatch_polar_fx",
+		build = "pocketwatch_polar_fx",
+		anim = "pocketwatch_polar_fx_pre",
+		animqueue = true,
+		bloom = true,
+		fn = function(inst)
+			inst.AnimState:PushAnimation("pocketwatch_polar_fx_loop", false)
+			inst.AnimState:PushAnimation("pocketwatch_polar_fx_pst", false)
+			FinalOffset3(inst)
+		end,
+	},
+	{
+		name = "pocketwatch_polar_fx_mount",
+		bank = "pocketwatch_polar_fx",
+		build = "pocketwatch_polar_fx",
+		anim = "pocketwatch_polar_fx_pre",
+		animqueue = true,
+		fn = function(inst)
+			inst.AnimState:PushAnimation("pocketwatch_polar_fx_loop", false)
+			inst.AnimState:PushAnimation("pocketwatch_polar_fx_pst", false)
+			FinalOffset3(inst)
+		end,
+	},
 }
 
 require("fx")

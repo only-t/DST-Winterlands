@@ -10,6 +10,7 @@ local modimport = ENV.modimport
 modimport("init/init_tuning")
 modimport("init/init_tiles")
 
+require("advent_calendar_content")
 require("map/polar_terrain")
 require("polar_strings/strings")
 
@@ -186,7 +187,7 @@ ENV.AddGlobalClassPostConstruct("map/storygen", "Story", function(self)
 			end
 			tagdata["PolarTusks"] = false
 			
-			return "STATIC", math.random() < 0.5 and "PolarTuskCamp" or "PolarTuskTown"
+			return "STATIC", (HasPassedCalendarDay(13) and math.random() < 0.5) and "PolarTuskCamp" or "PolarTuskTown"
 		end
 	end
 end)

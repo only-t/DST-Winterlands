@@ -83,6 +83,7 @@ local prefabs = {
 	"bear_treasures",
 	"chesspieces_polar_materials",
 	"ents_onfreeze",
+	--"fiery_weapons",
 	"hot_stuff",
 	"polar_walking",
 	"waxed_plants",

@@ -13,6 +13,8 @@ local wilson_attack = TUNING.BASE_SURVIVOR_ATTACK
 
 --	Configs
 	
+	require("advent_calendar_content")
+	
 	TUNING.POLAR_RETROFIT = GetModConfigData("biome_retrofit") or 0
 	TUNING.POLAR_SHARD = GetModConfigData("biome_shard") or "forest"
 	TUNING.POLAR_ICEGEN_CONFIG = GetModConfigData("polar_icegen") or 0
@@ -510,7 +512,7 @@ local wilson_attack = TUNING.BASE_SURVIVOR_ATTACK
 		health 		= 6,
 		hunger 		= 0.15,
 		sanity 		= 1,
-		temperature = 0.01,
+		temperature = 0.001,
 		moisture 	= 2,
 	}
 	
@@ -586,10 +588,16 @@ local wilson_attack = TUNING.BASE_SURVIVOR_ATTACK
 	TUNING.POLAR_SNOW_MELT_TEMP = 54
 	TUNING.POLAR_SNOW_UPDATE_RATE = 1
 	
+	if not GLOBAL.HasPassedCalendarDay(10) then
+	TUNING.HUNT_ALTERNATE_POLAR_CHANCE = TUNING.HUNT_ALTERNATE_BEAST_CHANCE_MAX
+	TUNING.HUNT_ALTERNATE_POLAR_CHANCE_MIN = 0 -- Always Moose in summer
+	TUNING.HUNT_ALTERNATE_POLAR_CHANCE_MAX = 1 -- Always Varg in winter
+	else
 	TUNING.HUNT_ALTERNATE_POLAR_CHANCE_MIN = 0 -- AKA: 100% chances for Moose in Summer
 	TUNING.HUNT_ALTERNATE_POLAR_CHANCE_MAX = 0.66 -- Chances for Ice Varg in Winter
 	TUNING.HUNT_ALTERNATE_POLAR_CHANCE = TUNING.HUNT_ALTERNATE_BEAST_CHANCE_MAX -- Chances for Ice Varg outside of Winter (33%)
 	TUNING.HUNT_KOALEFANT_POLAR_CHANCE = 0.5
+	end
 	
 	TUNING.SNOW_PLOW_RANGES = {
 		REPLACED = 3, -- Deployed / Built something in snow

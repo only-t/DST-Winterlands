@@ -1,6 +1,10 @@
 local ENV = env
 GLOBAL.setfenv(1, GLOBAL)
 
+if not HasPassedCalendarDay(7) then
+	return
+end
+
 local function MoleOnLocomote(inst)
 	local inpolar = IsInPolar(inst)
 	

@@ -18,8 +18,9 @@ local WandaTimeFreezeOver = Class(UIAnim, function(self, owner)
 	
 	self:GetAnimState():SetBank("wanda_timefreeze_over")
 	self:GetAnimState():SetBuild("wanda_timefreeze_over")
-	self:GetAnimState():PlayAnimation("over_idle", true)
+	self:GetAnimState():PlayAnimation("over_idle")
 	self:GetAnimState():AnimateWhilePaused(false)
+	self:GetAnimState():SetScale(0.9, 0.9)
 	
 	self.tac = false
 	self.rewinding = false
@@ -70,12 +71,11 @@ function WandaTimeFreezeOver:Toggle(show)
 		
 		self:Show()
 		
-		TheFrontEnd:GetSound():PlaySound("polarsounds/timefreeze/clock_start")
+		--TheFrontEnd:GetSound():PlaySound("polarsounds/timefreeze/clock_start")
 		self:GetAnimState():PlayAnimation("over_pre")
-		self:GetAnimState():PushAnimation("over_idle", true)
 		
 	elseif not show and self.shown then
-		TheFrontEnd:GetSound():PlaySound("polarsounds/timefreeze/clock_stop")
+		--TheFrontEnd:GetSound():PlaySound("polarsounds/timefreeze/clock_stop")
 		self:GetAnimState():PlayAnimation("over_pst")
 		
 		local time = self.inst.AnimState:GetCurrentAnimationLength() + FRAMES
@@ -84,7 +84,7 @@ function WandaTimeFreezeOver:Toggle(show)
 			self.hidetask = nil
 		end
 		
-		self.hidetask = self.inst:DoTaskInTime(time, function(inst) print("hide?") self:Hide() end)
+		self.hidetask = self.inst:DoTaskInTime(time, function(inst) self:Hide() end)
 	end
 	
 	self.shown = show
@@ -126,23 +126,20 @@ function WandaTimeFreezeOver:MakeGears()
 		
 		gear:GetAnimState():SetBank("wanda_timefreeze_over")
 		gear:GetAnimState():SetBuild("wanda_timefreeze_over")
-		gear:GetAnimState():PlayAnimation(anim)
+		gear:GetAnimState():PlayAnimation(anim, true)
 		gear:GetAnimState():AnimateWhilePaused(false)
-		gear:GetAnimState():SetMultColour(1, 1, 1, 0.4)
+		gear:GetAnimState():SetMultColour(1, 1, 1, 0.1)
 		gear:SetClickable(false)
-		
-		gear.inst:ListenForEvent("animover", function() 
-			self:UpdateGear(gear, anim)
-		end)
+		self:UpdateGear(gear, anim)
 		
 		table.insert(self.gears, gear)
 	end
 end
 
 function WandaTimeFreezeOver:UpdateGear(gear, anim)
-	self.inst:DoTaskInTime(math.random() < 0.9 and 0 or math.random(), function()
-		gear:GetAnimState():PlayAnimation(anim)
-		gear:GetAnimState():SetDeltaTimeMultiplier(math.random() < 0.8 and 1 or -1)
+	gear:GetAnimState():SetDeltaTimeMultiplier(GetRandomMinMax(-0.2, 0.2))
+	gear.inst:DoTaskInTime(math.random() * 10, function()
+		self:UpdateGear(gear, anim)
 	end)
 end
 

@@ -71,7 +71,9 @@ PolarRecipe("polaricepack", 		{Ingredient("polar_dryice", 1), Ingredient("bluege
 
 --	Boating / Fishing
 PolarRecipe("polarice_plow_item", 	{Ingredient("log", 3), Ingredient("cutstone", 1), Ingredient("mole", 1)}, 	TECH.SEAFARING_ONE, 	nil, 				{"FISHING", "WINTER"}, {"ocean_trawler_kit", "winterometer"})
+if HasPassedCalendarDay(2) then
 PolarRecipe("boat_ice_item", 		{Ingredient("polar_dryice", 1)}, 											TECH.SEAFARING_ONE, 	{numtogive = 8}, 	{"SEAFARING"}, {"flotationcushion"})
+end
 
 --	Decor / Structure
 PolarRecipe("polar_brazier_item", 	{Ingredient("boneshard", 2), Ingredient("cutstone", 1), Ingredient("rope", 1)}, 			TECH.LOST, 				nil, 									{"LIGHT", "STRUCTURES", "WINTER"}, {"dragonflyfurnace", "dragonflyfurnace", "dragonflyfurnace"})
@@ -93,7 +95,9 @@ PolarRecipe("wintercooking_polarcrablegs",	{Ingredient("wintersfeastfuel", 1), I
 --	Survivors
 local function pocketwatch_nodecon(inst) return not inst:HasTag("pocketwatch_inactive") end
 
+if HasPassedCalendarDay(4) then
 PolarRecipe("pocketwatch_polar", 		{Ingredient("pocketwatch_parts", 2), Ingredient("bluegem_shards", 3), Ingredient("polarwargstooth", 2)}, 	TECH.SCIENCE_TWO, 			{builder_tag = "clockmaker", no_deconstruction = pocketwatch_nodecon}, 	{"CHARACTER", "ARMOUR"}, {"pocketwatch_portal", "wathgrithr_shield"})
+end
 PolarRecipe("wx78module_naughty", 		{Ingredient("scandata", 4), Ingredient("charcoal", 2)}, 													TECH.ROBOTMODULECRAFT_ONE, 	{builder_tag = "upgrademoduleowner", nounlock = false}, 				{"CHARACTER", "MAGIC"}, {"wx78module_light", "nightmarefuel"})
 
 --	[ 	Crafting Station	]	--

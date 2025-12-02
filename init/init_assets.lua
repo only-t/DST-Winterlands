@@ -17,7 +17,7 @@ Assets = {
 	
 	Asset("ATLAS", "images/crafting_menu_polar.xml"),
 	Asset("IMAGE", "images/crafting_menu_polar.tex"),
-
+	
 	Asset("ATLAS", "images/button_winter_carny_xlong.xml"),
 	Asset("IMAGE", "images/button_winter_carny_xlong.tex"),
 	

@@ -315,6 +315,7 @@ end
 
 local function WandaTimeFreeze_OnAttached(inst, target)
 	target:AddTag("frozenstats")
+	target.SoundEmitter:PlaySound("polarsounds/timefreeze/clock_start")
 	
 	--This tests how much time is lost per stats
 	--inst.debugstatdrain = function(src, stat, amt) wandatimefreeze_debugstatdrain(inst, stat, amt) end
@@ -327,6 +328,7 @@ end
 
 local function WandaTimeFreeze_OnDetached(inst, target)
 	target:RemoveTag("frozenstats")
+	target.SoundEmitter:PlaySound("polarsounds/timefreeze/clock_stop")
 	
 	if target.components.colourtweener then
 		target.components.colourtweener:EndTween()

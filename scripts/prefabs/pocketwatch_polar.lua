@@ -13,7 +13,7 @@ local function DoCastSpell(inst, doer)
 			doer.components.oldager:StopDamageOverTime()
 		end
 		
-		local fx = SpawnPrefab((doer.components.rider ~= nil and doer.components.rider:IsRiding()) and "pocketwatch_heal_fx_mount" or "pocketwatch_heal_fx") --TODO: Custom fx
+		local fx = SpawnPrefab((doer.components.rider ~= nil and doer.components.rider:IsRiding()) and "pocketwatch_polar_fx_mount" or "pocketwatch_polar_fx")
 		fx.entity:SetParent(doer.entity)
 		
 		inst.components.rechargeable:Discharge(TUNING.POCKETWATCH_POLAR_COOLDOWN)
