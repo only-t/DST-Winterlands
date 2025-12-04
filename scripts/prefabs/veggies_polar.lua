@@ -6,6 +6,12 @@ local function OnEat_IceLettuce(inst, eater)
 	EatIceLettuce(inst, eater, TUNING.POLAR_IMMUNITY_DURATION, TUNING.ICELETTUCE_FREEZABLE_COLDNESS, TUNING.ICELETTUCE_COOLING)
 end
 
+local function OnEat_IceLettuceSeeds(inst, eater)
+	if eater:HasTag("bird") and eater.components.freezable then
+		eater.components.freezable:AddColdness(TUNING.ICELETTUCE_FREEZABLE_COLDNESS)
+	end
+end
+
 local function MakeVegStats(seedweight, hunger, health, perish_time, sanity, cooked_hunger, cooked_health, cooked_perish_time, cooked_sanity, float_settings, cooked_float_settings, dryable, oneatfn, secondary_foodtype)
 	return {
 		health = health,
@@ -134,6 +140,9 @@ local function MakeVeggie(name, has_seeds)
 		inst.components.edible.foodtype = FOODTYPE.SEEDS
 		inst.components.edible.healthvalue = TUNING.HEALING_TINY / 2
 		inst.components.edible.hungervalue = TUNING.CALORIES_TINY
+		if name == "icelettuce" then
+			inst.components.edible:SetOnEatenFn(OnEat_IceLettuceSeeds)
+		end
 		
 		inst:AddComponent("stackable")
 		inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
@@ -229,6 +238,8 @@ local function MakeVeggie(name, has_seeds)
 		
 		if name == "icelettuce" then
 			inst.components.edible.degrades_with_spoilage = false
+			inst.components.edible.temperaturedelta = TUNING.COLD_FOOD_BONUS_TEMP
+			inst.components.edible.temperatureduration = TUNING.FOOD_TEMP_AVERAGE
 			inst.components.perishable:SetOnPerishFn(inst.Remove)
 		else
 			inst.components.perishable.onperishreplacement = "spoiled_food"
