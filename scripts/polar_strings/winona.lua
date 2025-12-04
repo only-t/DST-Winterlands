@@ -15,6 +15,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WINONA.DESCRIBE
 	}
 	ANNOUNCE.ANNOUNCE_EMPEROR_ESCAPE = "So much fluff for so little backbone!"
 	ANNOUNCE.ANNOUNCE_POLARGLOBE = "Pfew! It's over. And it's... snowin'?"
+	ANNOUNCE.ANNOUNCE_POLARFLEA_LATCHED = "Eww, not a great view from up here..."
 	ANNOUNCE.ANNOUNCE_POLARICE_PLOW_BAD = "Nope. Bad idea."
 	ANNOUNCE.ANNOUNCE_THRONE_GIFT_TAKEN = "At least some bosses leave presents."
 	
@@ -75,6 +76,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WINONA.DESCRIBE
 		HELD_INV = "Yeesh! Go away!",
 		HELD_BACKPACK = "I'm the boss here. You bite when I say so.",
 	}
+	DESCRIBE.POLARFLEA_MOTHER = "What'an ugly piece of work!"
 	DESCRIBE.POLARFOX = {
 		FOLLOWER = "You get me rabbits, and I get you dinners, simple.",
 		FRIEND = "Have I forgotten my part of our little engagement?",

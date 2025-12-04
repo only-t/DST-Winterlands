@@ -15,6 +15,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WALTER.DESCRIBE
 	}
 	ANNOUNCE.ANNOUNCE_EMPEROR_ESCAPE = "Guess that's my ice castle now!"
 	ANNOUNCE.ANNOUNCE_POLARGLOBE = "That was... cool! Chilly even!"
+	ANNOUNCE.ANNOUNCE_POLARFLEA_LATCHED = "Hang on! Bugs can catch humans too?"
 	ANNOUNCE.ANNOUNCE_POLARICE_PLOW_BAD = "Let's try somewhere more stable."
 	ANNOUNCE.ANNOUNCE_THRONE_GIFT_TAKEN = "Neat! Almost what I wanted."
 	
@@ -75,6 +76,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WALTER.DESCRIBE
 		HELD_INV = "My handbook says... that it's too late to remove it.",
 		HELD_BACKPACK = "Nothing can stop me and my bugs!",
 	}
+	DESCRIBE.POLARFLEA_MOTHER = "Gee Wobers! Remind me to brush you after this."
 	DESCRIBE.POLARFOX = {
 		FOLLOWER = "I think he likes us!",
 		FRIEND = "He could use another snack.",

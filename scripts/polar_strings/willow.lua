@@ -15,6 +15,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WILLOW.DESCRIBE
 	}
 	ANNOUNCE.ANNOUNCE_EMPEROR_ESCAPE = "Aww, scared of a little fire?"
 	ANNOUNCE.ANNOUNCE_POLARGLOBE = "Ah! I already hate it here!"
+	ANNOUNCE.ANNOUNCE_POLARFLEA_LATCHED = "I don't wanna be flea food!"
 	ANNOUNCE.ANNOUNCE_POLARICE_PLOW_BAD = "Here? Of all places?"
 	ANNOUNCE.ANNOUNCE_THRONE_GIFT_TAKEN = "That could've been worse."
 	
@@ -75,6 +76,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WILLOW.DESCRIBE
 		HELD_INV = "Ughhh! Get it off!",
 		HELD_BACKPACK = "Hey, Wilson! Come shake my bag!",
 	}
+	DESCRIBE.POLARFLEA_MOTHER = "Coming here was a big mistake."
 	DESCRIBE.POLARFOX = {
 		FOLLOWER = "Come with me, and you'll see...",
 		FRIEND = "I thought I had lost you!",

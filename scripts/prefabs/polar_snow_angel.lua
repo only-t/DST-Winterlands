@@ -2,7 +2,7 @@ local EQUIPS_SYM_OVERRIDE = {
 	swap_hat 		= EQUIPSLOTS.HEAD,
 	swap_body 		= EQUIPSLOTS.BODY,
 	swap_body_tall 	= EQUIPSLOTS.BODY,
-	swap_object 	= EQUIPSLOTS.HANDS,
+	--swap_object 	= EQUIPSLOTS.HANDS,
 }
 
 local function SetAngelPose(inst, data)
@@ -20,6 +20,7 @@ local function SetAngelPose(inst, data)
 			inst.AnimState:HideSymbol("arm_upper_skin")
 			inst.AnimState:HideSymbol("torso")
 			inst.AnimState:HideSymbol("torso_pelvis")
+			inst.AnimState:HideSymbol("skirt")
 			inst.AnimState:Hide("HEAD")
 			inst.AnimState:Hide("HEAD_HAT")
 			inst.AnimState:Hide("HAIR")

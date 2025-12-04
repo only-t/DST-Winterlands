@@ -42,7 +42,7 @@ local prefabs = {
 	"antlion_sinkhole",
 	"bearger",
 	"birds",
-	--"birdcage",
+	"birdcage",
 	"boat_ice",
 	"books",
 	"bluegem",

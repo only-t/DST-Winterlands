@@ -95,10 +95,15 @@ POLARWALRUS_TRADEDATA = { -- Note: Default chance for each trade is 50%, respect
 		{product = "saltrock", 				ingredients = {Ingredient("beefalowool", 1)}, 	limits = {min = 5, max = 10}},
 		{product = "saltrock", 				ingredients = {Ingredient("pigskin", 1)}, 		limits = {min = 5, max = 10}, numtogive = 3},
 		{product = "saltrock", 				ingredients = {Ingredient("polarbearfur", 1)}, 	limits = {min = 5, max = 10}, numtogive = 5},
-		{product = "cookingrecipecard", 	ingredients = {Ingredient("goldnugget", 1)}, 	limits = {min = 1, max = 1}, nosharedstock = true, nameoverride = "cookingrecipecard_koalefried_trunk_summer", image = "cookingrecipecard.tex"},
-		{product = "cookingrecipecard", 	ingredients = {Ingredient("goldnugget", 1)}, 	limits = {min = 1, max = 1}, nosharedstock = true, nameoverride = "cookingrecipecard_koalefried_trunk_winter", image = "cookingrecipecard.tex"},
+		--{product = "cookingrecipecard", 	ingredients = {Ingredient("goldnugget", 1)}, 	limits = {min = 1, max = 1}, nosharedstock = true, nameoverride = "cookingrecipecard_koalefried_trunk_summer", image = "cookingrecipecard.tex"},
+		--{product = "cookingrecipecard", 	ingredients = {Ingredient("goldnugget", 1)}, 	limits = {min = 1, max = 1}, nosharedstock = true, nameoverride = "cookingrecipecard_koalefried_trunk_winter", image = "cookingrecipecard.tex"},
 	},
 }
+
+if HasPassedCalendarDay(10) then
+table.insert(POLARWALRUS_TRADEDATA, {product = "cookingrecipecard", 	ingredients = {Ingredient("goldnugget", 1)}, 	limits = {min = 1, max = 1}, nosharedstock = true, nameoverride = "cookingrecipecard_koalefried_trunk_summer", image = "cookingrecipecard.tex"})
+table.insert(POLARWALRUS_TRADEDATA, {product = "cookingrecipecard", 	ingredients = {Ingredient("goldnugget", 1)}, 	limits = {min = 1, max = 1}, nosharedstock = true, nameoverride = "cookingrecipecard_koalefried_trunk_winter", image = "cookingrecipecard.tex"})
+end
 
 --	Events
 

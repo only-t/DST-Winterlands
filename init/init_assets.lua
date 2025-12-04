@@ -49,6 +49,7 @@ Assets = {
 	Asset("ANIM", "anim/player_polarcast.zip"),
 	Asset("ANIM", "anim/player_winterfists.zip"),
 	
+	Asset("ANIM", "anim/bird_cage_polar_anims.zip"),
 	Asset("ANIM", "anim/rain_meter_polar_anims.zip"),
 	Asset("ANIM", "anim/winter_meter_polar_anims.zip"),
 	Asset("ANIM", "anim/walrus_polar_anims.zip"),
@@ -57,8 +58,6 @@ Assets = {
 	Asset("ANIM", "anim/polar_snow.zip"),
 	Asset("ANIM", "anim/polar_snowman_decor.zip"),
 	Asset("ANIM", "anim/tree_rock_polar.zip"),
-
-	-- Asset("ANIM", "anim/bird_cage_frozen.zip"),
 	
 	-- Sounds
 	Asset("SOUNDPACKAGE", "sound/polarsounds.fev"),

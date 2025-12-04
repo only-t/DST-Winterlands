@@ -15,6 +15,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WORTOX.DESCRIBE
 	}
 	ANNOUNCE.ANNOUNCE_EMPEROR_ESCAPE = "Hee-Hee! Watch, the royal rump flees!"
 	ANNOUNCE.ANNOUNCE_POLARGLOBE = "You call this a prank? That was just rude!"
+	ANNOUNCE.ANNOUNCE_POLARFLEA_LATCHED = "Hyuy-- oof!"
 	ANNOUNCE.ANNOUNCE_POLARICE_PLOW_BAD = "There's only so much ice to destroy, but not here!"
 	ANNOUNCE.ANNOUNCE_THRONE_GIFT_TAKEN = "See? You should trust me sometimes-"
 	
@@ -75,6 +76,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WORTOX.DESCRIBE
 		HELD_INV = "It's okay. I will consume you in return soon.",
 		HELD_BACKPACK = "That's one way to hoard souls.",
 	}
+	DESCRIBE.POLARFLEA_MOTHER = "I have nothing to do with this...! Right?"
 	DESCRIBE.POLARFOX = {
 		FOLLOWER = "A cunning little com-paw-nion.",
 		FRIEND = "Don't you remember me? Oh, but you look so hungry...",

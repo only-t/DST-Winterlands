@@ -28,6 +28,7 @@ ENV.AddComponentPostInit("hunter", function(self)
 	
 	PolarUpvalue(OldSpawnHuntedBeast, "GetHuntedBeast", GetHuntedBeast)
 end)
+
 else
 
 ENV.AddComponentPostInit("hunter", function(self)

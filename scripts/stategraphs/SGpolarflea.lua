@@ -208,7 +208,7 @@ local states = {
 				inst.SoundEmitter:PlaySound("hookline_2/characters/hermit/clap")
 				inst.sg:GoToState("taunt")
 			else
-				inst.Physics:SetMotorVelOverride(20, -50, 0)
+				inst.Physics:SetMotorVelOverride(20, -20, 0)
 			end
 		end,
 		

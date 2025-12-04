@@ -15,6 +15,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WEBBER.DESCRIBE
 	}
 	ANNOUNCE.ANNOUNCE_EMPEROR_ESCAPE = "It goes to show, birds are no match to us!"
 	ANNOUNCE.ANNOUNCE_POLARGLOBE = "The ground wobbled like jelly!"
+	ANNOUNCE.ANNOUNCE_POLARFLEA_LATCHED = "Alright, alright, you win!"
 	ANNOUNCE.ANNOUNCE_POLARICE_PLOW_BAD = "Too risky here."
 	ANNOUNCE.ANNOUNCE_THRONE_GIFT_TAKEN = "Well that's quite nice-"
 	
@@ -75,6 +76,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WEBBER.DESCRIBE
 		HELD_INV = "Next time, we keep our pockets shut!",
 		HELD_BACKPACK = "Mum always said no bugs in the schoolbag...",
 	}
+	DESCRIBE.POLARFLEA_MOTHER = "AHHHHHHH! Oh-- that must be how others feel about our queen!"
 	DESCRIBE.POLARFOX = {
 		FOLLOWER = "Wanna make angels in the snow?",
 		FRIEND = "It remembers us!",

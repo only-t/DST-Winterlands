@@ -399,7 +399,7 @@ local wilson_attack = TUNING.BASE_SURVIVOR_ATTACK
 	TUNING.FROSTWALKERAMULET_ICE_STAY_TIME = 8
 	TUNING.FROSTWALKERAMULET_SLIPPINESS = TUNING.WILSON_RUN_SPEED * 9
 	
-	TUNING.POCKETWATCH_POLAR_COOLDOWN = total_day_time * 2
+	TUNING.POCKETWATCH_POLAR_COOLDOWN = total_day_time * 4
 	
 	TUNING.POLARAMULET = {
 		GNARWAIL_HORN = {
@@ -509,9 +509,9 @@ local wilson_attack = TUNING.BASE_SURVIVOR_ATTACK
 	TUNING.POCKETWATCH_BUFF_DURATION = total_day_time
 	TUNING.POCKETWATCH_BUFF_TICK = 0.06
 	TUNING.POCKERWATCH_BUFF_DRAINS = {
-		health 		= 6,
+		health 		= 8,
 		hunger 		= 0.15,
-		sanity 		= 1,
+		sanity 		= 3,
 		temperature = 0.001,
 		moisture 	= 2,
 	}

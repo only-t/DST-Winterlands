@@ -15,6 +15,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WENDY.DESCRIBE
 	}
 	ANNOUNCE.ANNOUNCE_EMPEROR_ESCAPE = "He lives another day, but now in eternal shame."
 	ANNOUNCE.ANNOUNCE_POLARGLOBE = "Is it the end yet?"
+	ANNOUNCE.ANNOUNCE_POLARFLEA_LATCHED = "Let go of me!"
 	ANNOUNCE.ANNOUNCE_POLARICE_PLOW_BAD = "That's one way to drown."
 	ANNOUNCE.ANNOUNCE_THRONE_GIFT_TAKEN = "...I was hoping for something else."
 	
@@ -75,6 +76,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WENDY.DESCRIBE
 		HELD_INV = "Um, excuse you?",
 		HELD_BACKPACK = "For once, a pet I might actually keep alive.",
 	}
+	DESCRIBE.POLARFLEA_MOTHER = "More bug blood must spill."
 	DESCRIBE.POLARFOX = {
 		FOLLOWER = "Would you like to take me somewhere?",
 		FRIEND = "Oh. Did I leave you to starve?",

@@ -15,6 +15,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE
 	}
 	ANNOUNCE.ANNOUNCE_EMPEROR_ESCAPE = "A strategic withdrawal? Tsk."
 	ANNOUNCE.ANNOUNCE_POLARGLOBE = "This disturbance feels orchestrated, not natural."
+	ANNOUNCE.ANNOUNCE_POLARFLEA_LATCHED = "Oh heavens!!"
 	ANNOUNCE.ANNOUNCE_POLARICE_PLOW_BAD = "Making a hole here would be ill-advised."
 	ANNOUNCE.ANNOUNCE_THRONE_GIFT_TAKEN = "Ooo. What a serviceable present!"
 	
@@ -75,6 +76,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE
 		HELD_INV = "How unmannered, revolting pests!",
 		HELD_BACKPACK = "I will not tolerate any of you near my books.",
 	}
+	DESCRIBE.POLARFLEA_MOTHER = "I had noticed how prolific they are.\nBut only now do I understand why."
 	DESCRIBE.POLARFOX = {
 		FOLLOWER = "A little food goes a long way here, right dear?",
 		FRIEND = "A face I won't soon forget.",

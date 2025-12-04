@@ -15,6 +15,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE
 	}
 	ANNOUNCE.ANNOUNCE_EMPEROR_ESCAPE = "Flee to thy fjord, foul fowl!"
 	ANNOUNCE.ANNOUNCE_POLARGLOBE = "Curses! The Fimbulvetr just begun!"
+	ANNOUNCE.ANNOUNCE_POLARFLEA_LATCHED = "Someone! Slain the beast!"
 	ANNOUNCE.ANNOUNCE_POLARICE_PLOW_BAD = "'Twould be a mistake."
 	ANNOUNCE.ANNOUNCE_THRONE_GIFT_TAKEN = "What was that?"
 	
@@ -75,6 +76,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE
 		HELD_INV = "It can be removed, at the cost of my skin.",
 		HELD_BACKPACK = "The bugs yearn to join me in battle.",
 	}
+	DESCRIBE.POLARFLEA_MOTHER = "Vile spawn-hurler! I shall cleave thee!"
 	DESCRIBE.POLARFOX = {
 		FOLLOWER = "'Tis all fun and games until you lend me into a trap.",
 		FRIEND = "Our roads cross again.",

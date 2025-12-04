@@ -15,6 +15,7 @@ local DESCRIBE = STRINGS.CHARACTERS.GENERIC.DESCRIBE
 	}
 	ANNOUNCE.ANNOUNCE_EMPEROR_ESCAPE = "I hereby declare a new era of cool-headed leadership!"
 	ANNOUNCE.ANNOUNCE_POLARGLOBE = "Quakes and shivers- what just happened?!"
+	ANNOUNCE.ANNOUNCE_POLARFLEA_LATCHED = "AHHHH-- Help!"
 	ANNOUNCE.ANNOUNCE_POLARICE_PLOW_BAD = "Ice should try somewhere else."
 	ANNOUNCE.ANNOUNCE_THRONE_GIFT_TAKEN = "Huh. That wasn't so bad."
 	
@@ -80,6 +81,7 @@ local DESCRIBE = STRINGS.CHARACTERS.GENERIC.DESCRIBE
 		HELD_INV = "The mandibles are already quite far under my skin.",
 		HELD_BACKPACK = "I'm positive this whole idea will go well.",
 	}
+	DESCRIBE.POLARFLEA_MOTHER = "She looks quite upset! I wonder why."
 	DESCRIBE.POLARFOX = {
 		FOLLOWER = "Let's play a small game.",
 		FRIEND = "He's got a familiar face. Look like I do too.",

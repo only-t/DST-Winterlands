@@ -15,6 +15,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WOLFGANG.DESCRIBE
 	}
 	ANNOUNCE.ANNOUNCE_EMPEROR_ESCAPE = "Crown was too big for puny bird shoulders."
 	ANNOUNCE.ANNOUNCE_POLARGLOBE = "Was sky always so blue?"
+	ANNOUNCE.ANNOUNCE_POLARFLEA_LATCHED = "Eep! Tongue got biceps!"
 	ANNOUNCE.ANNOUNCE_POLARICE_PLOW_BAD = "Ice already too weak here."
 	ANNOUNCE.ANNOUNCE_THRONE_GIFT_TAKEN = "I like present!"
 	
@@ -75,6 +76,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WOLFGANG.DESCRIBE
 		HELD_INV = "Will not let go without a fight.",
 		HELD_BACKPACK = "Wolfgang won't squish bug, if bug behaves.",
 	}
+	DESCRIBE.POLARFLEA_MOTHER = "Oh mama..."
 	DESCRIBE.POLARFOX = {
 		FOLLOWER = "Puny but cute.",
 		FRIEND = "Aww, is too hungry to follow.",

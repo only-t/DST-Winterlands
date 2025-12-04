@@ -75,7 +75,7 @@ local function MakeEmptyFn(inst)
 		inst.AnimState:PlayAnimation("picked")
 	end
 	
-	--inst:ReleaseFlea()
+	inst:ReleaseFlea()
 end
 
 local function MakeBarrenFn(inst, wasempty)
@@ -85,6 +85,8 @@ local function MakeBarrenFn(inst, wasempty)
 	else
 		inst.AnimState:PlayAnimation("idle_dead")
 	end
+	
+	inst:ReleaseFlea()
 end
 
 local function OnPickedFn(inst, picker)
@@ -105,7 +107,7 @@ local function OnPickedFn(inst, picker)
 		inst.AnimState:PushAnimation("picked", false)
 	end
 	
-	--inst:ReleaseFlea()
+	-- ReleaseFlea is automated here
 end
 
 local function DigUp(inst, worker)
@@ -151,7 +153,7 @@ local function TryGetFlea(inst, force)
 end
 
 --[[local function OnIgnite(inst)
-	inst:ReleaseFlea()
+	ReleaseFlea is automated here
 end]]
 
 local function OnGetPolarFlea(inst, data)
@@ -184,6 +186,10 @@ local function GetFleaCapacity(inst, flea)
 	end
 	
 	return inst:HasTag("pickable") and TUNING.POLARFLEA_HOST_MAXFLEAS or 0
+end
+
+local function OnInit(inst)
+	OnPolarstormChanged(inst, TheWorld.components.polarstorm and TheWorld.components.polarstorm:IsPolarStormActive())
 end
 
 local function fn()
@@ -251,12 +257,14 @@ local function fn()
 	inst.OnLoad = OnLoad
 	inst.OnPreLoad = OnPreLoad
 	inst.TryGetFlea = TryGetFlea
-	--inst.ReleaseFlea = ReleaseFlea	No longer used, fleas now respond on their own
+	inst.ReleaseFlea = ReleaseFlea
 	
 	local color = 0.75 + math.random() * 0.25
 	inst.AnimState:SetMultColour(color, color, color, 1)
 	
 	inst.AnimState:SetFrame(math.random(inst.AnimState:GetCurrentAnimationNumFrames()) - 1)
+	
+	inst:DoTaskInTime(0, OnInit)
 	
 	inst.onpolarstormchanged = function(src, data)
 		if data and data.stormtype == STORM_TYPES.POLARSTORM then

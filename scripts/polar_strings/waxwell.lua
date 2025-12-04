@@ -15,6 +15,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WAXWELL.DESCRIBE
 	}
 	ANNOUNCE.ANNOUNCE_EMPEROR_ESCAPE = "A ruler? Please. He juggled like a jester in feathers."
 	ANNOUNCE.ANNOUNCE_POLARGLOBE = "Who's playing with this accursed thing again?"
+	ANNOUNCE.ANNOUNCE_POLARFLEA_LATCHED = "Unhand me, vermin!"
 	ANNOUNCE.ANNOUNCE_POLARICE_PLOW_BAD = "I'd rather not break that ice."
 	ANNOUNCE.ANNOUNCE_THRONE_GIFT_TAKEN = "I feel like there's a string attached."
 	
@@ -75,6 +76,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WAXWELL.DESCRIBE
 		HELD_INV = "It'll hurt but it's not like I'm going to keep it as a pet.",
 		HELD_BACKPACK = "You won't make me keep that thing.",
 	}
+	DESCRIBE.POLARFLEA_MOTHER = "This creature is nightmare fuel... figurally speaking."
 	DESCRIBE.POLARFOX = {
 		FOLLOWER = "We're in this together now.",
 		FRIEND = "Long time no see, pal.",
