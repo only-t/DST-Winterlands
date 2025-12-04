@@ -6,7 +6,7 @@ local prefabs = {
     
 }
 
-local function OnInfighting(inst, hooligan, victim)
+local function OnInfighting(inst, attacker, victim)
     if inst.sg:HasStateTag("yelling") or inst.sg:HasStateTag("sleeping") then
         return
     end
@@ -36,16 +36,23 @@ local function StopBearInfighting(inst)
 
     for _, bear in ipairs(bears) do
         if bear.components.health and not bear.components.health:IsDead() then
-            if bear.components.combat:HasTarget() then
-                if bear.components.timer:TimerExists("rageover") then -- Calms down bears that are currently enraged
-                    bear.components.timer:SetTimeLeft("rageover", 0)
-                else
-                    bear:SetEnraged(false)
-                end
-                
-                if bear.components.combat.target:HasTag("bear") then -- If they're targeting another bear, drop the target
-                    bear.components.combat:DropTarget()
-                end
+            if bear.components.combat:HasTarget() and bear.components.combat.target:HasTag("bear") then -- If they're targeting another bear, drop the target and face the major
+                bear.components.combat:DropTarget()
+            end
+            
+            if not bear.components.combat:HasTarget() or bear.components.combat.target:HasTag("bear") then
+                bear.current_major = inst
+                bear:DoTaskInTime(6, function(inst) inst.current_major = nil end)
+
+                local str = bear.infighting_guilty and STRINGS.POLARBEAR_FACE_MAJOR_GUILTY[math.random(1, #STRINGS.POLARBEAR_FACE_MAJOR_GUILTY)]
+                                                    or STRINGS.POLARBEAR_FACE_MAJOR_GENERIC[math.random(1, #STRINGS.POLARBEAR_FACE_MAJOR_GENERIC)]
+                bear.components.talker:Say(str, 3.5)
+            end
+
+            if bear.components.timer:TimerExists("rageover") then -- Calm them down if they're enraged
+                bear.components.timer:SetTimeLeft("rageover", 0)
+            else
+                bear:SetEnraged(false)
             end
         end
     end

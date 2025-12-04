@@ -19,6 +19,9 @@ local MAX_PLOW_DIST = 10
 local LEASH_RETURN_DIST = 10
 local LEASH_MAX_DIST = 30
 
+local LEASH_MAJOR_MAX_DIST = 10
+local LEASH_MAJOR_RETURN_DIST = 6
+
 local STOP_RUN_DIST = 30
 local MAX_CHASE_TIME = 10
 local MAX_CHASE_DIST = 30
@@ -31,6 +34,21 @@ local SEE_PLAYER_DIST = 6
 
 local GETTRADER_MUST_TAGS = {"player"}
 local FINDFOOD_CANT_TAGS = {"FX", "NOCLICK", "DECOR", "INLIMBO", "outofreach", "show_spoiled"}
+
+--  Facin' Major
+
+local function GetMajor(inst)
+	return inst.current_major
+end
+
+local function KeepMajor(inst)
+	return inst.current_major ~= nil
+end
+
+local function GetMajorPos(inst)
+	return inst.current_major ~= nil and inst.current_major:GetPosition() or nil
+end
+
 
 --	Followin'
 
@@ -378,6 +396,12 @@ function PolarBearBrain:OnStart()
 		WhileNode(function() return IsHomeOnFire(self.inst) end, "On Fire",
 			ChattyNode(self.inst, "POLARBEAR_PANICHOUSEFIRE",
 				Panic(self.inst))),
+		WhileNode(function() return KeepMajor(self.inst) end, "Face Major",
+			PriorityNode({
+				Leash(self.inst, GetMajorPos, LEASH_MAJOR_MAX_DIST, LEASH_MAJOR_RETURN_DIST, true),
+				FaceEntity(self.inst, GetMajor, KeepMajor)
+			}, 0)
+		),
 		WhileNode(function() return self.inst.enraged end, "Rage Zoomin",
 			Panic(self.inst)),
 		EventNode(self.inst, "gohome",

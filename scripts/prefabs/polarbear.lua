@@ -370,6 +370,20 @@ local function OnHitOther(inst, data)
 	if data and data.target and data.target:HasTag("bear") then
 		local major = FindEntity(inst, TUNING.POLARBEAR_MAJOR_SEARCH_RADIUS, nil, { "bear_major" })
 
+		if data.target.components.combat.lasttargetGUID == nil or
+		Ents[data.target.components.combat.lasttargetGUID] == nil or -- Can this happen? idk
+		not Ents[data.target.components.combat.lasttargetGUID]:HasTag("bear") then
+			-- If Combat.lastattacker isn't the current target, presume we're the instigator and therefor guilty
+			inst.infighting_guilty = true
+
+			if inst._infighting_guilty_task then
+				inst._infighting_guilty_task:Cancel()
+				inst._infighting_guilty_task = nil
+			end
+
+			inst._infighting_guilty_task = inst:DoTaskInTime(10, function() inst.infighting_guilty = nil end)
+		end
+
 		if major then
 			major:OnInfighting(inst, data.target)
 		end
@@ -680,6 +694,7 @@ local function fn()
 	inst.StartPolarPlowing = StartPolarPlowing
 	inst.StopPolarPlowing = StopPolarPlowing
 	
+	inst._infighting_guilty_task = nil
 	inst.inittask = inst:DoTaskInTime(0, OnInit)
 	
 	inst:ListenForEvent("attacked", OnAttacked)
