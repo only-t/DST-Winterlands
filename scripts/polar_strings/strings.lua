@@ -43,6 +43,7 @@ local RECIPE_DESC = STRINGS.RECIPE_DESC
 	NAMES.POLARWARG = "Ice Varg"
 	NAMES.SHADOW_ICICLER = "Shadow Spine"
 	NAMES.FROSTY_SIMPLE = "Frosty"
+	NAMES.POLARBEARKING = "Ursa Major" -- Is this even a mod?
 	
 --	Buildings
 	

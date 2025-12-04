@@ -366,6 +366,16 @@ local function OnUnmarkForTeleport(inst, data)
 	end
 end
 
+local function OnHitOther(inst, data)
+	if data and data.target and data.target:HasTag("bear") then
+		local major = FindEntity(inst, TUNING.POLARBEAR_MAJOR_SEARCH_RADIUS, nil, { "bear_major" })
+
+		if major then
+			major:OnInfighting(inst, data.target)
+		end
+	end
+end
+
 local function StartPolarPlowing(inst)
 	local equipped = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
 	local plower = inst.components.inventory:FindItem(function(item) return item.components.polarplower end) or (equipped and equipped.components.polarplower and equipped)
@@ -673,6 +683,7 @@ local function fn()
 	inst.inittask = inst:DoTaskInTime(0, OnInit)
 	
 	inst:ListenForEvent("attacked", OnAttacked)
+	inst:ListenForEvent("onhitother", OnHitOther)
 	inst:ListenForEvent("equip", OnEquip)
 	inst:ListenForEvent("unequip", OnUnequip)
 	inst:ListenForEvent("gainloyalty", OnUnmarkForTeleport)

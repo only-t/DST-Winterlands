@@ -74,6 +74,7 @@ PrefabFiles = {
 	"wysp_skeleton",
 	"frosty_simple",
 	"frosty_snowball",
+	"polarbearking",
 	
 --	Skin stuff
 	
