@@ -29,7 +29,7 @@ end
 
 local OldDigestFood
 local function DigestFood(inst, food, ...)
-	if food and (food.prefab == "icelettuce" or "icelettuce_seeds") and inst.components.freezable and inst.CAGE_STATE == CAGE_STATES.FULL then
+	if food and (food.prefab == "icelettuce" or food.prefab == "icelettuce_seeds") and inst.components.freezable and inst.CAGE_STATE == CAGE_STATES.FULL then
 		inst.components.freezable:AddColdness(TUNING.ICELETTUCE_FREEZABLE_COLDNESS)
 	end
 	if OldDigestFood then

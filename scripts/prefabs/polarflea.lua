@@ -279,6 +279,14 @@ local function OnHostAttacked(inst, host, data) -- This is for both onattacked a
 	end
 end
 
+local function OnDeath(inst, data)
+	local killer = data and data.afflicter
+	
+	if killer and (killer:HasTag("character") or killer:HasTag("monster")) then
+		TheWorld:PushEvent("motherflea_triggered", {victim = inst})
+	end
+end
+
 local function OnHostAttackOther(inst, host, data)
 	if host and inst.components.combat then
 		local fleapack
@@ -539,6 +547,7 @@ local function fn()
 	inst.on_host_pickedup = function(target, data) OnHostPickedUp(inst, target, data) end
 	
 	inst:ListenForEvent("attacked", OnAttacked)
+	inst:ListenForEvent("death", OnDeath)
 	inst:ListenForEvent("fleabiteback", OnMurdered)
 	inst:ListenForEvent("onremove", OnRemove)
 	inst:ListenForEvent("timerdone", OnTimerDone)

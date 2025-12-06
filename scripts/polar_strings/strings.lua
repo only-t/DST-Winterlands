@@ -361,7 +361,7 @@ local RECIPE_DESC = STRINGS.RECIPE_DESC
 			str = "Wanda's own little gift. Freeze all of your stats and prevent buff + debuff afflictions, for longer shall you keep stable this frame of the timeline..."
 		},
 		DAY5_TOOLTIP = {
-			title = "MaTusk and Beartraps",
+			title = "MaTusk and Bear Traps",
 			str = "A new hunter may sometimes join the party, equipped with sharp, snaring traps and a strange invigorating instrument."
 		},
 		DAY6_TOOLTIP = {

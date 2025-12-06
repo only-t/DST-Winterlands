@@ -415,7 +415,7 @@ local function StopPolarPlowing(inst)
 end
 
 local function DoGrowl(inst)
-	inst.SoundEmitter:PlaySound(inst.sounds.growl, "growl")
+	inst.SoundEmitter:PlaySound(inst.sounds.growl)
 	
 	if inst.enraged and inst.components.health and not inst.components.health:IsDead() then
 		inst._growltask = inst:DoTaskInTime(0.1 + math.random() * 0.5, inst.DoGrowl)

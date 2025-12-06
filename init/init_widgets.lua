@@ -187,6 +187,8 @@ AddClassPostConstruct("widgets/inventorybar", function(self, owner)
 	self.hudcompass_polar:SetScale(1.75, 1.75)
 	self.hudcompass_polar:SetMaster()
 	
+	--	TODO: 	I know this is the intended spot, but we might want to take this somewhere else later,
+	--			cause most of the more inventory equip/slots mods screw this one up...
 	local OldRebuild = self.Rebuild
 	function self:Rebuild(...)
 		local test = OldRebuild(self, ...)
