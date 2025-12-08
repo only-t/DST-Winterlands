@@ -64,6 +64,20 @@ table.insert(prefs, CreatePrefabSkin("ms_dragonflychest_upgraded_polarice", {
 	skin_tags = {},
 }))
 
+if HasPassedCalendarDay(9) then
+	table.insert(prefs, CreatePrefabSkin("ms_goldenpickaxe_polar", {
+		assets = {
+			Asset("DYNAMIC_ANIM", "anim/dynamic/goldenpickaxe_polar.zip"),
+			Asset("PKGREF", "anim/dynamic/goldenpickaxe_polar.dyn"),
+		},
+		base_prefab = "goldenpickaxe",
+		type = "item",
+		build_name_override = "goldenpickaxe_polar",
+		rarity = "ModMade",
+		skin_tags = {"POLAR", "GOLDENPICKAXE", "CRAFTABLE"},
+	}))
+end
+
 if HasPassedCalendarDay(11) then
 	table.insert(prefs, CreatePrefabSkin("ms_bushhat_polar", {
 		assets = {

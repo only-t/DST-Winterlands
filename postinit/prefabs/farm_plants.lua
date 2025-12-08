@@ -292,7 +292,7 @@ local function GrowthStagesPostInit(OLD_GROWTH_STAGES)
 					if inst.components.polarmistemitter then
 						inst.components.polarmistemitter.scale = mist_scale
 						
-						if mist_scale >= 1 then
+						if mist_scale >= 1 and not inst:HasTag("farm_plant_killjoy") then -- Not a seed or rotten
 							inst.components.polarmistemitter:StartMisting()
 							inst:AddTag("farm_plant_freezejoy")
 						else
@@ -327,6 +327,15 @@ end
 
 --
 
+local function GetHeatFn_IceLettuce(inst)
+	local stage = (inst.components.growable and inst.components.growable.stage or 5) + (inst.is_oversized and 1 or 0)
+	if not HasPassedCalendarDay(18) or (stage <= 1 or inst:HasTag("farm_plant_killjoy")) then
+		return nil
+	end
+	
+	return (TUNING.ICELETTUCE_COOLER * stage) / 6
+end
+
 local function PolarInit(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
 	if HasPassedCalendarDay(7) and GetClosestPolarTileToPoint(x, 0, z, 32) then
@@ -338,6 +347,10 @@ for k, data in pairs(PLANT_DEFS) do
 	local is_lettuce = k == "icelettuce"
 	
 	ENV.AddPrefabPostInit(data.prefab, function(inst)
+		if is_lettuce then
+			inst:AddTag("HASHEATER")
+		end
+		
 		if not TheWorld.ismastersim then
 			return
 		end
@@ -362,6 +375,10 @@ for k, data in pairs(PLANT_DEFS) do
 			
 			inst:AddComponent("polarmistemitter")
 			inst.components.polarmistemitter.maxmist_range = 2
+			
+			inst:AddComponent("heater")
+			inst.components.heater:SetThermics(false, true)
+			inst.components.heater.heatfn = GetHeatFn_IceLettuce
 			
 			inst.IsTenderImmune = IsTenderImmune
 			

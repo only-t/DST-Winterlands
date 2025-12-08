@@ -208,6 +208,17 @@ local oldrepairer = COMPONENT_ACTIONS.USEITEM.repairer -- Dryice can repair norm
 		end
 	end
 	
+local oldprototyper = COMPONENT_ACTIONS.SCENE.prototyper -- Trading with Walruses should only show while buffed and out of battle
+	COMPONENT_ACTIONS.SCENE.prototyper = function(inst, doer, actions, right, ...)
+		if inst:HasTag("walrus") and not (doer.replica.combat and doer.replica.combat:IsAlly(inst)) then
+			return
+		end
+		
+		if oldprototyper then
+			oldprototyper(inst, doer, actions, right, ...)
+		end
+	end
+	
 local oldstorytellingprop = COMPONENT_ACTIONS.SCENE.storytellingprop -- To keep action order the same with Walter, can't use portable_campfire tag or it can't be used by others
 	COMPONENT_ACTIONS.SCENE.storytellingprop = function(inst, doer, actions, right, ...)
 		if inst:HasTag("portable_brazier") then

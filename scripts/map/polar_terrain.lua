@@ -50,9 +50,12 @@ local polar_addedtiles = {
 	rock1 = {WORLD_TILES.POLAR_ICE, WORLD_TILES.POLAR_SNOW},
 	rock2 = {WORLD_TILES.POLAR_ICE, WORLD_TILES.POLAR_SNOW},
 	rock_flintless = {WORLD_TILES.POLAR_ICE},
-	rock_ice = {WORLD_TILES.POLAR_ICE},
+	--rock_ice = {WORLD_TILES.POLAR_ICE},
 	skeleton_notplayer_1 = {WORLD_TILES.POLAR_ICE, WORLD_TILES.PEBBLEBEACH},
 	skeleton_notplayer_2 = {WORLD_TILES.POLAR_ICE, WORLD_TILES.PEBBLEBEACH},
+	
+	seastack = {WORLD_TILES.POLAR_SNOW},
+	wobster_den = {WORLD_TILES.POLAR_SNOW},
 }
 
 for terrain, tiles in pairs(polar_filters) do

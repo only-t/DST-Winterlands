@@ -183,7 +183,10 @@ local function dowaxfn(inst, doer, waxitem)
 	return true
 end
 
-local PlayWaxAnimation
+local function PlayWaxAnimation(inst)
+	inst.AnimState:PlayAnimation("wax_oversized", false)
+	inst.AnimState:PushAnimation("idle_oversized")
+end
 
 local function CancelWaxTask(inst)
 	if inst._waxtask then
@@ -198,9 +201,8 @@ local function StartWaxTask(inst)
 	end
 end
 
-PlayWaxAnimation = function(inst)
-	inst.AnimState:PlayAnimation("wax_oversized", false)
-	inst.AnimState:PushAnimation("idle_oversized")
+local function GetHeatFn_IceLettuce(inst)
+	return TUNING.ICELETTUCE_COOLER * (inst.components.perishable and inst.components.perishable:GetPercent() or 0.5)
 end
 
 local function MakeVeggie(name, has_seeds)
@@ -421,6 +423,10 @@ local function MakeVeggie(name, has_seeds)
 		inst:AddTag("waxable")
 		inst:AddTag("oversized_veggie")
 		inst:AddTag("show_spoilage")
+		if name == "icelettuce" then
+			inst:AddTag("HASHEATER")
+		end
+		
 		inst.gymweight = 4
 		
 		MakeHeavyObstaclePhysics(inst, OVERSIZED_PHYSICS_RADIUS)
@@ -480,7 +486,17 @@ local function MakeVeggie(name, has_seeds)
 		inst:AddComponent("lootdropper")
 		inst.components.lootdropper:SetLoot(oversized_makeloots(inst, name))
 		
-		-- TODO: Add cold heater to lettuce! (on planted crop too maybe)
+		if name == "icelettuce" then
+			inst:AddComponent("heater")
+			inst.components.heater:SetThermics(false, true)
+			inst.components.heater.heatfn = GetHeatFn_IceLettuce
+			inst.components.heater.equippedheat = TUNING.ICELETTUCE_COOLER
+			
+			inst:AddComponent("polarmistemitter")
+			inst.components.polarmistemitter.maxmist_range = 2
+			inst.components.polarmistemitter.scale = 3.5
+			inst.components.polarmistemitter:StartMisting()
+		end
 		
 		MakeMediumBurnable(inst)
 		inst.components.burnable:SetOnBurntFn(oversized_onburnt)
@@ -511,6 +527,9 @@ local function MakeVeggie(name, has_seeds)
 		
 		inst:AddTag("heavy")
 		inst:AddTag("oversized_veggie")
+		if name == "icelettuce" then
+			inst:AddTag("HASHEATER")
+		end
 		
 		inst.gymweight = 4
 		
@@ -555,6 +574,13 @@ local function MakeVeggie(name, has_seeds)
 		
 		inst:AddComponent("lootdropper")
 		inst.components.lootdropper:SetLoot({"spoiled_food"})
+		
+		if name == "icelettuce" then
+			inst:AddComponent("heater")
+			inst.components.heater:SetThermics(false, true)
+			inst.components.heater.heatfn = GetHeatFn_IceLettuce
+			inst.components.heater.equippedheat = TUNING.ICELETTUCE_COOLER
+		end
 		
 		MakeMediumBurnable(inst)
 		inst.components.burnable:SetOnBurntFn(oversized_onburnt)

@@ -138,6 +138,9 @@ local RECIPE_DESC = STRINGS.RECIPE_DESC
 	
 	--	Names
 	STRINGS.SKIN_NAMES.ms_bushhat_polar = "My-Wee-Glacier"
+	STRINGS.SKIN_NAMES.ms_goldenaxe_polar = "Goldenice Axe"
+	STRINGS.SKIN_NAMES.ms_goldenpickaxe_polar = "Goldenice Pickaxe"
+	STRINGS.SKIN_NAMES.ms_goldenshovel_polar = "Goldenice Shovel"
 	STRINGS.SKIN_NAMES.ms_dragonflychest_polarice = "Dry \"Ice Box\""
 	STRINGS.SKIN_NAMES.ms_polarmoosehat_white = "Hornamented Ushanka"
 	STRINGS.SKIN_NAMES.ms_treasurechest_polarice = "\"Ice Box\""
@@ -146,6 +149,9 @@ local RECIPE_DESC = STRINGS.RECIPE_DESC
 	
 	--	Desc
 	STRINGS.SKIN_DESCRIPTIONS.ms_bushhat_polar = "Ideal for hiding among Pengulls, less so around tumbleweeds and cacti."
+	STRINGS.SKIN_DESCRIPTIONS.ms_goldenaxe_polar = "Make trees feel the swing of winter air before your blade!"
+	STRINGS.SKIN_DESCRIPTIONS.ms_goldenpickaxe_polar = "Its icy edges hum with subterranean cold..."
+	STRINGS.SKIN_DESCRIPTIONS.ms_goldenshovel_polar = "It glints with the pale shimmer of freshly frozen ground."
 	STRINGS.SKIN_DESCRIPTIONS.ms_dragonflychest_polarice = "It's almost like if you had a large Ice Box. Well, the impression strikes out more in the dead of winter."
 	STRINGS.SKIN_DESCRIPTIONS.ms_polarmoosehat_white = "Twigs, bones... anything 'fur holding this loose hat together!"
 	STRINGS.SKIN_DESCRIPTIONS.ms_treasurechest_polarice = "Got no gears for the real thing? Afraid you'll have to make do with this."

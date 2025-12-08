@@ -21,7 +21,7 @@ local SPAWN_OFFSET = 2
 local SPAWN_OFFSET_ATTEMPTS = 12
 
 function PolarFleaMotherSpawner:ShouldTrigger(pt, data) -- Tests both fleakill spawn increment and spawn validity
-	if not GetClosestPolarTileToPoint(pt.x, 0, pt.z, 32) then
+	if not HasPassedCalendarDay(15) or not GetClosestPolarTileToPoint(pt.x, 0, pt.z, 32) then
 		return false
 	end
 	
@@ -79,13 +79,13 @@ function PolarFleaMotherSpawner:TrySpawn(pt)
 	end
 	
 	if math.random() < self.spawnchance then
-		local mom = SpawnPrefab("polarflea")
-		mom.Transform:SetPosition(pt.x, pt.y, pt.z)
-		mom.Transform:SetScale(3, 3, 3)
+		--local mom = SpawnPrefab("polarflea")
+		--mom.Transform:SetPosition(pt.x, pt.y, pt.z)
+		--mom.Transform:SetScale(3, 3, 3)
 		
-		if mom.sg then
-			mom.sg:GoToState("taunt") -- Unburrow instead, later
-		end
+		--if mom.sg then
+		--	mom.sg:GoToState("taunt") -- Unburrow instead, later
+		--end
 		
 		self.spawnchance = TUNING.POLARFLEA_MOTHER_SPAWN_CHANCE
 		-- TODO: Add minimum cooldown. Also fleas spawned from mother shouldn't increase count
