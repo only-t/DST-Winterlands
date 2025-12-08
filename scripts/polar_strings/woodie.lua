@@ -15,6 +15,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WOODIE.DESCRIBE
 	}
 	ANNOUNCE.ANNOUNCE_EMPEROR_ESCAPE = "That's right! And don't come back, eh!"
 	ANNOUNCE.ANNOUNCE_POLARGLOBE = "Guess we'll need more firewood, eh?"
+	ANNOUNCE.ANNOUNCE_POLARFLEA_LATCHED = "Hnff! It's got tongue!"
 	ANNOUNCE.ANNOUNCE_POLARICE_PLOW_BAD = "I know a better spot."
 	ANNOUNCE.ANNOUNCE_THRONE_GIFT_TAKEN = "Hoo! Lucy, you shouldn't have-"
 	
@@ -75,6 +76,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WOODIE.DESCRIBE
 		HELD_INV = "Get outta my hairs and feathers!",
 		HELD_BACKPACK = "They ain't so bad when you get to know them.",
 	}
+	DESCRIBE.POLARFLEA_MOTHER = "I say we chop this monstrosity down, eh?"
 	DESCRIBE.POLARFOX = {
 		FOLLOWER = "Go get'em birds!",
 		FRIEND = "That's my old chum.",

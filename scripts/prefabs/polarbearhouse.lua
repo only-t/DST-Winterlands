@@ -15,6 +15,23 @@ local HOUSE_PAINTINGS = {
 	"red",
 }
 
+local function OnPolarstormChanged(inst, active) -- TODO: This could need some improvement cause they don't go home if unloaded and returning later...
+	local child = inst.components.spawner and inst.components.spawner.child
+	
+	if child and active and TheWorld.components.polarstorm and TheWorld.components.polarstorm:GetPolarStormLevel(inst) >= TUNING.SANDSTORM_FULL_LEVEL then
+		if inst._leavestormtask == nil then
+			inst._leavestormtask = inst:DoPeriodicTask(1 + math.random() * 3, function()
+				if child.components.follower == nil or child.components.follower.leader == nil then
+					child:PushEvent("gohome")
+				end
+			end)
+		end
+	elseif inst._leavestormtask then
+		inst._leavestormtask:Cancel()
+		inst._leavestormtask = nil
+	end
+end
+
 local function GetStatus(inst)
 	return (inst:HasTag("burnt") and "BURNT") or nil
 end
@@ -183,6 +200,8 @@ local function OnInit(inst)
 			inst.components.spawner:GoHome(child)
 		end
 	end
+	
+	OnPolarstormChanged(inst, TheWorld.components.polarstorm and TheWorld.components.polarstorm:IsPolarStormActive())
 end
 
 local function OnSave(inst, data)
@@ -243,23 +262,6 @@ end
 local function OnIgnite(inst)
 	if inst.components.spawner and inst.components.spawner:IsOccupied() then
 		inst.components.spawner:ReleaseChild()
-	end
-end
-
-local function OnPolarstormChanged(inst, active) -- TODO: This could need some improvement cause they don't go home if unloaded and returning later...
-	local child = inst.components.spawner and inst.components.spawner.child
-	
-	if child and active and TheWorld.components.polarstorm and TheWorld.components.polarstorm:GetPolarStormLevel(inst) >= TUNING.SANDSTORM_FULL_LEVEL then
-		if inst._leavestormtask == nil then
-			inst._leavestormtask = inst:DoPeriodicTask(1 + math.random() * 3, function()
-				if child.components.follower == nil or child.components.follower.leader == nil then
-					child:PushEvent("gohome")
-				end
-			end)
-		end
-	elseif inst._leavestormtask then
-		inst._leavestormtask:Cancel()
-		inst._leavestormtask = nil
 	end
 end
 

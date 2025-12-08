@@ -160,7 +160,7 @@ end
 
 --
 
-local AURA_TAGS = {"_combat", "smolder", "fire"}
+local AURA_TAGS = {"_combat", "freezable", "smolder", "fire"}
 local AURA_CANT_TAGS = {"INLIMBO", "playerghost", "flight"}
 
 local function DoFrostAura(inst, target, pos, doer)

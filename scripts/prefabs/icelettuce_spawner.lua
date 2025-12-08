@@ -2,8 +2,6 @@ local prefabs = {
 	"farm_plant_icelettuce",
 }
 
--- TODO: would be cool to, like, replace the soil around the lettuce with snow or ice? Or that can be generalized to all crops standing in snow
-
 local BLOCKER_TAGS = {"antlion_sinkhole_blocker", "birdblocker", "blocker", "character", "structure", "wall"}
 local LETTUCE_TAGS = {"farm_plant_icelettuce"}
 

@@ -15,7 +15,6 @@ local function band_update(inst)
 		
 		for k, v in pairs(ents) do
 			if v.components.follower and not v.components.follower.leader and not owner.components.leader:IsFollower(v) then
-				--owner.components.leader:AddFollower(v)
 			elseif v.components.farmplanttendable then
 				v.components.farmplanttendable:TendTo(owner)
 			end
@@ -27,29 +26,6 @@ local function band_update(inst)
 				v:AddDebuff("buff_walrusally", "buff_walrusally")
 			end
 		end
-		
-		--[[for k, v in pairs(owner.components.leader.followers) do
-			if k.components.follower then
-				if k:HasTag("walrus") then
-					k.components.follower:AddLoyaltyTime(3)
-				end
-			end
-		end
-	else
-		local x, y, z = inst.Transform:GetWorldPosition()
-		local ents = TheSim:FindEntities(x, y, z, TUNING.ONEMANBAND_RANGE, FOLLOWER_ONEOF_TAGS, FOLLOWER_CANT_TAGS)
-		
-		for k, v in pairs(ents) do
-			if v.components.follower and not v.components.follower.leader and not inst.components.leader:IsFollower(v) then
-				inst.components.leader:AddFollower(v)
-			end
-		end
-		
-		for k, v in pairs(inst.components.leader.followers) do
-			if k:HasTag("walrus") and k.components.follower then
-				k.components.follower:AddLoyaltyTime(3)
-			end
-		end]]
 	end
 end
 
@@ -63,6 +39,7 @@ local function OnEquip(inst, owner)
 		end
 	end)
 	
+	TheWorld:PushEvent("pausehounded", {source = inst, reason = "bagpipe"}) -- A little more than the standard pause, Houndwaves won't progress at all!
 	if inst.components.fueled then
 		inst.components.fueled:StartConsuming()
 	end
@@ -74,6 +51,7 @@ local function OnUnequip(inst, owner)
 		owner.SoundEmitter:KillSound("walrus_bagpipe")
 	end
 	
+	TheWorld:PushEvent("unpausehounded", {source = inst, reason = "bagpipe"})
 	if inst.components.fueled then
 		inst.components.fueled:StopConsuming()
 	end
@@ -89,6 +67,7 @@ local function OnEquipToModel(inst, owner)
 		owner.SoundEmitter:KillSound("walrus_bagpipe")
 	end
 	
+	TheWorld:PushEvent("unpausehounded", {source = inst})
 	if inst.components.fueled then
 		inst.components.fueled:StopConsuming()
 	end

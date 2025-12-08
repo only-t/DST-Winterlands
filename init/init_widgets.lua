@@ -187,6 +187,8 @@ AddClassPostConstruct("widgets/inventorybar", function(self, owner)
 	self.hudcompass_polar:SetScale(1.75, 1.75)
 	self.hudcompass_polar:SetMaster()
 	
+	--	TODO: 	I know this is the intended spot, but we might want to take this somewhere else later,
+	--			cause most of the more inventory equip/slots mods screw this one up...
 	local OldRebuild = self.Rebuild
 	function self:Rebuild(...)
 		local test = OldRebuild(self, ...)
@@ -326,10 +328,15 @@ AddClassPostConstruct("widgets/upgrademodulesdisplay", function(self)
 end)
 
 --  Advent Calendar
+
 local PolarCalendarScreen = require("screens/polarcalendarscreen")
 local PauseScreen = require("screens/redux/pausescreen")
+
+local TEMPLATES = require("widgets/redux/templates")
+
 local old_PauseScreen_BuildMenu = PauseScreen.BuildMenu
 PauseScreen.BuildMenu = function(self, ...)
+	local _TEMPLATES = TEMPLATES -- Required reference for Insight mod, somewhy
 	old_PauseScreen_BuildMenu(self, ...)
 
 	local calendar_btn = self.menu:AddItem("Advent Calendar", function()

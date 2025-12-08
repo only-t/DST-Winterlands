@@ -15,6 +15,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WANDA.DESCRIBE
 	}
 	ANNOUNCE.ANNOUNCE_EMPEROR_ESCAPE = "Ha! Fly off, you lot! No wait..."
 	ANNOUNCE.ANNOUNCE_POLARGLOBE = "Ack! The end is nigh- or... is it?"
+	ANNOUNCE.ANNOUNCE_POLARFLEA_LATCHED = "This can't be how it all end..."
 	ANNOUNCE.ANNOUNCE_POLARICE_PLOW_BAD = "Something tells me it's a bad idea here."
 	ANNOUNCE.ANNOUNCE_THRONE_GIFT_TAKEN = "My thanks... but now I will take my leaves."
 	
@@ -77,6 +78,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WANDA.DESCRIBE
 		HELD_INV = "It hurts, but removing it would hurt more.",
 		HELD_BACKPACK = "They're wound up like a spring and ready to burst out!",
 	}
+	DESCRIBE.POLARFLEA_MOTHER = "Nature really shouldn't scale things up like that!"
 	DESCRIBE.POLARFOX = {
 		FOLLOWER = "Now that I caught you... well. I don't know what I'll be doing exactly!",
 		FRIEND = "We've met in this timestream, haven't we?",

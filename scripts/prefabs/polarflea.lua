@@ -157,6 +157,7 @@ local function SetHost(inst, host, kick, given)
 		inst:RemoveEventCallback("onattackother", inst.on_host_attackother, inst._host)
 		inst:RemoveEventCallback("onpickup", inst.on_host_pickedup, inst._host)
 		inst:RemoveEventCallback("picked", inst.on_host_pickedup, inst._host)
+		inst:RemoveEventCallback("worked", inst.on_host_pickedup, inst._host)
 		
 		if inst._host:IsValid() then
 			if inst._host._snowfleas then
@@ -205,6 +206,7 @@ local function SetHost(inst, host, kick, given)
 	inst:ListenForEvent("onattackother", inst.on_host_attackother, inst._host)
 	inst:ListenForEvent("onpickup", inst.on_host_pickedup, inst._host)
 	inst:ListenForEvent("picked", inst.on_host_pickedup, inst._host)
+	inst:ListenForEvent("worked", inst.on_host_pickedup, inst._host)
 	
 	if inst.components.health then
 		inst.components.health:StartRegen(TUNING.POLARFLEA_POCKET_REGEN, TUNING.POLARFLEA_REGEN_RATE)
@@ -277,6 +279,14 @@ local function OnHostAttacked(inst, host, data) -- This is for both onattacked a
 	end
 end
 
+local function OnDeath(inst, data)
+	local killer = data and data.afflicter
+	
+	if killer and (killer:HasTag("character") or killer:HasTag("monster")) then
+		TheWorld:PushEvent("motherflea_triggered", {victim = inst})
+	end
+end
+
 local function OnHostAttackOther(inst, host, data)
 	if host and inst.components.combat then
 		local fleapack
@@ -306,9 +316,9 @@ local function OnHostAttackOther(inst, host, data)
 	end
 end
 
-local function OnHostPickedUp(inst, host, data) -- This is for both items and pickables
+local function OnHostPickedUp(inst, host, data) -- This is for both items, pickables and workables
 	if host and not host.components.container and inst.components.combat then
-		local picker = data and (data.picker or data.owner)
+		local picker = data and (data.picker or data.owner or data.worker)
 		local isbuddy = picker and picker:HasTag("bearbuddy")
 		local isflea = picker and picker:HasTag("flea")
 		
@@ -537,6 +547,7 @@ local function fn()
 	inst.on_host_pickedup = function(target, data) OnHostPickedUp(inst, target, data) end
 	
 	inst:ListenForEvent("attacked", OnAttacked)
+	inst:ListenForEvent("death", OnDeath)
 	inst:ListenForEvent("fleabiteback", OnMurdered)
 	inst:ListenForEvent("onremove", OnRemove)
 	inst:ListenForEvent("timerdone", OnTimerDone)

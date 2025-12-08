@@ -104,7 +104,7 @@ local function walrusally_onattackother(target, data)
 		target:RemoveDebuff("buff_walrusally")
 		
 		if target.components.timer then
-			if target.components.timer:TimerExist("walrusally_oncooldown") then
+			if target.components.timer:TimerExists("walrusally_oncooldown") then
 				target.components.timer:SetTimeLeft("walrusally_oncooldown", 4 + math.random())
 			else
 				target.components.timer:StartTimer("walrusally_oncooldown", 4 + math.random())
@@ -315,9 +315,10 @@ end
 
 local function WandaTimeFreeze_OnAttached(inst, target)
 	target:AddTag("frozenstats")
+	target.SoundEmitter:PlaySound("polarsounds/timefreeze/clock_start")
 	
 	--This tests how much time is lost per stats
-	--inst.debugstatdrain = function(src, stat, amt) wandatimefreeze_debugstatdrain(inst, stat, amt) end
+	inst.debugstatdrain = function(src, stat, amt) wandatimefreeze_debugstatdrain(inst, stat, amt) end
 	inst.ontemperaturedeltafn = function(src, data) wandatimefreeze_ontemperaturedelta(inst, target, data) end
 	inst:ListenForEvent("temperaturedelta", inst.ontemperaturedeltafn, target)
 	
@@ -327,6 +328,7 @@ end
 
 local function WandaTimeFreeze_OnDetached(inst, target)
 	target:RemoveTag("frozenstats")
+	target.SoundEmitter:PlaySound("polarsounds/timefreeze/clock_stop")
 	
 	if target.components.colourtweener then
 		target.components.colourtweener:EndTween()

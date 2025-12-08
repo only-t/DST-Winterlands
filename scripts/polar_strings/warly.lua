@@ -15,6 +15,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WARLY.DESCRIBE
 	}
 	ANNOUNCE.ANNOUNCE_EMPEROR_ESCAPE = "The king is gone! Long live the king!"
 	ANNOUNCE.ANNOUNCE_POLARGLOBE = "Brr! Who left the freezer door open?"
+	ANNOUNCE.ANNOUNCE_POLARFLEA_LATCHED = "Oh sa mère!"
 	ANNOUNCE.ANNOUNCE_POLARICE_PLOW_BAD = "I'd rather fish somewhere else."
 	ANNOUNCE.ANNOUNCE_THRONE_GIFT_TAKEN = "Merci-- oh. I should have brought gifts too!"
 	
@@ -75,6 +76,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WARLY.DESCRIBE
 		HELD_INV = "Bon appétit, and adieu!",
 		HELD_BACKPACK = "I believe they're hibernating.",
 	}
+	DESCRIBE.POLARFLEA_MOTHER = "To each their own Maman..."
 	DESCRIBE.POLARFOX = {
 		FOLLOWER = "You simply can't say non to a good meal, non?",
 		FRIEND = "What say you for a meal like old times?",

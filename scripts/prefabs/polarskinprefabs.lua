@@ -64,18 +64,34 @@ table.insert(prefs, CreatePrefabSkin("ms_dragonflychest_upgraded_polarice", {
 	skin_tags = {},
 }))
 
-table.insert(prefs, CreatePrefabSkin("ms_bushhat_polar", {
-	assets = {
-		Asset("DYNAMIC_ANIM", "anim/dynamic/ms_bushhat_polar.zip"),
-		Asset("PKGREF", "anim/dynamic/ms_bushhat_polar.dyn"),
-	},
-	base_prefab = "bushhat",
-	type = "item",
-	build_name_override = "ms_bushhat_polar",
-	rarity = "ModMade",
-	prefabs = {"polar_snow_bush"},
-	skin_tags = {"POLAR", "BUSHHAT", "CRAFTABLE"},
-	fx_prefab = {"polar_snow_bush"},
-}))
+if HasPassedCalendarDay(9) then
+	table.insert(prefs, CreatePrefabSkin("ms_goldenpickaxe_polar", {
+		assets = {
+			Asset("DYNAMIC_ANIM", "anim/dynamic/goldenpickaxe_polar.zip"),
+			Asset("PKGREF", "anim/dynamic/goldenpickaxe_polar.dyn"),
+		},
+		base_prefab = "goldenpickaxe",
+		type = "item",
+		build_name_override = "goldenpickaxe_polar",
+		rarity = "ModMade",
+		skin_tags = {"POLAR", "GOLDENPICKAXE", "CRAFTABLE"},
+	}))
+end
+
+if HasPassedCalendarDay(11) then
+	table.insert(prefs, CreatePrefabSkin("ms_bushhat_polar", {
+		assets = {
+			Asset("DYNAMIC_ANIM", "anim/dynamic/ms_bushhat_polar.zip"),
+			Asset("PKGREF", "anim/dynamic/ms_bushhat_polar.dyn"),
+		},
+		base_prefab = "bushhat",
+		type = "item",
+		build_name_override = "ms_bushhat_polar",
+		rarity = "ModMade",
+		prefabs = {"polar_snow_bush"},
+		skin_tags = {"POLAR", "BUSHHAT", "CRAFTABLE"},
+		fx_prefab = {"polar_snow_bush"},
+	}))
+end
 
 return unpack(prefs)

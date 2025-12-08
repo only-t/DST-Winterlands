@@ -39,6 +39,7 @@ local RECIPE_DESC = STRINGS.RECIPE_DESC
 	NAMES.POLAR_PENGUIN = NAMES.PENGUIN
 	NAMES.POLARBEAR = "Polar Bear"
 	NAMES.POLARFLEA = "Snowflea"
+	NAMES.POLARFLEA_MOTHER = "Motherflea"
 	NAMES.POLARFOX = "Frost Tail"
 	NAMES.POLARWARG = "Ice Varg"
 	NAMES.SHADOW_ICICLER = "Shadow Spine"
@@ -138,6 +139,9 @@ local RECIPE_DESC = STRINGS.RECIPE_DESC
 	
 	--	Names
 	STRINGS.SKIN_NAMES.ms_bushhat_polar = "My-Wee-Glacier"
+	STRINGS.SKIN_NAMES.ms_goldenaxe_polar = "Goldenice Axe"
+	STRINGS.SKIN_NAMES.ms_goldenpickaxe_polar = "Goldenice Pickaxe"
+	STRINGS.SKIN_NAMES.ms_goldenshovel_polar = "Goldenice Shovel"
 	STRINGS.SKIN_NAMES.ms_dragonflychest_polarice = "Dry \"Ice Box\""
 	STRINGS.SKIN_NAMES.ms_polarmoosehat_white = "Hornamented Ushanka"
 	STRINGS.SKIN_NAMES.ms_treasurechest_polarice = "\"Ice Box\""
@@ -146,6 +150,9 @@ local RECIPE_DESC = STRINGS.RECIPE_DESC
 	
 	--	Desc
 	STRINGS.SKIN_DESCRIPTIONS.ms_bushhat_polar = "Ideal for hiding among Pengulls, less so around tumbleweeds and cacti."
+	STRINGS.SKIN_DESCRIPTIONS.ms_goldenaxe_polar = "Make trees feel the swing of winter air before your blade!"
+	STRINGS.SKIN_DESCRIPTIONS.ms_goldenpickaxe_polar = "Its icy edges hum with subterranean cold..."
+	STRINGS.SKIN_DESCRIPTIONS.ms_goldenshovel_polar = "It glints with the pale shimmer of freshly frozen ground."
 	STRINGS.SKIN_DESCRIPTIONS.ms_dragonflychest_polarice = "It's almost like if you had a large Ice Box. Well, the impression strikes out more in the dead of winter."
 	STRINGS.SKIN_DESCRIPTIONS.ms_polarmoosehat_white = "Twigs, bones... anything 'fur holding this loose hat together!"
 	STRINGS.SKIN_DESCRIPTIONS.ms_treasurechest_polarice = "Got no gears for the real thing? Afraid you'll have to make do with this."
@@ -353,8 +360,8 @@ local RECIPE_DESC = STRINGS.RECIPE_DESC
 	--  Polar Calendar
 	STRINGS.POLAR_CALENDAR = {
 		DAY1_TOOLTIP = {
-			title = "QoL Update",
-			str = "Freezing resistance overhaul, rebalance of many items, crafting recipes and much more... prepare yourself for the days to come! (More details can be found in our daily Discord changelog)"
+			title = "Coolity Of Life",
+			str = "Freezing resistance overhaul, rebalance of many items, crafting recipes and much more...\nprepare yourself for the days to come! (More details can be found in our daily Discord changelog)"
 		},
 		DAY2_TOOLTIP = {
 			title = "Ice Floe Kits",
@@ -369,12 +376,12 @@ local RECIPE_DESC = STRINGS.RECIPE_DESC
 			str = "Wanda's own little gift. Freeze all of your stats and prevent buff + debuff afflictions, for longer shall you keep stable this frame of the timeline..."
 		},
 		DAY5_TOOLTIP = {
-			title = "MaTusk and Beartraps",
+			title = "MaTusk and Bear Traps",
 			str = "A new hunter may sometimes join the party, equipped with sharp, snaring traps and a strange invigorating instrument."
 		},
 		DAY6_TOOLTIP = {
 			title = "Bagpipes and Walrus Trades",
-			str = "Play their song, and your past enemies may turn out to be your finest allies, in battle, or in trades of commodities"
+			str = "Play their song, and your past enemies will grant you safe passage, and open for trades of commodities."
 		},
 		DAY7_TOOLTIP = {
 			title = "Snowification and Hunts Rehaul",
@@ -450,8 +457,9 @@ local RECIPE_DESC = STRINGS.RECIPE_DESC
 		},
 		DAY25_TOOLTIP = {
 			title = "Frosty the Snowman, Blue Gems Overcharger",
-			str = "Summon a snowbound giant! This is Phase One of a tougher battle for Overcharged Blue Gems. Stay tuned for more, and happy Winter's Feast!"
-		}
+			str = "Summon a snowbound giant! This is Phase One of a tougher battle for Overcharged Blue Gems.\nStay tuned for more, and happy Winter's Feast!"
+		},
+		SEE_YA = "Next tile unlocks at 0:00 UTC-8!",
 	}
 	
 	--	Scrapbook, Cookbook
@@ -483,7 +491,7 @@ local RECIPE_DESC = STRINGS.RECIPE_DESC
 	STRINGS.SCRAPBOOK.SPECIALINFO.POLARICESTAFF = "Sends a freezing shockwave in a large range."
 	STRINGS.SCRAPBOOK.SPECIALINFO.TUMBLEWEED_POLAR = "These flutter in the blizzard and collect junk along the way.\n\nAll sorts of crazy junk.\n\nYou'd be surprised."
 	STRINGS.SCRAPBOOK.SPECIALINFO.WALL_POLAR = "Whoever messes with this wall better chill out."
-	STRINGS.SCRAPBOOK.SPECIALINFO.WALRUS_BAGPIPE = "Lose your wits playing the Bagpipes! Its tune keeps hounds at ease and opens hunters for safe trading."
+	STRINGS.SCRAPBOOK.SPECIALINFO.WALRUS_BAGPIPE = "Lose your wits playing the Bagpipes! Its tune keeps hounds and hound waves at ease momentarily, and opens hunters for safe trading to you and nearby allies."
 	STRINGS.SCRAPBOOK.SPECIALINFO.WALRUS_BEARTRAP = "A nasty trap deployed and hidden in the snow by trappers.\n\nCreatures caught by the mechanism will be stuck in place momentarily. One can attempt to break free from it, or be rescued by allies or foes' attacks alike.\n\nCan be disarmed by placing an item atop, or risking your life."
 	STRINGS.SCRAPBOOK.SPECIALINFO.WINTERS_FISTS = "Pound the ground with these heavy ice chunks to burst temporary snowy areas.\n\nSnowball combos can be performed while standing in snow: first causing minor damage, then pushing back, and finally causing a deadly avalanche!"
 	STRINGS.SCRAPBOOK.SPECIALINFO.WX78MODULE_NAUGHTY = "Plugs into WX78's circuit board.\n\nRequires 1 socket and multiplies all sorts of Naughtiness gained as followed per circuit installed:\nx2 > x3 > x3.5 > x4 > x4.5 > x5"
@@ -581,6 +589,7 @@ local RECIPE_DESC = STRINGS.RECIPE_DESC
 	STRINGS.UI.CUSTOMIZATIONSCREEN.POLAR_THRONE = "Naughty Throne"
 	STRINGS.UI.CUSTOMIZATIONSCREEN.POLARBEARS = "Polar Bears"
 	STRINGS.UI.CUSTOMIZATIONSCREEN.POLARFLEAS = "Snowfleas"
+	STRINGS.UI.CUSTOMIZATIONSCREEN.POLARFLEA_MOTHERS = "Motherfleas"
 	STRINGS.UI.CUSTOMIZATIONSCREEN.POLARFOXES = "Frost Tails"
 	STRINGS.UI.CUSTOMIZATIONSCREEN.TUMBLEWEED_POLAR = "Tumblewinds"
 	

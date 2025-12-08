@@ -15,6 +15,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WURT.DESCRIBE
 	}
 	ANNOUNCE.ANNOUNCE_EMPEROR_ESCAPE = "Swamp {wins}, Snow 0!"
 	ANNOUNCE.ANNOUNCE_POLARGLOBE = "Glr-rpp, leave ground alone!"
+	ANNOUNCE.ANNOUNCE_POLARFLEA_LATCHED = "Ow! OW! Oh! Can see inside it!"
 	ANNOUNCE.ANNOUNCE_POLARICE_PLOW_BAD = "Maybe not here."
 	ANNOUNCE.ANNOUNCE_THRONE_GIFT_TAKEN = "Best day ever, florp!"
 	
@@ -75,6 +76,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WURT.DESCRIBE
 		HELD_INV = "Go away! Go awaaaay!",
 		HELD_BACKPACK = "Got big plans for you.",
 	}
+	DESCRIBE.POLARFLEA_MOTHER = "Squish! Squash! Oh. D-didn't do it!"
 	DESCRIBE.POLARFOX = {
 		FOLLOWER = "Aww, it too cute!",
 		FRIEND = "Why not following anymore, florp?",

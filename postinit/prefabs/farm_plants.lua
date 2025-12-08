@@ -34,6 +34,7 @@ PLANT_DEFS.icelettuce = {
 	moisture = {drink_rate = TUNING.FARM_PLANT_DRINK_MED, min_percent = TUNING.FARM_PLANT_DROUGHT_TOLERANCE},
 	
 	max_killjoys_tolerance = TUNING.FARM_PLANT_KILLJOY_TOLERANCE,
+	fireproof = true,
 	nutrient_consumption = {M, M, M},
 	nutrient_restoration = {false, false, false},
 	
@@ -47,10 +48,10 @@ PLANT_DEFS.icelettuce = {
 	
 	prefab = "farm_plant_icelettuce",
 	product = "icelettuce",
-	product_oversized = "icelettuce_oversized", -- Doesn't exist
+	product_oversized = "icelettuce_oversized",
 	seed = "icelettuce_seeds",
 	plant_type_tag = "farm_plant_icelettuce",
-	loot_oversized_rot = {"ice"},
+	loot_oversized_rot = {"ice", "ice", "spoiled_food", "icelettuce_seeds", "fruitfly", "fruitfly"},
 	
 	family_min_count = TUNING.FARM_PLANT_SAME_FAMILY_MIN,
 	family_check_dist = TUNING.FARM_PLANT_SAME_FAMILY_RADIUS,
@@ -119,6 +120,33 @@ PLANT_DEFS.icelettuce = {
 	pictureframeanim = {anim = "idle_shiver", time = 12 * FRAMES},
 }
 
+if HasPassedCalendarDay(18) then
+	table.insert(PLANT_DEFS.icelettuce.plantregistryinfo, {
+		text = "oversized",
+		anim = "crop_oversized",
+		grow_anim = "grow_oversized",
+		revealplantname = true,
+		fullgrown = true,
+		hidden = true,
+	})
+	table.insert(PLANT_DEFS.icelettuce.plantregistryinfo, {
+		text = "rotting",
+		anim = "crop_rot",
+		grow_anim = "grow_rot",
+		stagepriority = -100,
+		is_rotten = true,
+		hidden = true,
+	})
+	table.insert(PLANT_DEFS.icelettuce.plantregistryinfo, {
+		text = "oversized_rotting",
+		anim = "crop_rot_oversized",
+		grow_anim = "grow_rot_oversized",
+		stagepriority = -100,
+		is_rotten = true,
+		hidden = true,
+	})
+end
+
 --	Changes for lettuce and other crops on island...
 
 --	Freeze Tender
@@ -174,10 +202,12 @@ local function KillJoyStressTest(inst, ...)
 		test = OldKillJoyStressTest(inst, ...)
 	end
 	
+	--	Iceberg Lettuce stresses other crops that don't like winter, unless if world temperature is sufficently hot (summer and hot biomes...)
 	local x, y, z = inst.Transform:GetWorldPosition()
-	if not test and inst.prefab ~= "farm_plant_icelettuce" and GetTemperatureAtXZ(x, z) < TUNING.OVERHEAT_TEMP - 15 then
-		local lettuce_tolerance = inst.plant_def.icelettuce_tolerance or TUNING.ICELETTUCE_KILLJOY_TOLERANCE
-		return #TheSim:FindEntities(x, y, z, TUNING.FARM_PLANT_KILLJOY_RADIUS, FREEZEJOY_MUST_TAGS) > lettuce_tolerance
+	if not test and inst.prefab ~= "farm_plant_icelettuce" and GetTemperatureAtXZ(x, z) < TUNING.OVERHEAT_TEMP - 15 and inst.plant_def and
+		not inst.plant_def.good_seasons["winter"] then
+		
+		return #TheSim:FindEntities(x, y, z, TUNING.FARM_PLANT_KILLJOY_RADIUS, FREEZEJOY_MUST_TAGS) > (inst.plant_def.icelettuce_tolerance or TUNING.ICELETTUCE_KILLJOY_TOLERANCE)
 	end
 	
 	return test 
@@ -197,7 +227,7 @@ local function SeasonStressTest(inst, ...)
 	end
 end
 
---	Applying no oversized / rotten states for Lettuce, and winter growth time for any crop on island
+--	Applying no oversized / rotten states for Lettuce (TEMPPPPP, 18th calendar day), and winter growth time for any crop on island
 
 local CalcGrowTime
 
@@ -262,7 +292,7 @@ local function GrowthStagesPostInit(OLD_GROWTH_STAGES)
 					if inst.components.polarmistemitter then
 						inst.components.polarmistemitter.scale = mist_scale
 						
-						if mist_scale >= 1 then
+						if mist_scale >= 1 and not inst:HasTag("farm_plant_killjoy") then -- Not a seed or rotten
 							inst.components.polarmistemitter:StartMisting()
 							inst:AddTag("farm_plant_freezejoy")
 						else
@@ -271,7 +301,7 @@ local function GrowthStagesPostInit(OLD_GROWTH_STAGES)
 						end
 					end
 					
-					inst.no_oversized = true
+					inst.no_oversized = not HasPassedCalendarDay(18)
 				end
 			end
 			
@@ -282,7 +312,7 @@ local function GrowthStagesPostInit(OLD_GROWTH_STAGES)
 				end
 				
 				if inst:HasTag("farm_plant_icelettuce") then
-					inst.no_oversized = true
+					inst.no_oversized = not HasPassedCalendarDay(18)
 				end
 			end
 			
@@ -297,9 +327,18 @@ end
 
 --
 
+local function GetHeatFn_IceLettuce(inst)
+	local stage = (inst.components.growable and inst.components.growable.stage or 5) + (inst.is_oversized and 1 or 0)
+	if not HasPassedCalendarDay(18) or (stage <= 1 or inst:HasTag("farm_plant_killjoy")) then
+		return nil
+	end
+	
+	return (TUNING.ICELETTUCE_COOLER * stage) / 6
+end
+
 local function PolarInit(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
-	if GetClosestPolarTileToPoint(x, 0, z, 32) then
+	if HasPassedCalendarDay(7) and GetClosestPolarTileToPoint(x, 0, z, 32) then
 		inst.AnimState:OverrideSymbol("soil01", "dirt_to_polar_builds", "soil01")
 	end
 end
@@ -308,6 +347,10 @@ for k, data in pairs(PLANT_DEFS) do
 	local is_lettuce = k == "icelettuce"
 	
 	ENV.AddPrefabPostInit(data.prefab, function(inst)
+		if is_lettuce then
+			inst:AddTag("HASHEATER")
+		end
+		
 		if not TheWorld.ismastersim then
 			return
 		end
@@ -332,6 +375,10 @@ for k, data in pairs(PLANT_DEFS) do
 			
 			inst:AddComponent("polarmistemitter")
 			inst.components.polarmistemitter.maxmist_range = 2
+			
+			inst:AddComponent("heater")
+			inst.components.heater:SetThermics(false, true)
+			inst.components.heater.heatfn = GetHeatFn_IceLettuce
 			
 			inst.IsTenderImmune = IsTenderImmune
 			

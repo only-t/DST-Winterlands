@@ -17,7 +17,7 @@ Assets = {
 	
 	Asset("ATLAS", "images/crafting_menu_polar.xml"),
 	Asset("IMAGE", "images/crafting_menu_polar.tex"),
-
+	
 	Asset("ATLAS", "images/button_winter_carny_xlong.xml"),
 	Asset("IMAGE", "images/button_winter_carny_xlong.tex"),
 	
@@ -49,6 +49,7 @@ Assets = {
 	Asset("ANIM", "anim/player_polarcast.zip"),
 	Asset("ANIM", "anim/player_winterfists.zip"),
 	
+	Asset("ANIM", "anim/bird_cage_polar_anims.zip"),
 	Asset("ANIM", "anim/rain_meter_polar_anims.zip"),
 	Asset("ANIM", "anim/winter_meter_polar_anims.zip"),
 	Asset("ANIM", "anim/walrus_polar_anims.zip"),
@@ -57,8 +58,6 @@ Assets = {
 	Asset("ANIM", "anim/polar_snow.zip"),
 	Asset("ANIM", "anim/polar_snowman_decor.zip"),
 	Asset("ANIM", "anim/tree_rock_polar.zip"),
-
-	-- Asset("ANIM", "anim/bird_cage_frozen.zip"),
 	
 	-- Sounds
 	Asset("SOUNDPACKAGE", "sound/polarsounds.fev"),
@@ -101,6 +100,9 @@ local ITEMS = {
 	"frostwalkeramulet",
 	"iceburrito",
 	"icelettuce",
+	"icelettuce_oversized",
+	"icelettuce_oversized_rotten",
+	"icelettuce_oversized_waxed",
 	"icelettuce_seeds",
 	"iciclestaff",
 	"koalefried_trunk_summer",
@@ -145,6 +147,7 @@ local ITEMS = {
 	
 	"ms_bushhat_polar",
 	"ms_dragonflychest_polarice",
+	"ms_goldenpickaxe_polar",
 	"ms_treasurechest_polarice",
 	"ms_polarmoosehat_white",
 	"ms_treasurechest_polarice",
