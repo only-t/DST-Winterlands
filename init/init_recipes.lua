@@ -35,11 +35,16 @@ local POLAR_CRAFTING_ATLAS = "images/crafting_menu_polar.xml"
 
 PROTOTYPER_DEFS["polaramulet_station"] = {icon_atlas = POLAR_CRAFTING_ATLAS, icon_image = "polaramulet_station.tex", action_str = "TRADE", is_crafting_station = true, filter_text = STRINGS.UI.CRAFTING_STATION_FILTERS.POLARAMULET_STATION}
 
+PROTOTYPER_DEFS["polarbearking"] = {icon_atlas = "images/polarimages.xml", icon_image = "ms_polarmoosehat_white.tex", action_str = "TALKTO", is_crafting_station = true, filter_text = STRINGS.UI.CRAFTING_STATION_FILTERS.POLARBEARKING_TRIALS}
+
 PROTOTYPER_DEFS["walrus"] = PROTOTYPER_DEFS["walrus"] or {icon_atlas = POLAR_CRAFTING_ATLAS, icon_image = "station_walrustrader.tex", action_str = "TRADE", is_crafting_station = true, filter_text = STRINGS.UI.CRAFTING_STATION_FILTERS.WANDERINGWALRUSSHOP}
 PROTOTYPER_DEFS["girl_walrus"] = {icon_atlas = POLAR_CRAFTING_ATLAS, icon_image = "station_girl_walrustrader.tex", action_str = "TRADE", is_crafting_station = true, filter_text = STRINGS.UI.CRAFTING_STATION_FILTERS.WANDERINGWALRUSSHOP}
 PROTOTYPER_DEFS["little_walrus"] = PROTOTYPER_DEFS["little_walrus"] or {icon_atlas = POLAR_CRAFTING_ATLAS, icon_image = "station_little_walrustrader.tex", action_str = "TRADE", is_crafting_station = true, filter_text = STRINGS.UI.CRAFTING_STATION_FILTERS.WANDERINGWALRUSSHOP}
 
-local POLAR_TECHING = {"polarsnow_material"}
+local POLAR_TECHING = {
+	"polarsnow_material",
+	"polarbear_material"
+}
 
 local OldIsTechIngredient = IsTechIngredient
 function IsTechIngredient(ingredienttype, ...)
@@ -117,6 +122,9 @@ PolarRecipe("polaricestaff", 				{Ingredient("antler_tree_stick", 1), Ingredient
 PolarRecipe("polar_lavae_tooth", 			{Ingredient("lavae_egg", 1), Ingredient("redgem", 1)}, 														TECH.LOST, 					{product = "lavae_tooth", description = "polar_lavae_tooth", nounlock = true, actionstr = "TRADE", sg_state = "give", hint_msg = "NEEDSPOLARAMULET_STATION"}, 	{"CRAFTING_STATION"})
 
 PolarRecipe("bluegem_overcharged", 			{Ingredient("moose_polar_antler", 1), Ingredient("bluegem", 1)}, 	TECH.POLARAMULET_STATION, 	{nounlock = true, sg_state = "give"}, 	{"CRAFTING_STATION"})
+PolarRecipe("trial_fist_fight", 				{Ingredient(TECH_INGREDIENT.POLARBEAR, 1)}, 											TECH.POLARBEARKING_TRIALS, 					{nounlock = true, sg_state = "give"}, 	{"CRAFTING_STATION"})
+-- PolarRecipe("trial_endurence_fight", 				{Ingredient(TECH_INGREDIENT.POLARBEAR, 2)}, 											TECH.POLARBEARKING_TRIALS, 					{nounlock = true, sg_state = "give"}, 	{"CRAFTING_STATION"})
+-- PolarRecipe("trial_all_out_rumble", 				{Ingredient(TECH_INGREDIENT.POLARBEAR, 5)}, 											TECH.POLARBEARKING_TRIALS, 					{nounlock = true, sg_state = "give"}, 	{"CRAFTING_STATION"})
 
 for phase, phase_data in pairs(POLARAMULET_STATION_MOONPHASE_TRADEDATA) do
 	for i, recipe_data in ipairs(phase_data) do

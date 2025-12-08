@@ -84,6 +84,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WINONA.DESCRIBE
 	}
 	DESCRIBE.POLARWARG = "I've got no doubt about his minty breath."
 	DESCRIBE.FROSTY_SIMPLE = "Frosty"
+	DESCRIBE.POLARBEARKING = "Hmm, Ursa Major, he is."
 	
 --	Buildings
 	

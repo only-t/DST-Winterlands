@@ -84,6 +84,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WENDY.DESCRIBE
 	}
 	DESCRIBE.POLARWARG = "The champion of the tundra."
 	DESCRIBE.FROSTY_SIMPLE = "Frosty"
+	DESCRIBE.POLARBEARKING = "Hmm, Ursa Major, he is."
 	
 --	Buildings
 	

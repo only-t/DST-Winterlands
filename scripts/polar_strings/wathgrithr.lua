@@ -84,6 +84,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE
 	}
 	DESCRIBE.POLARWARG = "A glorious battle awaits me on this frozen land."
 	DESCRIBE.FROSTY_SIMPLE = "Frosty"
+	DESCRIBE.POLARBEARKING = "Hmm, Ursa Major, he is."
 	
 --	Buildings
 	

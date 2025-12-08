@@ -84,6 +84,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WORMWOOD.DESCRIBE
 	}
 	DESCRIBE.POLARWARG = "Big chilly woofer"
 	DESCRIBE.FROSTY_SIMPLE = "Frosty"
+	DESCRIBE.POLARBEARKING = "Hmm, Ursa Major, he is."
 	
 --	Buildings
 	

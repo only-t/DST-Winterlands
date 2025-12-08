@@ -84,6 +84,7 @@ local DESCRIBE = STRINGS.CHARACTERS.WARLY.DESCRIBE
 	}
 	DESCRIBE.POLARWARG = "I'm all shivery, and it's not just the cold..."
 	DESCRIBE.FROSTY_SIMPLE = "Frosty"
+	DESCRIBE.POLARBEARKING = "Hmm, Ursa Major, he is."
 	
 --	Buildings
 	

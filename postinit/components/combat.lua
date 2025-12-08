@@ -8,6 +8,10 @@ local Combat_Replica = require("components/combat_replica")
 		if self.inst:HasTag("penguin") and target and target.prefab == "wall_polar" then
 			return false -- We don't want Pengulls to break their castle...
 		end
+
+		if self.inst:HasTag("player_trial_participator") and target and target:HasTag("trial_spectator") and not target:HasTag("trial_participator") then
+			return false -- Don't target trial spectators if we're participating
+		end
 		
 		return OldCanTarget(self, target, ...)
 	end
