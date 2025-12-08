@@ -183,9 +183,9 @@ end
 local function GetNoLeaderHomePos(inst)
 	if GetLeader(inst) then
 		return nil
-	else
-		return GetHomePos(inst)
 	end
+
+	return GetHomePos(inst)
 end
 
 --	Fuelin'
@@ -372,14 +372,88 @@ local function GetCombatLines(inst)
 	return STRINGS.POLARBEAR_FIGHT[math.random(#STRINGS.POLARBEAR_FIGHT)]
 end
 
---
+--  Trialin'
+
+local function GetTrialParticipatorLines(inst)
+	if inst.trialdata then
+		if inst.trialdata.combat_trial then
+			return STRINGS.POLARBEAR_IN_COMBAT_TRIAL[math.random(#STRINGS.POLARBEAR_IN_COMBAT_TRIAL)]
+		elseif inst.trialdata.fun_trial then
+			return STRINGS.POLARBEAR_IN_FUN_TRIAL[math.random(#STRINGS.POLARBEAR_IN_FUN_TRIAL)]
+		end
+	end
+end
+
+local function GetTrialSpectatorLines(inst)
+	if inst.nearby_trial then
+		if inst.nearby_trial.components.trialsholder.trialdata.combat_trial then
+			return STRINGS.POLARBEAR_SPECTATING_COMBAT_TRIAL[math.random(#STRINGS.POLARBEAR_SPECTATING_COMBAT_TRIAL)]
+		elseif inst.nearby_trial.components.trialsholder.trialdata.fun_trial then
+			return STRINGS.POLARBEAR_SPECTATING_FUN_TRIAL[math.random(#STRINGS.POLARBEAR_SPECTATING_FUN_TRIAL)]
+		end
+	end
+end
+
+local function FindNearbyTrial(inst)
+	if inst.nearby_trial == nil or not inst.nearby_trial:IsValid() then
+		inst.nearby_trial = FindEntity(inst, 24,
+		function(guy)
+			return guy.components.trialsholder:IsTrialActive() and
+				   guy.components.trialsholder.trialdata.audience_valid
+		end,
+		{ "bear_major" })
+
+	elseif not inst.nearby_trial.components.trialsholder:IsTrialActive() then
+		inst.nearby_trial = nil
+	end
+
+	if inst.nearby_trial ~= nil then
+		inst:AddTag("trial_spectator")
+	else
+		inst:RemoveTag("trial_spectator")
+	end
+
+	return inst.nearby_trial
+end
+
+local function GetNearbyTrial(inst)
+	return inst.nearby_trial
+end
+
+local function KeepFaceNearbyTrial(inst)
+	return inst.nearby_trial and inst.nearby_trial:IsValid() and inst.nearby_trial.components.trialsholder:IsTrialActive()
+end
+
+local function GetTrialFollowMinDist(inst)
+	return inst.nearby_trial and inst.nearby_trial.components.trialsholder.trialdata.radius + 1 or 24
+end
+
+local function GetTrialFollowTargetDist(inst)
+	return inst.nearby_trial and inst.nearby_trial.components.trialsholder.trialdata.radius + 2 or 24 + 1
+end
+
+local function GetTrialFollowMaxDist(inst)
+	return inst.nearby_trial and inst.nearby_trial.components.trialsholder.trialdata.radius + 4 or 24 + 2
+end
 
 local PolarBearBrain = Class(Brain, function(self, inst)
 	Brain._ctor(self, inst)
 end)
 
 function PolarBearBrain:OnStart()
+	local combat_trial_nodes = PriorityNode({
+		ChattyNode(self.inst, GetTrialParticipatorLines,
+			ChaseAndAttack(self.inst, 999, 999))
+	}, 0)
+
+	local observe_trial_nodes = PriorityNode({
+		Follow(self.inst, GetNearbyTrial, GetTrialFollowMinDist, GetTrialFollowTargetDist, GetTrialFollowMaxDist, true),
+		ChattyNode(self.inst, GetTrialSpectatorLines,
+			FaceEntity(self.inst, GetNearbyTrial, KeepFaceNearbyTrial), 5, 5, 1, 1)
+	}, 0)
+
 	local root = PriorityNode({
+		-- Panic nodes
 		WhileNode( function() return self.inst.components.hauntable and self.inst.components.hauntable.panic end, "Panic Haunted",
 			ChattyNode(self.inst, "POLARBEAR_PANICHAUNT",
 				Panic(self.inst))),
@@ -389,19 +463,27 @@ function PolarBearBrain:OnStart()
 		WhileNode(function() return BrainCommon.ShouldAvoidElectricFence(self.inst) end, "Shocked",
 			ChattyNode(self.inst, "POLARBEAR_PANICELECTRICITY",
 				AvoidElectricFence(self.inst))),
-		
+
+		-- Trial participation nodes
+		WhileNode(function() return self.inst.trialdata and self.inst.trialdata.combat_trial end, "Participate In Combat Trial", combat_trial_nodes),
+
+		-- Common nodes
 		ChattyNode(self.inst, GetCombatLines,
 			WhileNode(function() return not self.inst.components.combat:InCooldown() end, "Attack Momentarily",
 				ChaseAndAttack(self.inst, MAX_CHASE_TIME, MAX_CHASE_DIST))),
 		WhileNode(function() return IsHomeOnFire(self.inst) end, "On Fire",
 			ChattyNode(self.inst, "POLARBEAR_PANICHOUSEFIRE",
 				Panic(self.inst))),
+				
+		-- Trial spectating nodes
+		WhileNode(function() if self.inst.trialdata == nil then return FindNearbyTrial(self.inst) ~= nil end end, "Observe Trial", observe_trial_nodes),
+
+		-- Common nodes
 		WhileNode(function() return KeepMajor(self.inst) end, "Face Major",
 			PriorityNode({
 				Leash(self.inst, GetMajorPos, LEASH_MAJOR_MAX_DIST, LEASH_MAJOR_RETURN_DIST, true),
 				FaceEntity(self.inst, GetMajor, KeepMajor)
-			}, 0)
-		),
+			}, 0)),
 		WhileNode(function() return self.inst.enraged end, "Rage Zoomin",
 			Panic(self.inst)),
 		EventNode(self.inst, "gohome",
@@ -412,9 +494,11 @@ function PolarBearBrain:OnStart()
 				DoAction(self.inst, RescueLeaderAction, "Rescue Leader", true))),
 		RunAway(self.inst, "icecrackfx", 5, 7),
 		
+		-- Teeth trading nodes
 		FailIfSuccessDecorator(ActionNode(function() DoToothTrade(self.inst) end, "Tooth Trade")),
 		FailIfSuccessDecorator(ConditionWaitNode(function() return not self.inst._tooth_trade_queued end, "Block While Doing Tooth Trade")),
 		
+		-- Action chatty nodes
 		IfNode(function() return not ShouldPauseChatty(self.inst) end, "Other Trade",
 			ChattyNode(self.inst, "POLARBEAR_ATTEMPT_TRADE",
 				FaceEntity(self.inst, GetTraderFn, KeepTraderFn))),
@@ -424,28 +508,31 @@ function PolarBearBrain:OnStart()
 			DoAction(self.inst, FindFoodAction)),
 		ChattyNode(self.inst, "POLARBEAR_FOLLOWWILSON",
 			Follow(self.inst, GetLeader, MIN_FOLLOW_DIST, TARGET_FOLLOW_DIST, MAX_FOLLOW_DIST)),
-		
 		WhileNode(function() return self.inst.components.timer and self.inst.components.timer:TimerExists("arcticfooled_cooldown") end, "Avoid Pranked",
 			RunAway(self.inst, "arcticfooled", 4, 10, nil, nil, nil, true)),
 		
-		IfNode(function() return not self.inst.components.locomotor.dest end, "Bored",
-			PriorityNode({
-				ChattyNode(self.inst, "POLARBEAR_STICKARCTICFISH",
-					DoAction(self.inst, StickArcticFoolFishAction, "Pranking Players")),
-				ChattyNode(self.inst, "POLARBEAR_FUELBRAZIER",
-					DoAction(self.inst, AddFuelAction, "Add Fuel")),
-				ChattyNode(self.inst, "POLARBEAR_PLOWSNOW",
-					DoAction(self.inst, DoPlowingAction, "Plow Snow"), 5, 10, 5, 5),
-			}, 0.5)),
+		-- Bored nodes -- LukaS: THIS BREAKS WANDERING, TODO FIX!
+					   --        for some reason this completely breaks subsequent nodes and stops
+					   --        bears from wandering, also they spam their FaceEntity lines each brain tick
+		-- IfNode(function() return not self.inst.components.locomotor.dest end, "Bored",
+		-- 	PriorityNode({
+		-- 		ChattyNode(self.inst, "POLARBEAR_STICKARCTICFISH",
+		-- 			DoAction(self.inst, StickArcticFoolFishAction, "Pranking Players")),
+		-- 		ChattyNode(self.inst, "POLARBEAR_FUELBRAZIER",
+		-- 			DoAction(self.inst, AddFuelAction, "Add Fuel")),
+		-- 		ChattyNode(self.inst, "POLARBEAR_PLOWSNOW",
+		-- 			DoAction(self.inst, DoPlowingAction, "Plow Snow"), 5, 10, 5, 5),
+		-- 	}, 0.5)),
 		
+		-- Common nodes
 		ChattyNode(self.inst, "POLARBEAR_GOHOME",
 			WhileNode(function() return TheWorld.state.iscavenight or not self.inst:IsInLight() end, "Night Time",
 				DoAction(self.inst, GoHomeAction, "Go Home", true))),
 		Leash(self.inst, GetNoLeaderHomePos, LEASH_MAX_DIST, LEASH_RETURN_DIST),
 		ChattyNode(self.inst, GetChatterLines,
 			FaceEntity(self.inst, GetFaceTargetNearestPlayerFn, KeepFaceTargetNearestPlayerFn)),
-		Wander(self.inst, GetNoLeaderHomePos, MAX_WANDER_DIST)
-	}, 0.5)
+		Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("spawnpt") end, MAX_WANDER_DIST)
+	}, 0.25)
 	
 	self.bt = BT(self.inst, root)
 end

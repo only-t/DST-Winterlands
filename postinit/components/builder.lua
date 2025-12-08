@@ -3,9 +3,16 @@ GLOBAL.setfenv(1, GLOBAL)
 
 local function HasSnowIngredient(self, ingredient)
 	if ingredient.type and ingredient.type == "polarsnow_material" then
-		local x, y, z = self.inst.Transform:GetWorldPosition()
-		
 		return self.inst.nearhighsnow:value()
+	end
+
+	if ingredient.type and ingredient.type == "polarbear_material" then
+		local x, y, z = self.inst.Transform:GetWorldPosition()
+		local bears = TheSim:FindEntities(x, y, z, TRIALS_INGREDIANT_ACCESS_RADIUS, { "bear" }, { "bear_major" })
+
+		if #bears >= ingredient.amount then
+			return true
+		end
 	end
 end
 

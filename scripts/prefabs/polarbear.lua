@@ -37,11 +37,18 @@ local RETARGET_ONEOF_TAGS = {"hound", "walrus", "warg", "pirate", "wonkey", "abo
 local RETARGET_NOT_TAGS = {"bearbuddy"}
 
 local function RetargetFn(inst)
+	if inst.trialdata ~= nil and inst.trialdata.combat_trial then
+		return not inst:IsInLimbo() and FindEntity(inst, inst.trialdata.radius * 2, function(guy)
+			return inst.components.combat:CanTarget(guy) and inst.trialdata.players_left[guy]
+		end)
+	end
+
 	return not inst:IsInLimbo() and FindEntity(inst, TUNING.PIG_TARGET_DIST, function(guy)
 		return inst.components.combat:CanTarget(guy)
-			and guy:HasAnyTag(RETARGET_ONEOF_TAGS) or guy:HasAnyTag(POLARBEAR_FISHY_TAGS)
-	
-	end, RETARGET_MUST_TAGS, RETARGET_NOT_TAGS) or nil
+				and guy:HasAnyTag(RETARGET_ONEOF_TAGS) or guy:HasAnyTag(POLARBEAR_FISHY_TAGS)
+		end,
+		RETARGET_MUST_TAGS, RETARGET_NOT_TAGS
+	) or nil
 end
 
 local function KeepTargetFn(inst, target)
@@ -69,9 +76,12 @@ local function OnAttacked(inst, data)
 	
 	if data and data.attacker then
 		inst.components.combat:SetTarget(data.attacker)
-		inst.components.combat:ShareTarget(data.attacker, 30, function(dude)
-			return dude:HasTag("bear") and dude.components.health and not dude.components.health:IsDead()
-		end, 10)
+
+		if inst.trialdata == nil then
+			inst.components.combat:ShareTarget(data.attacker, 30, function(dude)
+				return dude:HasTag("bear") and dude.components.health and not dude.components.health:IsDead()
+			end, 10)
+		end
 	end
 	
 	inst:SetEnraged(true)
@@ -447,6 +457,10 @@ local function DoGrowl(inst)
 end
 
 local function SetEnraged(inst, enable)
+	if enable and inst.trialdata and inst.trialdata.name == "trial_fist_fight" then
+		return -- Don't enrage during a fist fight
+	end
+
 	if enable ~= inst.enraged then
 		local colour = inst.body_paint ~= DEFAULT_PAINTING and inst.body_paint or nil
 		
@@ -512,6 +526,8 @@ local function OnInit(inst)
 	if inst.body_paint == nil then
 		inst:SetPainting(BODY_PAINTINGS[math.random(#BODY_PAINTINGS)])
 	end
+	
+	inst.components.knownlocations:RememberLocation("spawnpt", inst:GetPosition())
 end
 
 local function OnEquip(inst, data)
@@ -613,6 +629,21 @@ local function fn()
 	inst.components.combat:SetAttackPeriod(TUNING.POLARBEAR_ATTACK_PERIOD)
 	inst.components.combat:SetRetargetFunction(1, RetargetFn)
 	inst.components.combat:SetKeepTargetFunction(KeepTargetFn)
+
+	local old_CalcDamage = inst.components.combat.CalcDamage
+	inst.components.combat.CalcDamage = function(self, target, ...) -- Special CalcDamage edit for trial fighting, bears play nice :)
+		local damage, spdamage = old_CalcDamage(self, target, ...)
+
+		if inst.trialdata ~= nil and inst.trialdata.players_left[target] then -- The target is a trial participant
+			local target_hp = target.components.health.currenthealth
+
+			if target_hp <= TUNING.POLARBEAR_DAMAGE then
+				return target_hp - 1, nil -- Cap the damage to targets hp - 1
+			end
+		end
+
+		return damage, spdamage
+	end
 	
 	inst:AddComponent("eater")
 	inst.components.eater:SetDiet({FOODGROUP.BEARGER}, {FOODGROUP.BEARGER})

@@ -75,6 +75,8 @@ PrefabFiles = {
 	"frosty_simple",
 	"frosty_snowball",
 	"polarbearking",
+	"polarkingtrials",
+	"trial_radius_fx",
 	
 --	Skin stuff
 	

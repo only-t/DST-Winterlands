@@ -1,3 +1,5 @@
+local trials = require("polarbearking_trials")
+
 local assets = {
     Asset("ANIM", "anim/pig_king.zip")
 }
@@ -7,7 +9,7 @@ local prefabs = {
 }
 
 local function OnInfighting(inst, attacker, victim)
-    if inst.sg:HasStateTag("yelling") or inst.sg:HasStateTag("sleeping") then
+    if inst.sg:HasStateTag("yelling") or inst.sg:HasStateTag("sleeping") or inst.components.trialsholder:IsTrialActive() then
         return
     end
 
@@ -64,6 +66,35 @@ local function StopBearInfighting(inst)
     end
 end
 
+local function CanStartTrial(inst, trialdata)
+    return not inst.sg:HasStateTag("sleeping") and
+           not inst.sg:HasStateTag("yelling") and
+           not inst.components.trialsholder:IsTrialActive()
+end
+
+local function OnActivatePrototyper(inst, doer, recipe)
+    inst.components.trialsholder:StartTrial(trials[recipe.name], doer)
+end
+
+local function OnTurnOnPrototyper(inst)
+    
+end
+
+local function EnableTrials(inst)
+    if inst.components.prototyper == nil then
+        inst:AddComponent("prototyper")
+        inst.components.prototyper.onactivate = OnActivatePrototyper
+        inst.components.prototyper.onturnon = OnTurnOnPrototyper
+        inst.components.prototyper.trees = TUNING.PROTOTYPER_TREES.POLARBEARKING_TRIALS
+    end
+end
+
+local function DisableTrials(inst)
+    if inst.components.prototyper then
+        inst:RemoveComponent("prototyper")
+    end
+end
+
 local function OnIsNight(inst, isnight)
     if isnight then
         inst.sg.mem.sleeping = true
@@ -71,12 +102,16 @@ local function OnIsNight(inst, isnight)
         if inst.sg:HasStateTag("idle") then
             inst.sg:GoToState("sleep")
         end
+
+        DisableTrials(inst)
     else
         inst.sg.mem.sleeping = false
 
         if inst.sg:HasStateTag("sleeping") then
             inst.sg:GoToState("wake")
         end
+
+        EnableTrials(inst)
     end
 end
 
@@ -123,6 +158,9 @@ local function fn()
 
     inst:AddComponent("hauntable")
     inst.components.hauntable:SetHauntValue(TUNING.HAUNT_TINY)
+
+    inst:AddComponent("trialsholder")
+    inst.components.trialsholder:SetTrialStartTestFn(CanStartTrial)
 
     inst.infighting_tolerance = TUNING.POLARBEARKING_INFIGHTING_TOLARANCE
     inst._regain_tolerance_task = nil
