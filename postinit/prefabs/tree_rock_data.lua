@@ -63,3 +63,24 @@ local ROOMS = {
 for k, v in pairs(ROOMS) do
 	ROOMS_TO_LOOT_KEY[k] = v
 end
+
+--	Just changing dirt to snow...
+
+local tree_rocks = {"tree_rock1", "tree_rock2"}
+
+local function PolarInit(inst)
+	local x, y, z = inst.Transform:GetWorldPosition()
+	if HasPassedCalendarDay(7) and GetClosestPolarTileToPoint(x, 0, z, 32) then
+		inst.AnimState:OverrideSymbol("tree_ground_rocks", "dirt_to_polar_builds", "tree_ground_rocks")
+	end
+end
+
+for i, v in ipairs(tree_rocks) do
+	ENV.AddPrefabPostInit(v, function(inst)
+		if not TheWorld.ismastersim then
+			return
+		end
+		
+		inst:DoTaskInTime(0, PolarInit)
+	end)
+end
