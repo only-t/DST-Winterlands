@@ -11,7 +11,13 @@ return Class(function(self, inst)
 	
 	local function OnEntSleep(ent)
 		TheWorld:RemoveEventCallback("entitysleep", OnEntSleep, ent)
-		ent:DoTaskInTime(0, ent.Remove)
+		if ent:IsValid() then
+			ent:DoTaskInTime(0, function()
+				if ent:IsValid() then -- Can't ever be too sure these days!
+					ent:Remove()
+				end
+			end)
+		end
 	end
 	
 	local function GetLargestWaterPtAndRad(pt, plow)
