@@ -2,12 +2,12 @@ local ENV = env
 GLOBAL.setfenv(1, GLOBAL)
 
 --	[ 		Containers		]	--
-	
-	local containers = require("containers")
-	local params = containers.params
+
+local containers = require("containers")
+local params = containers.params
 
 --	Necklace "Shop"
-
+	
 	params.polaramulet_station =  {
 		widget = {
 			slotpos = {
@@ -366,7 +366,7 @@ end
 local IngredientUI = require("widgets/ingredientui")
 	
 	local OldIngredientUI_ctor = IngredientUI._ctor
-	function IngredientUI:_ctor(atlas, image, quantity, on_hand, has_enough, name, owner, recipe_type, quant_text_scale, ingredient_recipe)
+	function IngredientUI:_ctor(atlas, image, quantity, on_hand, has_enough, name, owner, recipe_type, ...)
 		if recipe_type == "polarbear_material" and quantity == nil and ThePlayer then
 			on_hand = GetPolarBears()
 			quantity = POLARBEAR_TRIALS_QUANTITY or 1 -- Tech ingredients don't show / transfer quantity required to ing slot
@@ -380,7 +380,7 @@ local IngredientUI = require("widgets/ingredientui")
 			SEWINGKIT_DURABILITY = nil
 		end
 		
-		return OldIngredientUI_ctor(self, atlas, image, quantity, on_hand, has_enough, name, owner, recipe_type, quant_text_scale, ingredient_recipe)
+		return OldIngredientUI_ctor(self, atlas, image, quantity, on_hand, has_enough, name, owner, recipe_type, ...)
 	end
 	
 local CraftingMenuIngredients = require("widgets/redux/craftingmenu_ingredients")

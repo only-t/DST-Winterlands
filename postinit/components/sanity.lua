@@ -14,7 +14,11 @@ local Sanity = require("components/sanity")
 	end
 	
 	local OldRecalc = Sanity.Recalc
+	local LIGHT_SANITY_DRAINS = PolarUpvalue(OldRecalc, "LIGHT_SANITY_DRAINS")
+	
 	function Sanity:Recalc(dt, ...)
+		local _LIGHT_SANITY_DRAINS = LIGHT_SANITY_DRAINS -- Reference for other mods
+		
 		local fleas = self.inst.components.inventory ~= nil and self.inst.components.inventory:GetItemsWithTag("flea") or nil
 		local hostedamt = 0
 		

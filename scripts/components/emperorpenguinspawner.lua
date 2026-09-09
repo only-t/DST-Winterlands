@@ -278,8 +278,8 @@ return Class(function(self, inst)
 	local CASTLE_AVOID_TAGS = {"antlion_sinkhole_blocker", "birdblocker", "blocker", "playerowned", "structure", "wall", "character", "monster"}
 	local CASTLE_AVOID_NOT_TAGS = {"icecastlepart", "penguinicepart", "INLIMBO", "player"}
 	
-	function self:GetValidCastlePos(pt)
-		local valid = false
+	function self:GetValidCastlePos(pt, force)
+		local valid = force or false
 		
 		print("Finding area for Emperor Icecastle!")
 		if TheWorld.has_ocean and TheWorld.Map:IsSurroundedByLand(pt.x, pt.y, pt.z, 9) then

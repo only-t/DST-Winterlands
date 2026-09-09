@@ -10,7 +10,7 @@ return Class(function(self, inst)
 	
 	local _map = inst.Map
 	local _tempgrid -- Hold values [0, 1] between farthest, closest to the island
-	local _gradient_indeces = {  } -- Indeces for the next iteration of the gradient
+	local _gradient_indeces = {} -- Indeces for the next iteration of the gradient
 	
 	-- [ Functions ] --
 	
@@ -23,7 +23,7 @@ return Class(function(self, inst)
 	local function GenerateTempGradient(depth)
 		assert(depth > 0, "Temperature gradient depth must be positive!")
 		
-		local new_gradient_indeces = {  }
+		local new_gradient_indeces = {}
 		for _, i in ipairs(_gradient_indeces) do
 			local ox, oy = _tempgrid:GetXYFromIndex(i)
 			

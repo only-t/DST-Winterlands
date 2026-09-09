@@ -123,14 +123,15 @@ end
 
 local OldOnSave
 local function OnSave(inst, data, ...)
-	if OldOnSave then
-		OldOnSave(inst, data, ...)
-	end
 	if inst:HasTag("thronekrampus") then
 		data.throne_combat = true
 	end
 	if inst.krampus_ugly_sweater then
 		data.krampus_ugly_sweater = inst.krampus_ugly_sweater.sweater_id:value()
+	end
+	
+	if OldOnSave then
+		return OldOnSave(inst, data, ...)
 	end
 end
 

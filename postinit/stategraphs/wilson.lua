@@ -11,6 +11,27 @@ local function DoHurtSound(inst)
 	end
 end
 
+local function GetWX78ScreechRange(inst)
+	local num_modules = inst._screech_modules or 1
+	
+	return num_modules * TUNING.WX78_SCREECH_RANGE
+end
+
+local WX_ICICLE_TAGS = {"bigicicle"}
+local WX_ICICLE_NOT_TAGS = {"INLIMBO"}
+
+local function DoWX78ScreechIcicleFall(inst)
+	local x, y, z = inst.Transform:GetWorldPosition()
+	local range = GetWX78ScreechRange(inst)
+	local ents = TheSim:FindEntities(x, y, z, range, WX_ICICLE_TAGS, WX_ICICLE_NOT_TAGS)
+	
+	for i, v in ipairs(ents) do
+		if v ~= inst and v.persists and v.StartBreaking then
+			v:StartBreaking()
+		end
+	end
+end
+
 local events = {
 	EventHandler("gotpolarflea", function(inst, data)
 		local flea = data and data.flea
@@ -535,6 +556,15 @@ ENV.AddStategraphPostInit("wilson", function(sg)
 			
 			inst.AnimState:OverrideItemSkinSymbol("swap_hat", GetBuildForItem(skin_name), sym_override, hat.GUID, hat.AnimState:GetBuild())
 		end
+	end
+	
+	local oldwx_screech_loop = sg.states["wx_screech_loop"].onupdate
+	sg.states["wx_screech_loop"].onupdate = function(inst, ...)
+		if inst.sg.statemem.shouldcooldown then
+			DoWX78ScreechIcicleFall(inst)
+		end
+		
+		oldwx_screech_loop(inst, ...)
 	end
 end)
 

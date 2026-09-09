@@ -208,7 +208,7 @@ local RESULTS = {
 				offset = function(pt, radius, ...) return FNS.OffsetIfLarger(pt, radius, 3, ...) end},
 			{prefab = "sunkenchest", 		chance = 0.1, 							spawntime = 0,
 				offset = function(pt, radius, ...) return FNS.OffsetIfLarger(pt, radius, 3, ...) end,
-				onspawn = function(inst, ...)return FNS.SetScenario(inst, weighted_random_choice(LOOT["SUNKENCHEST_POOLS"]), ...) end},
+				onspawn = function(inst, ...) return FNS.SetScenario(inst, weighted_random_choice(LOOT["SUNKENCHEST_POOLS"]), ...) end},
 		},
 		onstarted = FNS.SpawnShoal,
 		rad = 1.5,

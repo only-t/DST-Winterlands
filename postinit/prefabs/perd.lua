@@ -46,11 +46,12 @@ end
 
 local OldOnSave
 local function OnSave(inst, data, ...)
-	if OldOnSave then
-		OldOnSave(inst, data, ...)
-	end
 	if inst.polar_perd then
 		data.polar_perd = true
+	end
+	
+	if OldOnSave then
+		return OldOnSave(inst, data, ...)
 	end
 end
 

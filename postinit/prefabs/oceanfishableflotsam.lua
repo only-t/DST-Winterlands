@@ -17,10 +17,11 @@ end
 
 local OldOnSave
 local function OnSave(inst, data, ...)
-	if OldOnSave then
-		OldOnSave(inst, data, ...)
-	end
 	data.icefishingloot = inst.icefishingloot
+	
+	if OldOnSave then
+		return OldOnSave(inst, data, ...)
+	end
 end
 
 local OldOnLoad
@@ -100,10 +101,11 @@ end
 
 local Water_OldOnSave
 local function Water_OnSave(inst, data, ...)
-	if Water_OldOnSave then
-		Water_OldOnSave(inst, data, ...)
-	end
 	data.icefishingloot = inst.icefishingloot
+	
+	if Water_OldOnSave then
+		return Water_OldOnSave(inst, data, ...)
+	end
 end
 
 local Water_OldOnLoad

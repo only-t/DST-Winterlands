@@ -7,6 +7,7 @@ local Follower = require("components/follower")
 	function Follower:AddLoyaltyTime(time, ...)
 		if self.leader and self.leader.components.inventory then
 			local amulet = self.leader.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY)
+			
 			if amulet and amulet.GetAmuletParts then
 				local walrus_tusks = amulet:GetAmuletParts("walrus_tusk")
 				

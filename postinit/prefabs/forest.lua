@@ -92,6 +92,10 @@ for i, v in ipairs(cave_shards) do
 			inst:AddComponent("snowwaver")
 		end
 		
+		-- polarflowerspawner relies on the winterlands_initialized event to generate the flower tile grid,
+		-- otherwise Caves don't *actually* need this but it's fine
+		inst:AddComponent("winterlands_manager")
+		
 		if not inst.ismastersim then
 			return inst
 		end

@@ -119,9 +119,15 @@ local function DoBreak(inst)
 end
 
 local function StartBreaking(inst)
+	if not inst.persists then
+		return
+	end
+	
 	local anim = ICICLE_STAGES[inst.stage]
 	inst.AnimState:PlayAnimation("fall_"..anim, false)
 	inst.SoundEmitter:PlaySound("polarsounds/icicle/shake")
+	
+	inst.persists = false
 	
 	inst:ListenForEvent("animover", inst.DoBreak)
 end
@@ -138,10 +144,19 @@ local function DoGrow(inst)
 		inst.AnimState:PushAnimation("idle_"..newanim, false)
 		
 		if not inst.components.timer:TimerExists("ignore_icicle") then
-			inst:RemoveTag("NOCLICK")
+			inst:RemoveTag("ignoremouse") -- A smoll window of time to let players inspect the icicle after it grew
+			
 			inst.components.timer:StartTimer("ignore_icicle", 3)
 		end
 	end
+end
+
+local function OnHaunt(inst)
+	if inst.persists then
+		inst:StartBreaking()
+	end
+	
+	return true
 end
 
 local function GetGrowTime(inst, breaking)
@@ -233,8 +248,12 @@ local function OnTimerDone(inst, data)
 	elseif data.name == "break_icicle" then
 		inst:StartBreaking()
 	elseif data.name == "ignore_icicle" then
-		inst:AddTag("NOCLICK")
+		inst:AddTag("ignoremouse")
 	end
+end
+
+local function CanMouseThrough(inst)
+	return inst:HasTag("ignoremouse")
 end
 
 local function fn()
@@ -254,10 +273,12 @@ local function fn()
 	
 	inst:AddTag("bigicicle")
 	inst:AddTag("birdblocker")
-	inst:AddTag("NOCLICK")
+	inst:AddTag("ignoremouse")
 	inst:AddTag("NOBLOCK")
 	
 	inst.scrapbook_inspectonseen = true
+	
+	inst.CanMouseThrough = CanMouseThrough
 	
 	inst.entity:SetPristine()
 	
@@ -266,6 +287,9 @@ local function fn()
 	end
 	
 	inst.stage = 1
+	
+	inst:AddComponent("hauntable")
+	inst.components.hauntable:SetOnHauntFn(OnHaunt)
 	
 	inst:AddComponent("inspectable")
 	
@@ -399,7 +423,7 @@ local function rock()
 	
 	inst.OnPolarFreeze = OnPolarFreeze
 	
-	MakeHauntableWork(inst) -- TODO: Remove NOCLICK for ceiling icicles and give them a mousethrough for alive players, ghost should haunt them to make them fall
+	MakeHauntableWork(inst)
 	
 	local scale = math.random() > 0.5 and 1 or -1
 	inst.AnimState:SetScale(scale, 1)

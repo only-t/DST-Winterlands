@@ -80,7 +80,7 @@ local Combat = require("components/combat")
 		
 		local unscrew = target and target:HasTag("penguin_emperor") and target.components.health and target.components.health.minhealth and not target:HasTag("hostile")
 		if unscrew then
-			target.components.health:SetMinHealth(0)
+			target.components.health:SetMinHealth(0) -- Momentially removing min health so we can be targetted...
 		end
 		
 		local test = OldShouldAggro(self, target, ...)

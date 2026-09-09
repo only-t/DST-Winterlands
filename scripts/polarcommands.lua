@@ -142,8 +142,8 @@ function c_icefishingsurprise(name)
 	end
 end
 
---	Spawn in the Emperor and his castle
-function c_icecastle(despawn, layout)
+--	Spawn or despawn the Emperor and his castle, use force to ignore normal area spawn restriction (no important entities + ocean not too close...)
+function c_icecastle(force, despawn, layout)
 	if TheWorld.components.emperorpenguinspawner then
 		if despawn then
 			TheWorld.components.emperorpenguinspawner:DespawnCastle()
@@ -156,7 +156,7 @@ function c_icecastle(despawn, layout)
 				v:AddTag("penguinicepart")
 			end
 			
-			local pt, valid = TheWorld.components.emperorpenguinspawner:GetValidCastlePos(Vector3(x, y, z))
+			local pt, valid = TheWorld.components.emperorpenguinspawner:GetValidCastlePos(Vector3(x, y, z), force)
 			
 			if valid then
 				print(#ice_ents > 0 and "	Removing some stuff in vacinity:" or "Space is clear.")
